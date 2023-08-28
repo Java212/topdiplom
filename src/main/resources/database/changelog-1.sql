@@ -110,14 +110,3 @@ CREATE TABLE IF NOT EXISTS public.users_incomes
               FOREIGN KEY(user_id)
         	  REFERENCES public.users(user_id)
 );
-
---CREATE SEQUENCE transaction_id_seq;
---    INCREMENT 1
---    START WITH 1;
---
---CREATE TABLE IF NOT EXISTS public.transactions_users
---(
---    transaction_id integer NOT NULL DEFAULT nextval('budget_id_seq'),
---
---    CONSTRAINT transactions_users_pkey PRIMARY KEY (transaction_id)
---);

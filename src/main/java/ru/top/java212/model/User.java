@@ -1,7 +1,6 @@
 package ru.top.java212.model;
 
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 @Entity
