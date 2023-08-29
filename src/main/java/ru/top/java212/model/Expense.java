@@ -5,17 +5,15 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "incomes")
-
-public class Income {
+@Table( name = "expenses")
+public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "income _id")
+    @Column(name = "expense _id")
     private Integer id;
-
     @Column(name = "expense_amount")
-    private int incomeAmount;
+    private int expenseAmount;
 
     @Column(name = "date_expense")
     private LocalDate date;
@@ -24,7 +22,7 @@ public class Income {
     @JoinColumn(name = "user_id")
     private User users;
 
-    public Income(){};
+    public Expense(){};
 
     public Integer getId() {
         return id;
@@ -34,12 +32,12 @@ public class Income {
         this.id = id;
     }
 
-    public int getIncomeAmount() {
-        return incomeAmount;
+    public int getExpenseAmount() {
+        return expenseAmount;
     }
 
-    public void setIncomeAmount(int incomeAmount) {
-        this.incomeAmount = incomeAmount;
+    public void setExpenseAmount(int expenseAmount) {
+        this.expenseAmount = expenseAmount;
     }
 
     public LocalDate getDate() {

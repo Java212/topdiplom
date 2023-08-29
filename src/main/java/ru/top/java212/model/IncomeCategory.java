@@ -1,0 +1,38 @@
+package ru.top.java212.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="income_category")
+
+public class IncomeCategory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "income_category_id")
+    private Integer id;
+
+    @Column(name = "source_income_category")
+    private String sourceIncomeCategory;
+
+    public IncomeCategory(Integer id, String sourceIncomeCategory) {
+        this.id = id;
+        this.sourceIncomeCategory = sourceIncomeCategory;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getSourceIncomeCategory() {
+        return sourceIncomeCategory;
+    }
+
+    public void setSourceIncomeCategory(String sourceIncomeCategory) {
+        this.sourceIncomeCategory = sourceIncomeCategory;
+    }
+}

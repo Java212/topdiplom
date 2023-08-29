@@ -2,9 +2,6 @@ package ru.top.java212.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.util.Set;
-
 @Entity
 @Table(name="expense_category")
 public class ExpenseCategory {
@@ -16,16 +13,7 @@ public class ExpenseCategory {
     @Column(name = "name_expense_category")
     private String nameExpenseCategory;
 
-    @Column(name = "expense_amount")
-    private int expenseAmount;
-
-    @Column(name = "date_expense")
-    private LocalDate date;
-
-    @ManyToMany(mappedBy = "expenses", fetch = FetchType.LAZY)
-    private Set<User> users;
-
-    public Integer getId() {
+     public Integer getId() {
         return id;
     }
 
@@ -41,29 +29,6 @@ public class ExpenseCategory {
         this.nameExpenseCategory = nameExpenseCategory;
     }
 
-    public int getExpenseAmount() {
-        return expenseAmount;
-    }
-
-    public void setExpenseAmount(int expenseAmount) {
-        this.expenseAmount = expenseAmount;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 
     public ExpenseCategory(Integer id, String descriptionExpenseCategory) {
         this.id = id;
