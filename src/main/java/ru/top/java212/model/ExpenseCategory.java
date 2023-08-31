@@ -3,17 +3,25 @@ package ru.top.java212.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="expense_category")
+@Table(name="expenses_category")
 public class ExpenseCategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "expense_category_id")
     private Integer id;
 
     @Column(name = "name_expense_category")
     private String nameExpenseCategory;
 
-     public Integer getId() {
+    private ExpenseCategory() {
+    }
+
+    public ExpenseCategory(Integer id, String nameExpenseCategory) {
+        this.id = id;
+        this.nameExpenseCategory = nameExpenseCategory;
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -30,8 +38,5 @@ public class ExpenseCategory {
     }
 
 
-    public ExpenseCategory(Integer id, String descriptionExpenseCategory) {
-        this.id = id;
-        this.nameExpenseCategory = descriptionExpenseCategory;
-    }
+
 }

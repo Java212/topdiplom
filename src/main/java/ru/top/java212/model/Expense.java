@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Expense {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "expense _id")
     private Integer id;
     @Column(name = "expense_amount")
@@ -22,7 +22,7 @@ public class Expense {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Expense(){};
+    public Expense(){}
 
     public Integer getId() {
         return id;

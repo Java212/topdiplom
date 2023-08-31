@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Income {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "income _id")
     private Integer id;
 
@@ -24,7 +24,7 @@ public class Income {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Income(){};
+    public Income(){}
 
     public Integer getId() {
         return id;

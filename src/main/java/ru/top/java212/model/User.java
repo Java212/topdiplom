@@ -12,11 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-
 public class User implements UserDetails{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private  Integer id;
 
@@ -30,10 +29,11 @@ public class User implements UserDetails{
     private String password;
 
     @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column(name = "user_starting_capital")
-    private int startingCapitalFamilyMember;
+    private BigDecimal startingCapitalFamilyMember;
 
     @OneToMany(mappedBy = "user")
     private Set<Expense> expenses;
@@ -41,11 +41,13 @@ public class User implements UserDetails{
     @OneToMany(mappedBy = "user")
     private Set<Income> incomes;
 
-    public User(){};
+    public User(){}
 
-    public User(Integer id, String name,  int startingCapitalFamilyMember) {
-        this.id = id;
+    public User(String name, String password, Role role, BigDecimal startingCapitalFamilyMember) {
         this.name = name;
+        this.login = name;
+        this.password = password;
+        this.role = role;
         this.startingCapitalFamilyMember = startingCapitalFamilyMember;
     }
 
@@ -89,11 +91,11 @@ public class User implements UserDetails{
         this.role = role;
     }
 
-    public int getStartingCapitalFamilyMember() {
+    public BigDecimal getStartingCapitalFamilyMember() {
         return startingCapitalFamilyMember;
     }
 
-    public void setStartingCapitalFamilyMember(int startingCapitalFamilyMember) {
+    public void setStartingCapitalFamilyMember(BigDecimal startingCapitalFamilyMember) {
         this.startingCapitalFamilyMember = startingCapitalFamilyMember;
     }
 

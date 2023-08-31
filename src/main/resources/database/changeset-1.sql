@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS public.users
     user_login varchar NOT NULL,
     user_password varchar NOT NULL DEFAULT 'password',
     user_role varchar NOT NULL DEFAULT 'USER',
-    user_starting_capital  integer NOT NULL,
+    user_starting_capital  numeric(9,2) NOT NULL,
     CONSTRAINT users_pkey PRIMARY KEY (user_id)
 );
 
