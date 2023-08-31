@@ -7,7 +7,7 @@ plugins {
     id 'org.springframework.boot' version '3.0.0'
 }
 
-group 'ru.topacademy.java212'
+group 'ru.top.java212'
 version '1.0'
 
 ext{
@@ -23,6 +23,9 @@ repositories {
 }
 
 dependencies {
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.1.1'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
     implementation ('org.springframework.boot:spring-boot-starter-web:3.1.1'){
@@ -40,6 +43,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.1'
+
+    // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity6
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity6', version: '3.1.1.RELEASE'
 
     // https://mvnrepository.com/artifact/log4j/log4j
     implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
@@ -59,6 +65,13 @@ dependencies {
     // testImplementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.2.7.Final'
+    annotationProcessor "org.hibernate.orm:hibernate-jpamodelgen:6.2.7.Final"
+
+    // https://mvnrepository.com/artifact/org.liquibase/liquibase-core
+    implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.23.0'
+
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.1'
