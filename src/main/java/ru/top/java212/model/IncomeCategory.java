@@ -18,8 +18,7 @@ public class IncomeCategory {
     IncomeCategory() {
     }
 
-    public IncomeCategory(Integer id, String sourceIncomeCategory) {
-        this.id = id;
+    public IncomeCategory(String sourceIncomeCategory) {
         this.sourceIncomeCategory = sourceIncomeCategory;
     }
 

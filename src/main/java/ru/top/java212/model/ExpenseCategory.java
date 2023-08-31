@@ -16,8 +16,7 @@ public class ExpenseCategory {
     private ExpenseCategory() {
     }
 
-    public ExpenseCategory(Integer id, String nameExpenseCategory) {
-        this.id = id;
+    public ExpenseCategory(String nameExpenseCategory) {
         this.nameExpenseCategory = nameExpenseCategory;
     }
 

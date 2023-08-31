@@ -9,6 +9,8 @@ import ru.top.java212.model.User;
 
 import java.math.BigDecimal;
 
+import static ru.top.java212.model.Role.ADMIN;
+
 
 @SpringBootTest
 public class UserDbDaoTest {
@@ -28,6 +30,15 @@ public class UserDbDaoTest {
         User userFromDb = userDbDao.findById(1).orElseThrow();
         Assertions.assertEquals(user.getName(),userFromDb.getName());
         Assertions.assertEquals(user.getRole(),userFromDb.getRole());
+    }
+
+    @Test
+    void test_save_and_set_is_same(){
+        User userFromDb = userDbDao.findById(1).orElseThrow();
+        userFromDb.setLogin("chef");
+        userFromDb.setRole(ADMIN);
+        Assertions.assertEquals("chef",userFromDb.getLogin());
+        Assertions.assertEquals(ADMIN,userFromDb.getRole());
     }
 
 }
