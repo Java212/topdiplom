@@ -22,7 +22,7 @@ public class Income {
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
-    private User users;
+    private User user;
 
     public Income(){};
 
@@ -50,11 +50,11 @@ public class Income {
         this.date = date;
     }
 
-    public User getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

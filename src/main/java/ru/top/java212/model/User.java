@@ -33,7 +33,7 @@ public class User implements UserDetails{
     private Role role;
 
     @Column(name = "user_starting_capital")
-    private BigDecimal startingCapitalFamilyMember;
+    private int startingCapitalFamilyMember;
 
     @OneToMany(mappedBy = "user")
     private Set<Expense> expenses;
@@ -43,6 +43,11 @@ public class User implements UserDetails{
 
     public User(){};
 
+    public User(Integer id, String name,  int startingCapitalFamilyMember) {
+        this.id = id;
+        this.name = name;
+        this.startingCapitalFamilyMember = startingCapitalFamilyMember;
+    }
 
     public Integer getId() {
         return id;
@@ -84,11 +89,11 @@ public class User implements UserDetails{
         this.role = role;
     }
 
-    public BigDecimal getStartingCapitalFamilyMember() {
+    public int getStartingCapitalFamilyMember() {
         return startingCapitalFamilyMember;
     }
 
-    public void setStartingCapitalFamilyMember(BigDecimal startingCapitalFamilyMember) {
+    public void setStartingCapitalFamilyMember(int startingCapitalFamilyMember) {
         this.startingCapitalFamilyMember = startingCapitalFamilyMember;
     }
 

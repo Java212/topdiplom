@@ -20,7 +20,7 @@ public class Expense {
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
-    private User users;
+    private User user;
 
     public Expense(){};
 
@@ -49,10 +49,10 @@ public class Expense {
     }
 
     public User getUsers() {
-        return users;
+        return user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUsers(User user) {
+        this.user = user;
     }
 }
