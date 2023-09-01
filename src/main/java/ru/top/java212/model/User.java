@@ -19,6 +19,7 @@ public class User implements UserDetails {
     private Integer id;
     private String name;
     private String password;
+    private Integer personId;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -94,6 +95,14 @@ public class User implements UserDetails {
 
     public int getId(){
         return this.id;
+    }
+
+    public Integer getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public List<Tool> getToolList() {
