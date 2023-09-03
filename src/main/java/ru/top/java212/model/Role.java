@@ -24,8 +24,8 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<User> users;
     public Role(){}
-    public Role(Long id, String name, Set<User> users) {
-        this.id = id;
+    public Role(String name, Set<User> users) {
+
         this.name = name;
         this.users = users;
     }

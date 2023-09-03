@@ -21,8 +21,7 @@ public class Address {
     public Address() {
     }
 
-    public Address(Long id, String district, String street, int numberOfHouse, int apartmentNumber) {
-        this.id = id;
+    public Address(String district, String street, int numberOfHouse, int apartmentNumber) {
         this.district = district;
         this.street = street;
         this.numberOfHouse = numberOfHouse;

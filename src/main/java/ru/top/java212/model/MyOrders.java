@@ -19,13 +19,12 @@ public class MyOrders {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "order_id")
+    @OneToMany(mappedBy = "myOrders", cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public MyOrders(){}
-    public MyOrders(Long id, User user, List<Order> orders) {
-        this.id = id;
+    public MyOrders(User user, List<Order> orders) {
+
         this.user = user;
         this.orders = orders;
     }

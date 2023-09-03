@@ -1,7 +1,8 @@
 package ru.top.java212.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.repository.CrudRepository;
 import ru.top.java212.model.Address;
 
-public interface AddressRepository extends JpaRepository<Address, Long> {
+public interface AddressRepository extends CrudRepository<Address, Long> {
 }

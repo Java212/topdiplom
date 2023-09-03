@@ -32,8 +32,8 @@ public class Product {
     private String specification;
     private BigDecimal price;
     public Product(){}
-    public Product(Long id, List<Category> categories, Address address, String title, String specification, BigDecimal price) {
-        this.id = id;
+    public Product(List<Category> categories, Address address, String title, String specification, BigDecimal price) {
+
         this.categories = categories;
         this.address = address;
         this.title = title;

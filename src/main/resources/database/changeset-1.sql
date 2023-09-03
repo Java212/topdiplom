@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS public.orders
     order_id INTEGER NOT NULL DEFAULT nextval('orders_id_seq'),
     user_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
-    my_order_id INTEGER NOT NULL,
+    my_order_id INTEGER,
     startDate TIMESTAMP,
     endDate TIMESTAMP,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id)

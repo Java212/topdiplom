@@ -6,7 +6,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
 
 
-
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -23,14 +22,20 @@ public class Order {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "my_order_id")
+    MyOrders myOrders;
+
     @CreationTimestamp
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    public Order(){}
-    public Order(Long id, User user, Product product, LocalDate startDate, LocalDate endDate) {
-        this.id = id;
+    public Order() {
+    }
+
+    public Order(User user, Product product, LocalDate startDate, LocalDate endDate) {
+
         this.user = user;
         this.product = product;
         this.startDate = startDate;

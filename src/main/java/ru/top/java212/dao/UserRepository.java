@@ -1,8 +1,9 @@
 package ru.top.java212.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.repository.CrudRepository;
 import ru.top.java212.model.User;
 
-public interface UserRepository  extends JpaRepository<User, Long> {
+public interface UserRepository  extends CrudRepository<User, Long> {
     User findByUserName(String userName);
 }
