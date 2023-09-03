@@ -17,9 +17,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private Integer id;
-    private String name;
+    private String login;
     private String password;
-    private Integer personId;
+    @Column(name="person_name")
+    private String personName;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -28,8 +29,11 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
 
-    @OneToMany (mappedBy = "user")
-    private List<Tool> toolList = new LinkedList<>();
+    @OneToMany(mappedBy = "user")
+    private Set<Tool> tools;
+
+//    @OneToMany (mappedBy = "user")
+//    private List<Tool> toolList = new LinkedList<>();
 
 
     @Override
@@ -48,7 +52,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.getName();
+        return this.getLogin();
     }
 
     @Override
@@ -77,12 +81,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public Set<Role> getRoles() {
@@ -97,19 +101,19 @@ public class User implements UserDetails {
         return this.id;
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public String getPersonName() {
+        return this.personName;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public void setPersonId(String personName) {
+        this.personName = personName;
     }
 
-    public List<Tool> getToolList() {
-        return toolList;
+    public Set<Tool> getTools() {
+        return this.tools;
     }
 
-    public void setToolList(List<Tool> toolList) {
-        this.toolList = toolList;
+    public void setToolList(Set<Tool> tools) {
+        this.tools = tools;
     }
 }

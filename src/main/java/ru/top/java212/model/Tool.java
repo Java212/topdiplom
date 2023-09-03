@@ -10,15 +10,16 @@ public class Tool {
     @Column(name = "order_id")
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "name")
     private String name;
 
     private double price;
 
-    private Address address;
+
 
     @Column(name = "in_rent")
     private boolean inRent;

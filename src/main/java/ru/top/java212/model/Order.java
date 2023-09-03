@@ -16,7 +16,6 @@ public class Order {
     @Column(name = "user_id")
     private int userId;
 
-    private Period period;
 
     Order(){
     }

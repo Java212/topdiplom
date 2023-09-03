@@ -1,9 +1,19 @@
 package ru.top.java212.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "addresses")
 public class Address {
+    @Id
+    @Column(name = "address_id")
     private int id;
     private String district;
     private String street;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private Tool tool;
 
     Address(){
 
