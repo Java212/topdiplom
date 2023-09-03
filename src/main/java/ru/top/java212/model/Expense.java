@@ -10,7 +10,7 @@ public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "expense _id")
+    @Column(name = "expense_id")
     private Integer id;
     @Column(name = "expense_amount")
     private int expenseAmount;
@@ -22,7 +22,13 @@ public class Expense {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Expense(){}
+    private Expense(){};
+
+
+    public Expense(int expenseAmount){
+        this.expenseAmount=expenseAmount;
+        this.date=LocalDate.now();
+    }
 
     public Integer getId() {
         return id;

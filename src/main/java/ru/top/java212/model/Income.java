@@ -11,13 +11,13 @@ public class Income {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "income _id")
+    @Column(name = "income_id")
     private Integer id;
 
-    @Column(name = "expense_amount")
+    @Column(name = "income_amount")
     private int incomeAmount;
 
-    @Column(name = "date_expense")
+    @Column(name = "date_income")
     private LocalDate date;
 
     @ManyToOne()
@@ -25,6 +25,12 @@ public class Income {
     private User user;
 
     public Income(){}
+
+    public Income(int incomeAmount){
+        this.incomeAmount=incomeAmount;
+        this.date=LocalDate.now();
+    }
+
 
     public Integer getId() {
         return id;

@@ -35,10 +35,10 @@ public class User implements UserDetails{
     @Column(name = "user_starting_capital")
     private BigDecimal startingCapitalFamilyMember;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Expense> expenses;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Income> incomes;
 
     public User(){}

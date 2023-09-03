@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
-
 import java.math.BigDecimal;
 
 import static ru.top.java212.model.Role.ADMIN;
@@ -18,7 +17,7 @@ public class UserDbDaoTest {
     @Autowired
     UserDbDao userDbDao;
 
-    @Test
+     @Test
     void test_context_is_OK(){
         Assertions.assertDoesNotThrow(() -> userDbDao.findById(1));
     }
@@ -41,4 +40,17 @@ public class UserDbDaoTest {
         Assertions.assertEquals(ADMIN,userFromDb.getRole());
     }
 
+      @Test
+    void test_save_and_get_and_set_expenses(){
+        //TODO как тестировать setExpenses?
+            User userFromDb = userDbDao.findById(2).orElseThrow();
+            Assertions.assertEquals(2,userFromDb.getExpenses().size());
+    }
+
+    @Test
+    void test_save_and_get_and_set_incomes(){
+        //TODO как тестировать setIncomes?
+        User userFromDb = userDbDao.findById(2).orElseThrow();
+        Assertions.assertEquals(2,userFromDb.getIncomes().size());
+    }
 }
