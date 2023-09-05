@@ -19,11 +19,10 @@ public class ExpenseCategoryDbDaoTest {
     }
     @Test
     void test_save_and_get_is_same(){
-        ExpenseCategory expCategory = new ExpenseCategory("продукты питания", 56000);
+        ExpenseCategory expCategory = new ExpenseCategory("benzin", 56000);
         categoryDbDao.save(expCategory);
         ExpenseCategory expCategoryFromDb = categoryDbDao.findById(2).orElseThrow();
         Assertions.assertEquals(expCategory.getNameExpenseCategory(),expCategoryFromDb.getNameExpenseCategory());
-        Assertions.assertEquals(expCategory.getAmountExpenseCategory(),expCategoryFromDb.getAmountExpenseCategory());
     }
 
     @Test

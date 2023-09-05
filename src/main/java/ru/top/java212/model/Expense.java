@@ -7,9 +7,6 @@ import java.time.LocalDate;
 @Entity
 @Table( name = "expenses")
 
-@NamedQuery(
-        name="selectAllExpenses", query = "select n.expenseAmount from Expense n where n.date between : startData and : endData"
-)
 //todo как сделать поиск расходов по  пользователю
 //@NamedQueries({
 //        @NamedQuery(name="selectAllExpenses", query = "select n.expenseAmount from Expense n where n.date between : startData and : endData"),
@@ -32,12 +29,18 @@ public class Expense {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne()
+    @JoinColumn(name = "expense_category_id")
+    private ExpenseCategory expenseCategory;
+
     private Expense(){};
 
 
-    public Expense(int expenseAmount){
+    public Expense(User user,ExpenseCategory expenseCategory, int expenseAmount){
         this.expenseAmount=expenseAmount;
         this.date=LocalDate.now();
+        this.user=user;
+        this.expenseCategory=expenseCategory;
     }
 
     public Integer getId() {
@@ -70,5 +73,21 @@ public class Expense {
 
     public void setUsers(User user) {
         this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public ExpenseCategory getExpenseCategory() {
+        return expenseCategory;
+    }
+
+    public void setExpenseCategory(ExpenseCategory expenseCategory) {
+        this.expenseCategory = expenseCategory;
     }
 }

@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+//todo удалить класс
 @Component
 public class RepositoryNamesCategoryExpenses {
-    private final List<String> listAllNamesCategoryExpenses = new ArrayList<>();
+    private  List<String> listAllNamesCategoryExpenses = new ArrayList<>();
 
     public RepositoryNamesCategoryExpenses() {
         this.listAllNamesCategoryExpenses.add("коммуналка");

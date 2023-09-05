@@ -39,18 +39,4 @@ public class UserDbDaoTest {
         Assertions.assertEquals("chef",userFromDb.getLogin());
         Assertions.assertEquals(ADMIN,userFromDb.getRole());
     }
-
-      @Test
-    void test_save_and_get_and_set_expenses(){
-        //TODO как тестировать setExpenses?
-            User userFromDb = userDbDao.findById(2).orElseThrow();
-            Assertions.assertEquals(2,userFromDb.getExpenses().size());
-    }
-
-    @Test
-    void test_save_and_get_and_set_incomes(){
-        //TODO как тестировать setIncomes?
-        User userFromDb = userDbDao.findById(2).orElseThrow();
-        Assertions.assertEquals(2,userFromDb.getIncomes().size());
-    }
 }

@@ -4,20 +4,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.top.java212.family.CalculationFamilyBalance;
+import ru.top.java212.family.CalculationAllExpensesFamily;
 
 import java.time.LocalDate;
 
 @SpringBootTest
-public class CalculationFamilyBalanceTest {
+public class CalculationAllExpensesFamilyTest {
 
     @Autowired
-    CalculationFamilyBalance balance;
+    CalculationAllExpensesFamily allExpenseFamily;
 
     @Test
-    void test_method_getBalance(){
+    void test_method_calculationExpensesFamily(){
+        int res =31000;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,9,30);
-        Assertions.assertEquals(241930, balance.getBalance(startPeriod, endPeriod));
+        Assertions.assertEquals(res,allExpenseFamily.calculationExpensesFamily(startPeriod,endPeriod));
     }
 }

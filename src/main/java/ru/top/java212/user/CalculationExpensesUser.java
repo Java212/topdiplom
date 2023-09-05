@@ -1,4 +1,4 @@
-package ru.top.java212.User;
+package ru.top.java212.user;
 
 import java.time.LocalDate;
 

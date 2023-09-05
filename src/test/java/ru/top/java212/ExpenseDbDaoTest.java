@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.top.java212.model.Expense;
+import ru.top.java212.model.ExpenseCategory;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 
@@ -29,10 +30,12 @@ public class ExpenseDbDaoTest {
 
     @Test
     void test_save_and_get_is_same(){
-        // TODO FALlING TEST: could not execute statement [Значение NULL не разрешено для поля "USER_ID"
-//        User user = new User ("Bob", "df34", Role.USER, new BigDecimal(1000.23));
-//        Expense expense = new Expense(1000);
-//        expenseDbDao.save(expense);
+        User user = new User ("Jek", "df34", Role.USER, new BigDecimal(1000.23));
+        user.setId(2);
+        ExpenseCategory expenseCategory = new ExpenseCategory("коммуналка");
+        Expense expense = new Expense(user, expenseCategory,1000);
+        expenseCategory.setId(2);
+        expenseDbDao.save(expense);
         Expense expenseFromDb = expenseDbDao.findById(1).orElseThrow();
         Assertions.assertEquals(1000, expenseFromDb.getExpenseAmount());
     }

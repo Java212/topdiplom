@@ -2,14 +2,10 @@ package ru.top.java212.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name="expenses_category")
-
-@NamedQuery(
-        name = "selectAllExpenseCategoryForPeriod", query = "select n from ExpenseCategory n where n.dataExpenseCategory between : startPeriod and : endPeriod"
-)
 
 public class ExpenseCategory {
     @Id
@@ -20,11 +16,8 @@ public class ExpenseCategory {
     @Column(name = "name_expense_category")
     private String nameExpenseCategory;
 
-    @Column(name = "amount_expense_category")
-    private int amountExpenseCategory;
-
-    @Column(name = "data_expense_category")
-    private LocalDate dataExpenseCategory;
+    @OneToMany(mappedBy = "expenseCategory", fetch = FetchType.EAGER)
+    private Set<Expense> expenses;
 
     private ExpenseCategory() {
     }
@@ -35,8 +28,6 @@ public class ExpenseCategory {
 
     public ExpenseCategory(String nameExpenseCategory, int amountExpenseCategory) {
         this.nameExpenseCategory = nameExpenseCategory;
-        this.amountExpenseCategory = amountExpenseCategory;
-        this.dataExpenseCategory= LocalDate.now();
     }
 
     public Integer getId() {
@@ -55,19 +46,11 @@ public class ExpenseCategory {
         this.nameExpenseCategory = nameExpenseCategory;
     }
 
-    public int getAmountExpenseCategory() {
-        return amountExpenseCategory;
+    public Set<Expense> getExpenses() {
+        return expenses;
     }
 
-    public void setAmountExpenseCategory(int amountExpenseCategory) {
-        this.amountExpenseCategory = amountExpenseCategory;
-    }
-
-    public LocalDate getDataExpenseCategory() {
-        return dataExpenseCategory;
-    }
-
-    public void setDataExpenseCategory(LocalDate dataExpenseCategory) {
-        this.dataExpenseCategory = dataExpenseCategory;
+    public void setExpenses(Set<Expense> expenses) {
+        this.expenses = expenses;
     }
 }
