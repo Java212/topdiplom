@@ -60,6 +60,8 @@ CREATE TABLE IF NOT EXISTS public.expenses_category
 (
     expense_category_id integer NOT NULL DEFAULT nextval('expenses_category_id_seq'),
     name_expense_category varchar NOT NULL,
+    amount_expense_category integer NOT NULL DEFAULT 0,
+    data_expense_category timestamp without time zone default CURRENT_TIMESTAMP,
     CONSTRAINT expenses_category_pkey PRIMARY KEY (expense_category_id)
 );
 

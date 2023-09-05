@@ -12,6 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
+
+@NamedQuery(
+        name = "selectAllUserStartingCapital", query = "select n.startingCapitalFamilyMember from User n"
+)
 public class User implements UserDetails{
 
     @Id
@@ -33,7 +37,7 @@ public class User implements UserDetails{
     private Role role;
 
     @Column(name = "user_starting_capital")
-    private BigDecimal startingCapitalFamilyMember;
+    private  BigDecimal startingCapitalFamilyMember;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Expense> expenses;

@@ -6,3 +6,4 @@ insert into expenses (expense_amount, user_id) values (29000, 2);
 insert into incomes (income_amount, user_id) values (25140, 2);
 insert into incomes (income_amount, user_id) values (86790, 2);
 
+
