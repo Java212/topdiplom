@@ -12,9 +12,15 @@ public class Person {
     private String name;
     private String phoneNumber;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
+
     Person(){}
 
-    public Person(String name, String phoneNumber){
+    public Person(int id,String name, String phoneNumber,User user){
+        this.id = id;
+        this.user = user;
         this.name =  name;
         this.phoneNumber = phoneNumber;
     }

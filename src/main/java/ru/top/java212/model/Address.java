@@ -11,15 +11,17 @@ public class Address {
     private String district;
     private String street;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private Tool tool;
 
     Address(){
 
     }
     public Address(String district,String street){
         this.id = 0;
+        this.district = district;
+        this.street = street;
+    }
+    public Address(int id,String district,String street){
+        this.id = id;
         this.district = district;
         this.street = street;
     }

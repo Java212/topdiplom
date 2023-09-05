@@ -10,12 +10,19 @@ public class Order {
     @Column(name = "order_id")
     private int id;
 
-    @Column(name ="tool_id")
-    private int toolId;
+    @ManyToOne()
+    @JoinColumn(name = "tool_id")
+    private Tool tool;
 
-    @Column(name = "user_id")
-    private int userId;
 
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "period_id",nullable = false)
+    private Period period;
 
     Order(){
     }
@@ -23,5 +30,21 @@ public class Order {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
 }

@@ -5,8 +5,4 @@
     <changeSet id="1" author="Bazhanov">
         <sqlFile path="db/changeset-1.sql"/>
     </changeSet>
-
-    <changeSet id="1" author="Bazhanov">
-        <sqlFile path="db/changeset-2.sql"/>
-    </changeSet>
 </databaseChangeLog>

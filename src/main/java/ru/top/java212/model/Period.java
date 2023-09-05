@@ -14,17 +14,16 @@ public class Period {
     @Column(name = "start_date")
     private LocalDate startDate;
 
-    @Column(name = "stop-date")
+    @Column(name = "stop_date")
     private LocalDate stopDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private Order order;
 
     Period(){
     }
-    public Period(int id){
+    public Period(int id,LocalDate startDate,LocalDate stopDate){
         this.id = id;
+        this.startDate = startDate;
+        this.stopDate = stopDate;
     }
 
     public LocalDate getStartDate() {
