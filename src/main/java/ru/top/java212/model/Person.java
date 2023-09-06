@@ -18,8 +18,7 @@ public class Person {
 
     Person(){}
 
-    public Person(int id,String name, String phoneNumber,User user){
-        this.id = id;
+    public Person(String name, String phoneNumber,User user){
         this.user = user;
         this.name =  name;
         this.phoneNumber = phoneNumber;

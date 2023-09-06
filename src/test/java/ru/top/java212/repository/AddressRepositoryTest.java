@@ -17,9 +17,9 @@ public class AddressRepositoryTest {
     }
     @Test
     public void test_that_Address_is_saved(){
-       addressRepository.save(new Address(1,"District1","Street1"));
-       Address addressFromDB = addressRepository.findById(1).orElseThrow();
-       Assertions.assertEquals("Street1",addressFromDB.getStreet());
+       addressRepository.save(new Address(2,"District2","Street2"));
+       Address addressFromDB = addressRepository.findById(2).orElseThrow();
+       Assertions.assertEquals("Street2",addressFromDB.getStreet());
     }
 
 }
