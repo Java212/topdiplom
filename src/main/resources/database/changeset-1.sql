@@ -67,7 +67,16 @@ CREATE TABLE IF NOT EXISTS public.expenses
 );
 
 
+CREATE SEQUENCE incomes_category_id_seq
+    INCREMENT 1
+    START WITH 1;
 
+CREATE TABLE IF NOT EXISTS public.incomes_category
+(
+    income_category_id integer NOT NULL DEFAULT nextval('incomes_category_id_seq'),
+    source_income_category varchar NOT NULL,
+    CONSTRAINT incomes_category_pkey PRIMARY KEY (income_category_id)
+);
 
 CREATE SEQUENCE income_id_seq
     INCREMENT 1
@@ -79,20 +88,15 @@ CREATE TABLE IF NOT EXISTS public.incomes
     income_amount integer NOT NULL DEFAULT 0,
     date_income timestamp without time zone default CURRENT_TIMESTAMP,
     user_id integer NOT NULL,
+    income_category_id integer NOT NULL,
     CONSTRAINT incomes_pkey PRIMARY KEY (income_id),
     CONSTRAINT incomes_users_fkey
                 FOREIGN KEY(user_id)
                    REFERENCES public.users(user_id)
-                     ON DELETE CASCADE
+                     ON DELETE CASCADE,
+          CONSTRAINT incomes_incomes_category_fkey
+             FOREIGN KEY(income_category_id)
+                REFERENCES public.incomes_category(income_category_id)
+                  ON DELETE CASCADE
 );
 
-CREATE SEQUENCE incomes_category_id_seq
-    INCREMENT 1
-    START WITH 1;
-
-CREATE TABLE IF NOT EXISTS public.incomes_category
-(
-    income_category_id integer NOT NULL DEFAULT nextval('incomes_category_id_seq'),
-    source_income_category varchar NOT NULL,
-    CONSTRAINT incomes_category_pkey PRIMARY KEY (income_category_id)
-);

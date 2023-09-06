@@ -2,6 +2,8 @@ package ru.top.java212.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name="incomes_category")
 
@@ -14,6 +16,9 @@ public class IncomeCategory {
 
     @Column(name = "source_income_category")
     private String sourceIncomeCategory;
+
+    @OneToMany(mappedBy = "incomeCategory", fetch = FetchType.EAGER)
+    private Set<Income> incomes;
 
     IncomeCategory() {
     }
@@ -36,5 +41,13 @@ public class IncomeCategory {
 
     public void setSourceIncomeCategory(String sourceIncomeCategory) {
         this.sourceIncomeCategory = sourceIncomeCategory;
+    }
+
+    public Set<Income> getIncomes() {
+        return incomes;
+    }
+
+    public void setIncomes(Set<Income> incomes) {
+        this.incomes = incomes;
     }
 }

@@ -1,26 +1,28 @@
 package ru.top.java212.family;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
-import ru.top.java212.ExpenseDbDao;
-import ru.top.java212.model.Expense;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Component
+public class CalculationAllExpensesFamily implements AllExpensesFamily  {
 
-public class CalculationAllExpensesFamily  {
+        private final EntityManager entityManager;
 
-@Autowired
-    ExpenseDbDao expenseDbDao;
-
-public int calculationExpensesFamily(LocalDate initalDate, LocalDate endData){
-        List<Expense> listAllExpensesFamily = (List<Expense>) expenseDbDao.findAll();
-        return listAllExpensesFamily.stream().filter(exp->{
-        if(exp.getDate()>initalDate && exp.getDate()<endData) {
-        return exp;
+        public CalculationAllExpensesFamily(EntityManager entityManager) {
+                this.entityManager = entityManager;
         }
-        }).mapToInt(Expense::getExpenseAmount).sum();
+
+        @Override
+        public int calculationExpensesFamily(LocalDate initalDate, LocalDate endData){
+        TypedQuery<Integer> queryExp = entityManager.createNamedQuery("selectAllExpensesFamily", Integer.class);
+        queryExp.setParameter("startData", initalDate);
+        queryExp.setParameter("endData", endData);
+        List<Integer> listExpenses = queryExp.getResultList();
+        return listExpenses.stream().mapToInt(Integer::intValue).sum();
 }
+
 }

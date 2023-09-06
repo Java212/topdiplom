@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "incomes")
 
 @NamedQuery(
-        name="selectAllIncomes", query = "select n.incomeAmount from Income n where n.date between : startData and : endData"
+        name="selectAllIncomesFamily", query = "select n.incomeAmount from Income n where n.date between : startData and : endData"
 )
 
 public class Income {
@@ -28,9 +28,15 @@ public class Income {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne()
+    @JoinColumn(name = "income_category_id")
+    private IncomeCategory incomeCategory;
+
     public Income(){}
 
-    public Income(int incomeAmount){
+    public Income(User user, IncomeCategory incomeCategory, int incomeAmount){
+        this.user=user;
+        this.incomeCategory=incomeCategory;
         this.incomeAmount=incomeAmount;
         this.date=LocalDate.now();
     }
@@ -66,5 +72,13 @@ public class Income {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public IncomeCategory getIncomeCategory() {
+        return incomeCategory;
+    }
+
+    public void setIncomeCategory(IncomeCategory incomeCategory) {
+        this.incomeCategory = incomeCategory;
     }
 }
