@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="./css/total_expense_family.css">
+</head>
+<body>
+    <header>
+        <div class="login_user">
+            <p>Login User</p> <p th:text="${loginUser}"></p>
+        </div>
+    </header>
+            <section class="input_fields">
+            <form th:action="@{/total_expense_family}" method="post">
+                <div>
+                    <label for="name">Communal expenses</label>
+                    <input name="name" type="number" required>
+                </div>
+                <div>
+                    <label for="name">Buying food</label>
+                    <input id="name" name="name" type="number" required>
+                </div>
+                <button class="button_calculate">Calculate</button>
+            </form>
+                    <div class="all_expense">
+                        <p>General family expenses:  </p> <p th:text="${allExpenses}"></p>
+                    </div>
+            </section>
+</body>
+</html>

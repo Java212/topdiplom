@@ -1,0 +1,61 @@
+body{
+    background-color: aqua;
+}
+header{
+    margin-top: 50px;
+    width: 100%;
+    height: 50px;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 2px solid black;
+    border-radius: 14px;
+    padding: 20px;
+}
+.balance, .login_user{
+      height: 100%;
+      background: red;
+      align-self: flex-end;
+
+}
+.balance{
+    width: 500px;
+    font-size: 25px;
+}
+.login_user{
+    width: 200px;
+    font-size: 20px;
+    margin-right: 80px;
+}
+.family, .user{
+    margin-top: 100px;
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.all_exp_and_inc_family, .details_exp_and_inc_family, .all_exp_and_inc_user, .details_exp_and_inc_user{
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.all_exp_and_inc_family{
+    background-color: blue;
+}
+.details_exp_and_inc_family{
+    background-color: rosybrown;
+}
+.button_family, .button_user{
+    margin: 20px;
+    font-size: 25px;
+    padding: 30px;
+}
+.all_exp_and_inc_user{
+    background-color: blueviolet;
+}
+.details_exp_and_inc_user{
+    background-color: coral;
+}

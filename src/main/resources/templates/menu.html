@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="./css/menu.css">
+</head>
+<body>
+<header>
+    <div class="balance">
+        <p>Family current balance:  </p> <p th:text="${balanceFamily}"></p>
+    </div>
+    <div class="login_user">
+        <p>Login User</p> <p th:text="${loginUser}"></p>
+    </div>
+</header>
+
+<section class="family">
+    <div class="all_exp_and_inc_family">
+        <form  th:action="@{/total_expense_family}" method="get">
+            <button class="button_family">Calculate total family expenses</button>
+        </form>
+        <form>
+            <button class="button_family">Calculate total family incomes</button>
+        </form>
+    </div>
+
+    <div class="details_exp_and_inc_family">
+        <form th:action="@{/}" method="get">
+            <button class="button_family">View details of family expenses</button>
+        </form>
+        <form>
+            <button class="button_family">View details of family incomes</button>
+        </form>
+    </div>
+
+</section>
+<section class="user">
+    <div class="all_exp_and_inc_user">
+        <form  th:action="@{/}" method="get">
+            <button class="button_user">Calculate total user expenses</button>
+        </form>
+        <form>
+            <button class="button_user">Calculate total user incomes</button>
+        </form>
+    </div>
+
+    <div class="details_exp_and_inc_user">
+        <form th:action="@{/}" method="get">
+            <button class="button_user">View details of user expenses</button>
+        </form>
+        <form>
+            <button class="button_user">View details of user incomes</button>
+        </form>
+    </div>
+
+</section>
+</body>
+</html>
