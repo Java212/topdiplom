@@ -31,9 +31,11 @@ public class Tool {
 
     Tool(){
     }
-    public Tool(int id,String name){
-        this.id = id;
+    public Tool(String name, User user, Address address){
         this.name = name;
+        this.user = user;
+        this.address = address;
+        this.inRent = false;
     }
 
     public int getId() {

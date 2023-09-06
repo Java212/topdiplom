@@ -2,6 +2,8 @@ package ru.top.java212.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -20,14 +22,20 @@ public class Order {
     private User user;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "period_id",nullable = false)
-    private Period period;
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    Order(){
+    @Column(name = "stop_date")
+    private LocalDate stopDate;
+
+    Order(User user, Tool tool, LocalDate startDate, LocalDate stopDate ){
+        this.user = user;
+        this.tool = tool;
+        this.startDate = startDate;
+        this.stopDate = stopDate;
     }
-    public Order(int id){
-        this.id = id;
+    public Order(){
+
     }
 
     public int getId() {
@@ -38,13 +46,19 @@ public class Order {
         this.id = id;
     }
 
-
-
-    public Period getPeriod() {
-        return period;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setPeriod(Period period) {
-        this.period = period;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getStopDate() {
+        return stopDate;
+    }
+
+    public void setStopDate(LocalDate stopDate) {
+        this.stopDate = stopDate;
     }
 }

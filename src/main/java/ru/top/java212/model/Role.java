@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role implements GrantedAuthority {
     public static final String ROLE_USER = "USER";
     @Id

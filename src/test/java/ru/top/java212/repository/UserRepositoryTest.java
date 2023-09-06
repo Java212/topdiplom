@@ -16,5 +16,10 @@ public class UserRepositoryTest {
     public void test_that_context_is_ok(){
         Assertions.assertDoesNotThrow(() -> userRepository.findAll());
     }
+    @Test
+    public void test_that_(){
+        User userFromDB = userRepository.findById(1).orElseThrow();
+        Assertions.assertEquals("user1",userFromDB.getLogin());
+    }
 
 }
