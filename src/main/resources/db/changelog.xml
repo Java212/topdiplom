@@ -7,14 +7,11 @@
     </changeSet>
     <changeSet id="2" author="Bazhanov">
         <sqlFile path="db/changeset-created-user.sql"/>
-<<<<<<< HEAD
     </changeSet>
     <changeSet id="3" author="Bazhanov">
         <sqlFile path="db/changeset-created-tools.sql"/>
     </changeSet>
     <changeSet id="4" author="Bazhanov">
         <sqlFile path="db/changeset-created-orders.sql"/>
-=======
->>>>>>> c6039f15535ff6412cea36a5d92ed4f314d5a5bb
     </changeSet>
 </databaseChangeLog>
