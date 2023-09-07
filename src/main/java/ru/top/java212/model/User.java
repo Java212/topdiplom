@@ -13,9 +13,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "users")
 
-@NamedQuery(
-        name = "selectAllUserStartingCapital", query = "select n.startingCapitalFamilyMember from User n"
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "selectAllUserStartingCapital", query = "select n.startingCapitalFamilyMember from User n"
+        )
+})
 
 public class User implements UserDetails{
 

@@ -41,6 +41,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
      runtimeOnly group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '12.4.0.jre11'
 
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    runtimeOnly('org.postgresql:postgresql:42.6.0')
+
     // https://mvnrepository.com/artifact/org.liquibase/liquibase-core
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.23.0'
 

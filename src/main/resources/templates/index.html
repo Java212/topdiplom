@@ -7,16 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home bookkeeping</title>
 
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
 <header>
-    <form th:action="@{/}" method="post">
-        <button class="button_comeIn">come in</button>
-    </form>
-        <form th:action="@{/registration}" method="get">
-            <button class="button_register">registration</button>
-        </form>
+    <a th:href="@{/comeIn}"> Войти </a>
+    <a th:href="@{/registration}"> Зарегистрироваться </a>
 </header>
 <div class="header">
     <h1>Home bookkeeping</h1>

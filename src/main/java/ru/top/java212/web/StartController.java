@@ -26,4 +26,9 @@ public class StartController {
         mv.addObject("balanceFamily", balanceFamily);
         return mv;
     }
+
+    @GetMapping("/comeIn")
+    public String comeIn(){
+        return "comeIn";
+    }
 }

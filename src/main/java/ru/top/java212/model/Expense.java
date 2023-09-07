@@ -7,15 +7,15 @@ import java.time.LocalDate;
 @Entity
 @Table( name = "expenses")
 
-//todo как сделать поиск расходов по  пользователю
-//@NamedQueries({
-//        @NamedQuery(name="selectAllExpenses", query = "select n.expenseAmount from Expense n where n.date between : startData and : endData"),
-//        @NamedQuery(name="selectAllExpensesUser", query = "select n.expenseAmount from Expense n where n.date between : startData and : endData and "),
-//})
-
-@NamedQuery(
-        name = "selectAllExpensesFamily", query = "select n.expenseAmount from Expense n inner join User m on user_id=expense_id where m.date between : startData and : endData"
-)
+@NamedQueries({
+        @NamedQuery(
+        name = "selectAllExpensesFamily",
+                query = "select e.expenseAmount from Expense e where e.date between :startData and :endData"
+        ),
+        @NamedQuery(name="selectAllExpensesUser",
+                query = "select n.expenseAmount from Expense n where n.date between :startData and :endData and n.user.id = :userId "
+        )
+})
 public class Expense {
 
     @Id
@@ -36,7 +36,7 @@ public class Expense {
     @JoinColumn(name = "expense_category_id")
     private ExpenseCategory expenseCategory;
 
-    private Expense(){};
+    private Expense(){}
 
 
     public Expense(User user,ExpenseCategory expenseCategory, int expenseAmount){
