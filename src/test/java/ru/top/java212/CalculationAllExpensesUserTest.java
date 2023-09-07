@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.top.java212.user.AllExpensesUser;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @SpringBootTest
 public class CalculationAllExpensesUserTest {
@@ -14,11 +15,20 @@ public class CalculationAllExpensesUserTest {
     AllExpensesUser expensesUser;
 
     @Test
-    void test_method_calculationExpensesUse() {
+    void test_method_calculationExpensesUser() {
         int result = 1000;
         int userId = 1;
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
         LocalDate endPeriod = LocalDate.of(2023, 9, 30);
         Assertions.assertEquals(result, expensesUser.calculationExpensesUser(userId, startPeriod, endPeriod));
+    }
+
+    @Test
+    void test_method_calculationExpensesUserByCategory() {
+        int userId = 2;
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 9, 30);
+        Map<String, Long> calculated = expensesUser.getExpensesByCategory(userId, startPeriod, endPeriod);
+        Assertions.assertEquals(30000, calculated.get("квартплата"));
     }
 }
