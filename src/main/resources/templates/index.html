@@ -13,8 +13,10 @@
 <header>
     <form th:action="@{/}" method="post">
         <button class="button_comeIn">come in</button>
-        <button class="button_register">registration</button>
     </form>
+        <form th:action="@{/registration}" method="get">
+            <button class="button_register">registration</button>
+        </form>
 </header>
 <div class="header">
     <h1>Home bookkeeping</h1>

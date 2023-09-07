@@ -20,16 +20,20 @@
             <form th:action="@{/total_expense_family}" method="post">
                 <div>
                     <label for="name">Communal expenses</label>
-                    <input name="name" type="number" required>
+                    <input id="name" name="nameCategory1" type="number" required>
                 </div>
-                <div>
-                    <label for="name">Buying food</label>
-                    <input id="name" name="name" type="number" required>
-                </div>
+                    <div>
+                        <label for="name">Buying food</label>
+                        <input  name="nameCategory2" type="number" required>
+                    </div>
+                        <div>
+                            <label for="name">Buying food</label>
+                            <input  name="nameCategory3" type="number" required>
+                        </div>
                 <button class="button_calculate">Calculate</button>
             </form>
                     <div class="all_expense">
-                        <p>General family expenses:  </p> <p th:text="${allExpenses}"></p>
+                        <p>Total family expenses:  </p> <p th:text="${allExpenses}"></p>
                     </div>
             </section>
 </body>

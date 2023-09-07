@@ -14,7 +14,7 @@ import java.time.LocalDate;
 //})
 
 @NamedQuery(
-        name = "selectAllExpensesFamily", query = "select n.expenseAmount from Expense n where n.date between : startData and : endData"
+        name = "selectAllExpensesFamily", query = "select n.expenseAmount from Expense n inner join User m on user_id=expense_id where m.date between : startData and : endData"
 )
 public class Expense {
 

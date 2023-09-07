@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NamedQuery(
         name = "selectAllUserStartingCapital", query = "select n.startingCapitalFamilyMember from User n"
 )
+
 public class User implements UserDetails{
 
     @Id
@@ -46,6 +47,13 @@ public class User implements UserDetails{
     private Set<Income> incomes;
 
     public User(){}
+
+    public User(String name, String login, String password, BigDecimal startingCapitalFamilyMember) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.startingCapitalFamilyMember = startingCapitalFamilyMember;
+    }
 
     public User(String name, String password, Role role, BigDecimal startingCapitalFamilyMember) {
         this.name = name;
