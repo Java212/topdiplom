@@ -56,10 +56,10 @@ public class User implements UserDetails{
         this.password = password;
         this.startingCapitalFamilyMember = startingCapitalFamilyMember;
     }
-
-    public User(String name, String password, Role role, BigDecimal startingCapitalFamilyMember) {
+    // todo в конструктор добавил параметр Login
+    public User(String name, String login, String password, Role role, BigDecimal startingCapitalFamilyMember) {
         this.name = name;
-        this.login = name;
+        this.login=login;
         this.password = password;
         this.role = role;
         this.startingCapitalFamilyMember = startingCapitalFamilyMember;

@@ -4,15 +4,15 @@ body{
 header{
     margin-top: 50px;
     text-align: right;
+    weight: 100%;
 }
-.button_comeIn{
-background-color: #7B68EE;
-margin-right: 50px;
-font-size: 24px;
-}
-.button_register{
-    background-color: #7B68EE;
-    font-size: 24px;
+header>a{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    text-decoration: none;
+    margin-left:20px;
 }
 .header{
     margin-top: 100px;
@@ -23,4 +23,5 @@ font-size: 24px;
 .img{
     margin-top: 50px;
     text-align: center;
+    weight: 100%;
 }

@@ -30,7 +30,7 @@ public class ExpenseDbDaoTest {
 
     @Test
     void test_save_and_get_is_same(){
-        User user = new User ("Jek", "df34", Role.USER, new BigDecimal(1000.23));
+        User user = new User ("Jek", "df34","fgfg8", Role.USER, new BigDecimal(1000.23));
         user.setId(2);
         ExpenseCategory expenseCategory = new ExpenseCategory("коммуналка");
         Expense expense = new Expense(user, expenseCategory,1000);
@@ -62,7 +62,7 @@ public class ExpenseDbDaoTest {
         Expense expenseFromDb = expenseDbDao.findById(1).orElseThrow();
         Assertions.assertEquals(userFromDb.getName(), expenseFromDb.getUsers().getName());
 
-        User user = new User("John", "df34", Role.USER, new BigDecimal(10000.23));
+        User user = new User("John", "df34","fgfg8", Role.USER, new BigDecimal(10000.23));
         expenseFromDb.setUsers(user);
         Assertions.assertEquals(user.getName(), expenseFromDb.getUsers().getName());
     }

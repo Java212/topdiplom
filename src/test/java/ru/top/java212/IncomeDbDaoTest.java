@@ -55,7 +55,7 @@ public class IncomeDbDaoTest {
         Income incomeFromDb = incomeDbDao.findById(1).orElseThrow();
         Assertions.assertEquals(userFromDb.getName(), incomeFromDb.getUser().getName());
 
-        User user = new User("Kurt", "df34", Role.USER, new BigDecimal(240000.56));
+        User user = new User("Kurt", "df34","fgfg8", Role.USER, new BigDecimal(240000.56));
         incomeFromDb.setUser(user);
         Assertions.assertEquals(user.getName(), incomeFromDb.getUser().getName());
     }

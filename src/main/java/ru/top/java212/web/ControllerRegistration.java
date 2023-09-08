@@ -27,7 +27,8 @@ public class ControllerRegistration {
                                       @RequestParam ("userLogin") String userLogin,
                                       @RequestParam ("userPassword") String userPassword,
                                       @RequestParam ("startCapitalUser") BigDecimal startCapitalUser){
-        User user = new User(userName, userPassword, Role.USER, startCapitalUser);
+        //User user = new User(userName, userPassword, Role.USER, startCapitalUser);
+        User user = new User(userName, userLogin, userPassword,Role.USER, startCapitalUser);
         userDao.save(user);
         ModelAndView mv = new ModelAndView("registration");
         mv.addObject("message", "Регистрация прошла успешно!");
