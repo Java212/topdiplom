@@ -29,7 +29,7 @@ public class CalculationAllExpensesFamily implements AllExpensesFamily  {
 }
 
         @Override
-        public Map<String, Integer> getExpensesByCategory(LocalDate initalDate, LocalDate endData){
+        public Map<String, Long> getExpensesByCategory(LocalDate initalDate, LocalDate endData){
                 TypedQuery<Tuple> query = entityManager.createQuery("""
                         select expenseCategory.nameExpenseCategory as category, sum(expenseAmount) as total
                         from Expense where date between : startData and : endData
@@ -41,7 +41,7 @@ public class CalculationAllExpensesFamily implements AllExpensesFamily  {
                         .collect(
                                 Collectors.toMap(
                                         tuple -> ((String) tuple.get("category")),
-                                        tuple -> ((Number) tuple.get("total")).intValue()
+                                        tuple -> ((Number) tuple.get("total")).longValue()
                                 )
                         );
         }

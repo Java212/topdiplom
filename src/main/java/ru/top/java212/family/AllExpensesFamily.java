@@ -6,5 +6,5 @@ import java.util.Map;
 public interface AllExpensesFamily {
     int calculationExpensesFamily(LocalDate initalDate, LocalDate endData);
 
-    Map<String, Integer> getExpensesByCategory(LocalDate initalDate, LocalDate endData);
+    Map<String, Long> getExpensesByCategory(LocalDate initalDate, LocalDate endData);
 }

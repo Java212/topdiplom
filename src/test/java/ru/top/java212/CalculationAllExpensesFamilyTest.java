@@ -27,7 +27,7 @@ public class CalculationAllExpensesFamilyTest {
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
         LocalDate endPeriod = LocalDate.of(2023, 9, 30);
         int result = 31000;
-        Map<String, Integer> expenseByCategory = expensesFamily.getExpensesByCategory(startPeriod, endPeriod);
+        Map<String, Long> expenseByCategory = expensesFamily.getExpensesByCategory(startPeriod, endPeriod);
         Assertions.assertEquals(result, expenseByCategory.get("квартплата"));
     }
 }

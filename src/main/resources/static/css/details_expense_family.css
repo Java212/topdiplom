@@ -1,0 +1,34 @@
+body{
+    background-color: aqua;
+}
+header{
+    margin-top: 50px;
+    width: 100%;
+    height: 50px;
+    background-color: #CCCCFF;
+    border: 1px solid #3b9fd9;;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.login_user, .menu{
+    width: 150px;
+    height: 30px;
+    margin-right: 60px;
+    border: 0px solid black;
+    border-radius: 12px;
+    text-align: center;
+    padding-top: 10px;
+    align-self: flex-end;
+}
+.menu{
+    background-color: #BDECB6;
+}
+.menu>a{
+    text-decoration: none;
+}
+.login_user{
+    background-color: #3b9fd9;
+}
