@@ -1,4 +1,4 @@
-package ru.top.java212.web;
+package ru.top.java212.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

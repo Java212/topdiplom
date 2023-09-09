@@ -7,12 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.top.java212.family.AllExpensesFamily;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @SpringBootTest
 public class CalculationAllExpensesFamilyTest {
-
-//    @Autowired
-//    CalculationAllExpensesFamily allExpenseFamily;  это можно убрать реализация через интерфейс
 
     @Autowired
     AllExpensesFamily expensesFamily;
@@ -22,5 +20,14 @@ public class CalculationAllExpensesFamilyTest {
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,9,30);
         Assertions.assertEquals(result,expensesFamily.calculationExpensesFamily(startPeriod,endPeriod));
+    }
+
+    @Test
+    void test_method_getExpensesByCategory_for_family(){
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 9, 30);
+        int result = 31000;
+        Map<String, Integer> expenseByCategory = expensesFamily.getExpensesByCategory(startPeriod, endPeriod);
+        Assertions.assertEquals(result, expenseByCategory.get("квартплата"));
     }
 }

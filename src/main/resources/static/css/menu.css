@@ -1,26 +1,28 @@
 body{
-    background-color: aqua;
+    background-color: #3bd997;
 }
 header{
     margin-top: 50px;
     width: 100%;
     height: 50px;
-    background-color: gray;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    border: 2px solid black;
+    border: 0px solid black;
     border-radius: 14px;
     padding: 20px;
 }
 .balance, .login_user{
       height: 100%;
-      background: red;
+      background: #fafa2a;
       align-self: flex-end;
-
+      border: 0.3px solid #fafa2a;
+      border-radius: 14px;
+      text-align: center;
+      padding: 10px;
 }
 .balance{
-    width: 500px;
+    width: 550px;
     font-size: 25px;
 }
 .login_user{
@@ -29,7 +31,7 @@ header{
     margin-right: 80px;
 }
 .family, .user{
-    margin-top: 100px;
+    margin-top: 60px;
     margin-left: 200px;
     display: flex;
     flex-direction: column;

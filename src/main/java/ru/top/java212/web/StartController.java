@@ -20,9 +20,11 @@ public class StartController {
     @GetMapping("/menu")
     public ModelAndView menuDisplay(){
         ModelAndView mv = new ModelAndView("menu");
+
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,9,30);
         int balanceFamily = balance.getBalance(startPeriod, endPeriod);
+
         mv.addObject("balanceFamily", balanceFamily);
         return mv;
     }

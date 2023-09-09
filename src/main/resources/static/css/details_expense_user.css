@@ -32,19 +32,3 @@ header{
 .login_user{
     background-color: #3b9fd9;
 }
-.input_fields{
-    margin-top: 100px;
-    margin-left: 200px;
-    display: flex;
-    flex-direction: column;
-}
-.input_fields>div{
-    margin-bottom: 30px;
-}
-.button_calculate{
-    margin: 50px;
-    width: 150px;
-    height: 40px;
-    font-size: 18px;
-    padding: 10px;
-}

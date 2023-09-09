@@ -23,6 +23,7 @@ public class StartControllerTest {
     @Test
     void testing_the_initial_request() throws Exception{
     String url = "/";
+
     this.mockMvc.perform(get(url))
                 .andExpect(status().isOk());
     }
@@ -30,26 +31,33 @@ public class StartControllerTest {
     @Test
     void test_go_to_home_page_index() throws Exception{
         String url = "/";
+
         this.mockMvc.perform(get(url))
                 .andExpect(content().string(containsString("index")))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Home bookkeeping")));
     }
 
+
     @Test
     void test_go_to_page_menu() throws Exception{
+
+        //todo тест падает: ожидалось 241930, актуально 240930. Это происходит при запуске всех тетсов сразу. Если запустить только этот тест все ok
+
         String url = "/menu";
         int currentBalanceFamily=241930;
+
         this.mockMvc.perform(get(url))
                 .andExpect(model().size(1))
                 .andExpect(model().attribute("balanceFamily", currentBalanceFamily))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Login User")));
+                .andExpect(content().string(containsString("Family current balance")));
     }
 
     @Test
     void test_go_to_page_comeIn() throws Exception{
         String url = "/comeIn";
+
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Authorization")));

@@ -13,10 +13,10 @@
 <body>
 <header>
     <div class="balance">
-        <p>Family current balance:  </p> <p th:text="${balanceFamily}"></p>
+        Family current balance: <span th:text="${balanceFamily}"></span> <span> рубл.</span>
     </div>
     <div class="login_user">
-        <p>Login User</p> <p th:text="${loginUser}"></p>
+         <p th:text="${loginUser}"></p>
     </div>
 </header>
 
@@ -34,7 +34,7 @@
         <form th:action="@{/}" method="get">
             <button class="button_family">View details of family expenses</button>
         </form>
-        <form>
+        <form th:action="@{/}" method="get">>
             <button class="button_family">View details of family incomes</button>
         </form>
     </div>
@@ -45,16 +45,16 @@
         <form  th:action="@{/}" method="get">
             <button class="button_user">Calculate total user expenses</button>
         </form>
-        <form>
+        <form th:action="@{/}" method="get">
             <button class="button_user">Calculate total user incomes</button>
         </form>
     </div>
 
     <div class="details_exp_and_inc_user">
-        <form th:action="@{/}" method="get">
+        <form th:action="@{/details_expense_user}" method="get">
             <button class="button_user">View details of user expenses</button>
         </form>
-        <form>
+        <form th:action="@{/}" method="get">
             <button class="button_user">View details of user incomes</button>
         </form>
     </div>

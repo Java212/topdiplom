@@ -12,9 +12,12 @@
 </head>
 <body>
     <header>
-        <div class="login_user">
-            <p>Login User</p> <p th:text="${loginUser}"></p>
+        <div class="menu">
+            <a th:href="@{/menu}"> Menu </a>
         </div>
+            <div class="login_user">
+               <p th:text="${userLogin}"></p>
+            </div>
     </header>
             <section class="input_fields">
             <form th:action="@{/total_expense_family}" method="post">
