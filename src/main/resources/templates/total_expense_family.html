@@ -11,33 +11,33 @@
     <link rel="stylesheet" href="./css/total_expense_family.css">
 </head>
 <body>
-    <header>
-        <div class="menu">
-            <a th:href="@{/menu}"> Menu </a>
+<header>
+    <div class="menu">
+        <a th:href="@{/menu}"> Menu </a>
+    </div>
+    <div class="login_user">
+        <p th:text="${userLogin}"></p>
+    </div>
+</header>
+<section class="input_fields">
+    <form th:action="@{/total_expense_family}" method="post">
+        <div class="fields">
+            <label for="name">Communal expenses</label>
+            <input id="name" name="nameCategory1" type="number" required>
         </div>
-            <div class="login_user">
-               <p th:text="${userLogin}"></p>
-            </div>
-    </header>
-            <section class="input_fields">
-            <form th:action="@{/total_expense_family}" method="post">
-                <div>
-                    <label for="name">Communal expenses</label>
-                    <input id="name" name="nameCategory1" type="number" required>
-                </div>
-                    <div>
-                        <label for="name">Buying food</label>
-                        <input  name="nameCategory2" type="number" required>
-                    </div>
-                        <div>
-                            <label for="name">Buying food</label>
-                            <input  name="nameCategory3" type="number" required>
-                        </div>
-                <button class="button_calculate">Calculate</button>
-            </form>
-                    <div class="all_expense">
-                        <p>Total family expenses:  </p> <p th:text="${allExpenses}"></p>
-                    </div>
-            </section>
+        <div class="fields">
+            <label for="name">Buying food</label>
+            <input  name="nameCategory2" type="number" required>
+        </div>
+        <div class="fields">
+            <label for="name">Buying food</label>
+            <input  name="nameCategory3" type="number" required>
+        </div>
+        <button class="button_calculate">Calculate</button>
+    </form>
+    <div class="all_expense">
+        <span>Total family expenses:  </span> <span th:text="${allExpenses}"></span> <span> рубл.</span>
+    </div>
+</section>
 </body>
 </html>

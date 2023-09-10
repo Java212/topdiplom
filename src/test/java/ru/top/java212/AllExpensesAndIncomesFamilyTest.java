@@ -44,6 +44,7 @@ public class AllExpensesAndIncomesFamilyTest {
 //                .andExpect(status().isOk());
 //    }
 
+    //todo сделать тест на класс AllExpensesAndIncomesFamily по доходам
     @Test
     void test_GetMapping_Incomes() throws Exception{
         String url = "/total_income_family";
