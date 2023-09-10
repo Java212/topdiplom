@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Total income family</title>
+    <title>Total income user</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-    <link rel="stylesheet" href="./css/total_income_family.css">
+    <link rel="stylesheet" href="./css/total_income_user.css">
 </head>
 <body>
     <header>
@@ -19,9 +19,9 @@
             <p th:text="${userLogin}"></p>
         </div>
     </header>
-    <h2>Total income family</h2>
+    <h2>Total income user</h2>
             <section class="input_fields">
-            <form th:action="@{/total_income_family}" method="post">
+            <form th:action="@{/total_income_user}" method="post">
                 <div class="fields">
                     <label for="name">Salary</label>
                     <input id="name" name="sourceIncome1" type="number" required>
@@ -37,7 +37,7 @@
                 <button class="button_calculate">Calculate</button>
             </form>
                     <div class="all_income">
-                        <span>Total family incomes:  </span> <p th:text="${allIncomes}"></p> <span> рубл.</span>
+                        <span>Total user incomes:  </span> <span th:text="${allIncomes}"></span> <span> рубл.</span>
                     </div>
             </section>
 </body>

@@ -20,28 +20,34 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class ViewAllExpensesAndIncomesUserTest {
 
     @Autowired
-    AllExpensesUser expensesUser;
-
-    @Autowired
     MockMvc mockMvc;
 
     @Test
-    void test_GetMapping() throws  Exception{
+    void test_GetMapping_Expenses_User() throws  Exception{
      String url = "/total_expense_user";
 
      this.mockMvc.perform(get(url))
                     .andExpect(status().isOk())
-             .andExpect(content().string(containsString("Total user expenses")));
+                    .andExpect(content().string(containsString("Total user expenses")));
     }
 // todo falling test: No ModelAndView found
 
 //    @Test
-//    void test_PostMapping() throws  Exception{
+//    void test_PostMapping_Expenses_User() throws  Exception{
 //        String url = "/total_expense_user";
+//        String [] amountByCategorys = {"1000", "2000", "3000"};
 //
-//        this.mockMvc.perform(post(url))
-//                .andExpect(model().size(3))
+//        this.mockMvc.perform(post(url).param("nameCategory1", amountByCategorys))
+//                .andExpect(model().size(1))
 //                .andExpect(status().isOk());
-//
 //    }
+
+    @Test
+    void test_GetMapping_Incomes_User() throws  Exception{
+        String url = "/total_income_user";
+
+        this.mockMvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Total income user")));
+    }
 }

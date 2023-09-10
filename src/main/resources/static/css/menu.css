@@ -22,7 +22,7 @@ header{
       padding: 10px;
 }
 .balance{
-    width: 550px;
+    width: 500px;
     font-size: 25px;
 }
 .login_user{
@@ -32,32 +32,35 @@ header{
 }
 .family, .user{
     margin-top: 60px;
-    margin-left: 200px;
+    margin-left: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
 }
 .all_exp_and_inc_family, .details_exp_and_inc_family, .all_exp_and_inc_user, .details_exp_and_inc_user{
-    width: 1000px;
+    width: 900px;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 .all_exp_and_inc_family{
-    background-color: blue;
+    background-color: #008080;
 }
 .details_exp_and_inc_family{
-    background-color: rosybrown;
+    background-color: #20B2AA;  
 }
 .button_family, .button_user{
     margin: 20px;
     font-size: 25px;
     padding: 30px;
+    border-radius: 18px;
+}
+.button_family{
+    border: 1px solid ;
 }
 .all_exp_and_inc_user{
-    background-color: blueviolet;
+    background-color: #9370DB;
 }
 .details_exp_and_inc_user{
-    background-color: coral;
+    background-color: #BA55D3;
 }

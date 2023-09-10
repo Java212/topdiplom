@@ -22,7 +22,7 @@ public class ViewAllExpensesAndIncomesFamilyTest {
     MockMvc mockMvc;
 
     @Test
-    void test_GetMapping_Expenses() throws Exception{
+    void test_GetMapping_Expenses_Family() throws Exception{
         String url = "/total_expense_family";
         this.mockMvc.perform(get(url))
                     .andExpect(status().isOk())
@@ -32,25 +32,25 @@ public class ViewAllExpensesAndIncomesFamilyTest {
 // todo falling test: No ModelAndView found error 403
 
 //    @Test
-//    void test_PostMapping() throws Exception{
+//    void test_PostMapping_Expenses_Family() throws Exception{
 //        String url = "/total_expense_family";
-//        int amountForUtilityBills = 6000;
-//        int amountOfGasolineConsumption = 3000;
-//        int amountOfTripToTheStore = 2000;
+//        int amountCategory1 = 6000;
+//        int amountCategory2= 3000;
+//        int amountCategory3 = 2000;
 //        this.mockMvc.perform(post(url))
-//                .andExpect(model().size(3))
-//                .andExpect(model().attribute("nameCategory1", amountForUtilityBills))
-//                .andExpect(model().attribute("nameCategory2", amountOfGasolineConsumption))
-//                .andExpect(model().attribute("nameCategory3", amountOfTripToTheStore))
+//                .andExpect(model().attribute("nameCategory1", amountCategory1))
+//                .andExpect(model().attribute("nameCategory2", amountCategory2))
+//                .andExpect(model().attribute("nameCategory3", amountCategory3))
 //                .andExpect(status().isOk());
 //    }
 
-    // todo сделать тест на класс AllExpensesAndIncomesFamily по доходам
     @Test
-    void test_GetMapping_Incomes() throws Exception{
+    void test_GetMapping_Incomes_Family() throws Exception{
         String url = "/total_income_family";
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Total family incomes")));
     }
+
+    // todo сделать тест на класс AllExpensesAndIncomesFamily по доходам
 }
