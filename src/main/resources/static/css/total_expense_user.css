@@ -1,0 +1,56 @@
+body{
+    background-color: aqua;
+}
+header{
+    margin-top: 50px;
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.login_user, .menu{
+    width: 150px;
+    height: 30px;
+    margin-right: 60px;
+    border: 0px solid black;
+    border-radius: 12px;
+    text-align: center;
+    padding-top: 10px;
+    align-self: flex-end;
+}
+.menu{
+    background-color: #87CEFA;
+}
+.menu>a{
+    text-decoration: none;
+}
+.login_user{
+    background-color: #3b9fd9;
+}
+.input_fields{
+    margin-top: 100px;
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.fields{
+    clear: both;
+    text-align: right;
+    line-height: 25px;
+}
+label{
+    float: left;
+    padding-right: 10px;
+}
+.input_fields{
+    float: left;
+}
+.button_calculate{
+    margin: 50px;
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    padding: 10px;
+}
