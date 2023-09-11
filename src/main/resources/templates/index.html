@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Аренда инструмента</title>
-    <link rel="stylesheet" th:href="@{stylesIndex.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
-<div class="main">
-    <h1>
-        Аренда инструмента
-    </h1>
-    <h2>
-        Рады приветствоать Вас
-    </h2>
-    <div class="box"> Текущее время [[${#dates.createNow()}]] </div>
-
-</div>
+<section class="top">
+        <div class="top_center">
+            <h1>
+                Аренда инструмента
+            </h1>
+        </div>
+</section>
+<section class="center">
+    <div class="registration">
+        <h2>
+            Рады приветствовать Вас
+        </h2>
+    </div>
+</section>
+<section class="bottom">
+    <div class="box"> Текущее время: [[${#dates.createNow()}]] </div>
+</section>
 </body>
 </html>
