@@ -6,7 +6,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.top.java212.Application;
-import ru.top.java212.dao.AllExpensesUser;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,12 +37,14 @@ public class ViewAllExpensesAndIncomesUserTest {
 //        String amountCategory1 = "6000";
 //        String amountCategory2= "3000";
 //        String amountCategory3 = "2000";
+//        int result = 30000;
 //
 //        this.mockMvc.perform(post(url)
 //                        .param("amountCategory1", amountCategory1)
 //                        .param("amountCategory2", amountCategory2)
 //                        .param("amountCategory3", amountCategory3))
 //                .andExpect(model().size(1))
+//                .andExpect(model().attribute("allExpenses", result))
 //                .andExpect(status().isOk());
 //    }
 
