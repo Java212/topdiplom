@@ -31,7 +31,7 @@ header{
 }
 .input_fields{
     margin-top: 100px;
-    margin-left: 200px;
+    margin-left: 500px;
     display: flex;
     flex-direction: column;
 }
@@ -41,8 +41,13 @@ header{
     line-height: 25px;
 }
 label{
+    font-size: 20px;
     float: left;
     padding-right: 10px;
+}
+input{
+    margin-bottom: 20px;
+    height: 20px;
 }
 .input_fields{
     float: left;
@@ -53,4 +58,8 @@ label{
     height: 40px;
     font-size: 18px;
     padding: 10px;
+}
+.all_expense{
+    font-size: 23px;
+    font-weight: 150;
 }

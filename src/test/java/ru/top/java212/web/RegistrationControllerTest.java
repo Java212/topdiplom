@@ -29,7 +29,9 @@ public class RegistrationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Registration")));
     }
-//todo falling test: No ModelAndView found error 403
+
+
+    // todo falling test: No ModelAndView found with error 403
 
 //    @Test
 //    void test_PostMapping() throws Exception{
@@ -37,13 +39,13 @@ public class RegistrationControllerTest {
 //        String userName = "John";
 //        String userLogin = "j-88";
 //        String userPassword = "fg89{";
-//        BigDecimal startingCapitalUser = new BigDecimal(1568412);
-//        this.mockMvc.perform(post(url))
-//                .andExpect(model().attribute("userName", userName))
-//                .andExpect(model().attribute("userLogin", userLogin))
-//                .andExpect(model().attribute("userPassword", userPassword))
-//                .andExpect(model().attribute("startCapitalUser", startingCapitalUser))
-//                .andExpect(status().isOk())
-//                .andExpect(content().string(containsString("Регистрация прошла успешно!")));
+//        String  startingCapitalUser = String.valueOf((new BigDecimal(1568412)));
+//        this.mockMvc.perform(post(url)
+//                .param("userName", userName)
+//                .param("userLogin", userLogin)
+//                .param("userPassword", userPassword)
+//                .param("startingCapitalUser", startingCapitalUser))
+//                 .andExpect(model().size(1))
+//                .andExpect(status().isOk());
 //    }
 }

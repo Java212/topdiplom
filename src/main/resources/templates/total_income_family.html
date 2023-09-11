@@ -19,7 +19,6 @@
             <p th:text="${userLogin}"></p>
         </div>
     </header>
-    <h2>Total income family</h2>
             <section class="input_fields">
             <form th:action="@{/total_income_family}" method="post">
                 <div class="fields">
@@ -37,7 +36,7 @@
                 <button class="button_calculate">Calculate</button>
             </form>
                     <div class="all_income">
-                        <span>Total family incomes:  </span> <p th:text="${allIncomes}"></p> <span> рубл.</span>
+                        <span>Total family incomes:  </span> <span th:text="${allIncomes}"></span> <span> рубл.</span>
                     </div>
             </section>
 </body>

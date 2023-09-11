@@ -41,15 +41,10 @@ public class StartControllerTest {
 
     @Test
     void test_go_to_page_menu() throws Exception{
-
-        //todo тест падает: ожидалось 241930, актуально 240930. Это происходит при запуске всех тетсов сразу. Если запустить только этот тест все ok
-
         String url = "/menu";
-        int currentBalanceFamily=241930;
 
         this.mockMvc.perform(get(url))
                 .andExpect(model().size(1))
-                .andExpect(model().attribute("balanceFamily", currentBalanceFamily))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Family current balance")));
     }

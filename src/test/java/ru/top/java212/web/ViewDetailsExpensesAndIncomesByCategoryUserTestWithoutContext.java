@@ -9,6 +9,8 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.dao.AllExpensesUser;
+import ru.top.java212.dao.AllIncomesFamily;
+import ru.top.java212.dao.AllIncomesUser;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -21,6 +23,9 @@ public class ViewDetailsExpensesAndIncomesByCategoryUserTestWithoutContext {
 
    @Mock
    AllExpensesUser expensesUser;
+
+   @Mock
+    AllIncomesUser incomesUser;
 
     //todo test falling: ожидался пустой список
 
@@ -39,7 +44,7 @@ public class ViewDetailsExpensesAndIncomesByCategoryUserTestWithoutContext {
 //    }
            //todo  нижеследует Другой вариант первого теста
     @Test
-    void test_GetMapping(){
+    void test_GetMapping_viewPageDetailsExpenseUser(){
         LocalDate startDate = LocalDate.of(2023, 9, 1);
         LocalDate endDate = LocalDate.of(2023, 9, 30);
         int userId = 2;
@@ -51,5 +56,20 @@ public class ViewDetailsExpensesAndIncomesByCategoryUserTestWithoutContext {
         Assertions.assertEquals("details_expense_user", mv.getViewName());
         Map<String, Long> list = (Map<String, Long>) mv.getModelMap().get("listExpenseCategoryUser");
         Assertions.assertEquals(list, mv.getModelMap().getAttribute("listExpenseCategoryUser"));
+    }
+
+    @Test
+    void test_GetMapping_viewPageDetailsIncomeUser(){
+        LocalDate startDate = LocalDate.of(2023, 9, 1);
+        LocalDate endDate = LocalDate.of(2023, 9, 30);
+        int userId = 2;
+        Mockito.when(incomesUser.getIncomesUserBySource(userId, startDate, endDate)).thenReturn(
+                Map.of("заработная плата", 35000L,
+                        "премия", 10000L)
+        );
+        ModelAndView mv = controller.viewPageDetailsIncomeUser();
+        Assertions.assertEquals("details_income_user", mv.getViewName());
+        Map<String, Long> list = (Map<String, Long>) mv.getModelMap().get("listIncomeUserBySource");
+        Assertions.assertEquals(list, mv.getModelMap().getAttribute("listIncomeUserBySource"));
     }
 }

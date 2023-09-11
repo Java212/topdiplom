@@ -35,9 +35,14 @@ public class ViewAllExpensesAndIncomesUserTest {
 //    @Test
 //    void test_PostMapping_Expenses_User() throws  Exception{
 //        String url = "/total_expense_user";
-//        String [] amountByCategorys = {"1000", "2000", "3000"};
+//        String amountCategory1 = "6000";
+//        String amountCategory2= "3000";
+//        String amountCategory3 = "2000";
 //
-//        this.mockMvc.perform(post(url).param("nameCategory1", amountByCategorys))
+//        this.mockMvc.perform(post(url)
+//                        .param("amountCategory1", amountCategory1)
+//                        .param("amountCategory2", amountCategory2)
+//                        .param("amountCategory3", amountCategory3))
 //                .andExpect(model().size(1))
 //                .andExpect(status().isOk());
 //    }

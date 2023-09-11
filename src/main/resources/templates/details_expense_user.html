@@ -21,7 +21,7 @@
 </header>
     <h2>Details expense user</h2>
         <section>
-            <ul>
+            <ul class="list">
                 <li th:each="expenseCategory : ${listExpenseCategoryUser}">
                     <span th:text="${expenseCategory.key}">: </span>
                     <span th:text="${expenseCategory.value}"></span> <span> рубл.</span>

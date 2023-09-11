@@ -29,18 +29,20 @@ public class ViewAllExpensesAndIncomesFamilyTest {
                 .andExpect(content().string(containsString("Total family expenses")));
     }
 
-// todo falling test: No ModelAndView found error 403
+// todo No ModelAndView found with error 403
 
 //    @Test
 //    void test_PostMapping_Expenses_Family() throws Exception{
 //        String url = "/total_expense_family";
-//        int amountCategory1 = 6000;
-//        int amountCategory2= 3000;
-//        int amountCategory3 = 2000;
-//        this.mockMvc.perform(post(url))
-//                .andExpect(model().attribute("nameCategory1", amountCategory1))
-//                .andExpect(model().attribute("nameCategory2", amountCategory2))
-//                .andExpect(model().attribute("nameCategory3", amountCategory3))
+//        String amountCategory1 = "6000";
+//        String amountCategory2= "3000";
+//        String amountCategory3 = "2000";
+//
+//        this.mockMvc.perform(post(url)
+//                .param("amountCategory1", amountCategory1)
+//                .param("amountCategory2", amountCategory2)
+//                .param("amountCategory3", amountCategory3))
+//                .andExpect(model().size(1))
 //                .andExpect(status().isOk());
 //    }
 

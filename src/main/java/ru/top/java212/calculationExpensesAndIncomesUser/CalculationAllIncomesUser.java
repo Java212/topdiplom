@@ -1,11 +1,14 @@
 package ru.top.java212.calculationExpensesAndIncomesUser;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import ru.top.java212.dao.AllIncomesUser;
 
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class CalculationAllIncomesUser implements AllIncomesUser {
@@ -24,5 +27,22 @@ public class CalculationAllIncomesUser implements AllIncomesUser {
         return query.getResultList().stream().mapToInt(Integer ::intValue).sum();
     }
 
-    //todo сделать расчет доходов пользователя по источникам
+    @Override
+    public Map<String, Long> getIncomesUserBySource(int userId, LocalDate initalDate, LocalDate endData){
+        TypedQuery<Tuple> query = entityManager.createQuery("""
+                        select incomeCategory.sourceIncomeCategory as category, sum(incomeAmount) as total
+                        from Income where date between : startDate and : endDate and user.id =: userId
+                        group by incomeCategory.sourceIncomeCategory""", Tuple.class);
+        query.setParameter("startDate", initalDate);
+        query.setParameter("endDate", endData);
+        query.setParameter("userId", userId);
+        return query.getResultList()
+                .stream()
+                .collect(
+                        Collectors.toMap(
+                                tuple -> ((String) tuple.get("category")),
+                                tuple -> ((Number) tuple.get("total")).longValue()
+                        )
+                );
+    }
 }

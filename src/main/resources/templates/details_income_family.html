@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details expense family</title>
+    <title>Details income family</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-    <link rel="stylesheet" href="./css/details_expense_family.css">
+    <link rel="stylesheet" href="./css/details_income_family.css">
 </head>
 <body>
 <header>
@@ -19,12 +19,12 @@
         <p th:text="${userLogin}"></p>
     </div>
 </header>
-    <h2>Details expense family</h2>
+    <h2>Details income family</h2>
         <section>
             <ul class="list">
-                <li th:each="expenseCategory : ${listExpensesFamilyByCategory}">
-                    <span th:text="${expenseCategory.key}">: </span>
-                    <span th:text="${expenseCategory.value}"></span> <span> рубл.</span>
+                <li th:each="sourceIncome : ${listIncomeFamilyBySource}">
+                    <span th:text="${sourceIncome.key}">: </span>
+                    <span th:text="${sourceIncome.value}"></span> <span> рубл.</span>
                 </li>
             </ul>
         </section>
