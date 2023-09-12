@@ -30,9 +30,7 @@ DROP TABLE IF EXISTS public.products;
 
 DROP SEQUENCE IF EXISTS public.products_id_seq;
 
-DROP TABLE IF EXISTS public.products_categories;
 
-DROP SEQUENCE IF EXISTS public.products_categories_id_seq;
 
 
 -- creates
@@ -45,8 +43,8 @@ CREATE TABLE IF NOT EXISTS public.addresses
     address_id INTEGER NOT NULL DEFAULT nextval('addresses_id_seq'),
     district VARCHAR NOT NULL,
     street VARCHAR NOT NULL,
-    numberOfHouse INTEGER NOT NULL,
-    apartmentNumber INTEGER,
+    number_of_house INTEGER NOT NULL,
+    apartment_number INTEGER,
     CONSTRAINT addresses_pkey PRIMARY KEY (address_id)
 
 );
@@ -58,18 +56,12 @@ CREATE SEQUENCE public.users_id_seq
 CREATE TABLE IF NOT EXISTS public.users
 (
     user_id integer NOT NULL DEFAULT nextval('users_id_seq'),
-    userName varchar NOT NULL,
+    user_name varchar NOT NULL,
     password varchar NOT NULL DEFAULT 'password',
     email varchar NOT NULL,
     address_id integer,
     CONSTRAINT users_pkey PRIMARY KEY (user_id)
 );
-
-ALTER TABLE IF EXISTS users
-    ADD CONSTRAINT users_fk_address
-        FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
-
-
 
 CREATE SEQUENCE IF NOT EXISTS public.roles_id_seq
     INCREMENT 1
@@ -126,9 +118,7 @@ CREATE TABLE IF NOT EXISTS public.my_orders
      CONSTRAINT my_orders_pkey PRIMARY KEY (my_order_id)
 
 );
-ALTER TABLE IF EXISTS my_orders
-    ADD CONSTRAINT my_orders_fk_users
-        FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
 
 
 CREATE SEQUENCE IF NOT EXISTS public.products_id_seq
@@ -139,19 +129,14 @@ CREATE TABLE IF NOT EXISTS public.products
 (
     product_id INTEGER NOT NULL DEFAULT nextval('products_id_seq'),
     address_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
     title VARCHAR,
+    link_to_the_image varchar,
+    specification varchar,
     price NUMERIC(19,2),
     CONSTRAINT products_pkey PRIMARY KEY (product_id)
 
 );
-
-ALTER TABLE IF EXISTS products
-    ADD CONSTRAINT products_fk_address
-        FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
-
-
-
-
 
 CREATE SEQUENCE IF NOT EXISTS public.orders_id_seq
     INCREMENT 1
@@ -163,11 +148,30 @@ CREATE TABLE IF NOT EXISTS public.orders
     user_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
     my_order_id INTEGER,
-    startDate TIMESTAMP,
-    endDate TIMESTAMP,
+    start_date TIMESTAMP,
+    end_date TIMESTAMP,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id)
 
 );
+
+ALTER TABLE IF EXISTS products
+    ADD CONSTRAINT products_fk_categories
+        FOREIGN KEY (category_id) REFERENCES public.categories(category_id);
+
+
+
+ALTER TABLE IF EXISTS users
+    ADD CONSTRAINT users_fk_address
+        FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
+
+ALTER TABLE IF EXISTS my_orders
+    ADD CONSTRAINT my_orders_fk_users
+        FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+ALTER TABLE IF EXISTS products
+    ADD CONSTRAINT products_fk_address
+        FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
 
 ALTER TABLE IF EXISTS orders
     ADD CONSTRAINT orders_fk_my_orders
@@ -180,28 +184,5 @@ ALTER TABLE IF EXISTS orders
 ALTER TABLE IF EXISTS orders
     ADD CONSTRAINT orders_fk_products
         FOREIGN KEY (product_id) REFERENCES public.products(product_id);
-
-
-
-
-CREATE SEQUENCE IF NOT EXISTS public.products_categories_id_seq
-    INCREMENT 1
-    START WITH 1;
-
-CREATE TABLE IF NOT EXISTS public.products_categories
-(
-    products_categories_id integer NOT NULL DEFAULT nextval('products_categories_id_seq'),
-    product_id integer NOT NULL,
-    category_id integer NOT NULL,
-    CONSTRAINT products_categories_pkey PRIMARY KEY (products_categories_id),
-    CONSTRAINT products_categories_product_fkey
-          FOREIGN KEY(product_id)
-    	  REFERENCES public.products(product_id),
-    CONSTRAINT products_categories_categories_fkey
-              FOREIGN KEY(category_id)
-        	  REFERENCES public.categories(category_id)
-);
-
-
 
 

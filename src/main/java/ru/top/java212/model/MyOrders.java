@@ -13,7 +13,7 @@ public class MyOrders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "my_order_id")
-    private Long id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -22,18 +22,20 @@ public class MyOrders {
     @OneToMany(mappedBy = "myOrders", cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    public MyOrders(){}
-    public MyOrders(User user, List<Order> orders) {
+    public MyOrders() {
+    }
 
+    public MyOrders(Integer id, User user, List<Order> orders) {
+        this.id = id;
         this.user = user;
         this.orders = orders;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

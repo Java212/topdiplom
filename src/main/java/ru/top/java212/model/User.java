@@ -18,13 +18,13 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Integer id;
 
     private String userName;
     private String password;
     private String email;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -52,7 +52,8 @@ public class User implements UserDetails {
     public User(){}
 
 
-    public User(String userName, String password, String email, Address address) {
+    public User(Integer id, String userName, String password, String email, Address address) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -72,11 +73,11 @@ public class User implements UserDetails {
         return email;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

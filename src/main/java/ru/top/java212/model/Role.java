@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Set;
 
 
-
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
@@ -18,23 +17,26 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private Long id;
+    private Integer id;
     private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<User> users;
-    public Role(){}
-    public Role(String name, Set<User> users) {
 
+    public Role() {
+    }
+
+    public Role(Integer id, String name, Set<User> users) {
+        this.id = id;
         this.name = name;
         this.users = users;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

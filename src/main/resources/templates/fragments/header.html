@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 
 </head>
 <body th:fragment="header">
 <nav class="navbar navbar-expand-lg bg-info" >
     <div class="container-fluid" >
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="./img/logo.png" alt="" style="height: 40px">
             TOOLRENT
         </a>
@@ -23,13 +24,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"
+                <li class="nav-item" >
+                    <a class="nav-link"  th:classappend="${module == 'home' ? 'active' : ''}" aria-current="page" href="/"
                     >Главная</a
                     >
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#">Акции</a>
+                <li class="nav-item" >
+                    <a class="nav-link " th:classappend="${module == 'sale' ? 'active' : ''}" href="/sale">Акции</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -43,14 +44,14 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#"
+                            <a class="dropdown-item" href="/batteryTool"
                             >Аккумуляторный инструмент</a
                             >
                         </li>
-                        <li><a class="dropdown-item" href="#">Перфораторы</a></li>
+                        <li><a class="dropdown-item" href="/punchers">Перфораторы</a></li>
 
                         <li>
-                            <a class="dropdown-item" href="#">Пневмоинструмент</a>
+                            <a class="dropdown-item" href="/ushm">УШМ</a>
                         </li>
                     </ul>
                 </li>
@@ -68,7 +69,7 @@
             </form>
             <ul class="navbar-nav m-auto  m-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " href="auth">
                         <img src="./img/user.png" alt="">
                         Войти</a>
                 </li>

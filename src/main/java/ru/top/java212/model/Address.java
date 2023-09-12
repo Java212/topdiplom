@@ -9,19 +9,22 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    private Long id;
+    private Integer id;
 
 
     private String district;
-    private String street;
-  private int numberOfHouse;
 
-   private int apartmentNumber;
+    private String street;
+
+    private int numberOfHouse;
+
+    private int apartmentNumber;
 
     public Address() {
     }
 
-    public Address(String district, String street, int numberOfHouse, int apartmentNumber) {
+    public Address(Integer id, String district, String street, int numberOfHouse, int apartmentNumber) {
+        this.id = id;
         this.district = district;
         this.street = street;
         this.numberOfHouse = numberOfHouse;
@@ -29,12 +32,11 @@ public class Address {
     }
 
 
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

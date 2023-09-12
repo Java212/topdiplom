@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 
-
 @Entity
 @Table(name = "products")
 public class Product {
@@ -15,46 +14,53 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long id;
+    private Integer id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "products_categories",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<Category> categories;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address address;
 
-    private String title;
-    private String specification;
-    private BigDecimal price;
-    public Product(){}
-    public Product(List<Category> categories, Address address, String title, String specification, BigDecimal price) {
 
-        this.categories = categories;
+    private String title;
+
+
+    private String linkToTheImage;
+
+    private String specification;
+
+    private BigDecimal price;
+
+    public Product() {
+    }
+
+    public Product(Integer id, Category category, Address address, String title, String linkToTheImage, String specification, BigDecimal price) {
+        this.id = id;
+        this.category = category;
         this.address = address;
         this.title = title;
+        this.linkToTheImage = linkToTheImage;
         this.specification = specification;
         this.price = price;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Category getCategories() {
+        return category;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setCategories(Category category) {
+        this.category = category;
     }
 
     public Address getAddress() {
@@ -71,6 +77,14 @@ public class Product {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getLinkToTheImage() {
+        return linkToTheImage;
+    }
+
+    public void setLinkToTheImage(String linkToTheImage) {
+        this.linkToTheImage = linkToTheImage;
     }
 
     public String getSpecification() {

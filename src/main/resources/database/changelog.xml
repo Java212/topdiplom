@@ -4,4 +4,6 @@
     <changeSet id="1" author="mehaniqs">
         <sqlFile path="database/changeset-1.sql"/>
     </changeSet>
+
+
 </databaseChangeLog>

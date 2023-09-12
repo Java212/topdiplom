@@ -12,7 +12,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,19 +34,19 @@ public class Order {
     public Order() {
     }
 
-    public Order(User user, Product product, LocalDate startDate, LocalDate endDate) {
-
+    public Order(Integer id, User user, Product product, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
         this.user = user;
         this.product = product;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

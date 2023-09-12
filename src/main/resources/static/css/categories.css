@@ -1,0 +1,9 @@
+#categories{
+    padding: 100px;
+    background: linear-gradient(180deg, #5cccf4 0%, #9665ec 0%, #8b8bee 100%);
+}
+
+.card{
+    box-shadow: 9px 15px 10px 1px #000;
+    margin-top: 35px;
+}

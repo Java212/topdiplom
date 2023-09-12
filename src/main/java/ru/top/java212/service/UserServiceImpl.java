@@ -1,9 +1,15 @@
 package ru.top.java212.service;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.top.java212.dao.UserRepository;
-import ru.top.java212.model.User;
 
-public class UserServiceImpl implements UserService{
+
+import java.util.Collection;
+
+public class UserServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -13,12 +19,7 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public void save(User user) {
-
-    }
-
-    @Override
-    public User findByUserName(String userName) {
-        return userRepository.findByUserName(userName);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
