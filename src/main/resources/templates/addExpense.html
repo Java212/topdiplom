@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form  th:object="${newExpense}" th:action="@{/expenses/add}" method="post">
+  <div>
+    <label class="form-label">Категория </label>
+    <select class="form-select"  th:field="*{categoryName}">
+      <option th:each="category : ${allCategories}"
+              th:value="${category.nameExpenseCategory}"
+              th:text="${category.nameExpenseCategory}">Имя категории</option>
+    </select>
+  </div>
+  <div>
+    <label class="form-label">Количество </label>
+    <input name="description" th:field="*{amount}"  type="text" />
+  </div>
+
+  <button type="submit"> Доавить </button>
+</form>
+
+<div>
+  <a th:href="@{/menu}"> Menu </a>
+</div>
+
+</body>
+</html>
