@@ -26,11 +26,7 @@ public class ExpenseCategory {
         this.nameExpenseCategory = nameExpenseCategory;
     }
 
-    public ExpenseCategory(String nameExpenseCategory, int amountExpenseCategory) {
-        this.nameExpenseCategory = nameExpenseCategory;
-    }
-
-    public Integer getId() {
+     public Integer getId() {
         return id;
     }
 

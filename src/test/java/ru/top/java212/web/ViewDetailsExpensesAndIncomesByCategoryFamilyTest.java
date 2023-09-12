@@ -40,6 +40,7 @@ public class ViewDetailsExpensesAndIncomesByCategoryFamilyTest {
 
         Map<String, Long> listExpensesByCategory = (Map<String, Long>) mv.getModelMap().get("listExpensesFamilyByCategory");
         Assertions.assertEquals(listExpensesByCategory, mv.getModelMap().getAttribute("listExpensesFamilyByCategory"));
+        Mockito.verify(expensesFamily).getExpensesByCategory(startPeriod, endPeriod);
     }
 
     @Test
@@ -55,5 +56,6 @@ public class ViewDetailsExpensesAndIncomesByCategoryFamilyTest {
         Assertions.assertEquals("details_income_family", mv.getViewName());
         Map<String, Long> listIncomesByCategory = (Map<String, Long>) mv.getModelMap().get("listIncomeFamilyBySource");
         Assertions.assertEquals(listIncomesByCategory, mv.getModelMap().getAttribute("listIncomeFamilyBySource"));
+        Mockito.verify(incomesFamily).getIncomesFamilyBySource(startPeriod, endPeriod);
     }
 }

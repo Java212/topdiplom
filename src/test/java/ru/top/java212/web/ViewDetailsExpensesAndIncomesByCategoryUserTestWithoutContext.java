@@ -47,7 +47,7 @@ public class ViewDetailsExpensesAndIncomesByCategoryUserTestWithoutContext {
     void test_GetMapping_viewPageDetailsExpenseUser(){
         LocalDate startDate = LocalDate.of(2023, 9, 1);
         LocalDate endDate = LocalDate.of(2023, 9, 30);
-        int userId = 2;
+        int userId = 1;
         Mockito.when(expensesUser.getExpensesByCategory(userId, startDate, endDate)).thenReturn(
                 Map.of("квартплата", 5000L,
                         "бензин", 2000L)
@@ -56,6 +56,7 @@ public class ViewDetailsExpensesAndIncomesByCategoryUserTestWithoutContext {
         Assertions.assertEquals("details_expense_user", mv.getViewName());
         Map<String, Long> list = (Map<String, Long>) mv.getModelMap().get("listExpenseCategoryUser");
         Assertions.assertEquals(list, mv.getModelMap().getAttribute("listExpenseCategoryUser"));
+        Mockito.verify(expensesUser).getExpensesByCategory(userId, startDate, endDate);
     }
 
     @Test
@@ -71,5 +72,6 @@ public class ViewDetailsExpensesAndIncomesByCategoryUserTestWithoutContext {
         Assertions.assertEquals("details_income_user", mv.getViewName());
         Map<String, Long> list = (Map<String, Long>) mv.getModelMap().get("listIncomeUserBySource");
         Assertions.assertEquals(list, mv.getModelMap().getAttribute("listIncomeUserBySource"));
+        Mockito.verify(incomesUser).getIncomesUserBySource(userId, startDate, endDate);
     }
 }
