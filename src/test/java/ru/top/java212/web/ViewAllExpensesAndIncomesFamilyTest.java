@@ -1,53 +1,65 @@
 package ru.top.java212.web;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.top.java212.Application;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.hamcrest.Matchers.containsString;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest (classes = Application.class)
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class ViewAllExpensesAndIncomesFamilyTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private WebApplicationContext context;
+    private MockMvc mockMvc;
+
+    @BeforeEach
+    public void setup() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity()) // enable security for the mock set up
+                .build();
+    }
 
     @Test
-    void test_GetMapping_Expenses_Family() throws Exception{
+    @WithMockUser
+    void test_GetMapping_Expenses_Family() throws Exception {
         String url = "/total_expense_family";
         this.mockMvc.perform(get(url))
-                    .andExpect(status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Total family expenses")));
     }
 
 // todo No ModelAndView found with error 403
 
-//    @Test
-//    void test_PostMapping_Expenses_Family() throws Exception{
-//        String url = "/total_expense_family";
-//        String amountCategory1 = "6000";
-//        String amountCategory2= "3000";
-//        String amountCategory3 = "2000";
-//
-//        this.mockMvc.perform(post(url)
-//                .param("amountCategory1", amountCategory1)
-//                .param("amountCategory2", amountCategory2)
-//                .param("amountCategory3", amountCategory3))
-//                .andExpect(model().size(1))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    @WithMockUser
+    void test_PostMapping_Expenses_Family() throws Exception {
+        String url = "/total_expense_family"; //?nameCategory1=6000&nameCategory2=3000&nameCategory3=2000";
+        String amountCategory1 = "6000";
+        String amountCategory2 = "3000";
+        String amountCategory3 = "2000";
+
+        this.mockMvc.perform(post(url).with(csrf())
+                        .param("nameCategory1", amountCategory1)
+                        .param("nameCategory2", amountCategory2)
+                        .param("nameCategory3", amountCategory3))
+                .andExpect(model().size(1))
+                .andExpect(status().isOk());
+    }
 
     @Test
-    void test_GetMapping_Incomes_Family() throws Exception{
+    void test_GetMapping_Incomes_Family() throws Exception {
         String url = "/total_income_family";
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk())
