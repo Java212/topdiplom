@@ -8,6 +8,7 @@ import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootTest

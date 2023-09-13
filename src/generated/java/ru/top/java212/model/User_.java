@@ -1,6 +1,6 @@
 package ru.top.java212.model;
 
-import jakarta.persistence.metamodel.SetAttribute;
+import jakarta.persistence.metamodel.CollectionAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 import javax.annotation.processing.Generated;
@@ -10,7 +10,7 @@ import javax.annotation.processing.Generated;
 public abstract class User_ {
 
 	public static volatile SingularAttribute<User, String> password;
-	public static volatile SetAttribute<User, Role> roles;
+	public static volatile CollectionAttribute<User, Role> roles;
 	public static volatile SingularAttribute<User, Integer> id;
 	public static volatile SingularAttribute<User, String> login;
 

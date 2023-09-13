@@ -24,7 +24,7 @@ public class WebSecurityConfig {
         http.userDetailsService(userDetailsService)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/","/registration**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .formLogin(formLogin -> formLogin
