@@ -9,9 +9,12 @@
         <sqlFile path="db/changeset-created-user.sql"/>
     </changeSet>
     <changeSet id="3" author="Bazhanov">
-        <sqlFile path="db/changeset-created-tools.sql"/>
+        <sqlFile path="db/changeset-created-persons.sql"/>
     </changeSet>
     <changeSet id="4" author="Bazhanov">
+        <sqlFile path="db/changeset-created-tools.sql"/>
+    </changeSet>
+    <changeSet id="5" author="Bazhanov">
         <sqlFile path="db/changeset-created-orders.sql"/>
     </changeSet>
 </databaseChangeLog>

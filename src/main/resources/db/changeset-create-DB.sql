@@ -73,6 +73,23 @@ CREATE TABLE IF NOT EXISTS public.users_roles
 );
 -- //---------------------------------------------------------------------------------
 
+
+CREATE SEQUENCE public.persons_id_seq
+    INCREMENT 1
+    START WITH 1;
+CREATE TABLE IF NOT EXISTS public.persons
+(
+    person_id integer NOT NULL  DEFAULT nextval('persons_id_seq'),
+    user_id integer NOT NULL,
+	name varchar NOT NULL,
+	phone_number varchar NOT NULL,
+	CONSTRAINT persons_pkey PRIMARY KEY (person_id),
+	  CONSTRAINT person_user_fkey
+          FOREIGN KEY(user_id)
+    	  REFERENCES public.users(user_id)
+    	  ON DELETE CASCADE
+);
+
 CREATE SEQUENCE public.addresses_id_seq
     INCREMENT 1
     START WITH 1;
@@ -94,7 +111,7 @@ CREATE TABLE IF NOT EXISTS public.tools
     tool_id integer NOT NULL DEFAULT nextval('tools_id_seq'),
     name varchar NOT NULL,
 	address_id integer NOT NULL,
-	user_id integer NOT NULL,
+	person_id integer NOT NULL,
     price real NOT NULL DEFAULT 0.0,
 	in_rent boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT tools_pkey PRIMARY KEY (tool_id),
@@ -102,9 +119,9 @@ CREATE TABLE IF NOT EXISTS public.tools
           FOREIGN KEY(address_id)
     	  REFERENCES public.addresses(address_id)
     	  ON DELETE CASCADE,
-     CONSTRAINT tools_users_fkey
-              FOREIGN KEY(user_id)
-        	  REFERENCES public.users(user_id)
+     CONSTRAINT tools_persons_fkey
+              FOREIGN KEY(person_id)
+        	  REFERENCES public.persons(person_id)
         	  ON DELETE CASCADE
 
 );
@@ -117,33 +134,17 @@ CREATE SEQUENCE public.orders_id_seq
 CREATE TABLE IF NOT EXISTS public.orders
 (
     order_id integer NOT NULL DEFAULT nextval('orders_id_seq'),
-    user_id integer NOT NULL,
+    person_id integer NOT NULL,
 	tool_id integer NOT NULL,
 	start_date date NOT NULL,
     stop_date date NOT NULL,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id),
-	 CONSTRAINT orders_users_fkey
-          FOREIGN KEY(user_id)
-    	  REFERENCES public.users(user_id)
+	 CONSTRAINT orders_persons_fkey
+          FOREIGN KEY(person_id)
+    	  REFERENCES public.persons(person_id)
     	  ON DELETE CASCADE,
 	 CONSTRAINT orders_tools_fkey
           FOREIGN KEY(tool_id)
     	  REFERENCES public.tools(tool_id)
-    	  ON DELETE CASCADE
-);
-
-CREATE SEQUENCE public.persons_id_seq
-    INCREMENT 1
-    START WITH 1;
-CREATE TABLE IF NOT EXISTS public.persons
-(
-    person_id integer NOT NULL  DEFAULT nextval('persons_id_seq'),
-    user_id integer NOT NULL,
-	name varchar NOT NULL,
-	phone_number varchar NOT NULL,
-	CONSTRAINT persons_pkey PRIMARY KEY (person_id),
-	  CONSTRAINT person_user_fkey
-          FOREIGN KEY(user_id)
-    	  REFERENCES public.users(user_id)
     	  ON DELETE CASCADE
 );

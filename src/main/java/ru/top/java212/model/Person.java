@@ -2,6 +2,8 @@ package ru.top.java212.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "persons")
 public class Person {
@@ -15,6 +17,13 @@ public class Person {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "person")
+    private List<Tool> tools;
+
+
+    @OneToMany(mappedBy = "person")
+    private List<Order> orders;
 
     Person(){}
 
@@ -46,5 +55,20 @@ public class Person {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    public List<Tool> getTools() {
+        return tools;
+    }
+
+    public void setTools(List<Tool> tools) {
+        this.tools = tools;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -18,8 +18,8 @@ public class Order {
 
 
     @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
 
     @Column(name = "start_date")
@@ -28,8 +28,8 @@ public class Order {
     @Column(name = "stop_date")
     private LocalDate stopDate;
 
-    Order(User user, Tool tool, LocalDate startDate, LocalDate stopDate ){
-        this.user = user;
+    Order(Person person, Tool tool, LocalDate startDate, LocalDate stopDate ){
+        this.person = person;
         this.tool = tool;
         this.startDate = startDate;
         this.stopDate = stopDate;

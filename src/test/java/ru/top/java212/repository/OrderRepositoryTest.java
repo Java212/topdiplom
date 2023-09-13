@@ -25,22 +25,6 @@ public class OrderRepositoryTest {
     public void test_that_context_is_ok(){
         Assertions.assertDoesNotThrow(() -> orderRepository.findAll());
     }
-    @Test
-    public void test_that_user_find_by_id_is_ok(){
-
-    }
-    @Test
-    public void test_that_user_is_saved(){
-        User user = new User("user2","password2");
-        user.setId(2);
-        Role role = roleRepository.findById(2).orElseThrow();
-        Set<Role> roles = new HashSet<>();
-        roles.add(role);
-        user.setRoles(roles);
-        userRepository.save(user);
-        User userFromDB = userRepository.findById(2).orElseThrow();
-
-    }
 
 
 }

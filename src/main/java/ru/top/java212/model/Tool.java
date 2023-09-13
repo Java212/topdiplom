@@ -13,8 +13,8 @@ public class Tool {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "person_id")
+    private Person person;
     private String name;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -31,9 +31,9 @@ public class Tool {
 
     Tool(){
     }
-    public Tool(String name, User user, Address address){
+    public Tool(String name, Person person, Address address){
         this.name = name;
-        this.user = user;
+        this.person = person;
         this.address = address;
         this.inRent = false;
     }
@@ -46,12 +46,12 @@ public class Tool {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public String getName() {

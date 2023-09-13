@@ -18,10 +18,16 @@
         <h2>
             Рады приветствовать Вас
         </h2>
+        <p>
+            <a th:href="@{/login}"> Войти </a>
+        </p>
+        <p>
+            <a th:href="@{/registration}"> Зарегистрироваться </a>
+        </p>
     </div>
 </section>
 <section class="bottom">
-    <div class="box"> Текущее время: [[${#dates.createNow()}]] </div>
+    <div class="bottom_box"> Текущее время: [[${#dates.createNow()}]] </div>
 </section>
 </body>
 </html>

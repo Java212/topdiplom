@@ -27,13 +27,6 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "user")
-    private List<Tool> tools;
-
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,7 +67,7 @@ public class User implements UserDetails {
         return true;
     }
 
-    User(){
+    public User(){
     }
     public User(String login, String password){
         this.login = login;
@@ -101,24 +94,7 @@ public class User implements UserDetails {
         return this.id;
     }
 
-
-    public List<Tool> getTools() {
-        return this.tools;
-    }
-
-    public void setTools(LinkedList<Tool> tools) {
-        this.tools = tools;
-    }
-
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 }
