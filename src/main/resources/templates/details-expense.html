@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details expense</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="./css/details-expense.css">
+</head>
+<body>
+<header>
+    <div class="menu">
+        <a th:href="@{/menu}"> Menu </a>
+    </div>
+    <div class="login_user">
+        <p th:text="${userLogin}"></p>
+    </div>
+</header>
+    <section>
+        <form th:action="@{/details/expenses}" method="post">
+            <label>Семья</label>
+            <input type="checkbox" th:name="*{family}" />
+            <label>Пользователь</label>
+            <input type="checkbox" th:name="*{user}" />
+        <label>Start data</label>
+        <input th:text="${#dates.format(startData, 'dd/MM/yyyy')}" />
+        <label>End data</label>
+        <input th:text="${#dates.format(endData, 'dd/MM/yyyy')}" />
+            <button class="button_show">Show list of expenses</button>
+        </form>
+
+    </section>
+            <section>
+                <div  th:switch ="${forWhomCalculation}">
+                    <div th:case="'family'">
+                        <ul class="list">
+                            <li th:each="listExpenseByCategory : ${detailsListExpensesFamily}">
+                                <span th:text="${listExpenseByCategory.key}">: </span>
+                                <span th:text="${listExpenseByCategory.value}"></span> <span> рубл.</span>
+                            </li>
+                        </ul>
+                    </div>
+                            <div th:case="'user'">
+                                <ul class="list">
+                                    <li th:each="listExpenseByCategory : ${detailsListExpensesUser}">
+                                        <span th:text="${listExpenseByCategory.key}">: </span>
+                                        <span th:text="${listExpenseByCategory.value}"></span> <span> рубл.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                </div>
+
+            </section>
+</body>
+</html>

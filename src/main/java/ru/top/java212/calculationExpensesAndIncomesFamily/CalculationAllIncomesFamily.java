@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+//todo переделать класс по образцу CalculationAllExpensesFamily
+
 @Component
 public class CalculationAllIncomesFamily implements AllIncomesFamily {
 

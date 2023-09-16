@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.dao.ExpenseDbDao;
+import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllExpensesFamily;
+import ru.top.java212.calculationExpensesAndIncomesUser.CalculationAllExpensesUser;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 
@@ -19,7 +20,9 @@ import java.time.LocalDate;
 public class ControllerViewDetailsExpenses {
 
     @Autowired
-    ExpenseDbDao expenseDbDao;
+    CalculationAllExpensesFamily calculationExpensesFamily;
+    @Autowired
+    CalculationAllExpensesUser calculationExpensesUser;
 
     @GetMapping("/details/expenses")
     @PreAuthorize("authenticated")
@@ -30,7 +33,7 @@ public class ControllerViewDetailsExpenses {
     @PostMapping("/details/expenses")
     @PreAuthorize("authenticated")
     public ModelAndView viewDetailsExpenses(@RequestParam("checkbox") String checkbox,
-            @RequestParam("startDate") LocalDate startDate,
+                                            @RequestParam("startDate") LocalDate startDate,
                                             @RequestParam("endDate") LocalDate endDate){
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -39,11 +42,11 @@ public class ControllerViewDetailsExpenses {
         ModelAndView mv = new ModelAndView("details-expense");
 
         if ( checkbox.equals("family") ){
-           mv.addObject("detailsListExpensesFamily", expenseDbDao.getExpensesFamilyByCategory(startDate, endDate));
+           mv.addObject("detailsListExpensesFamily", calculationExpensesFamily.calculationExpensesFamilyByCategory(startDate, endDate));
            mv.addObject("forWhomCalculation", checkbox);
         } else {
             if ( checkbox.equals("user") ){
-                mv.addObject("detailsListExpensesUser", expenseDbDao.getExpensesByCategory(user.getId(), startDate, endDate));
+                mv.addObject("detailsListExpensesUser", calculationExpensesUser.calculationExpensesUserByCategory(user.getId(), startDate, endDate));
                 mv.addObject("forWhomCalculation", checkbox);
             }
         }

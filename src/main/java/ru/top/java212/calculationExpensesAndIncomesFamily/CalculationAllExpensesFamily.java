@@ -3,10 +3,15 @@ package ru.top.java212.calculationExpensesAndIncomesFamily;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.top.java212.dao.AllExpensesFamily;
+import ru.top.java212.dao.ExpenseDbDao;
+import ru.top.java212.model.ExpenseAmount;
+import ru.top.java212.model.TotalExpense;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,37 +19,27 @@ import java.util.stream.Collectors;
 @Component
 public class CalculationAllExpensesFamily implements AllExpensesFamily {
 
-        private final EntityManager entityManager;
+     private final ExpenseDbDao expenseDbDao;
 
-        public CalculationAllExpensesFamily(EntityManager entityManager) {
-                this.entityManager = entityManager;
+     @Autowired
+
+        public CalculationAllExpensesFamily(ExpenseDbDao expenseDbDao) {
+                this.expenseDbDao = expenseDbDao;
         }
 
         @Override
-        public int calculationExpensesFamily(LocalDate initalDate, LocalDate endData){
-        TypedQuery<Integer> queryExp = entityManager.createNamedQuery("selectAllExpensesFamily", Integer.class);
-        queryExp.setParameter("startData", initalDate);
-        queryExp.setParameter("endData", endData);
-        List<Integer> listExpenses = queryExp.getResultList();
-        return listExpenses.stream().mapToInt(Integer::intValue).sum();
-}
-
-        @Override
-        public Map<String, Long> getExpensesByCategory(LocalDate initalDate, LocalDate endData){
-                TypedQuery<Tuple> query = entityManager.createQuery("""
-                        select expenseCategory.nameExpenseCategory as category, sum(expenseAmount) as total
-                        from Expense where date between : startData and : endData
-                        group by expenseCategory.nameExpenseCategory""", Tuple.class);
-                query.setParameter("startData", initalDate);
-                query.setParameter("endData", endData);
-                return query.getResultList()
-                        .stream()
-                        .collect(
-                                Collectors.toMap(
-                                        tuple -> ((String) tuple.get("category")),
-                                        tuple -> ((Number) tuple.get("total")).longValue()
-                                )
-                        );
+        public int calculationExpensesFamily(LocalDate initialDate, LocalDate endData){
+             List<ExpenseAmount> list = expenseDbDao.findByDateBetween(initialDate, endData);
+             return list.stream().mapToInt(ExpenseAmount::getExpenseAmount).reduce(0, Integer::sum);
         }
 
+        @Override
+        public Map<String, Long> calculationExpensesFamilyByCategory(LocalDate initialDate, LocalDate endData){
+                List<TotalExpense> list = expenseDbDao.getExpensesFamilyByCategory(initialDate, endData);
+                Map<String, Long> map = new HashMap<>();
+                for (TotalExpense e : list) {
+                        map.put(e.getCategoryName(), e.getTotal());
+                }
+                return map;
+        }
 }

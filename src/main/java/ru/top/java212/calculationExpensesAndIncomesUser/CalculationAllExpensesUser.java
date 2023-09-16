@@ -30,8 +30,8 @@ public class CalculationAllExpensesUser implements AllExpensesUser {
 
 
     @Override
-    public Map<String, Long> getExpensesByCategory(int userId, LocalDate initialDate, LocalDate endData) {
-        List<TotalExpense> list = expenseDao.getExpensesByCategory(userId, initialDate, endData);
+    public Map<String, Long> calculationExpensesUserByCategory(int userId, LocalDate initialDate, LocalDate endData) {
+        List<TotalExpense> list = expenseDao.getExpensesUserByCategory(userId, initialDate, endData);
         Map<String, Long> map = new HashMap<>();
         for (TotalExpense e : list) {
             map.put(e.getCategoryName(), e.getTotal());

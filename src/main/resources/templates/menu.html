@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,8 +16,11 @@
     <div class="balance">
         Family current balance: <span th:text="${balanceFamily}"></span> <span> рубл.</span>
     </div>
-    <div class="login_user">
-         <p th:text="${loginUser}"></p>
+    <div class="date">
+        <span th:text="${#temporals.format(localDate, 'MM-yyyy')}"></span>
+    </div>
+    <div class="login_user" sec:authorize="isAuthenticated()">
+        <span sec:authentication="name"></span>
     </div>
 </header>
 
@@ -25,9 +29,9 @@
         <form  th:action="@{/total_expense_family}" method="get">
             <button class="button_family">Calculate total family expenses</button>
         </form>
-            <form  th:action="@{/total_income_family}" method="get">
-                <button class="button_family">Calculate total family incomes</button>
-            </form>
+        <form  th:action="@{/total_income_family}" method="get">
+            <button class="button_family">Calculate total family incomes</button>
+        </form>
     </div>
 
     <div class="details_exp_and_inc_family">

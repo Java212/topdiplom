@@ -19,7 +19,7 @@ public interface ExpenseDbDao extends CrudRepository<Expense, Integer> {
     @Query("select expenseCategory.nameExpenseCategory as categoryName, sum(expenseAmount) as total \n" +
             "                  from Expense where date between ?2 and ?3 and user.id = ?1 \n" +
             "                  group by expenseCategory.nameExpenseCategory")
-    List<TotalExpense> getExpensesByCategory(int userId, LocalDate initialDate, LocalDate endData);
+    List<TotalExpense> getExpensesUserByCategory(int userId, LocalDate initialDate, LocalDate endData);
 
     @Query("select expenseCategory.nameExpenseCategory as categoryName, sum(expenseAmount) as total \n" +
             "                  from Expense where date between ?1 and ?2 \n" +

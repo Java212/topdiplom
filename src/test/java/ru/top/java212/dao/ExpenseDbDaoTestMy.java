@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 
 @SpringBootTest
-public class ExpenseDbDaoTest {
+public class ExpenseDbDaoTestMy {
 
     @Autowired
     ExpenseDbDao expenseDbDao;

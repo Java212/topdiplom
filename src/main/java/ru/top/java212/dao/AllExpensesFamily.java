@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public interface AllExpensesFamily {
-    int calculationExpensesFamily(LocalDate initalDate, LocalDate endData);
+    int calculationExpensesFamily(LocalDate initialDate, LocalDate endData);
 
-    Map<String, Long> getExpensesByCategory(LocalDate initalDate, LocalDate endData);
+    Map<String, Long> calculationExpensesFamilyByCategory(LocalDate initialDate, LocalDate endData);
 }

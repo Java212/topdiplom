@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+//todo переделать класс по обрзцу CalculationAllExpensesUser
 @Component
 public class CalculationAllIncomesUser implements AllIncomesUser {
 

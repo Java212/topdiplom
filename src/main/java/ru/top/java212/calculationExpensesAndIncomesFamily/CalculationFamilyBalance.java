@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+//todo после написания класса CalculationIncomesFamily переписать реализацию класса CalculationFamilyBalance
 @Component
 public class CalculationFamilyBalance implements FamilyBalance {
     private final EntityManager entityManager;
