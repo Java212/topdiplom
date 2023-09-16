@@ -16,24 +16,29 @@
 </section>
 <section class="center">
     <div class="registration">
+        <h2>
+            Зарегистрируйтесь
+        </h2>
         <form  th:action="@{/registration}" method="post" th:object="${userForm}">
-            <div>
+            <div class="input">
                 <input name="name" placeholder="Имя "  th:field="*{name}"/>
             </div>
-            <div>
+            <div class="input">
                 <input name="phone" placeholder="Номер телефона "  th:field="*{phone}"/>
             </div>
-            <div>
+            <div class="input">
                 <input name="login" placeholder="Имя пользователя"  th:field="*{login}"/>
             </div>
-            <div>
+            <div class="input">
                 <input type="password" id="password" name="password" placeholder="Пароль"  th:field="*{password}"/>
             </div>
-            <div>
+            <div class="input">
                 <input type="password" id="confirm_password" name="passwordRepeat" placeholder="Повторно пароль"/>
             </div>
-            <input id="submitButton" type="submit" disabled value="Зарегистрироваться" />
-        </form>
+            <div class="input">
+                <input id="submitButton" type="submit" disabled value="Зарегистрироваться" />
+            </div>
+           </form>
     </div>
         <script th:inline="javascript" type="text/javascript">
             $("#confirm_password").on("keyup", function() {

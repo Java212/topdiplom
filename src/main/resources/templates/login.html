@@ -9,22 +9,32 @@
 <section class="top">
     <div class="top_center">
         <h1>
-            Войти в приложение
+            Аренда инструмента
         </h1>
     </div>
 </section>
 <section class="center">
     <div class="registration">
         <h2>
-            Рады приветствовать Вас
+            Войдите в приложение
         </h2>
-        <p>
-            <a th:href="@{/login}"> Войти </a>
-        </p>
-        <p>
+        <div th:if="${error}"> <div th:text="${error}"> Ошибка </div></div>
+        <div th:if="${message}"> <div th:text="${error}"> Регистрация прошла успешно </div></div>
+        <form th:action="@{/login}" method="post">
+            <div class="input">
+                <input autofocus name="login" placeholder="Имя пользователя" type="text"/>
+            </div>
+            <div class="input">
+                <input type="password" name="password" placeholder="Пароль"/>
+            </div>
+            <div class="input">
+                <input type="submit" value="Войти"/>
+            </div>
+        </form>
+        <div>
             <a th:href="@{/registration}"> Зарегистрироваться </a>
-        </p>
+        </div>
     </div>
-</section>
 
+</section>
 </body>
