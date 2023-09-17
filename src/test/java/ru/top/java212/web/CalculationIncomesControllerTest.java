@@ -15,13 +15,12 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class ControllerViewDetailsExpensesTest {
+public class CalculationIncomesControllerTest {
+
     @Autowired
     private WebApplicationContext context;
 
@@ -37,18 +36,16 @@ public class ControllerViewDetailsExpensesTest {
 
     @Test
     @WithMockUser
-    void test_view_page_details_expense() throws Exception{
-      String url = "/details/expenses";
-
-      this.mockMvc.perform(get(url))
-              .andExpect(status().isOk())
-              .andExpect(content().string(containsString("form")));
+    void test_viewPageIncome() throws Exception{
+        String url = "/incomes/calculation";
+        this.mockMvc.perform(get(url))
+                .andExpect(status().isOk());
     }
-
     @Test
     @WithMockUser
-    void test_controller_view_details_expense_for_family() throws Exception{
-        String url = "/details/expenses";
+    void test_controller_calculation_Incomes_for_family() throws Exception {
+        String url = "/incomes/calculation";
+
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
         String endPeriod = String.valueOf(LocalDate.of(2023, 9, 30));
@@ -58,23 +55,25 @@ public class ControllerViewDetailsExpensesTest {
                         .param("startDate", startPeriod)
                         .param("endDate", endPeriod))
                 .andExpect(model().size(2))
+                .andExpect(model().attribute("totalIncomeFamily", 146930))
                 .andExpect(status().isOk());
     }
     //todo falling test: User.getId()" is null
-
     @Test
     @WithMockUser
-    void test_controller_view_details_expense_for_user() throws Exception{
-        String url = "/details/expenses";
+    void test_controller_calculation_Incomes_for_user() throws Exception {
+        String url = "/incomes/calculation";
+
         String checkbox = "user";
-        String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
-        String endPeriod = String.valueOf(LocalDate.of(2023, 9, 30));
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 9, 30);
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("checkbox", checkbox)
-                        .param("startDate", startPeriod)
-                        .param("endDate", endPeriod))
+                        .param("startDate", String.valueOf(startPeriod))
+                        .param("endDate", String.valueOf(endPeriod)))
                 .andExpect(model().size(2))
+                .andExpect(model().attribute("totalIncomeUser", 35000))
                 .andExpect(status().isOk());
     }
 }

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllExpensesFamily;
-import ru.top.java212.calculationExpensesAndIncomesUser.CalculationAllExpensesUser;
+import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllIncomesFamily;
+import ru.top.java212.calculationExpensesAndIncomesUser.CalculationAllIncomesUser;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 
@@ -17,22 +17,22 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Controller
-public class ControllerViewDetailsExpenses {
+public class ViewDetailsIncomesController {
 
     @Autowired
-    CalculationAllExpensesFamily calculationExpensesFamily;
+    CalculationAllIncomesFamily calculationIncomesFamily;
     @Autowired
-    CalculationAllExpensesUser calculationExpensesUser;
+    CalculationAllIncomesUser calculationIncomesUser;
 
-    @GetMapping("/details/expenses")
+    @GetMapping("/details/incomes")
     @PreAuthorize("authenticated")
     public String viewDetailsExpenses(){
         return "details-expense";
     }
 
-    @PostMapping("/details/expenses")
+    @PostMapping("/details/incomes")
     @PreAuthorize("authenticated")
-    public ModelAndView viewDetailsExpenses(@RequestParam("checkbox") String checkbox,
+    public ModelAndView viewDetailsIncomes(@RequestParam("checkbox") String checkbox,
                                             @RequestParam("startDate") LocalDate startDate,
                                             @RequestParam("endDate") LocalDate endDate){
 
@@ -42,11 +42,11 @@ public class ControllerViewDetailsExpenses {
         ModelAndView mv = new ModelAndView("details-expense");
 
         if ( checkbox.equals("family") ){
-           mv.addObject("detailsListExpensesFamily", calculationExpensesFamily.calculationExpensesFamilyByCategory(startDate, endDate));
+           mv.addObject("detailsListIncomesFamily", calculationIncomesFamily.calculationSourceIncomeByCategory(startDate, endDate));
            mv.addObject("forWhomCalculation", checkbox);
         } else {
             if ( checkbox.equals("user") ){
-                mv.addObject("detailsListExpensesUser", calculationExpensesUser.calculationExpensesUserByCategory(user.getId(), startDate, endDate));
+                mv.addObject("detailsListIncomessUser", calculationIncomesUser.calculationIncomesUserBySource(user.getId(), startDate, endDate));
                 mv.addObject("forWhomCalculation", checkbox);
             }
         }
