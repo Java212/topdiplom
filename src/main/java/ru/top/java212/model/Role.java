@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
-    public static final String ROLE_USER = "USER";
+    public static final String ROLE_RENTER = "RENTER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="role_id")

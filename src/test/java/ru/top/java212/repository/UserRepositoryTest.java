@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.top.java212.dto.UserRegistrationDTO;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
+import ru.top.java212.security.UserService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +20,9 @@ public class UserRepositoryTest {
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     public void test_that_context_is_ok(){
@@ -39,6 +44,18 @@ public class UserRepositoryTest {
         userRepository.save(user);
         User userFromDB = userRepository.findById(3).orElseThrow();
         Assertions.assertEquals("user3",userFromDB.getLogin());
+    }
+    @Test
+    public void test_that_user__is_ok(){
+        UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
+        userRegistrationDTO.setName("Andrey");
+        userRegistrationDTO.setPhone("+79874564321");
+        userRegistrationDTO.setLogin("userDTO");
+        userRegistrationDTO.setPassword("userDTO");
+        userService.save(userRegistrationDTO);
+
+//        User userFromDB = userRepository.findById(1).orElseThrow();
+//        Assertions.assertEquals("user1",userFromDB.getLogin());
     }
 
 

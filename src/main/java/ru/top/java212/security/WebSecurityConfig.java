@@ -26,14 +26,17 @@ public class WebSecurityConfig {
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
+                        .usernameParameter("login")
+                        .passwordParameter("password")
                         .permitAll()
-                        .successForwardUrl("/menu")
-                        .failureForwardUrl("/login_error")
+                        .successForwardUrl("/renterView")
+
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .permitAll()
-                        .logoutSuccessUrl("/login")
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
+                        .logoutSuccessUrl("/renterView")
                 );
         return http.build();
 
