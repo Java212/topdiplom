@@ -28,7 +28,7 @@ public class RegistrationController {
     @PostMapping
     public String registerUserAccount(@ModelAttribute("userForm") UserRegistrationDTO registrationDto) {
         userService.save(registrationDto);
-        return "registration";
+        return "login";
     }
 
 

@@ -66,10 +66,10 @@ CREATE TABLE IF NOT EXISTS public.users_roles
     CONSTRAINT users_roles_pkey PRIMARY KEY (user_role_id),
     CONSTRAINT users_roles_roles_fkey
           FOREIGN KEY(role_id)
-    	  REFERENCES public.roles(role_id),
+    	  REFERENCES public.roles(role_id)ON DELETE CASCADE,
     CONSTRAINT users_roles_users_fkey
               FOREIGN KEY(user_id)
-        	  REFERENCES public.users(user_id)
+        	  REFERENCES public.users(user_id)ON DELETE CASCADE
 );
 -- //---------------------------------------------------------------------------------
 
