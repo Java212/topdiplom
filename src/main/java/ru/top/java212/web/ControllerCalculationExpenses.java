@@ -1,4 +1,4 @@
-package ru.top.java212;
+package ru.top.java212.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

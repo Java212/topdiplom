@@ -1,49 +1,40 @@
 package ru.top.java212.calculationExpensesAndIncomesUser;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Tuple;
-import jakarta.persistence.TypedQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.top.java212.dao.AllIncomesUser;
+import ru.top.java212.dao.IncomeAmount;
+import ru.top.java212.dao.IncomeDbDao;
+import ru.top.java212.dao.TotalIncome;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-//todo переделать класс по обрзцу CalculationAllExpensesUser
 @Component
 public class CalculationAllIncomesUser implements AllIncomesUser {
 
-    private EntityManager entityManager;
+    private final IncomeDbDao incomeDao;
 
-    public CalculationAllIncomesUser(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-    @Override
-    public int calculationIncomesUser(int userId, LocalDate initialPeriod, LocalDate endPeriod){
-        TypedQuery<Integer> query = entityManager.createNamedQuery("selectAllIncomesUser", Integer.class);
-        query.setParameter("userId", userId);
-        query.setParameter("startData", initialPeriod);
-        query.setParameter("endData", endPeriod);
-        return query.getResultList().stream().mapToInt(Integer ::intValue).sum();
+    @Autowired
+    public CalculationAllIncomesUser(IncomeDbDao incomeDao) {
+        this.incomeDao = incomeDao;
     }
 
     @Override
-    public Map<String, Long> getIncomesUserBySource(int userId, LocalDate initalDate, LocalDate endData){
-        TypedQuery<Tuple> query = entityManager.createQuery("""
-                        select incomeCategory.sourceIncomeCategory as category, sum(incomeAmount) as total
-                        from Income where date between : startDate and : endDate and user.id =: userId
-                        group by incomeCategory.sourceIncomeCategory""", Tuple.class);
-        query.setParameter("startDate", initalDate);
-        query.setParameter("endDate", endData);
-        query.setParameter("userId", userId);
-        return query.getResultList()
-                .stream()
-                .collect(
-                        Collectors.toMap(
-                                tuple -> ((String) tuple.get("category")),
-                                tuple -> ((Number) tuple.get("total")).longValue()
-                        )
-                );
+    public int calculationIncomesUser(int userId, LocalDate startDate, LocalDate endDate){
+
+        List<IncomeAmount> list = incomeDao.findByUserIdAndDateBetween(userId, startDate, endDate);
+        return list.stream().mapToInt(IncomeAmount::getIncomeAmount).reduce(0, Integer :: sum);
+    }
+    @Override
+    public Map<String, Long> calculationIncomesUserBySource(int userId, LocalDate startDate, LocalDate endDate){
+        List<TotalIncome> list = incomeDao.getIncomesUserByCategory(userId, startDate, endDate);
+        Map<String, Long> map = new HashMap<>();
+        for (TotalIncome i : list){
+            map.put(i.getCategoryName(), i.getTotal());
+        }
+        return map;
     }
 }

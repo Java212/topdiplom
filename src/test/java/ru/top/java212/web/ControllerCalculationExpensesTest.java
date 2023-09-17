@@ -1,13 +1,17 @@
-package ru.top.java212;
+package ru.top.java212.web;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 
 import java.time.LocalDate;
 
@@ -16,12 +20,12 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class ControllerViewDetailsExpensesTest {
+
+public class ControllerCalculationExpensesTest {
+
     @Autowired
     private WebApplicationContext context;
 
@@ -36,19 +40,17 @@ public class ControllerViewDetailsExpensesTest {
     }
 
     @Test
-    @WithMockUser
-    void test_view_page_details_expense() throws Exception{
-      String url = "/details/expenses";
-
+    void test_viewPageExpense() throws Exception{
+      String url = "/expense/calculation";
       this.mockMvc.perform(get(url))
-              .andExpect(status().isOk())
-              .andExpect(content().string(containsString("form")));
+              .andExpect(status().isOk());
     }
 
     @Test
     @WithMockUser
-    void test_controller_view_details_expense_for_family() throws Exception{
-        String url = "/details/expenses";
+    void test_controller_calculation_Expenses_for_family() throws Exception {
+        String url = "/expense/calculation";
+
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
         String endPeriod = String.valueOf(LocalDate.of(2023, 9, 30));
@@ -58,23 +60,25 @@ public class ControllerViewDetailsExpensesTest {
                         .param("startDate", startPeriod)
                         .param("endDate", endPeriod))
                 .andExpect(model().size(2))
+                .andExpect(model().attribute("totalExpenseFamily", 31000))
                 .andExpect(status().isOk());
     }
     //todo falling test: User.getId()" is null
-
     @Test
     @WithMockUser
-    void test_controller_view_details_expense_for_user() throws Exception{
-        String url = "/details/expenses";
+    void test_controller_calculation_Expenses_for_user() throws Exception {
+        String url = "/expense/calculation";
+
         String checkbox = "user";
-        String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
-        String endPeriod = String.valueOf(LocalDate.of(2023, 9, 30));
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 9, 30);
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("checkbox", checkbox)
-                        .param("startDate", startPeriod)
-                        .param("endDate", endPeriod))
+                        .param("startDate", String.valueOf(startPeriod))
+                        .param("endDate", String.valueOf(endPeriod)))
                 .andExpect(model().size(2))
+                .andExpect(model().attribute("totalExpenseUser", 1000))
                 .andExpect(status().isOk());
     }
 }

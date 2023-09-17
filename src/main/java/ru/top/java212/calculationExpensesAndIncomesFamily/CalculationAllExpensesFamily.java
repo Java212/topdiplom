@@ -1,8 +1,5 @@
 package ru.top.java212.calculationExpensesAndIncomesFamily;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Tuple;
-import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.top.java212.dao.AllExpensesFamily;
@@ -14,15 +11,14 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Component
 public class CalculationAllExpensesFamily implements AllExpensesFamily {
 
      private final ExpenseDbDao expenseDbDao;
 
-     @Autowired
-
+        @Autowired
         public CalculationAllExpensesFamily(ExpenseDbDao expenseDbDao) {
                 this.expenseDbDao = expenseDbDao;
         }

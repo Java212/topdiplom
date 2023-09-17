@@ -13,12 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "users")
 
-@NamedQueries({
-        @NamedQuery(
-                name = "selectAllUserStartingCapital", query = "select n.startingCapitalFamilyMember from User n"
-        )
-})
-
 public class User implements UserDetails{
 
     @Id
@@ -40,7 +34,7 @@ public class User implements UserDetails{
     private Role role;
 
     @Column(name = "user_starting_capital")
-    private  BigDecimal startingCapitalFamilyMember;
+    private  BigDecimal startingCapital;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Expense> expenses;
@@ -50,19 +44,19 @@ public class User implements UserDetails{
 
     public User(){}
 
-    public User(String name, String login, String password, BigDecimal startingCapitalFamilyMember) {
+    public User(String name, String login, String password, BigDecimal startingCapital) {
         this.name = name;
         this.login = login;
         this.password = password;
-        this.startingCapitalFamilyMember = startingCapitalFamilyMember;
+        this.startingCapital = startingCapital;
     }
     // todo в конструктор добавил параметр Login
-    public User(String name, String login, String password, Role role, BigDecimal startingCapitalFamilyMember) {
+    public User(String name, String login, String password, Role role, BigDecimal startingCapital) {
         this.name = name;
         this.login=login;
         this.password = password;
         this.role = role;
-        this.startingCapitalFamilyMember = startingCapitalFamilyMember;
+        this.startingCapital = startingCapital;
     }
 
     public Integer getId() {
@@ -105,12 +99,12 @@ public class User implements UserDetails{
         this.role = role;
     }
 
-    public BigDecimal getStartingCapitalFamilyMember() {
-        return startingCapitalFamilyMember;
+    public BigDecimal getstartingCapital() {
+        return startingCapital;
     }
 
-    public void setStartingCapitalFamilyMember(BigDecimal startingCapitalFamilyMember) {
-        this.startingCapitalFamilyMember = startingCapitalFamilyMember;
+    public void setstartingCapital(BigDecimal startingCapital) {
+        this.startingCapital = startingCapital;
     }
 
     public Set<Expense> getExpenses() {

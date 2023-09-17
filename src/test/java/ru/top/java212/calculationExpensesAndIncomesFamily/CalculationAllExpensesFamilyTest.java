@@ -1,10 +1,10 @@
-package ru.top.java212;
+package ru.top.java212.calculationExpensesAndIncomesFamily;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllExpensesFamily;
+
 
 import java.time.LocalDate;
 import java.util.Map;

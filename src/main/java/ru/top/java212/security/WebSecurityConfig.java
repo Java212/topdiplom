@@ -31,7 +31,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/", "/index").permitAll()
                         .requestMatchers("/registration").permitAll()
-                        .anyRequest().permitAll() //TODO authenticated!!!
+                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
                                 .loginPage("/comeIn")

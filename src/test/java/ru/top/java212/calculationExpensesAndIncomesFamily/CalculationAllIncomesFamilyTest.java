@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.top.java212.dao.AllIncomesFamily;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -13,22 +12,21 @@ import java.util.Map;
 public class CalculationAllIncomesFamilyTest {
 
     @Autowired
-    AllIncomesFamily allIncomesFamily;
+    CalculationAllIncomesFamily calculationIncomes;
 
     @Test
     void test_method_calculationIncomesFamily(){
         int result =146930;
-        LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
-        Assertions.assertEquals(result,allIncomesFamily.calculationIncomesFamily(startPeriod,endPeriod));
+        LocalDate startDate = LocalDate.of(2023,9,1);
+        LocalDate endDate = LocalDate.of(2023,9,30);
+        Assertions.assertEquals(result, calculationIncomes.calculationIncomesFamily(startDate, endDate));
     }
-
     @Test
-    void test_method_calculationIncomesFamilyBySource(){
+    void test_method_calculationSourceIncomeByCategory(){
         int result = 146930;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,9,30);
-        Map<String, Long> calculated = allIncomesFamily.getIncomesFamilyBySource(startPeriod, endPeriod);
+        Map<String, Long> calculated = calculationIncomes.calculationSourceIncomeByCategory(startPeriod, endPeriod);
         Assertions.assertEquals(result, calculated.get("премия"));
     }
 }

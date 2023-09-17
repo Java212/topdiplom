@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface AllIncomesUser {
 
-    int calculationIncomesUser(int userId, LocalDate initialPeriod, LocalDate endPeriod);
+    int calculationIncomesUser(int userId, LocalDate startDate, LocalDate endDate);
 
-    Map<String, Long> getIncomesUserBySource(int userId, LocalDate initalDate, LocalDate endData);
+    Map<String, Long> calculationIncomesUserBySource(int userId, LocalDate startDate, LocalDate endDate);
 }

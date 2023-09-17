@@ -7,15 +7,6 @@ import java.time.LocalDate;
 @Entity
 @Table( name = "expenses")
 
-@NamedQueries({
-        @NamedQuery(
-        name = "selectAllExpensesFamily",
-                query = "select e.expenseAmount from Expense e where e.date between :startData and :endData"
-        ),
-        @NamedQuery(name="selectAllExpensesUser",
-                query = "select n.expenseAmount from Expense n where n.date between :startData and :endData and n.user.id = :userId "
-        )
-})
 public class Expense {
 
     @Id

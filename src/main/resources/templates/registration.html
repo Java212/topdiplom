@@ -10,32 +10,32 @@
     <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
-    <h1>Registration</h1>
+<h1>Registration</h1>
 
-    <form th:action="@{/registration}" method="post">
-        <div>
-            <input name="userName" placeholder="Имя пользователя" type="text"/>
-        </div>
-        <div>
-            <input name="userLogin" placeholder="Login пользователя" type="text"/>
-        </div>
-        <div>
-            <input name="userPassword" placeholder="Пароль" type="text" />
-        </div>
-        <div>
-            <input name="startCapitalUser" placeholder="Стартовый капитал" type="number" />
-        </div>
-        <input id="button" type="submit" value="Зарегистрировать пользователя" />
-    </form>
-
-    <div th:if="${message}">
-        <h2 th:text="${message}"> </h2>
-        <div>
-            <form  th:action="@{/menu}" method="get">
-                <button class="button">Go to menu</button>
-            </form>
-        </div>
+<form th:object="${newUser}" th:action="@{/registration}" method="post">
+    <div>
+        <input type="text" th:field="*{name}" placeholder="ФИО пользователя" />
     </div>
+    <div>
+        <input type="text" th:field="*{login}" placeholder="Login пользователя" />
+    </div>
+    <div>
+        <input type="text" th:field="*{password}" placeholder="Пароль"  />
+    </div>
+    <div>
+        <input type="number" th:field="*{startCapital}"  placeholder="Стартовый капитал"  />
+    </div>
+    <input id="button" type="submit" value="Зарегистрировать пользователя" />
+</form>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"> </h2>
+    <div>
+        <form  th:action="@{/menu}" method="get">
+            <button class="button">Go to menu</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
