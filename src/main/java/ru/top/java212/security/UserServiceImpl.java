@@ -53,17 +53,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByLogin(user.getLogin());
-        if (userFromDB != null) {
-            return false;
-        }
-
-        user.setRoles(Collections.singleton(new Role( "Role_RENTER")));
-        user.setPassword(user.getPassword());
-        userRepository.save(user);
-        return true;
-    }
 
     public boolean deleteUser(Integer userId) {
         if (userRepository.findById(userId).isPresent()) {
@@ -76,8 +65,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean save(UserRegistrationDTO registrationDto) {
         Boolean saveOk = false;
+        int roleId = 1;
+        String roleText = registrationDto.getRole();
+        if(roleText == null){
+            roleId = 2;
+        }
         User newUser = new User(registrationDto.getLogin(),bCryptPasswordEncoder.encode(registrationDto.getPassword()));
-        Role role = roleRepository.findById(2).orElseThrow();
+        Role role = roleRepository.findById(roleId).orElseThrow();
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         newUser.setRoles(roles);

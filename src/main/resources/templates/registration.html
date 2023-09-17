@@ -21,7 +21,7 @@
         </h2>
         <form  th:action="@{/registration}" method="post" th:object="${userForm}">
             <div class="input">
-                <input type="checkbox"/> Зарегистрироваться как арендодатель
+                <input type="checkbox" name="role" th:chacked="*{role}"/> Зарегистрироваться как арендодатель
             </div>
             <div class="input">
                 <input name="name" placeholder="Имя "  th:field="*{name}"/>
@@ -55,26 +55,12 @@
                   $("#submit").attr("disabled", "disabled");
 
                 } else {
+
                       console.log("password correct");
                       $("#submitButton").attr("disabled",false);
                       $("#submit").removeAttr("disabled");
                       $(".error").html("");
                     }
-
-            });$("#confirm_password").on("keyup", function() {
-
-              var value_input1 = $("#password").val();
-              var value_input2 = $("#confirm_password").val();
-              console.log ("function");
-              if(value_input1 != value_input2) {
-                  console.log("password incorrect");
-                  $("#submitButton").attr("disabled",true);
-
-                } else {
-                      console.log("password correct");
-                      $("#submitButton").attr("disabled",false);
-                    }
-
             });
         </script>
 </section>

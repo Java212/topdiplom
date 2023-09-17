@@ -5,6 +5,17 @@ public class UserRegistrationDTO {
     String phone;
     String login;
     String password;
+    String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
 
    public UserRegistrationDTO(){
 
