@@ -21,6 +21,9 @@
         </h2>
         <form  th:action="@{/registration}" method="post" th:object="${userForm}">
             <div class="input">
+                <input type="checkbox"/> Зарегистрироваться как арендодатель
+            </div>
+            <div class="input">
                 <input name="name" placeholder="Имя "  th:field="*{name}"/>
             </div>
             <div class="input">

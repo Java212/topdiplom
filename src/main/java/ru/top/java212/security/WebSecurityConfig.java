@@ -21,22 +21,20 @@ public class WebSecurityConfig {
         http.userDetailsService(userDetailsService)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                        .requestMatchers("/","/registration","/lessorView","/renterView").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/registration","/lessorView","/renterView","/login").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .usernameParameter("login")
                         .passwordParameter("password")
                         .permitAll()
-                        .successForwardUrl("/renterView")
+                        .successForwardUrl("/")
 
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .clearAuthentication(true)
-                        .invalidateHttpSession(true)
-                        .logoutSuccessUrl("/renterView")
+                        .logoutSuccessUrl("/")
                 );
         return http.build();
 

@@ -6,8 +6,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.top.java212.dto.UserRegistrationDTO;
+import ru.top.java212.model.Person;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
+import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.RoleRepository;
 import ru.top.java212.repository.UserRepository;
 
@@ -18,13 +20,15 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PersonRepository personRepository;
 
     private final PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,PasswordEncoder encoder ) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,PersonRepository personRepository,PasswordEncoder encoder ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.personRepository = personRepository;
         this.bCryptPasswordEncoder = encoder;
     }
 
@@ -71,15 +75,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean save(UserRegistrationDTO registrationDto) {
+        Boolean saveOk = false;
         User newUser = new User(registrationDto.getLogin(),bCryptPasswordEncoder.encode(registrationDto.getPassword()));
         Role role = roleRepository.findById(2).orElseThrow();
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         newUser.setRoles(roles);
-        if(userRepository.save(newUser)!=null){
-            return true;
+        User saveUser = userRepository.save(newUser);
+        if(saveUser == null){
+            return false;
         }
-        return  false;
+        Person newPerson = new Person(registrationDto.getName(), registrationDto.getPhone(),saveUser);
+        if(personRepository.save(newPerson) == null){
+            return false;
+        }
+        return  true;
     }
 
 }

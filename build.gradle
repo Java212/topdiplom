@@ -53,8 +53,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:3.1.1'
 
 
-
-
     // https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
     compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
 
@@ -99,6 +97,7 @@ sourceSets {
             srcDirs = ['src/generated/java']
         }
     }
+
 }
 
 test {
