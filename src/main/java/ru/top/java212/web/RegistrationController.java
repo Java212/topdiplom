@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.dto.UserRegistrationDTO;
 import ru.top.java212.security.UserService;
 
@@ -26,9 +27,15 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("userForm") UserRegistrationDTO registrationDto) {
-        userService.save(registrationDto);
-        return "login";
+    public ModelAndView registerUserAccount(@ModelAttribute("userForm") UserRegistrationDTO registrationDto) {
+        ModelAndView mv;
+        if(!userService.save(registrationDto)){
+            mv = new ModelAndView("registration");
+            mv.addObject("error", "Такое имя пользователя уже существует");
+            return mv;
+        }
+        mv = new ModelAndView("login");
+        return mv;
     }
 
 

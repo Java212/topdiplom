@@ -64,13 +64,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean save(UserRegistrationDTO registrationDto) {
+        User newUser = userRepository.findByLogin(registrationDto.getLogin());
+        if(newUser != null){
+            return false;
+        }
         Boolean saveOk = false;
         int roleId = 1;
         String roleText = registrationDto.getRole();
         if(roleText == null){
             roleId = 2;
         }
-        User newUser = new User(registrationDto.getLogin(),bCryptPasswordEncoder.encode(registrationDto.getPassword()));
+        newUser = new User(registrationDto.getLogin(),bCryptPasswordEncoder.encode(registrationDto.getPassword()));
         Role role = roleRepository.findById(roleId).orElseThrow();
         Set<Role> roles = new HashSet<>();
         roles.add(role);

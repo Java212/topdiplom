@@ -19,6 +19,7 @@
         <h2>
             Зарегистрируйтесь
         </h2>
+        <div th:if="${error}"> <h3 style="color:red" th:text="${error}">  </h3></div>
         <form  th:action="@{/registration}" method="post" th:object="${userForm}">
             <div class="input">
                 <input type="checkbox" name="role" th:chacked="*{role}"/> Зарегистрироваться как арендодатель
