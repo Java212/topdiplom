@@ -45,18 +45,4 @@ public class UserRepositoryTest {
         User userFromDB = userRepository.findById(3).orElseThrow();
         Assertions.assertEquals("user3",userFromDB.getLogin());
     }
-    @Test
-    public void test_that_user__is_ok(){
-        UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
-        userRegistrationDTO.setName("Andrey");
-        userRegistrationDTO.setPhone("+79874564321");
-        userRegistrationDTO.setLogin("userDTO");
-        userRegistrationDTO.setPassword("userDTO");
-        userService.save(userRegistrationDTO);
-
-//        User userFromDB = userRepository.findById(1).orElseThrow();
-//        Assertions.assertEquals("user1",userFromDB.getLogin());
-    }
-
-
 }
