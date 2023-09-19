@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список категорий</title>
+</head>
+<body>
+<h1>Список категорий</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <!-- Добавить другие заголовки столбцов -->
+    </tr>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <!-- Добавить другие столбцы и информацию  -->
+    </tr>
+</table>
+<a href="/categories/create">Create Category</a>
+<!-- Добавить другие ссылки и элементы управления -->
+</body>
+</html>
