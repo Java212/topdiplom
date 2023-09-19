@@ -39,6 +39,7 @@ public class CalculationExpensesControllerTest {
     }
 
     @Test
+    @WithMockUser
     void test_viewPageExpense() throws Exception{
       String url = "/expense/calculation";
       this.mockMvc.perform(get(url))
@@ -62,7 +63,6 @@ public class CalculationExpensesControllerTest {
                 .andExpect(model().attribute("totalExpenseFamily", 31000))
                 .andExpect(status().isOk());
     }
-    //todo falling test: User.getId()" is null
     @Test
     void test_controller_calculation_Expenses_for_user() throws Exception {
         String url = "/expense/calculation";

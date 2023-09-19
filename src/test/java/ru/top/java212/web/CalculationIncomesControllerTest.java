@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -30,7 +31,7 @@ public class CalculationIncomesControllerTest {
     public void setup() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
-                .apply(springSecurity()) // enable security for the mock set up
+                .apply(springSecurity())
                 .build();
     }
 
@@ -42,10 +43,9 @@ public class CalculationIncomesControllerTest {
                 .andExpect(status().isOk());
     }
     @Test
-    @WithMockUser
     void test_controller_calculation_Incomes_for_family() throws Exception {
         String url = "/incomes/calculation";
-
+        SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
         String endPeriod = String.valueOf(LocalDate.of(2023, 9, 30));
@@ -58,12 +58,11 @@ public class CalculationIncomesControllerTest {
                 .andExpect(model().attribute("totalIncomeFamily", 146930))
                 .andExpect(status().isOk());
     }
-    //todo falling test: User.getId()" is null
     @Test
-    @WithMockUser
     void test_controller_calculation_Incomes_for_user() throws Exception {
         String url = "/incomes/calculation";
 
+        SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String checkbox = "user";
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
         LocalDate endPeriod = LocalDate.of(2023, 9, 30);
@@ -73,7 +72,7 @@ public class CalculationIncomesControllerTest {
                         .param("startDate", String.valueOf(startPeriod))
                         .param("endDate", String.valueOf(endPeriod)))
                 .andExpect(model().size(2))
-                .andExpect(model().attribute("totalIncomeUser", 35000))
+                .andExpect(model().attribute("totalIncomesUser", 35000))
                 .andExpect(status().isOk());
     }
 }
