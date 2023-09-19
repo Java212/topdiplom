@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -60,11 +61,10 @@ public class ViewDetailsExpensesControllerTest {
                 .andExpect(model().size(2))
                 .andExpect(status().isOk());
     }
-    //todo falling test: User.getId()" is null
 
     @Test
-    @WithMockUser
     void test_controller_view_details_expense_for_user() throws Exception{
+        SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String url = "/details/expenses";
         String checkbox = "user";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));

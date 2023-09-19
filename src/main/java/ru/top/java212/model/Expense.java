@@ -30,7 +30,7 @@ public class Expense {
     private Expense(){}
 
 
-    public Expense(User user,ExpenseCategory expenseCategory, int expenseAmount){
+    public Expense(User user, ExpenseCategory expenseCategory, int expenseAmount){
         this.expenseAmount=expenseAmount;
         this.date=LocalDate.now();
         this.user=user;

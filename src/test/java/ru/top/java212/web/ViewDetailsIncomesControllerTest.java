@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -32,10 +33,11 @@ public class ViewDetailsIncomesControllerTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity()) // enable security for the mock set up
                 .build();
+        SecurityContextHolder.getContext().setAuthentication(new TestAuth());
     }
 
     @Test
-    @WithMockUser
+
     void test_view_page_details_income() throws Exception{
         String url = "/details/incomes";
 
@@ -44,7 +46,6 @@ public class ViewDetailsIncomesControllerTest {
                 .andExpect(content().string(containsString("form")));
     }
     @Test
-    @WithMockUser
     void test_controller_view_details_incomes_for_family() throws Exception{
         String url = "/details/incomes";
         String checkbox = "family";
@@ -58,7 +59,6 @@ public class ViewDetailsIncomesControllerTest {
                 .andExpect(model().size(2))
                 .andExpect(status().isOk());
     }
-    //todo falling test: User.getId()" is null
 
     @Test
     @WithMockUser

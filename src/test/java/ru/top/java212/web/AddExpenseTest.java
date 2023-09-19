@@ -1,13 +1,16 @@
 package ru.top.java212.web;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -40,5 +43,15 @@ public class AddExpenseTest {
                 .andExpect(content().string(containsString("form")));
     }
 
-    //todo как сделать тест на метод post, в котором параметр ModelAttribute
+    @Test
+    @Disabled
+    void test_post_new_expense() throws Exception {
+        SecurityContextHolder.getContext().setAuthentication(new TestAuth());
+        String url = "/expenses/add";
+        this.mockMvc.perform(post(url).with(csrf())
+                        .param("categoryName", "квартплата")
+                        .param("amount", "1000"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("form")));
+    }
 }
