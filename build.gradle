@@ -43,6 +43,14 @@ dependencies {
     implementation 'org.flywaydb:flyway-core:8.5.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.hibernate:hibernate-core:5.5.3.Final'
+    implementation 'org.liquibase:liquibase-core:4.23.0'
+    runtimeOnly 'org.postgresql:postgresql:42.6.0'
+
+
 }
 
 test {
