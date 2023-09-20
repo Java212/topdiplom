@@ -17,7 +17,7 @@ public class Tool {
     private Person person;
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinColumn(name = "address_id",nullable = false)
     private Address address;
 
@@ -31,10 +31,11 @@ public class Tool {
 
     Tool(){
     }
-    public Tool(String name, Person person, Address address){
+    public Tool(String name, Person person, Address address,double price){
         this.name = name;
         this.person = person;
         this.address = address;
+        this.price = price;
         this.inRent = false;
     }
 

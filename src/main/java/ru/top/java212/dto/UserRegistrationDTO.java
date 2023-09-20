@@ -7,18 +7,18 @@ public class UserRegistrationDTO {
     String password;
     String role;
 
+
+
+   public UserRegistrationDTO(){
+
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-
-
-   public UserRegistrationDTO(){
-
     }
 
     public String getName() {

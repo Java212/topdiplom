@@ -1,4 +1,4 @@
-package ru.top.java212.security;
+package ru.top.java212.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +12,7 @@ import ru.top.java212.model.User;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.RoleRepository;
 import ru.top.java212.repository.UserRepository;
+import ru.top.java212.service.user.UserService;
 
 import java.util.*;
 
@@ -68,7 +69,6 @@ public class UserServiceImpl implements UserService {
         if(newUser != null){
             return false;
         }
-        Boolean saveOk = false;
         int roleId = 1;
         String roleText = registrationDto.getRole();
         if(roleText == null){

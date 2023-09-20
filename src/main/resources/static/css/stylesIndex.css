@@ -46,3 +46,11 @@ h2{
 .input{
    margin-top:10px;
 }
+.table{
+   display:flex;
+   flex-direction:row;
+}
+.panel{
+    width:30%;
+    height:100%
+}

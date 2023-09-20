@@ -123,7 +123,6 @@ CREATE TABLE IF NOT EXISTS public.tools
               FOREIGN KEY(person_id)
         	  REFERENCES public.persons(person_id)
         	  ON DELETE CASCADE
-
 );
 
 

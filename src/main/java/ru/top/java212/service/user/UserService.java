@@ -1,4 +1,4 @@
-package ru.top.java212.security;
+package ru.top.java212.service.user;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.top.java212.dto.UserRegistrationDTO;

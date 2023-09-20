@@ -7,9 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.top.java212.model.Person;
 import ru.top.java212.model.User;
 import ru.top.java212.repository.PersonRepository;
-import ru.top.java212.security.UserService;
-
-import java.util.Optional;
+import ru.top.java212.service.user.UserService;
 
 @SpringBootTest
 public class UserRegistrationDTOTest {

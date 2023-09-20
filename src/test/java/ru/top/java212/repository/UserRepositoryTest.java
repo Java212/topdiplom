@@ -4,13 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.top.java212.dto.UserRegistrationDTO;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
-import ru.top.java212.security.UserService;
+import ru.top.java212.service.user.UserService;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @SpringBootTest

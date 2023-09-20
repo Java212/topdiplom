@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.dto.UserRegistrationDTO;
-import ru.top.java212.security.UserService;
+import ru.top.java212.service.user.UserService;
 
 
 @Controller
@@ -31,12 +31,10 @@ public class RegistrationController {
         ModelAndView mv;
         if(!userService.save(registrationDto)){
             mv = new ModelAndView("registration");
-            mv.addObject("error", "Такое имя пользователя уже существует");
+            mv.addObject("error", "Пользователь с таким именем уже существует");
             return mv;
         }
         mv = new ModelAndView("login");
         return mv;
     }
-
-
 }

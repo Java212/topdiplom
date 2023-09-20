@@ -8,6 +8,9 @@
 <body>
 <section class="top">
     <div class="top_center">
+        <div>
+            Кабинет арендодателя:    <label  th:text="${personName}"></label>
+        </div>
         <h1>
             Аренда инструмента
         </h1>
@@ -15,8 +18,15 @@
 </section>
 <section class="center">
     <div class="userBox">
+        <div class="table">
+            <div class="panel">
+                <a href="toolCreatedView">Здать</a>
+                <a href="toolView">Изменить</a>
+            </div>
+            <div class="tools">
 
-
+            </div>
+        </div>
     </div>
 </section>
 </body>
