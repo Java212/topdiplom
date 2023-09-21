@@ -22,13 +22,13 @@
         <section class="input-fields">
             <form th:action="@{/expense/calculation}" method="post">
                 <label>Семья</label>
-                <input type="checkbox" th:name="checkbox" th:value="*{checkbox}" />
+                <input type="checkbox" th:name="checkbox" th:value="family" />
                 <label>Пользователь</label>
-                <input type="checkbox" th:name="checkbox" th:value="*{checkbox}" />
+                <input type="checkbox" th:name="checkbox" th:value="user" />
                 <label>Начало периода</label>
-                <input type="date"  name="startDate" th:value="*{startDate}" />
+                <input type="date"  name="startDate" th:value="${startDate}" />
                 <label>Конец периода</label>
-                <input type="date" name="endDate" th:value="*{endDate}"/>
+                <input type="date" name="endDate" th:value="${endDate}"/>
                 <button class="button_show">Рассчитать</button>
             </form>
         </section>
