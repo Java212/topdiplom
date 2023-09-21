@@ -27,7 +27,7 @@ public class ViewDetailsIncomesController {
     @GetMapping("/details/incomes")
     @PreAuthorize("authenticated")
     public String viewDetailsExpenses(){
-        return "details-expense";
+        return "details-income";
     }
 
     @PostMapping("/details/incomes")
@@ -39,17 +39,16 @@ public class ViewDetailsIncomesController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
-        ModelAndView mv = new ModelAndView("details-expense");
+        ModelAndView mv = new ModelAndView("details-income");
 
         if ( checkbox.equals("family") ){
            mv.addObject("detailsListIncomesFamily", calculationIncomesFamily.calculationSourceIncomeByCategory(startDate, endDate));
-           mv.addObject("forWhomCalculation", checkbox);
         } else {
             if ( checkbox.equals("user") ){
-                mv.addObject("detailsListIncomessUser", calculationIncomesUser.calculationIncomesUserBySource(user.getId(), startDate, endDate));
-                mv.addObject("forWhomCalculation", checkbox);
+                mv.addObject("detailsListIncomesUser", calculationIncomesUser.calculationIncomesUserBySource(user.getId(), startDate, endDate));
             }
         }
+        mv.addObject("forWhomCalculation", checkbox);
        return mv;
     }
 }

@@ -26,13 +26,13 @@ public class CalculationIncomesController {
     @Autowired
     CalculationAllIncomesUser calculationIncomesUser;
 
-    @GetMapping("/incomes/calculation")
+    @GetMapping("/income/calculation")
     @PreAuthorize("authenticated")
     public String viewPageIncomes(){
         return "income";
     }
 
-    @PostMapping("/incomes/calculation")
+    @PostMapping("/income/calculation")
     public ModelAndView calculationIncomes(@RequestParam("checkbox") String checkbox,
                                            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                            @RequestParam("endDate") @DateTimeFormat (iso = DateTimeFormat.ISO.DATE)  LocalDate endDate){
@@ -44,7 +44,7 @@ public class CalculationIncomesController {
             mv.addObject("totalIncomeFamily", calculationIncomesFamily.calculationIncomesFamily(startDate, endDate));
         } else {
             if (checkbox.equals("user")){
-                mv.addObject("totalIncomesUser", calculationIncomesUser.calculationIncomesUser(user.getId(), startDate, endDate));
+                mv.addObject("totalIncomeUser", calculationIncomesUser.calculationIncomesUser(user.getId(), startDate, endDate));
             }
         }
         mv.addObject("checkbox", checkbox);

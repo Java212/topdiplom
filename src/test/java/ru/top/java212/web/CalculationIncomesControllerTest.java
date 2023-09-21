@@ -38,13 +38,13 @@ public class CalculationIncomesControllerTest {
     @Test
     @WithMockUser
     void test_viewPageIncome() throws Exception{
-        String url = "/incomes/calculation";
+        String url = "/income/calculation";
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk());
     }
     @Test
     void test_controller_calculation_Incomes_for_family() throws Exception {
-        String url = "/incomes/calculation";
+        String url = "/income/calculation";
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
@@ -60,7 +60,7 @@ public class CalculationIncomesControllerTest {
     }
     @Test
     void test_controller_calculation_Incomes_for_user() throws Exception {
-        String url = "/incomes/calculation";
+        String url = "/income/calculation";
 
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String checkbox = "user";
@@ -72,7 +72,7 @@ public class CalculationIncomesControllerTest {
                         .param("startDate", String.valueOf(startPeriod))
                         .param("endDate", String.valueOf(endPeriod)))
                 .andExpect(model().size(2))
-                .andExpect(model().attribute("totalIncomesUser", 35000))
+                .andExpect(model().attribute("totalIncomeUser", 35000))
                 .andExpect(status().isOk());
     }
 }

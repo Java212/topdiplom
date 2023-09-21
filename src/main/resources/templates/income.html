@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Total incomes</title>
+    <title>Total income</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <link rel="stylesheet" href="./css/income.css">
@@ -19,33 +19,33 @@
         <p th:text="${userLogin}"></p>
     </div>
 </header>
-        <section class="input-fields">
-            <form th:action="@{/income/calculation}" method="post">
-                <label>Семья</label>
-                <input type="checkbox" th:name="checkbox" th:value="*{checkbox}" />
-                <label>Пользователь</label>
-                <input type="checkbox" th:name="checkbox" th:value="*{checkbox}" />
-                <label>Начало периода</label>
-                <input type="date"  name="startDate" th:value="*{startDate}" />
-                <label>Конец периода</label>
-                <input type="date" name="endDate" th:value="*{endDate}"/>
-                <button class="button_show">Рассчитать</button>
-            </form>
-        </section>
+<section class="input-fields">
+    <form th:action="@{/income/calculation}" method="post">
+        <label>Семья</label>
+        <input type="checkbox" th:name="checkbox" th:value="family" />
+        <label>Пользователь</label>
+        <input type="checkbox" th:name="checkbox" th:value="user" />
+        <label>Начало периода</label>
+        <input type="date"  name="startDate" th:value="${startDate}" />
+        <label>Конец периода</label>
+        <input type="date" name="endDate" th:value="${endDate}"/>
+        <button class="button_show">Рассчитать</button>
+    </form>
+</section>
 
-            <section>
-                <div  th:switch ="${checkbox}">
-                    <div th:case="'family'">
-                          <span>Общий доход семьи составляет:  </span>
-                            <span th:text="${totalIncomeFamily}"></span>
-                                <span>рубл.</span>
-                    </div>
-                        <div th:case="'user'">
-                            <span>Общий доход пользователя составляет:  </span>
-                                <span th:text="${totalIncomeUser}"></span>
-                                    <span>рубл.</span>
-                        </div>
-                </div>
-            </section>
+<section>
+    <div  th:switch ="${checkbox}">
+        <div th:case="'family'">
+            <span>Общий доход семьи составляет:  </span>
+            <span th:text="${totalIncomeFamily}"></span>
+            <span>рубл.</span>
+        </div>
+        <div th:case="'user'">
+            <span>Общий доход пользователя составляет:  </span>
+            <span th:text="${totalIncomeUser}"></span>
+            <span>рубл.</span>
+        </div>
+    </div>
+</section>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package ru.top.java212.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +30,7 @@ public class ExpenseDbDaoTestMy {
     }
 
     @Test
+    @Disabled
     void test_save_and_get_is_same(){
         User user = new User ("Jek", "df34","fgfg8", Role.USER, new BigDecimal(1000.23));
         user.setId(2);

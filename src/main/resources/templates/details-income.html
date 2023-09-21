@@ -22,13 +22,13 @@
     <section>
         <form th:action="@{/details/incomes}" method="post">
             <label>Семья</label>
-            <input type="checkbox" th:name="*{family}" />
+            <input type="checkbox" th:name="checkbox" th:value="family" />
             <label>Пользователь</label>
-            <input type="checkbox" th:name="*{user}" />
-        <label>Start data</label>
-        <input th:text="${#dates.format(startData, 'dd/MM/yyyy')}" />
-        <label>End data</label>
-        <input th:text="${#dates.format(endData, 'dd/MM/yyyy')}" />
+            <input type="checkbox" th:name="checkbox" th:value="user" />
+            <label>Начало периода</label>
+            <input type="date"  name="startDate" th:value="${startDate}" />
+            <label>Конец периода</label>
+            <input type="date" name="endDate" th:value="${endDate}"/>
             <button class="button_show">Show list of incomes</button>
         </form>
 
