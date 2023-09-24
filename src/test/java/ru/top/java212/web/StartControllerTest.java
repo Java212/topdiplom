@@ -61,7 +61,7 @@ public class StartControllerTest {
         this.mockMvc.perform(get(url).with(csrf()))
                 .andExpect(model().size(1))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Family current balance")));
+                .andExpect(content().string(containsString("Текущий баланс семьи")));
     }
 
     @Test
