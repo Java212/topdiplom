@@ -1,18 +1,28 @@
 package ru.top.java212.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
 
 @Entity
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String text, type;
+    private String title;
+    private String question;
+
+    public Question() {
+    }
+    public Question(String title, String question) {
+        this.title = title;
+        this.question = question;
+    }
 
     public Long getId() {
         return id;
@@ -22,19 +32,19 @@ public class Question {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getTitle() {
+        return title;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getType() {
-        return type;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }

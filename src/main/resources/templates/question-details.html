@@ -11,12 +11,14 @@
 <header th:insert="blocks/adminblock :: header"></header>
 
 <div class="container mt-5">
-  <h1>Вопросы</h1>
-
   <div th:each="el: ${question}" class="alert alert-info mt-2">
-		<h3 th:text="${el.title}"/>
-  		<p th:text="${el.question}"/>
-  		<a th:href="'/question/' + ${el.id}" class="btn btn-warning">Детальнее</a>
+    <h1 th:text="${el.title}"/>
+    <p th:text="${el.question}"/>
+    <a th:href="'/question/' + ${el.id} + '/edit'" class="btn btn-warning">Редактировать</a><br><br>
+    <form th:action="'/question/' + ${el.id} + '/remove'" method="post">
+      <button class="btn btn-warning" type="submit">Удалить</button>
+    </form>
+
   </div>
 </div>
 

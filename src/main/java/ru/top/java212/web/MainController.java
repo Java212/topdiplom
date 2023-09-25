@@ -12,10 +12,19 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("/about")
-    public String about(Model model) {
-        model.addAttribute("title", "О сайте"); // передаем данные внутрь шаблона
-        return "about";
-    }
+//    @GetMapping("/user")
+//    public String greeting(Model model) {
+//        model.addAttribute("title", "Главная страница"); // передаем данные внутрь шаблона
+//        return "home";
+//    }
+//
+//    @GetMapping("/admin")
+//    public String greeting(Model model) {
+//        model.addAttribute("title", "Главная страница"); // передаем данные внутрь шаблона
+//        return "home";
+//    }
+
+
+
 
 }
