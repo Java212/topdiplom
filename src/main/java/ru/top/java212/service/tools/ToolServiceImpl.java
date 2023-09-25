@@ -11,6 +11,8 @@ import ru.top.java212.repository.AddressRepository;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 
+import java.util.List;
+
 @Service
 public class ToolServiceImpl implements ToolService{
     private AddressRepository addressRepository;
@@ -45,4 +47,10 @@ public class ToolServiceImpl implements ToolService{
         }
         return true;
     }
+    @Override
+    public List<Tool> findAllByUser(User user){
+        Person person = personRepository.findByUser(user);
+        return toolRepository.findByPerson(person);
+    }
+
 }

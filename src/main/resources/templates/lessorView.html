@@ -24,7 +24,14 @@
                 <a href="toolView">Изменить</a>
             </div>
             <div class="tools">
-
+                <table th:each="tool:${tools}">
+                    <td>
+                        <label th:text="${tool.getName()}"></label>
+                    </td>
+                    <td>
+                        <label th:text="${tool.getPrice()}">  </label>
+                    </td>
+                </table>
             </div>
         </div>
     </div>
