@@ -5,7 +5,7 @@ public class ToolDTO {
     private String district;
     private String street;
     private String price;
-    ToolDTO(){}
+    public ToolDTO(){}
 
     public String getName() {
         return name;
