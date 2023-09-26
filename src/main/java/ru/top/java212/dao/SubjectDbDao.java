@@ -5,7 +5,7 @@ import ru.top.java212.model.Subject;
 
 import java.util.List;
 
-public interface SubjectDao extends CrudRepository<Subject, Integer> {
+public interface SubjectDbDao extends CrudRepository<Subject, Integer> {
 
     List<Subject> findAll();
 }
