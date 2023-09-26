@@ -11,3 +11,11 @@ if ($('.slider' )) {
 
     });
 }
+
+
+let get = window.location.href.split('?');
+if(get[1]=='authModal'){
+    $(document).ready(function(){
+        $("#authModal").modal('show');
+    });
+}
