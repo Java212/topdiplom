@@ -8,23 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @GetMapping("/")
     public String greeting(Model model) {
-        model.addAttribute("title", "Главная страница"); // передаем данные внутрь шаблона
+        model.addAttribute("title", "Главная страница");
         return "home";
     }
-
-//    @GetMapping("/user")
-//    public String greeting(Model model) {
-//        model.addAttribute("title", "Главная страница"); // передаем данные внутрь шаблона
-//        return "home";
-//    }
-//
-//    @GetMapping("/admin")
-//    public String greeting(Model model) {
-//        model.addAttribute("title", "Главная страница"); // передаем данные внутрь шаблона
-//        return "home";
-//    }
-
-
-
-
 }
