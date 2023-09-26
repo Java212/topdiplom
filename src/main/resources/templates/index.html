@@ -2,43 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Persons</title>
+    <title>Школьные предметы</title>
 </head>
 <body>
-<section>
-    <div>
-        <h1>
-            Persons
-        </h1>
-        <a href="/addPersonView">Добавить Person</a>
-    </div>
-    <div>
-        <form th:action="@{/}" method="post">
-            <table>
-                <div th:each="person: ${persons}">
-                    <tr>
-                        <td>
-                            <input type="checkbox" th:name="deleteList" th:value="${person.getId()}"/>
-                        </td>
-                        <td>
-                            <label th:text="${person.getName()}"></label>
-                        </td>
-                        <td>
-                            <label th:text="${person.getSurname()}">  </label>
-                        </td>
-                        <td>
-                            <label th:text="${person.phone}"></label>
-                        </td>
-                    </tr>
-                </div>
-            </table>
-            <input id="submitButton" type="submit"  value="Удалить" />
-        </form>
-        <div>
-            <label th:text="${deleteNumber}"></label>
-        </div>
+<div>
+    <h1>
+         Школьные предметы
+    </h1>
+</div>
 
-    </div>
-</section>
+<div th:each="subject: ${subjects}">
+            <label th:text="${subject.getName()}"></label>
+</div>
 </body>
 </html>
