@@ -10,14 +10,20 @@
 <body>
 <header th:insert="blocks/adminblock :: header"></header>
 
-<div class="container mt-5">
-  <h1>Вопросы</h1>
+<div class="container mt-5 mb-5">
+  <h1 class="text-center mb-4">Вопросы</h1>
+    <div th:each="el: ${question}" class="alert alert-info mt-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h3 th:text="${el.title}"></h3>
+                <p th:text="${el.question}"></p>
+            </div>
+        </div>
+        <div class="text-end mt-2">
+            <a th:href="'/question/' + ${el.id}" class="btn btn-warning">Детальнее</a>
+        </div>
+    </div>
 
-  <div th:each="el: ${question}" class="alert alert-info mt-2">
-		<h3 th:text="${el.title}"/>
-  		<p th:text="${el.question}"/>
-  		<a th:href="'/question/' + ${el.id}" class="btn btn-warning">Детальнее</a>
-  </div>
 </div>
 
 

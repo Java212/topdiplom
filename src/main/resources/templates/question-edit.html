@@ -10,20 +10,20 @@
 <body>
 <header th:insert="blocks/adminblock :: header"></header>
 
-<div class="container mt-5 mb-5">
-    <h1>Редактирование вопроса</h1>
-    <form method="post">
-        <div th:each="el: ${question}">
-            <input type="text" th:value="${el.title}" name="title" placeholder="Введите предметную область" class="from-control">
-            <input type="text" th:value="${el.question}" name="question" placeholder="Введите вопрос" class="from-control">
-            <button type="submit" class="btn btn-success">Обновить</button>
-        </div>
-    </form>
-
+<div class="container mt-5 mb-5 d-flex justify-content-center align-items-center">
+    <div>
+        <h1 class="text-center mb-4">Редактирование вопроса</h1>
+        <form method="post" class="text-center">
+            <div class="form-group" th:each="el: ${question}">
+                <input type="text" th:value="${el.title}" name="title" id="title" class="form-control mb-3" placeholder="Введите предметную область">
+                <input type="text" th:value="${el.question}" name="question" id="question" class="form-control mb-3" placeholder="Введите вопрос">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Редактировать</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-</div>
-
-
 
 </body>
 </html>
