@@ -9,4 +9,7 @@ import java.util.List;
 public interface SubjectDbDao extends CrudRepository<Subject, Integer> {
 
     List<Subject> findAll();
+
+    @Query("select subjectName from Subject where teacher_id not null")
+    List<Subject> getSubjectsWithTeachers();
 }

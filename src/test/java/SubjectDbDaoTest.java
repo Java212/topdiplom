@@ -19,4 +19,10 @@ public class SubjectDbDaoTest {
         List<String> result = subjectDbDao.findAll().stream().map(Subject::getSubjectName).toList();
         Assertions.assertEquals(listSubjects, result);
     }
+    @Test
+    void test_getSubjectsWithTeachers(){
+        List<String> listSubjects = List.of("Русский язык", "Литература");
+        List<String> result = subjectDbDao.getSubjectsWithTeachers().stream().map(Subject::getSubjectName).toList();
+        Assertions.assertEquals(listSubjects, result);
+    }
 }
