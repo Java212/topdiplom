@@ -14,11 +14,15 @@ public class Subject {
     @Column ( name = "subject_name")
     private String subjectName;
 
+    @ManyToOne()
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+
     public Subject() {
     }
 
-    public Subject(String subjectName) {
-        this.subjectName = subjectName;
+    public Subject(String subjectName, Teacher teacher) {
+        this.subjectName = subjectName; this.teacher=teacher;
     }
 
     public Integer getId() {
@@ -35,5 +39,13 @@ public class Subject {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

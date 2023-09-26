@@ -8,13 +8,13 @@ import ru.top.java212.model.Subject;
 
 import java.util.List;
 
-@SpringBootTest(classes = Application.class)
+@SpringBootTest (classes = Application.class)
 public class SubjectDbDaoTest {
     @Autowired
     SubjectDbDao subjectDbDao;
 
     @Test
-    void test(){
+    void test_getAll_from_Db(){
         List<String> listSubjects = List.of("Математика", "Химия", "Физика", "Русский язык", "Литература");
         List<String> result = subjectDbDao.findAll().stream().map(Subject::getSubjectName).toList();
         Assertions.assertEquals(listSubjects, result);
