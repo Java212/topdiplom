@@ -9,7 +9,7 @@ import java.util.Set;
 public class Teacher {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "teacher_id")
     private Integer id;
 
