@@ -22,7 +22,7 @@ public class ViewControllerSubject {
     @GetMapping
     public ModelAndView getSubject(){
         ModelAndView mv = new ModelAndView("index");
-        mv.addObject("subjectsList", subjectDao.findAll().stream().map(Subject::getSubjectName).toList());
+        mv.addObject("subjectsList", subjectDao.getSubjectsWithTeachers());
         return mv;
     }
 }

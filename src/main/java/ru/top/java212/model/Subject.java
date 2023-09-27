@@ -37,10 +37,6 @@ public class Subject {
         return subjectName;
     }
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
     public Teacher getTeacher() {
         return teacher;
     }

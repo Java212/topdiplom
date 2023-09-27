@@ -16,15 +16,14 @@ public class Teacher {
     @Column ( name = "teacher_fio")
     private String fio;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER)
     private Set<Subject> subjects;
 
     public Teacher() {
     }
 
-    public Teacher(String fio, Set<Subject> subjects) {
+    public Teacher(String fio) {
         this.fio = fio;
-        this.subjects = subjects;
     }
 
     public Integer getId() {
