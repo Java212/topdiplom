@@ -22,7 +22,7 @@ public class SubjectDbDaoTest {
     @Test
     void test_getSubjectsWithTeachers(){
         List<String> listSubjects = List.of("Русский язык", "Литература");
-        List<String> result = subjectDbDao.getSubjectsWithTeachers().stream().map(Subject::getSubjectName).toList();
+        List<String> result = subjectDbDao.getSubjectsWithTeachers();
         Assertions.assertEquals(listSubjects, result);
     }
 }

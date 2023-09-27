@@ -21,6 +21,5 @@ public class ViewControllerSubjectTest {
 
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk());
-
     }
 }
