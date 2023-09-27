@@ -16,7 +16,7 @@ public class Teacher {
     @Column ( name = "teacher_fio")
     private String fio;
 
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
     private Set<Subject> subjects;
 
     public Teacher() {

@@ -10,6 +10,6 @@ public interface SubjectDbDao extends CrudRepository<Subject, Integer> {
 
     List<Subject> findAll();
 
-    @Query("select subjectName from Subject where subjects_teachers_id=teacher.id")
+    @Query("select subjectName from Subject where teacher is not null")
     List<String> getSubjectsWithTeachers();
 }
