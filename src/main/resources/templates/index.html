@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>school</title>
+</head>
+<body>
+<h1>Предметы и преподователи:</h1>
+<ul>
+    <li th:each="subject : ${subjects}">
+
+        <label th:text="${subject.title}">...</label>
+        <ul>
+            <li >
+                <label >
+                    <span th:text="${subject.teacher.surname}"></span>
+                    <span th:text="${subject.teacher.name}"></span>
+                    <span th:text="${subject.teacher.patronymic}"></span>
+                    </label>
+
+            </li>
+
+
+        </ul>
+        <br>
+
+    </li>
+</ul>
+</body>
+</html>
