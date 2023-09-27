@@ -3,8 +3,6 @@ package ru.top.java212.model;
 import jakarta.persistence.*;
 
 
-
-
 @Entity
 @Table(name = "teachers")
 public class Teacher {
@@ -28,8 +26,6 @@ public class Teacher {
         this.patronymic = patronymic;
 
     }
-
-
 
 
     public Integer getId() {

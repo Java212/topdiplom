@@ -21,10 +21,10 @@ public class Subject {
     Subject() {
     }
 
-    public Subject(Integer id, String title) {
+    public Subject(Integer id, String title, Teacher teacher) {
         this.id = id;
         this.title = title;
-
+        this.teacher = teacher;
     }
 
     public Integer getId() {
