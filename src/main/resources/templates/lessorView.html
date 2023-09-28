@@ -26,6 +26,13 @@
             <div class="tools">
                 <table th:each="tool:${tools}">
                     <td>
+                        <input type="radio"
+                               onMouseDown="this.isChecked=this.checked;"
+                               onClick="this.checked=!this.isChecked;"
+                               th:name="deleteList"
+                               th:value="${tool.getId()}"/>
+                    </td>
+                    <td>
                         <label th:text="${tool.getName()}"></label>
                     </td>
                     <td>
