@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS public.subjects
 (
     subject_id integer NOT NULL DEFAULT nextval('subjects_id_seq'),
     subject_name varchar NOT NULL,
+    teacher_id integer,
     CONSTRAINT subjects_pkey PRIMARY KEY (subject_id),
         CONSTRAINT subjects_teachers_fkey
                        FOREIGN KEY (teacher_id)
