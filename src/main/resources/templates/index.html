@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Subjects</title>
+</head>
+
+<body>
+<h2>Список предметов:</h2>
+<ul class="box">
+    <li th:each="subject: ${subjects}">
+        <div class="box">
+            <th:block th:text="${subject.name}"/>
+        </div>
+    </li>
+</ul>
+</body>
+</html>

@@ -10,8 +10,6 @@ repositories {
 }
 
 dependencies {
-
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.1.1'
     implementation 'org.springframework.boot:spring-boot-starter-web:3.1.1'
 
     // https://mvnrepository.com/artifact/log4j/log4j
@@ -20,25 +18,16 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.1'
-    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity6', version: '3.1.1.RELEASE'
 
     implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.2.7.Final'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.1.1'
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.23.0'
 
-    runtimeOnly('org.postgresql:postgresql:42.6.0')
+    runtimeOnly('com.h2database:h2:2.2.220')
 
 //testing libs
-
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.3.1'
-
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.1'
-    testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '6.1.1'
-
-    testRuntimeOnly('com.h2database:h2:2.2.220')
 }
 
 test {
