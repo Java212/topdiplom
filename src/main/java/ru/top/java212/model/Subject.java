@@ -25,4 +25,16 @@ public class Subject {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

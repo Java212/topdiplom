@@ -14,5 +14,23 @@
 <div th:each="subject: ${subjects}">
             <label th:text="${subject.getName()}"></label>
 </div>
+
+<div>
+    <h1>
+        Школьные предметы c преподавателями
+    </h1>
+</div>
+<table>
+    <div th:each="subject: ${subjectsWithTeacher}">
+        <tr>
+            <td>
+                <label th:text="${subject.getSubjectName()}"></label>
+            </td>
+            <td>
+                <label th:text="${subject.getTeacherName()}"></label>
+            </td>
+        </tr>
+    </div>
+</table>
 </body>
 </html>

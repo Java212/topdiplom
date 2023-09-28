@@ -33,4 +33,8 @@ public class Teacher {
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
+
+    public int getId() {
+        return id;
+    }
 }
