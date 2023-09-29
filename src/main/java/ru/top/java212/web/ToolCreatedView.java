@@ -15,7 +15,7 @@ import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.service.tools.ToolService;
 
 @Controller
-@RequestMapping("/toolCreatedView")
+@RequestMapping("/lessor/toolCreatedView")
 public class ToolCreatedView {
 
     @Autowired
@@ -30,7 +30,7 @@ public class ToolCreatedView {
 
     @GetMapping
     public String showToolCreatedView(){
-        return "toolCreatedView";
+        return "lessor/toolCreatedView";
     }
 
     @PostMapping
@@ -39,7 +39,7 @@ public class ToolCreatedView {
         User user = ( principal instanceof User)? ((User) principal):new User();
         toolService.save(toolDTO,user);
         Person personUser = personRepository.findByUser(user);
-        ModelAndView mv = new ModelAndView("lessorView");
+        ModelAndView mv = new ModelAndView("lessor/lessorView");
         mv.addObject("personName",personUser.getName());
         mv.addObject("tools",toolService.findAllByUser(user));
        return  mv;

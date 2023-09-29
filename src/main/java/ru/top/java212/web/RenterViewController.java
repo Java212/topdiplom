@@ -9,19 +9,21 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.model.Person;
 import ru.top.java212.model.User;
 import ru.top.java212.repository.PersonRepository;
+import ru.top.java212.repository.ToolRepository;
 import ru.top.java212.repository.UserRepository;
 
 
 @Controller
-@RequestMapping("/renterView")
+@RequestMapping("/renter/renterView")
 public class RenterViewController {
 
     private final PersonRepository personRepository;
+    private final ToolRepository toolRepository;
 
     @Autowired
-    RenterViewController(PersonRepository personRepository){
-
+    RenterViewController(PersonRepository personRepository,ToolRepository toolRepository){
         this.personRepository = personRepository;
+        this.toolRepository = toolRepository;
     }
 
     @GetMapping
@@ -29,8 +31,9 @@ public class RenterViewController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = ( principal instanceof User)? ((User) principal):new User();
         Person personUser = personRepository.findByUser(user);
-        ModelAndView mv = new ModelAndView("renterView");
+        ModelAndView mv = new ModelAndView("renter/renterView");
         mv.addObject("personName",personUser.getName());
+        mv.addObject("tools", toolRepository.findAll());
         return  mv;
     }
 }

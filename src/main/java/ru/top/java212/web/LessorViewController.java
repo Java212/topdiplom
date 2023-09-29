@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/lessorView")
+@RequestMapping("/lessor/lessorView")
 public class LessorViewController {
 
 
@@ -35,7 +35,7 @@ public class LessorViewController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (principal instanceof User) ? ((User) principal) : new User();
         Person personUser = personRepository.findByUser(user);
-        ModelAndView mv = new ModelAndView("lessorView");
+        ModelAndView mv = new ModelAndView("lessor/lessorView");
         mv.addObject("personName", personUser.getName());
         mv.addObject("tools", toolService.findAllByUser(user));
         return mv;
@@ -45,7 +45,7 @@ public class LessorViewController {
     public ModelAndView deleteTool(@RequestParam(required = false) List<String> deleteList){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (principal instanceof User) ? ((User) principal) : new User();
-        ModelAndView mv = new ModelAndView("lessorView");
+        ModelAndView mv = new ModelAndView("lessor/lessorView");
         for(String element:deleteList){
             toolService.deleteById( Integer.parseInt(element));
             mv.addObject("tools", toolService.findAllByUser(user));

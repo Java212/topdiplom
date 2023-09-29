@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Lessor</title>
-    <link rel="stylesheet" th:href="@{css/stylesIndex.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
 <section class="top">
@@ -20,7 +20,7 @@
     <div class="userBox">
         <div class="table">
             <div class="tools">
-                <form th:action="@{/lessorView}" method="post">
+                <form th:action="@{/lessor/lessorView}" method="post">
                     <table th:each="tool:${tools}">
                         <td>
                             <input type="checkbox" th:name="deleteList" th:value="${tool.getId()}"/>

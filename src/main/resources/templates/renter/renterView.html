@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Renter</title>
-    <link rel="stylesheet" th:href="@{css/stylesIndex.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
 <section class="top">
@@ -19,6 +19,14 @@
 </section>
 <section class="center">
     <div class="userBox">
+        <table th:each="tool:${tools}">
+            <td>
+                <a href="@{/{toolId}(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
+            </td>
+            <td>
+                <label th:text="${tool.getPrice()}">  </label>
+            </td>
+        </table>
 
     </div>
 </section>

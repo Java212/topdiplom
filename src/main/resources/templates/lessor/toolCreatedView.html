@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Аренда инструмента</title>
-    <link rel="stylesheet" th:href="@{css/stylesIndex.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
 <section class="top">
@@ -15,7 +15,7 @@
 </section>
 <section class="center">
     <div class="registration">
-        <form  th:action="@{/toolCreatedView}" method="post" th:object="${toolForm}">
+        <form  th:action="@{/lessor/toolCreatedView}" method="post" th:object="${toolForm}">
 
             <div class="input">
                 <input name="name" placeholder="Название"  th:field="*{name}"/>
