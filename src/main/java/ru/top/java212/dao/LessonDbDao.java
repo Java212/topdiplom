@@ -27,13 +27,8 @@ public class LessonDbDao implements LessonDao {
     public List<Lesson> getSubjectsWithTeacher(){
         List<Lesson> subjectWithTeacherList = new LinkedList<>();
         List<Subject> subjects = subjectRepository.findByTeacherNotNull();
-        List<Teacher> teachers = teacherRepository.findAll();
         for(Subject subject:subjects){
-            for (Teacher teacher:teachers){
-                if( subject.getTeacher().getId() == teacher.getId()){
-                    subjectWithTeacherList.add(new Lesson(subject.getName(),teacher.getName()));
-                }
-            }
+                    subjectWithTeacherList.add(new Lesson(subject.getName(),subject.getTeacher().getName()));
         }
         return subjectWithTeacherList;
     }
