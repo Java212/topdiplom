@@ -10,4 +10,5 @@ import java.util.List;
 public interface ToolService {
     Boolean save(ToolDTO tool, User user);
     List<Tool> findAllByUser(User user);
+    void deleteById(int toolId);
 }

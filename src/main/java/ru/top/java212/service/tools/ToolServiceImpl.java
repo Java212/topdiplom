@@ -52,5 +52,9 @@ public class ToolServiceImpl implements ToolService{
         Person person = personRepository.findByUser(user);
         return toolRepository.findByPerson(person);
     }
+    @Override
+    public void deleteById(int toolId) {
+        toolRepository.deleteById(toolId);
+    }
 
 }

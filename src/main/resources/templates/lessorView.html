@@ -19,26 +19,22 @@
 <section class="center">
     <div class="userBox">
         <div class="table">
-            <div class="panel">
-                <a href="toolCreatedView">Cдать</a>
-                <a href="toolView">Изменить</a>
-            </div>
             <div class="tools">
-                <table th:each="tool:${tools}">
-                    <td>
-                        <input type="radio"
-                               onMouseDown="this.isChecked=this.checked;"
-                               onClick="this.checked=!this.isChecked;"
-                               th:name="deleteList"
-                               th:value="${tool.getId()}"/>
-                    </td>
-                    <td>
-                        <label th:text="${tool.getName()}"></label>
-                    </td>
-                    <td>
-                        <label th:text="${tool.getPrice()}">  </label>
-                    </td>
-                </table>
+                <form th:action="@{/lessorView}" method="post">
+                    <table th:each="tool:${tools}">
+                        <td>
+                            <input type="checkbox" th:name="deleteList" th:value="${tool.getId()}"/>
+                        </td>
+                        <td>
+                            <label th:text="${tool.getName()}"></label>
+                        </td>
+                        <td>
+                            <label th:text="${tool.getPrice()}">  </label>
+                        </td>
+                    </table>
+                    <input id="submitButton" type="submit"  value="Удалить" />
+                    <button><a href="toolCreatedView">Добавить</a></button>
+                </form >
             </div>
         </div>
     </div>
