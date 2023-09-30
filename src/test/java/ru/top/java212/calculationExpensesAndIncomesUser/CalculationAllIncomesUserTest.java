@@ -17,7 +17,7 @@ public class CalculationAllIncomesUserTest {
     void test_calculationIncomesUser(){
         int userId=2;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         int result=111930;
         Assertions.assertEquals(result, calculationncomesUser.calculationIncomesUser(userId,startPeriod,endPeriod));
     }
@@ -27,7 +27,7 @@ public class CalculationAllIncomesUserTest {
         int result = 111930;
         int userId = 2;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Map<String, Long> calculated = calculationncomesUser.calculationIncomesUserBySource(userId, startPeriod, endPeriod);
         Assertions.assertEquals(result, calculated.get("премия"));
     }

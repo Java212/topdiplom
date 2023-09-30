@@ -22,7 +22,7 @@ public class IncomeDbDaoTest {
     @Test
     void test_method_findByDateBetween(){
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         List<Integer> list = List.of(35000,25140, 86790);
 
         List<Integer> result = incomeDbDao.findByDateBetween(startPeriod, endPeriod).stream()
@@ -33,7 +33,7 @@ public class IncomeDbDaoTest {
     void test_method_findByUserIdAndDateBetween(){
         int userId = 2;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         List<Integer> list = List.of(25140, 86790);
 
         List<Integer> result = incomeDbDao.findByUserIdAndDateBetween(userId, startPeriod, endPeriod).stream()
@@ -43,7 +43,7 @@ public class IncomeDbDaoTest {
     @Test
     void test_method_getIncomesFamilyByCategory(){
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Map<String, Integer> list = Map.of("премия", 146930);
         Map<String, Integer> result = new HashMap<>();
         List<TotalIncome> readFromDb = incomeDbDao.getIncomesFamilyByCategory(startPeriod, endPeriod);
@@ -56,7 +56,7 @@ public class IncomeDbDaoTest {
     void test_method_getIncomesUserByCategory(){
         int userId = 2;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Map<String, Integer> list = Map.of("премия", 111930);
         Map<String, Integer> result = new HashMap<>();
         List<TotalIncome> readFromDb = incomeDbDao.getIncomesUserByCategory(userId, startPeriod, endPeriod);

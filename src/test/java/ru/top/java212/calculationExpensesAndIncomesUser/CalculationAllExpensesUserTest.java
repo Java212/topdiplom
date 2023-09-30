@@ -18,7 +18,7 @@ public class CalculationAllExpensesUserTest {
     void test_method_calculationExpensesUser(){
         int userId = 2;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         int result = 30000;
         Assertions.assertEquals(result,calculationAllExpensesUser.calculationExpensesUser(userId, startPeriod, endPeriod));
     }
@@ -27,7 +27,7 @@ public class CalculationAllExpensesUserTest {
     void test_method_calculationExpensesUserByCategory(){
         int userId = 2;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Map<String, Long> list = Map.of("квартплата", 30000L);
         Assertions.assertEquals(list,calculationAllExpensesUser.calculationExpensesUserByCategory(userId, startPeriod, endPeriod));
     }

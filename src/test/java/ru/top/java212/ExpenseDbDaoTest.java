@@ -23,7 +23,7 @@ public class ExpenseDbDaoTest {
     void test_method_findByDateBetween(){
         List<Integer> list = List.of(1000,1000, 29000);
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         List<Integer> result = expenseDbDao.findByDateBetween(startPeriod,endPeriod).stream()
                 .map(ExpenseAmount::getExpenseAmount).toList();
         Assertions.assertEquals(list, result);
@@ -33,7 +33,7 @@ public class ExpenseDbDaoTest {
         int userId = 2;
         List<Integer> list = List.of(1000, 29000);
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         List<Integer> result = expenseDbDao.findByUserIdAndDateBetween(userId, startPeriod,endPeriod).stream()
                 .map(ExpenseAmount::getExpenseAmount).toList();
         Assertions.assertEquals(list, result);
@@ -42,7 +42,7 @@ public class ExpenseDbDaoTest {
     @Test
     void test_method_getExpensesFamilyByCategory(){
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Map<String, Integer> list = Map.of("квартплата", 31000);
 
         Map<String, Integer> result = new HashMap<>();
@@ -56,7 +56,7 @@ public class ExpenseDbDaoTest {
     void test_method_getExpensesUserByCategory(){
         int userId = 2;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Map<String, Integer> list = Map.of("квартплата", 30000);
 
         Map<String, Integer> result = new HashMap<>();

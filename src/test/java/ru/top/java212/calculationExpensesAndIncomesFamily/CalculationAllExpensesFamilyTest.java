@@ -20,14 +20,14 @@ public class CalculationAllExpensesFamilyTest {
     void test_method_calculationExpensesFamily(){
         int result = 31000;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Assertions.assertEquals(result,calculationAllExpensesFamily.calculationExpensesFamily(startPeriod, endPeriod));
     }
     @Test
     void test_method_calculationExpensesFamilyByCategory(){
 
         LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
         Map<String, Long> list = Map.of("квартплата", 31000L);
         Assertions.assertEquals(list,calculationAllExpensesFamily.calculationExpensesFamilyByCategory(startPeriod, endPeriod));
     }
