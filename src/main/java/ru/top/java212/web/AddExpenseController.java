@@ -46,7 +46,7 @@ public class AddExpenseController {
 
     @PostMapping("/expenses/add")
     @PreAuthorize("authenticated")
-    public ModelAndView addExpense(@ModelAttribute ExpenseDto newExpense){
+    public ModelAndView addExpense(@ModelAttribute  ExpenseDto newExpense){
         ModelAndView mv = new ModelAndView("addExpense");
 
                 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

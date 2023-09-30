@@ -13,6 +13,7 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "expense_id")
     private Integer id;
+
     @Column(name = "expense_amount")
     private int expenseAmount;
 
