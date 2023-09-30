@@ -59,7 +59,4 @@ public class AddExpenseController {
         mv.addObject("newExpense", new ExpenseDto("default category",0));
         return mv;
     }
-
-
-
 }
