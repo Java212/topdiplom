@@ -34,14 +34,15 @@ header{
     font-size: 20px;
     margin-right: 80px;
 }
-.view-income-and-expenses, .add-expenses-and-income{
+.view-income-and-expenses, .add-expenses-and-income, .from-admin{
     margin-top: 60px;
     margin-left: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.all_exp_and_inc_family, .details_exp_and_inc_family, .all_exp_and_inc_user, .details_exp_and_inc_user, .buttons-add{
+.all_exp_and_inc_family, .details_exp_and_inc_family, .all_exp_and_inc_user, .details_exp_and_inc_user, .buttons-add,
+                                    .editing-categories{
     width: 900px;
     display: flex;
     flex-direction: row;
@@ -55,7 +56,7 @@ header{
 .details_exp_and_inc_family{
     background-color: #20B2AA;
 }
-.button_family, .button_user{
+.button_family, .button_user, .editing-categories{
     width: 400px;
     margin: 20px;
     font-size: 25px;
@@ -67,4 +68,11 @@ header{
 }
 .buttons-add{
     background-color: #9370DB;
+}
+.editing-categories{
+    background-color: #FFFACD;
+}
+.editing-categories>a{
+    text-decoration: none;
+    font-size: 25px;
 }

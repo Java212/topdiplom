@@ -14,7 +14,7 @@
 <body>
 <header>
     <div id="date_time" class="date"></div>
-    <div class="balance">
+    <div class="balance" sec:authorize="hasAuthority('USER')">
         Текущий баланс семьи: <span th:text="${balanceFamily}"></span> <span> рубл.</span>
     </div>
     <div class="login_user" sec:authorize="isAuthenticated()">
@@ -50,6 +50,11 @@
         </form>
     </div>
 </section>
+        <section class="from-admin" sec:authorize="hasAuthority('ADMIN')">
+            <div class="editing-categories">
+                <a href="./newCategory/add"> редактирование категорий</a>
+            </div>
+    </section>
 <script src="/js/menu.js"></script>
 </body>
 </html>
