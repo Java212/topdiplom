@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -32,8 +33,8 @@ public class EditingCategoriesControllerTest {
     }
     @Test
     @WithMockUser
-    void test_view_page_addNewCategory() throws Exception{
-        String url = "/newCategory/add";
+    void test_view_page_UpdateRecordsDb() throws Exception{
+        String url = "/recordsDb/update";
 
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk())
@@ -42,12 +43,14 @@ public class EditingCategoriesControllerTest {
 
     @Test
     @WithMockUser
-    void test_view_addNewCategory() throws Exception{
-        String url = "/newCategory/add";
+    void test_editingCategories() throws Exception{
+        SecurityContextHolder.getContext().setAuthentication(new TestAuth());
+        String url = "/recordsDb/update";
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("whatToAdd", "расходы")
-                        .param("NameNewCategory", "абонемент в тренажерный зал"))
+                        .param("altNameCategory", "квартплата")
+                        .param("newNameCategory", "абонемент в тренажерный зал"))
                         .andExpect(model().size(1))
                         .andExpect(status().isOk());
     }
