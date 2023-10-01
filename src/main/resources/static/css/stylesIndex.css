@@ -1,0 +1,60 @@
+body{
+   background-image:url(../img/tools_rent.jpg);
+}
+
+
+.top_center{
+     width:100%;
+    background:rgb(0,191,255,0.8);
+    margin-top:20px;
+    text-align: center;
+}
+h1{
+   font-size: 42px;
+   color:#af2121;
+}
+h2{
+  color:#af2121;
+}
+.bottom{
+   margin-top:10px;
+}
+.center{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+.registration{
+   width:400px;
+   height:300px;
+   background:rgb(0,191,255,0.8);
+   text-align: center;
+}
+.userBox{
+    width:100%;
+    height:400px;
+    background:rgb(0,191,255,0.8);
+}
+.bottom{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+.bottom_box{
+   margin-top:100px;
+}
+.input{
+   margin-top:10px;
+}
+.table{
+   display:flex;
+   flex-direction:row;
+}
+.panel{
+    width:30%;
+    height:100%
+}
+a {
+   color: #000000;
+   text-decoration:none;
+}

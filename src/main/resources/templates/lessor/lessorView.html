@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Lessor</title>
+    <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
+</head>
+<body>
+<section class="top">
+    <div class="top_center">
+        <div>
+            Кабинет арендодателя:    <label  th:text="${personName}"></label>
+        </div>
+        <h1>
+            Аренда инструмента
+        </h1>
+    </div>
+</section>
+<section class="center">
+    <div class="userBox">
+        <div class="table">
+            <div class="tools">
+                <form th:action="@{/lessor/lessorView}" method="post">
+                    <table th:each="tool:${tools}">
+                        <td>
+                            <input type="checkbox" th:name="deleteList" th:value="${tool.getId()}"/>
+                        </td>
+                        <td>
+                            <label th:text="${tool.getName()}"></label>
+                        </td>
+                        <td>
+                            <label th:text="${tool.getPrice()}">  </label>
+                        </td>
+                    </table>
+                    <input id="submitButton" type="submit"  value="Удалить" />
+                    <button><a href="toolCreatedView">Добавить</a></button>
+                </form >
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
