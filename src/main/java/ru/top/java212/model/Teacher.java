@@ -1,29 +1,28 @@
-package ru.top.java212;
+package ru.top.java212.model;
 
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-@Table(name="subjects")
+@Table(name = "teachers")
 
-public class Subject {
+public class Teacher {
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
-    @Column(name = "subject_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "subject_name")
     private String name;
 
-    public Subject(Integer id, String name) {
+    public Teacher(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Subject() {}
+    public Teacher() {
+    }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -35,8 +34,8 @@ public class Subject {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Subject subject = (Subject) o;
-        return Objects.equals(id, subject.id) && Objects.equals(name, subject.name);
+        Teacher teacher = (Teacher) o;
+        return Objects.equals(id, teacher.id) && Objects.equals(name, teacher.name);
     }
 
     @Override
@@ -44,5 +43,3 @@ public class Subject {
         return Objects.hash(id, name);
     }
 }
-
-

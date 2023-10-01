@@ -2,15 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Subjects</title>
+    <title>Предметы и преподаватели</title>
 </head>
 
 <body>
 <h2>Список предметов:</h2>
 <ul class="box">
-    <li th:each="subject: ${subjects}">
+    <li th:each="subject: ${subjects_all}">
         <div class="box">
             <th:block th:text="${subject.name}"/>
+        </div>
+    </li>
+</ul>
+<h2>Преподаватели:</h2>
+<ul class="box">
+    <li th:each="subject: ${subjects_with_teachers}">
+        <div class="lines">
+            <th:block th:text="${subject.name} + '&nbsp&nbsp-&nbsp&nbsp' + ${teachers[subject.getTeacher_id()-1].name}"/>
         </div>
     </li>
 </ul>

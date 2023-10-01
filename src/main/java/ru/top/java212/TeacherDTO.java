@@ -1,17 +1,14 @@
 package ru.top.java212;
 
-public class SubjectDTO {
+public class TeacherDTO {
 
     private final Integer id;
     private final String name;
 
-    private final Integer teacher_id;
 
-
-    public SubjectDTO(Integer id, String name, Integer teacher_id) {
+    public TeacherDTO(String name, Integer id) {
         this.id = id;
         this.name = name;
-        this.teacher_id = teacher_id;
     }
 
     public String getName() {
@@ -20,9 +17,5 @@ public class SubjectDTO {
 
     public Integer getId() {
         return id;
-    }
-
-    public Integer getTeacher_id() {
-        return teacher_id;
     }
 }

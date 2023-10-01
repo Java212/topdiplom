@@ -8,5 +8,8 @@
     <changeSet id="1" author="kotowmv">
         <sqlFile path="database/changeset-1.sql"/>
     </changeSet>
+    <changeSet id="2" author="kotowmv">
+        <sqlFile path="database/changeset-2.sql"/>
+    </changeSet>
 
 </databaseChangeLog>
