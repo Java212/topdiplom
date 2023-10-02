@@ -1,20 +1,13 @@
 plugins {
     id 'java'
-
 }
 
 group 'ru.top.java212'
 version '1.0-SNAPSHOT'
 
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
-
-
 repositories {
     mavenCentral()
 }
-
-
 
 dependencies {
 
@@ -29,17 +22,20 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.1.1'
 
-//    implementation 'org.springframework.boot:spring-boot-starter-security:3.1.1'
+	 implementation 'org.springframework.boot:spring-boot-starter-security:3.1.1'
 
 
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.1.1'
     // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
-    implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.0.33'
+
     implementation 'org.projectlombok:lombok:1.18.26'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.8'
 
     runtimeOnly 'com.h2database:h2:1.4.200'
 
     implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.2.7.Final'
+
+    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.30'
 
 
 //testing libs
@@ -52,6 +48,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.1'
     testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '6.1.1'
 
+    testRuntimeOnly('com.h2database:h2:2.2.220')
 }
 
 test {

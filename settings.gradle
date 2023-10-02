@@ -1,2 +1,4 @@
 rootProject.name = 'topdiplom'
+include 'src:main:generated'
+findProject(':src:main:generated')?.name = 'generated'
 

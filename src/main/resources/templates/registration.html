@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Регистрация в приложении</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link rel="stylesheet" th:href="@{css/stylesIndex.css}" type="text/css"/>
+<!--    <script th:href="@{js/main.js}"></script>-->
+</head>
+<body>
+<section class="top">
+    <div class="top_center">
+        <h1>
+            Аренда инструмента
+        </h1>
+    </div>
+</section>
+<section class="center">
+    <div class="registration">
+        <h2>
+            Регистрация
+        </h2>
+        <div th:if="${error}"> <h3 style="color:red" th:text="${error}">  </h3></div>
+        <form  th:action="@{/registration}" method="post" th:object="${userForm}">
+            <div class="input">
+                <input type="checkbox" name="role" th:chacked="*{role}"/> Владелец
+            </div>
+            <div class="input">
+                <input name="name" placeholder="Имя "  th:field="*{name}"/>
+            </div>
+            <div class="input">
+                <input name="phone" placeholder="Номер телефона "  th:field="*{phone}"/>
+            </div>
+            <div class="input">
+                <input name="login" placeholder="Логин"  th:field="*{login}"/>
+            </div>
+            <div class="input">
+                <input type="password" id="password" name="password" placeholder="Пароль"  th:field="*{password}"/>
+            </div>
+            <div class="input">
+                <input type="password" id="confirm_password" name="passwordRepeat" placeholder="Повторно пароль"/>
+            </div>
+            <div class="input">
+                <input id="submitButton" type="submit" disabled value="Зарегистрироваться" />
+            </div>
+           </form>
+    </div>
+        <script th:inline="javascript" type="text/javascript">
+            $("#confirm_password").on("keyup", function() {
+              var value_input1 = $("#password").val();
+              var value_input2 = $("#confirm_password").val();
+              console.log ("function");
+              if(value_input1 != value_input2) {
+                  console.log("password incorrect");
+                  $("#submitButton").attr("disabled",true);
+                  $(".error").html("Пароли не совпадают!");
+                  $("#submit").attr("disabled", "disabled");
+
+                } else {
+
+                      console.log("password correct");
+                      $("#submitButton").attr("disabled",false);
+                      $("#submit").removeAttr("disabled");
+                      $(".error").html("");
+                    }
+            });
+        </script>
+</section>
+</body>
