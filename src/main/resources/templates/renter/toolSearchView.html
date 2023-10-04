@@ -19,6 +19,24 @@
 </section>
 <section class="center">
     <div class="userBox">
+        <form th:action="@{/renter/toolSearchView}" method="post">
+            <div class="input">
+                <input name="name" placeholder="название" th:value="${name}"/>
+            </div>
+            <div>
+                <input name="priceMin" placeholder="мин. цена" th:value="${priceMin}"/>
+                <input name="priceMax" placeholder="макс. цена" th:value="${priceMax}"/>
+            </div>
+            <div>
+                <input type="date"  name="startDate"/>
+                <input type="date"  name="stopDate"/>
+            </div>
+
+
+            <div class="input">
+                <input  type="submit"  value="Найти" />
+            </div>
+        </form>
         <table th:each="tool:${tools}">
             <td>
                 <a th:href="@{/renter/renterView/{toolId}(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
@@ -27,7 +45,6 @@
                 <label th:text="${tool.getPrice()}">  </label>
             </td>
         </table>
-        <button><a  th:href="@{/renter/toolSearchView}">Арендовать</a></button>
     </div>
 </section>
 </body>

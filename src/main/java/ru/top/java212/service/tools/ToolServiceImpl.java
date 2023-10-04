@@ -12,6 +12,7 @@ import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ToolServiceImpl implements ToolService{
@@ -20,7 +21,7 @@ public class ToolServiceImpl implements ToolService{
     private PersonRepository personRepository;
 
     @Autowired
-     ToolServiceImpl(AddressRepository addressRepository,ToolRepository toolRepository,PersonRepository personRepository){
+    public ToolServiceImpl(AddressRepository addressRepository, ToolRepository toolRepository, PersonRepository personRepository){
         this.addressRepository = addressRepository;
         this.toolRepository = toolRepository;
         this.personRepository = personRepository;
@@ -55,6 +56,26 @@ public class ToolServiceImpl implements ToolService{
     @Override
     public void deleteById(int toolId) {
         toolRepository.deleteById(toolId);
+    }
+
+    @Override
+    public List<Tool> findAll(){
+       return toolRepository.findAll();
+    }
+
+    @Override
+    public List<Tool> findByName(String name){
+        return toolRepository.findByName(name);
+    }
+
+    @Override
+    public List<Tool> findByPriceBetween(Double priceMin, Double priceMax) {
+        return toolRepository.findByPriceBetween(priceMin,priceMax);
+    }
+
+    @Override
+    public List<Tool> finByName(List<Tool> tools,String name){
+        return tools.stream().filter(t -> t.getName().equals(name)).collect(Collectors.toList());
     }
 
 }
