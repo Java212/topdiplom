@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.IncomeDto;
+import ru.top.java212.dto.IncomeDto;
 import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.dao.IncomeDbDao;
 import ru.top.java212.model.Income;

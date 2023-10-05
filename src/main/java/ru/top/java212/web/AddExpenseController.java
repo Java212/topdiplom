@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.ExpenseDbDao;
+import ru.top.java212.dto.ExpenseDto;
 import ru.top.java212.model.Expense;
 import ru.top.java212.model.ExpenseCategory;
 import ru.top.java212.model.Role;

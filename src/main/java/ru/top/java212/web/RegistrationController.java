@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.UserDto;
+import ru.top.java212.dto.UserDto;
 import ru.top.java212.dao.UserDbDao;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;

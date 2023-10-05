@@ -38,7 +38,7 @@ public class EditingCategoriesControllerTest {
 
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("form")));
+                .andExpect(content().string(containsString("p")));
     }
 
     @Test

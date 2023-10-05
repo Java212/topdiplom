@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.RedactRecordsInDb;
+import ru.top.java212.service.RedactRecordsInDb;
 import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.model.ExpenseCategory;

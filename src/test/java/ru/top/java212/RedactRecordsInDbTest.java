@@ -9,6 +9,7 @@ import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.model.Expense;
 import ru.top.java212.model.Income;
+import ru.top.java212.service.RedactRecordsInDb;
 
 @SpringBootTest
 public class RedactRecordsInDbTest {

@@ -51,7 +51,7 @@ button{
     margin-top: 10px;
     font-size: 15px;
 }
-.message{
+.message, .for-user{
     margin-top: 300px;
     margin-left: 800px;
     font-size: 25px;

@@ -21,7 +21,10 @@
         <span sec:authentication="name"></span>
     </div>
 </header>
-<section class="fields">
+<div class="for-user" sec:authorize="hasAuthority('USER')">
+   <p> У Вас нет прав системного администратора для изменения записей в БД </p>
+</div>
+<section class="fields"  sec:authorize="hasAuthority('ADMIN')">
     <form class="expense" th:action="@{/recordsDb/update}" method="post">
         <label>Выберите категорию расхода для редактирования</label>
         <select th:name="altNameCategory">
