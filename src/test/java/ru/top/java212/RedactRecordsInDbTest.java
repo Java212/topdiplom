@@ -11,9 +11,9 @@ import ru.top.java212.model.Expense;
 import ru.top.java212.model.Income;
 
 @SpringBootTest
-public class UpdateDbTest {
+public class RedactRecordsInDbTest {
     @Autowired
-    UpdateDb updateDb;
+    RedactRecordsInDb redactRecordsInDb;
     @Autowired
     ExpenseCategoryDbDao expenseCategoryDbDao;
 
@@ -25,7 +25,7 @@ public class UpdateDbTest {
     void test_method_editingCategoryNamesExpense(){
         String currentName = "квартплата";
         String newName = "продукты питания";
-        updateDb.editingCategoryNamesExpense(currentName, newName);
+        redactRecordsInDb.editingCategoryNamesExpense(currentName, newName);
         String result = expenseCategoryDbDao.findByNameExpenseCategory(newName).getNameExpenseCategory();
         Assertions.assertEquals(newName, result);
     }
@@ -35,7 +35,7 @@ public class UpdateDbTest {
     void test_that_the_record_update_for_ExpenseCategory_was_successful(){
         String currentName = "квартплата";
         String newName = "продукты питания";
-        updateDb.editingCategoryNamesExpense(currentName, newName);
+        redactRecordsInDb.editingCategoryNamesExpense(currentName, newName);
         int sumAllExpenses =   expenseCategoryDbDao.findByNameExpenseCategory(newName).getExpenses().stream().mapToInt(Expense::getExpenseAmount).sum();
         Assertions.assertEquals(31000, sumAllExpenses);
     }
@@ -45,7 +45,7 @@ public class UpdateDbTest {
     void test_method_editingCategoryNamesIncome(){
         String currentName = "премия";
         String newName = "дивиденды";
-        updateDb.editingCategoryNamesIncome(currentName, newName);
+        redactRecordsInDb.editingCategoryNamesIncome(currentName, newName);
         String result = incomeCategoryDbDao.findBySourceIncomeCategory(newName).getSourceIncomeCategory();
         Assertions.assertEquals(newName, result);
     }
@@ -55,7 +55,7 @@ public class UpdateDbTest {
     void test_that_the_record_update_for_IncomeSource_was_successful(){
         String currentName = "премия";
         String newName = "дивиденды";
-        updateDb.editingCategoryNamesIncome(currentName, newName);
+        redactRecordsInDb.editingCategoryNamesIncome(currentName, newName);
         int sumAllExpenses = incomeCategoryDbDao.findBySourceIncomeCategory(newName).getIncomes().stream().mapToInt(Income::getIncomeAmount).sum();
         Assertions.assertEquals(146930, sumAllExpenses);
     }

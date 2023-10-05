@@ -8,13 +8,13 @@ import ru.top.java212.model.ExpenseCategory;
 import ru.top.java212.model.IncomeCategory;
 
 @Component
-public class UpdateDb {
+public class RedactRecordsInDb {
 
     private final ExpenseCategoryDbDao expenseCategoryDbDao;
     private final IncomeCategoryDbDao incomeCategoryDbDao;
 
     @Autowired
-    public UpdateDb(ExpenseCategoryDbDao expenseCategoryDbDao, IncomeCategoryDbDao incomeCategoryDbDao) {
+    public RedactRecordsInDb(ExpenseCategoryDbDao expenseCategoryDbDao, IncomeCategoryDbDao incomeCategoryDbDao) {
         this.expenseCategoryDbDao = expenseCategoryDbDao;
         this.incomeCategoryDbDao = incomeCategoryDbDao;
     }

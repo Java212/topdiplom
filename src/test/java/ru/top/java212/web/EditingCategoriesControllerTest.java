@@ -51,7 +51,7 @@ public class EditingCategoriesControllerTest {
                         .param("whatToAdd", "расходы")
                         .param("altNameCategory", "квартплата")
                         .param("newNameCategory", "абонемент в тренажерный зал"))
-                        .andExpect(model().size(1))
+                        .andExpect(model().size(3))
                         .andExpect(status().isOk());
     }
 }
