@@ -26,7 +26,7 @@ public class UserDbDaoTest {
     void test_save_and_get_is_same(){
         User user = new User("Bob","password", "fgfg8", Role.USER, BigDecimal.TEN);
         userDbDao.save(user);
-        User userFromDb = userDbDao.findById(1).orElseThrow();
+        User userFromDb = userDbDao.findById(6).orElseThrow();
         Assertions.assertEquals(user.getName(),userFromDb.getName());
         Assertions.assertEquals(user.getRole(),userFromDb.getRole());
     }

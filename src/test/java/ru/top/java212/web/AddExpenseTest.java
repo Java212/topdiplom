@@ -49,7 +49,7 @@ public class AddExpenseTest {
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String url = "/expenses/add";
         this.mockMvc.perform(post(url).with(csrf())
-                        .param("categoryName", "квартплата")
+                        .param("categoryName", "коммунальные платежи")
                         .param("amount", "1000"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("form")));

@@ -16,17 +16,21 @@ public class CalculationAllIncomesFamilyTest {
 
     @Test
     void test_method_calculationIncomesFamily(){
-        int result =146930;
+        int result = 466750;
         LocalDate startDate = LocalDate.of(2023,9,1);
         LocalDate endDate = LocalDate.of(2023,10,31);
         Assertions.assertEquals(result, calculationIncomes.calculationIncomesFamily(startDate, endDate));
     }
     @Test
     void test_method_calculationSourceIncomeByCategory(){
-        int result = 146930;
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,10,31);
-        Map<String, Long> calculated = calculationIncomes.calculationSourceIncomeByCategory(startPeriod, endPeriod);
-        Assertions.assertEquals(result, calculated.get("премия"));
+        Map<String, Long> list = Map.of("заработная плата", 201000L,
+                                        "премия",150750L,
+                                        "доходы от ценных бумаг", 10000L,
+                                        "стипендия", 10000L,
+                                        "доходы от предпренимательской деятельности", 78000L,
+                                        "доходы от других источников", 17000L);
+        Assertions.assertEquals(list, calculationIncomes.calculationSourceIncomeByCategory(startPeriod, endPeriod));
     }
 }

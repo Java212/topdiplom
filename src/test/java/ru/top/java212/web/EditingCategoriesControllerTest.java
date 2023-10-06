@@ -49,7 +49,7 @@ public class EditingCategoriesControllerTest {
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("whatToAdd", "расходы")
-                        .param("altNameCategory", "квартплата")
+                        .param("altNameCategory", "коммунальные платежи")
                         .param("newNameCategory", "абонемент в тренажерный зал"))
                         .andExpect(model().size(3))
                         .andExpect(status().isOk());

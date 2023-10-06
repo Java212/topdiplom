@@ -55,7 +55,7 @@ public class CalculationIncomesControllerTest {
                         .param("startDate", startPeriod)
                         .param("endDate", endPeriod))
                 .andExpect(model().size(2))
-                .andExpect(model().attribute("totalIncomeFamily", 146930))
+                .andExpect(model().attribute("totalIncomeFamily", 466750))
                 .andExpect(status().isOk());
     }
     @Test
@@ -72,7 +72,7 @@ public class CalculationIncomesControllerTest {
                         .param("startDate", String.valueOf(startPeriod))
                         .param("endDate", String.valueOf(endPeriod)))
                 .andExpect(model().size(2))
-                .andExpect(model().attribute("totalIncomeUser", 35000))
+                .andExpect(model().attribute("totalIncomeUser", 100250))
                 .andExpect(status().isOk());
     }
 }

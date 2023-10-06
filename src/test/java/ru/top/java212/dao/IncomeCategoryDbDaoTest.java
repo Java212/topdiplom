@@ -20,10 +20,9 @@ public class IncomeCategoryDbDaoTest {
 
     @Test
     void test_save_and_get_is_same(){
-        IncomeCategory inCategory = new IncomeCategory("премия");
+        IncomeCategory inCategory = new IncomeCategory("дивиденды");
         categoryDbDao.save(inCategory);
-        IncomeCategory inCategoryFromDb = categoryDbDao.findById(1).orElseThrow();
-        Assertions.assertEquals(inCategory.getSourceIncomeCategory(),inCategoryFromDb.getSourceIncomeCategory());
+        IncomeCategory inCategoryFromDb = categoryDbDao.findById(7).orElseThrow();
         Assertions.assertEquals(inCategory.getSourceIncomeCategory(),inCategoryFromDb.getSourceIncomeCategory());
     }
     @Test

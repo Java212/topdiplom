@@ -33,10 +33,10 @@ public class ExpenseDbDaoTestMy {
     @Disabled
     void test_save_and_get_is_same(){
         User user = new User ("Jek", "df34","fgfg8", Role.USER, new BigDecimal(1000.23));
-        user.setId(2);
-        ExpenseCategory expenseCategory = new ExpenseCategory("коммуналка");
+        user.setId(6);
+        ExpenseCategory expenseCategory = new ExpenseCategory("коммунальные платежи");
         Expense expense = new Expense(user, expenseCategory,1000);
-        expenseCategory.setId(2);
+        expenseCategory.setId(1);
         expenseDbDao.save(expense);
         Expense expenseFromDb = expenseDbDao.findById(1).orElseThrow();
         Assertions.assertEquals(1000, expenseFromDb.getExpenseAmount());
@@ -64,7 +64,7 @@ public class ExpenseDbDaoTestMy {
         Expense expenseFromDb = expenseDbDao.findById(1).orElseThrow();
         Assertions.assertEquals(userFromDb.getName(), expenseFromDb.getUsers().getName());
 
-        User user = new User("John", "df34","fgfg8", Role.USER, new BigDecimal(10000.23));
+        User user = new User("Jek", "df34","fgfg8", Role.USER, new BigDecimal(10000.23));
         expenseFromDb.setUsers(user);
         Assertions.assertEquals(user.getName(), expenseFromDb.getUsers().getName());
     }
