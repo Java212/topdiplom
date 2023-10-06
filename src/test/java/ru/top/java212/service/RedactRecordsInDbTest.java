@@ -1,4 +1,4 @@
-package ru.top.java212;
+package ru.top.java212.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -9,7 +9,6 @@ import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.model.Expense;
 import ru.top.java212.model.Income;
-import ru.top.java212.service.RedactRecordsInDb;
 
 @SpringBootTest
 public class RedactRecordsInDbTest {
@@ -24,40 +23,28 @@ public class RedactRecordsInDbTest {
     @Test
     @Disabled
     void test_method_editingCategoryNamesExpense(){
-        String currentName = "квартплата";
+        String currentName = "расходы на питание";
         String newName = "продукты питания";
+
         redactRecordsInDb.editingCategoryNamesExpense(currentName, newName);
         String result = expenseCategoryDbDao.findByNameExpenseCategory(newName).getNameExpenseCategory();
         Assertions.assertEquals(newName, result);
-    }
 
-    @Test
-    @Disabled
-    void test_that_the_record_update_for_ExpenseCategory_was_successful(){
-        String currentName = "квартплата";
-        String newName = "продукты питания";
-        redactRecordsInDb.editingCategoryNamesExpense(currentName, newName);
-        int sumAllExpenses =   expenseCategoryDbDao.findByNameExpenseCategory(newName).getExpenses().stream().mapToInt(Expense::getExpenseAmount).sum();
-        Assertions.assertEquals(31000, sumAllExpenses);
+        int sumAllExpenses = expenseCategoryDbDao.findByNameExpenseCategory(newName).getExpenses().stream().mapToInt(Expense::getExpenseAmount).sum();
+        Assertions.assertEquals(17000, sumAllExpenses);
     }
 
     @Test
     @Disabled
     void test_method_editingCategoryNamesIncome(){
-        String currentName = "премия";
+        String currentName = "доходы от ценных бумаг";
         String newName = "дивиденды";
+
         redactRecordsInDb.editingCategoryNamesIncome(currentName, newName);
         String result = incomeCategoryDbDao.findBySourceIncomeCategory(newName).getSourceIncomeCategory();
         Assertions.assertEquals(newName, result);
-    }
 
-    @Test
-    @Disabled
-    void test_that_the_record_update_for_IncomeSource_was_successful(){
-        String currentName = "премия";
-        String newName = "дивиденды";
-        redactRecordsInDb.editingCategoryNamesIncome(currentName, newName);
         int sumAllExpenses = incomeCategoryDbDao.findBySourceIncomeCategory(newName).getIncomes().stream().mapToInt(Income::getIncomeAmount).sum();
-        Assertions.assertEquals(146930, sumAllExpenses);
+        Assertions.assertEquals(10000, sumAllExpenses);
     }
 }

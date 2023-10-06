@@ -41,8 +41,8 @@
     </form>
     <form class="income" th:action="@{/recordsDb/update}" method="post">
         <label>Выберите источник дохода для редактирования</label>
-        <select th:name="altNameCategory" th:each="category : ${allCategoriesIncomes}">
-            <option
+        <select th:name="altNameCategory">
+            <option th:each="category : ${allCategoriesIncomes}"
                     th:value="${category.sourceIncomeCategory}"
                     th:text="${category.sourceIncomeCategory}">
             </option>
