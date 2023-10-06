@@ -65,4 +65,5 @@ public class IncomeDbDaoTest {
         }
         Assertions.assertEquals(list, result);
     }
+    //todo сделать првоерку запроса getSum для раскидывания по БД
 }

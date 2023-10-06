@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.ExpenseDbDao;
 import ru.top.java212.model.ExpenseAmount;
 import ru.top.java212.model.TotalExpense;
@@ -18,6 +20,9 @@ public class ExpenseDbDaoTest {
 
     @Autowired
     ExpenseDbDao expenseDbDao;
+
+    @Autowired
+    ExpenseCategoryDbDao categoryDbDao;
 
     @Test
     void test_method_findByDateBetween(){
@@ -61,6 +66,40 @@ public class ExpenseDbDaoTest {
 
         Map<String, Integer> result = new HashMap<>();
         List<TotalExpense> listFromDb = expenseDbDao.getExpensesUserByCategory(userId, startPeriod, endPeriod);
+        for(TotalExpense ex : listFromDb){
+            result.put(ex.getCategoryName(), ex.getTotal().intValue());
+        }
+        Assertions.assertEquals(list, result);
+    }
+
+    @Test
+    void test_getAllAmountForTheDeletedCategory(){
+        String nameRemoveCategory = "квартплата";
+        int result = 31000;
+        int amountFromDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory);
+        Assertions.assertEquals(result, amountFromDb);
+    }
+    @Test
+    void test_getCountRecordsInDbWithoutRemoveCategory(){
+        String nameRemoveCategory = "квартплата";
+        int result = 1;
+        int amountFromDb = expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
+        Assertions.assertEquals(result, amountFromDb);
+    }
+     @Test
+     @Transactional
+    void test_transferringTheAmountOfExpensesFromTheDeletedCategory(){
+        int amountToAdd = 31000;
+         String nameRemoveCategory = "квартплата";
+        categoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
+        expenseDbDao.transferringTheAmountOfExpensesFromTheDeletedCategory(amountToAdd);
+
+        LocalDate startPeriod = LocalDate.of(2023,9,1);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
+        Map<String, Integer> list = new HashMap<>();
+
+        Map<String, Integer> result = new HashMap<>();
+        List<TotalExpense> listFromDb = expenseDbDao.getExpensesFamilyByCategory(startPeriod, endPeriod);
         for(TotalExpense ex : listFromDb){
             result.put(ex.getCategoryName(), ex.getTotal().intValue());
         }

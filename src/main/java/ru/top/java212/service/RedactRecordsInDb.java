@@ -1,13 +1,12 @@
 package ru.top.java212.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.model.ExpenseCategory;
 import ru.top.java212.model.IncomeCategory;
+
 
 @Service
 public class RedactRecordsInDb {
@@ -31,6 +30,4 @@ public class RedactRecordsInDb {
         editableCategory.setSourceIncomeCategory(newName);
         incomeCategoryDbDao.save(editableCategory);
     }
-
-
 }
