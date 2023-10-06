@@ -65,5 +65,11 @@ public class IncomeDbDaoTest {
         }
         Assertions.assertEquals(list, result);
     }
-    //todo сделать првоерку запроса getSum для раскидывания по БД
+    @Test
+    void test_getAllAmountForTheDeletedSource(){
+        String removeIncomeSource = "премия";
+        int result = 146930;
+        int amountFromDb = incomeDbDao.getAllAmountForTheDeletedSource(removeIncomeSource);
+        Assertions.assertEquals(result, amountFromDb);
+    }
 }

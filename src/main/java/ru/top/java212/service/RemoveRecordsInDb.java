@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.ExpenseDbDao;
+import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.dao.IncomeDbDao;
 
 @Service
@@ -12,12 +13,15 @@ public class RemoveRecordsInDb {
     private final ExpenseDbDao expenseDbDao;
     private final IncomeDbDao incomeDbDao;
     private final ExpenseCategoryDbDao categoryDbDao;
+    private final IncomeCategoryDbDao incomeCategoryDbDao;
 
     @Autowired
-     public RemoveRecordsInDb(ExpenseDbDao expenseDbDao, IncomeDbDao incomeDbDao, ExpenseCategoryDbDao categoryDbDao) {
+     public RemoveRecordsInDb(ExpenseDbDao expenseDbDao, IncomeDbDao incomeDbDao,
+                              ExpenseCategoryDbDao categoryDbDao, IncomeCategoryDbDao incomeCategoryDbDao) {
         this.expenseDbDao = expenseDbDao;
         this.incomeDbDao = incomeDbDao;
         this.categoryDbDao = categoryDbDao;
+        this.incomeCategoryDbDao = incomeCategoryDbDao;
     }
 
     @Transactional
@@ -30,8 +34,9 @@ public class RemoveRecordsInDb {
             expenseDbDao.transferringTheAmountOfExpensesFromTheDeletedCategory(amountToAddToEachExpenseInTheDb);
         }
         if ( whatRemove.equals("доходы")){
-            int sum = 0;
-
+            int amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
+            numberOfDeletedRecordsInDb = incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
+            incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAddToEachIncomeInTheDb);
         }
      return numberOfDeletedRecordsInDb;
     }
