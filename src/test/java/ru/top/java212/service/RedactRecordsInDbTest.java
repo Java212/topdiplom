@@ -47,4 +47,20 @@ public class RedactRecordsInDbTest {
         int sumAllExpenses = incomeCategoryDbDao.findBySourceIncomeCategory(newName).getIncomes().stream().mapToInt(Income::getIncomeAmount).sum();
         Assertions.assertEquals(10000, sumAllExpenses);
     }
+    @Test
+    @Disabled
+    void test_remove_Category_from_Db_for_expenseCategory(){
+        String whatRemove = "расходы";
+        String nameRemoveCategory = "непредвиденные расходы";
+        int colRemoveRow = redactRecordsInDb.removeCategory(whatRemove, nameRemoveCategory);
+        Assertions.assertEquals(1, colRemoveRow);
+    }
+    @Test
+    @Disabled
+    void test_remove_Category_from_Db_for_incomeSource(){
+        String whatRemove = "доходы";
+        String nameRemoveCategory = "доходы от других источников";
+        int colRemoveRow = redactRecordsInDb.removeCategory(whatRemove, nameRemoveCategory);
+        Assertions.assertEquals(1, colRemoveRow);
+    }
 }

@@ -39,35 +39,24 @@ h2{
     font-size: 26px;
     font-weight: 200;
 }
-.input_fields{
-    margin-top: 100px;
-    margin-left: 650px;
-    display: flex;
-    flex-direction: column;
-    float: left;
-}
 .fields{
-    clear: both;
-    text-align: right;
-    line-height: 25px;
-}
-.form-label{
-    font-size: 20px;
+    margin-top: 30px;
+    margin-left: 500px;
+    display: flex;
+    flex-direction: row;
     float: left;
-    padding-right: 10px;
-    margin-bottom: 10px;
 }
-.form-select{
-    font-size: 17px;
+.expense, .income{
+    margin-right: 50px;
+    font-size: 22px;
 }
-input{
-    margin-bottom: 20px;
-    height: 20px;
-}
-button{
-    margin: 50px;
-    width: 150px;
-    height: 40px;
+.button{
+    margin-top: 10px;
     font-size: 18px;
-    padding: 10px;
+}
+.message{
+    margin-top: 300px;
+    margin-left: 200px;
+    font-size: 25px;
+    font-weight: 600;
 }

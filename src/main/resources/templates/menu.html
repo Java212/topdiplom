@@ -51,9 +51,13 @@
     </div>
 </section>
         <section class="from-admin" sec:authorize="hasAuthority('ADMIN')">
-            <div class="editing-categories">
+            <div class="redact-name-category">
                 <a href="./recordsDb/update"> Редактирование категорий</a>
             </div>
+            <div class="remove-category">
+                <a href="./recordsDb/remove"> Удаление категорий</a>
+            </div>
+        </section>
     </section>
 <script src="/js/menu.js"></script>
 </body>

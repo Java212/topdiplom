@@ -34,15 +34,14 @@ header{
     font-size: 20px;
     margin-right: 80px;
 }
-.view-income-and-expenses, .add-expenses-and-income, .from-admin{
+.view-income-and-expenses, .add-expenses-and-income{
     margin-top: 60px;
     margin-left: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.all_exp_and_inc_family, .details_exp_and_inc_family, .all_exp_and_inc_user, .details_exp_and_inc_user, .buttons-add,
-                                    .editing-categories{
+.all_exp_and_inc_family, .details_exp_and_inc_family, .all_exp_and_inc_user, .details_exp_and_inc_user, .buttons-add{
     width: 900px;
     display: flex;
     flex-direction: row;
@@ -56,7 +55,7 @@ header{
 .details_exp_and_inc_family{
     background-color: #20B2AA;
 }
-.button_family, .button_user, .editing-categories{
+.button_family, .button_user{
     width: 400px;
     margin: 20px;
     font-size: 25px;
@@ -69,10 +68,27 @@ header{
 .buttons-add{
     background-color: #9370DB;
 }
-.editing-categories{
-    background-color: #FFFACD;
+.from-admin{
+    width: 900px;
+    margin-top: 60px;
+    margin-left: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 18px;
+    background-color: #00BFFF
 }
-.editing-categories>a{
+.redact-name-category, .remove-category{
+    background-color: white;
+    width: 400px;
+    margin: 20px;
+    font-size: 25px;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+}
+.redact-name-category>a, .remove-category>a{
     text-decoration: none;
     font-size: 25px;
+    color: #000;
 }
