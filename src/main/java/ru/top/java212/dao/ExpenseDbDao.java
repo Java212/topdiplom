@@ -30,10 +30,10 @@ public interface ExpenseDbDao extends CrudRepository<Expense, Integer> {
     @Query("select sum(expenseAmount) from Expense where expenseCategory.nameExpenseCategory=?1")
     int getAllAmountForTheDeletedCategory(String removeExpenseCategory);
 
-    @Query("select count(*) from ExpenseCategory where nameExpenseCategory !=?1")
+    @Query("select count(*) from Expense where expenseCategory.nameExpenseCategory !=?1")
     int getCountRecordsInDbWithoutRemoveCategory(String removeExpenseCategory);
 
     @Modifying
     @Query("update Expense  set expenseAmount = (expenseAmount + ?1) where expenseAmount >0")
-    void transferringTheAmountOfExpensesFromTheDeletedCategory(int amountToAdd);
+    void transferringTheAmountOfExpensesFromTheDeletedCategory(long amountToAdd);
 }

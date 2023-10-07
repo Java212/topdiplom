@@ -25,7 +25,7 @@ public class RemoveRecordsInDbTest {
     @Disabled
     void test_remove_Category_from_Db_for_incomeSource(){
         String whatRemove = "доходы";
-        String nameRemoveCategory = "доходы от других источников'";
+        String nameRemoveCategory = "доходы от других источников";
         int colRemoveRow = removeRecordsInDb.removeCategory(whatRemove, nameRemoveCategory);
         Assertions.assertEquals(1, colRemoveRow);
     }

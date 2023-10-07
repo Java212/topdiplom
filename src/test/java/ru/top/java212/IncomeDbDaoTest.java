@@ -54,36 +54,34 @@ public class IncomeDbDaoTest {
 
     @Test
     void test_getAllAmountForTheDeletedSource(){
-        String removeIncomeSource = "стипендия";
-        int result = 10000;
+        String removeIncomeSource = "премия";
+        int thereMustBe = 150750;
         int amountFromDb = incomeDbDao.getAllAmountForTheDeletedSource(removeIncomeSource);
-        Assertions.assertEquals(result, amountFromDb);
+        Assertions.assertEquals(thereMustBe, amountFromDb);
     }
     @Test
     void test_getCountRecordsInDbWithoutRemoveSource(){
-        String removeIncomeSource = "стипендия";
-        int result = 5;
+        String removeIncomeSource = "премия";
+        int thereMustBe = 9;
         int countRecordsWithoutRemoveSource = incomeDbDao.getCountRecordsInDbWithoutRemoveSource(removeIncomeSource);
-        Assertions.assertEquals(result, countRecordsWithoutRemoveSource);
+        Assertions.assertEquals(thereMustBe, countRecordsWithoutRemoveSource);
     }
     @Test
     @Transactional
     @Disabled
     void test_transferringTheAmountOfIncomesFromTheDeletedSource(){
-        int amountToAdd = 2000;
-        String nameRemoveCategory = "доходы от ценных бумаг";
+        String nameRemoveCategory = "премия";
+        int amountToAdd = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
         incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
         incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAdd);
 
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,10,31);
-        Map<String, Long> list = Map.of("коммунальные платежи", 29500L,
-                "расходы на питание",28500L,
-                "транспортные расходы", 16000L,
-                "расходы на мобильную связь и интернет", 13200L,
-                "покупка лекарственных средств", 24500L,
-                "непредвиденные расходы", 51500L);
+        Map<String, Long> list = Map.of("заработная плата", 251250L,
+                                        "доходы от ценных бумаг", 43500L,
+                                        "стипендия", 26750L,
+                                        "доходы от предпренимательской деятельности", 111500L,
+                                        "доходы от других источников", 33750L);
         Assertions.assertEquals(list,calculationAllIncomesFamily.calculationSourceIncomeByCategory(startPeriod, endPeriod));
     }
-
 }
