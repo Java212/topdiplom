@@ -44,12 +44,12 @@
         <section class="income-output">
             <div  th:switch ="${checkbox}">
                 <div th:case="'family'">
-                    <span>Общий доход семьи составляет:  </span>
+                    <span>Общий доход семьи за выбранный период составляет:  </span>
                     <span th:text="${totalIncomeFamily}"></span>
                     <span>рубл.</span>
                 </div>
                 <div th:case="'user'">
-                    <span>Общий доход пользователя составляет:  </span>
+                    <span>Общий доход пользователя за выбранный период составляет:  </span>
                     <span th:text="${totalIncomeUser}"></span>
                     <span>рубл.</span>
                 </div>

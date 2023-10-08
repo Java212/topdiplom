@@ -50,7 +50,6 @@ public class User implements UserDetails{
         this.password = password;
         this.startingCapital = startingCapital;
     }
-    // todo в конструктор добавил параметр Login
     public User(String name, String login, String password, Role role, BigDecimal startingCapital) {
         this.name = name;
         this.login= login;

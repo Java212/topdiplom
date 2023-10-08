@@ -40,11 +40,11 @@
             </div>
             <button class="button_show">Показать список доходов</button>
         </form>
-
     </section>
             <section class="displaying-list-incomes">
                 <div  th:switch ="${forWhomCalculation}">
                     <div th:case="'family'">
+                        <h2>Детализированный список доходов семьи за выбранный период</h2>
                         <ul class="list">
                             <li th:each="listIncomeByCategory : ${detailsListIncomesFamily}">
                                 <span th:text="${listIncomeByCategory.key}">: </span>
@@ -53,6 +53,7 @@
                         </ul>
                     </div>
                             <div th:case="'user'">
+                                <h2>Детализированный список доходов пользователя за выбранный период</h2>
                                 <ul class="list">
                                     <li th:each="listIncomeByCategory : ${detailsListIncomesUser}">
                                         <span th:text="${listIncomeByCategory.key}">: </span>
@@ -61,7 +62,6 @@
                                 </ul>
                             </div>
                 </div>
-
             </section>
 <script src="/js/menu.js"></script>
 </body>

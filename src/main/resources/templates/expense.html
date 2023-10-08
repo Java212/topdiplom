@@ -45,12 +45,12 @@
             <section class="expense-output">
                 <div  th:switch ="${checkbox}">
                     <div th:case="'family'">
-                          <span>Общий расход семьи составляет:  </span>
+                          <span>Общий расход семьи за выбранный период составляет:  </span>
                             <span th:text="${totalExpenseFamily}"></span>
                                 <span>рубл.</span>
                     </div>
                         <div th:case="'user'">
-                            <span>Общий расход пользователя составляет:  </span>
+                            <span>Общий расход пользователя за выбранный период составляет:  </span>
                                 <span th:text="${totalExpenseUser}"></span>
                                     <span>рубл.</span>
                         </div>

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -38,11 +39,14 @@ public class RemoveCategoriesControllerTest {
         String url = "/recordsDb/remove";
         this.mockMvc.perform(get(url).with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("h2")));
+                .andExpect(content().string(containsString("p")));
     }
+
+    //todo falling Test
     @Test
     @WithMockUser
     void test_remove_records_from_Db() throws  Exception{
+        SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String url = "/recordsDb/remove";
         String whatRemove = "расходы";
         String nameRemoveCategory = "коммунальные платежи";

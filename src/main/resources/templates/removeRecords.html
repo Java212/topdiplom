@@ -21,6 +21,10 @@
         <span sec:authentication="name"></span>
     </div>
 </header>
+<div class="for-user" sec:authorize="hasAuthority('USER')">
+    <p> У Вас нет прав системного администратора для удаления записей в БД </p>
+</div>
+<div sec:authorize="hasAuthority('ADMIN')">
 <h2>Выберите из списка запись, которую нужно удалить</h2>
    <section class="fields" sec:authorize="hasAuthority('ADMIN')">
        <form class="expense" th:action="@{/recordsDb/remove}" method="post">
@@ -41,6 +45,7 @@
         <div class="message" th:if="${message}">
             <h2 th:text="${message}"></h2>
         </div>
+</div>
 <script src="/js/menu.js"></script>
 </body>
 </html>

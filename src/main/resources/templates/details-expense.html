@@ -46,6 +46,7 @@
 <section class="displaying-list-expenses">
     <div  th:switch ="${forWhomCalculation}">
         <div th:case="'family'">
+            <h2>Детализированный список расходов семьи за выбранный период</h2>
             <ul class="list">
                 <li th:each="listExpenseByCategory : ${detailsListExpensesFamily}">
                     <span th:text="${listExpenseByCategory.key}">: </span>
@@ -54,6 +55,7 @@
             </ul>
         </div>
         <div th:case="'user'">
+            <h2>Детализированный список расходов пользователя за выбранный период</h2>
             <ul class="list">
                 <li th:each="listExpenseByCategory : ${detailsListExpensesUser}">
                     <span th:text="${listExpenseByCategory.key}">: </span>

@@ -20,6 +20,9 @@
     <div class="login_user" sec:authorize="isAuthenticated()">
         <span sec:authentication="name"></span>
     </div>
+        <div class="exit">
+            <a th:href="@{/comeIn}">Выйти</a>
+        </div>
 </header>
 <section class="view-income-and-expenses">
     <div class="all_exp_and_inc_family">
