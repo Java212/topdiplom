@@ -20,14 +20,10 @@ import java.util.List;
 public class RemoveCategoriesController {
 
     private final RedactRecordsInDb redactRecordsInDb;
-    private final ExpenseCategoryDbDao expenseCategoryDao;
-    private final IncomeCategoryDbDao incomeCategoryDao;
 
     @Autowired
-    public RemoveCategoriesController(RedactRecordsInDb redactRecordsInDb, ExpenseCategoryDbDao expenseCategoryDao, IncomeCategoryDbDao incomeCategoryDao) {
+    public RemoveCategoriesController(RedactRecordsInDb redactRecordsInDb) {
         this.redactRecordsInDb = redactRecordsInDb;
-        this.expenseCategoryDao = expenseCategoryDao;
-        this.incomeCategoryDao = incomeCategoryDao;
     }
 
     @GetMapping("/recordsDb/remove")
@@ -35,9 +31,9 @@ public class RemoveCategoriesController {
     public ModelAndView viewPageRemoveRecords() {
         ModelAndView mv = new ModelAndView("removeRecords");
         List<ExpenseCategory> listExpenseCategory = new ArrayList<>();
-        expenseCategoryDao.findAll().iterator().forEachRemaining(listExpenseCategory::add);
+        redactRecordsInDb.getExpenseCategoryDbDao().findAll().iterator().forEachRemaining(listExpenseCategory::add);
         List<IncomeCategory> listIncomesSource = new ArrayList<>();
-        incomeCategoryDao.findAll().iterator().forEachRemaining(listIncomesSource::add);
+        redactRecordsInDb.getIncomeCategoryDbDao().findAll().iterator().forEachRemaining(listIncomesSource::add);
         mv.addObject("allCategoriesExpenses", listExpenseCategory);
         mv.addObject("allSourceIncomes", listIncomesSource);
         return mv;
@@ -52,10 +48,15 @@ public class RemoveCategoriesController {
 
         redactRecordsInDb.removeCategory(whatRemove, nameRemoveCategory);
 
+//        List<ExpenseCategory> listExpenseCategory = new ArrayList<>();
+//        expenseCategoryDao.findAll().iterator().forEachRemaining(listExpenseCategory::add);
+//        List<IncomeCategory> listIncomesSource = new ArrayList<>();
+//        incomeCategoryDao.findAll().iterator().forEachRemaining(listIncomesSource::add);
+
         List<ExpenseCategory> listExpenseCategory = new ArrayList<>();
-        expenseCategoryDao.findAll().iterator().forEachRemaining(listExpenseCategory::add);
+        redactRecordsInDb.getExpenseCategoryDbDao().findAll().iterator().forEachRemaining(listExpenseCategory::add);
         List<IncomeCategory> listIncomesSource = new ArrayList<>();
-        incomeCategoryDao.findAll().iterator().forEachRemaining(listIncomesSource::add);
+        redactRecordsInDb.getIncomeCategoryDbDao().findAll().iterator().forEachRemaining(listIncomesSource::add);
         mv.addObject("allCategoriesExpenses", listExpenseCategory);
         mv.addObject("allSourceIncomes", listIncomesSource);
         mv.addObject("message", "Удаление прошло успешно!");

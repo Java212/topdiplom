@@ -57,4 +57,12 @@ public class RedactRecordsInDb implements EditingRecordsInDb {
         }
         return numberOfDeletedRecordsInDb;
     }
+
+    public ExpenseCategoryDbDao getExpenseCategoryDbDao() {
+        return expenseCategoryDbDao;
+    }
+
+    public IncomeCategoryDbDao getIncomeCategoryDbDao() {
+        return incomeCategoryDbDao;
+    }
 }
