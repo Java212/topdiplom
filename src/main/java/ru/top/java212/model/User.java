@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 
-public class User implements UserDetails {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +22,11 @@ public class User implements UserDetails {
 
     private String userName;
     private String password;
-    private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private MyOrders myOrders;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -47,18 +42,15 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getUserName();
+        return this.getUserName();
     }
     public User(){}
 
 
-    public User(Integer id, String userName, String password, String email, Address address) {
-        this.id = id;
+    public User(String userName, String password) {
+
         this.userName = userName;
         this.password = password;
-        this.email = email;
-        this.address = address;
-
     }
 
     public void setUserName(String userName) {
@@ -69,9 +61,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
+
 
     public Integer getId() {
         return id;
@@ -81,21 +71,13 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override

@@ -1,40 +1,34 @@
 package ru.top.java212.dto;
 
 
+import ru.top.java212.model.Role;
+import ru.top.java212.model.UserInfo;
+
 public class UserDto {
-    private String userName;
-    private String password;
-    private String passwordRepeat;
+    private UserInfo userInfo;
+    private Role role;
+
 
     public UserDto(){}
 
-    public UserDto(String userName, String password, String passwordRepeat) {
-        this.userName = userName;
-        this.password = password;
-        this.passwordRepeat = passwordRepeat;
+    public UserDto(UserInfo userInfo, Role role) {
+        this.userInfo = userInfo;
+        this.role = role;
     }
 
-    public String getUserName() {
-        return userName;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
-    public String getPassword() {
-        return password;
+    public Role getRole() {
+        return role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPasswordRepeat() {
-        return passwordRepeat;
-    }
-
-    public void setPasswordRepeat(String passwordRepeat) {
-        this.passwordRepeat = passwordRepeat;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

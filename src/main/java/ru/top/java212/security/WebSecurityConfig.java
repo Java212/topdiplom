@@ -3,17 +3,15 @@ package ru.top.java212.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
-import ru.top.java212.model.Role;
+import ru.top.java212.service.UserService;
 
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +21,10 @@ public class WebSecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    public WebSecurityConfig(UserService userService) {
+        this.userDetailsService = userService;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.userDetailsService(userDetailsService)
@@ -30,24 +32,22 @@ public class WebSecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/slick/**").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/categories/**").permitAll()
-                        .requestMatchers( HttpMethod.POST, "/users/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/sale", "/myOrder").hasRole(Role.ROLE_TENANT)
-                        .requestMatchers("/sale", "/myOrder").hasRole(Role.ROLE_OWNER)
+                        .requestMatchers("/registration").permitAll()
                         .anyRequest().authenticated()
                 )
-                
+
                 .formLogin(formLogin -> formLogin
                         .loginPage("/?authModal")
-                        .permitAll()
-                        .successForwardUrl("/myOrder")
-                        .failureForwardUrl("/login_error")
+                        .loginProcessingUrl("/login").permitAll()
+                        .successForwardUrl("/personal-account")
+
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .permitAll()
-                        .logoutSuccessUrl("/?authModal")
+                        .logoutSuccessUrl("/")
                 );
-        
+
         return http.build();
 
     }

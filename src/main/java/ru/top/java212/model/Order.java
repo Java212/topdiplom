@@ -15,16 +15,13 @@ public class Order {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_info_id")
+    private UserInfo userInfo;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "my_order_id")
-    MyOrders myOrders;
 
     @CreationTimestamp
     private LocalDate startDate;
@@ -34,9 +31,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer id, User user, Product product, LocalDate startDate, LocalDate endDate) {
+    public Order(Integer id, UserInfo userInfo, Product product, LocalDate startDate, LocalDate endDate) {
         this.id = id;
-        this.user = user;
+        this.userInfo = userInfo;
         this.product = product;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -50,12 +47,12 @@ public class Order {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserInfo getUser() {
+        return userInfo;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.userInfo = userInfo;
     }
 
     public Product getProduct() {

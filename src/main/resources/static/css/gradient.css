@@ -1,4 +1,4 @@
-#categories{
+.gradient{
     padding: 100px;
     background: linear-gradient(180deg, #bde0fd 0%, #81d3f6 0%, #5b5b96 100%);
 }

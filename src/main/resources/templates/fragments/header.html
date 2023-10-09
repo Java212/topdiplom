@@ -7,7 +7,7 @@
 <body th:fragment="header">
 <nav class="navbar navbar-expand-lg bg-info" >
     <div class="container-fluid" >
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" th:href="@{/}">
             <img src="/img/logo.png" alt="" style="height: 40px">
             TOOLRENT
         </a>
@@ -25,12 +25,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                 <li class="nav-item" >
-                    <a class="nav-link"  th:classappend="${module == 'home' ? 'active' : ''}" aria-current="page" href="/"
+                    <a class="nav-link"  th:classappend="${module == 'home' ? 'active' : ''}" aria-current="page" th:href="@{/}"
                     >Главная</a
                     >
                 </li>
                 <li class="nav-item" >
-                    <a class="nav-link " th:classappend="${module == 'sale' ? 'active' : ''}" href="/sale">Акции</a>
+                    <a class="nav-link " th:classappend="${module == 'sale' ? 'active' : ''}" th:href="@{/sale}">Акции</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -44,14 +44,14 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="/categories/batteryTool"
+                            <a class="dropdown-item" th:href="@{/categories/batteryTool}"
                             >Аккумуляторный инструмент</a
                             >
                         </li>
-                        <li><a class="dropdown-item" href="/categories/punchers">Перфораторы</a></li>
+                        <li><a class="dropdown-item" th:href="@{/categories/punchers}">Перфораторы</a></li>
 
                         <li>
-                            <a class="dropdown-item" href="/categories/uhm">УШМ</a>
+                            <a class="dropdown-item" th:href="@{/categories/uhm}">УШМ</a>
                         </li>
                     </ul>
                 </li>
@@ -71,11 +71,12 @@
                 <li class="nav-item">
 
                         <img src="/img/user.png" alt="">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal">
+                   <span th:if="${userName}" th:text="${userName}">...</span>
+                    <a th:if="${userName}" th:href="@{/logout}" class="btn btn-primary">Выйти</a>
+                        <button type="button" id="authModalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal">
                             Войти
                         </button>
-                    <div th:if="${error}"> <div th:text="${error}"> Ошибка </div></div>
-                    <div th:if="${message}"> <div th:text="${error}"> Регистрация прошла успешно </div></div>
+
 
                 </li>
             </ul>
@@ -94,7 +95,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/?authModal}" method="post">
+                <form th:action="@{/login}" method="post">
                     <div class="mb-3">
                         <label for="inputLogin" class="form-label">Имя пользователя</label>
                         <input type="text" name="username" class="form-control" id="inputLogin" >
@@ -104,7 +105,8 @@
                         <label for="authInputPassword" class="form-label">Пароль</label>
                         <input type="password" name="password" class="form-control" id="authInputPassword">
                     </div>
-                    <input type="submit" value="Войти"/>
+
+                    <input class="btn btn-primary" type="submit" value="Войти"/>
 
                 </form>
             </div>
@@ -119,70 +121,79 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="registrationModalLabel">Регистрация</h1>
+                <h1 class="modal-title fs-5" id="registrationModalLabel">Регистрация нового пользователя</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" th:action="@{/users/registration}" method="post" >
+                <form class="row g-3 p-4"  method="post"  th:action="@{/registration}"  th:if="${userDto}" th:object="${userDto}" >
+
                     <div class="col-md-6">
-                        <label for="inputName" class="form-label">Имя</label>
-                        <input type="text"  class="form-control" id="inputName">
+                        <label for="login" class="form-label">Login</label>
+                        <input type="text" th:field="*{userInfo.user.userName}" class="form-control" id="login">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputEmail" class="form-label">Эл. адрес</label>
-                        <input type="email" class="form-control" id="inputEmail">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputPassword" class="form-label">Пароль</label>
-                        <input type="password"  class="form-control" id="inputPassword">
+                        <label for="password" class="form-label">Пароль</label>
+                        <input type="password" th:field="*{userInfo.user.password}" class="form-control" id="password">
                     </div>
                     <div class="col-md-6">
                         <label for="inputPasswordRepeat" class="form-label">Повторите пароль</label>
-                        <input type="password" class="form-control" id="inputPasswordRepeat">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddressStreet" class="form-label">Улица</label>
-                        <input type="text"  class="form-control" id="inputAddressStreet" placeholder="Проспект Ленина">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddressHouse" class="form-label">Номер дома</label>
-                        <input type="text"  class="form-control" id="inputAddressHouse" placeholder="Дом">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddressApartment" class="form-label">Номер квартиры</label>
-                        <input type="text"  class="form-control" id="inputAddressApartment" placeholder="Квартира">
+                        <input type="password"  class="form-control" id="inputPasswordRepeat">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputRole" class="form-label">Вы арендатор?</label>
-                        <select id="inputRole"  class="form-select">
-                            <option selected>Выберите роль</option>
-                            <option>Владелец</option>
-                            <option>Арендатор</option>
+                        <label for="userName" class="form-label">Имя</label>
+                        <input type="text" th:field="*{userInfo.name}"  class="form-control" id="userName">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Эл. адрес</label>
+                        <input type="email" th:field="*{userInfo.email}" class="form-control" id="email">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phoneNumber" class="form-label">Номер телефона</label>
+                        <input type="text" th:field="*{userInfo.phoneNumber}" class="form-control" id="phoneNumber">
+                    </div>
+
+
+                    <div class="col-6">
+                        <label for="street" class="form-label">Улица</label>
+                        <input type="text" th:field="*{userInfo.address.street}" class="form-control" id="street" placeholder="Проспект Ленина">
+                    </div>
+                    <div class="col-4">
+                        <label for="numberOfHouse" class="form-label">Номер дома</label>
+                        <input type="text" th:field="*{userInfo.address.numberOfHouse}"  class="form-control" id="numberOfHouse" placeholder="Дом">
+                    </div>
+                    <div class="col-4">
+                        <label for="apartmentNumber" class="form-label">Номер квартиры</label>
+                        <input type="text"  th:field="*{userInfo.address.apartmentNumber}" class="form-control" id="apartmentNumber" placeholder="Квартира">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="role" class="form-label">Вы арендатор?</label>
+                        <select id="role" th:field="*{role.name}"  class="form-select">
+                            <option value="" selected>Выберите роль</option>
+                            <option value="OWNER">Владелец</option>
+                            <option value="TENANT">Арендатор</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
-                        <label for="inputDistrict" class="form-label">Район</label>
-                        <select id="inputDistrict"  class="form-select">
-                            <option selected>Выберите район</option>
-                            <option>САО</option>
-                            <option>ВАО</option>
-                            <option>ЮАО</option>
-                            <option>ЗАО</option>
+                    <div class="col-md-6">
+                        <label for="district" class="form-label">Район</label>
+                        <select    id="district"  th:field="*{userInfo.address.district}"   class="form-select">
+                            <option value="" selected>Выберите район</option>
+                            <option value="САО">САО</option>
+                            <option value="ВАО">ВАО</option>
+                            <option value="ЮАО">ЮАО</option>
+                            <option value="ЗАО">ЗАО</option>
                         </select>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" id="buttonRegistration" class="col-md-6 btn btn-primary ">Зарегистрироваться</button>
                     </div>
 
 
                 </form>
             </div>
-            <div class="modal-footer">
-                <div>
-                    <button type="submit" id="buttonRegistration" class="btn btn-primary">Зарегистрироваться</button>
-                </div>
-                <button class="btn btn-primary" data-bs-target="#authModal" data-bs-toggle="modal">Авторизоваться</button>
-            </div>
         </div>
     </div>
 </div>
+
 
 </body>
 <script

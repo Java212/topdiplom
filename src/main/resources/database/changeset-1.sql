@@ -18,9 +18,9 @@ DROP TABLE IF EXISTS public.categories;
 
 DROP SEQUENCE IF EXISTS public.categories_id_seq;
 
-DROP TABLE IF EXISTS public.my_orders;
+DROP TABLE IF EXISTS public.users_info;
 
-DROP SEQUENCE IF EXISTS public.my_orders_id_seq;
+DROP SEQUENCE IF EXISTS public.users_info_id_seq;
 
 DROP TABLE IF EXISTS public.orders;
 
@@ -58,8 +58,6 @@ CREATE TABLE IF NOT EXISTS public.users
     user_id integer NOT NULL DEFAULT nextval('users_id_seq'),
     user_name varchar NOT NULL,
     password varchar NOT NULL DEFAULT 'password',
-    email varchar NOT NULL,
-    address_id integer,
     CONSTRAINT users_pkey PRIMARY KEY (user_id)
 );
 
@@ -107,15 +105,19 @@ CREATE TABLE IF NOT EXISTS public.categories
 );
 
 
-CREATE SEQUENCE IF NOT EXISTS public.my_orders_id_seq
+CREATE SEQUENCE IF NOT EXISTS public.users_info_id_seq
     INCREMENT 1
     START WITH 1;
 
-CREATE TABLE IF NOT EXISTS public.my_orders
+CREATE TABLE IF NOT EXISTS public.users_info
 (
-     my_order_id INTEGER NOT NULL DEFAULT nextval('my_orders_id_seq'),
+     user_info_id INTEGER NOT NULL DEFAULT nextval('users_info_id_seq'),
+     name varchar,
+     email varchar,
+     phone_number varchar,
      user_id INTEGER NOT NULL,
-     CONSTRAINT my_orders_pkey PRIMARY KEY (my_order_id)
+     address_id INTEGER,
+     CONSTRAINT users_info_pkey PRIMARY KEY (user_info_id)
 
 );
 
@@ -145,11 +147,10 @@ CREATE SEQUENCE IF NOT EXISTS public.orders_id_seq
 CREATE TABLE IF NOT EXISTS public.orders
 (
     order_id INTEGER NOT NULL DEFAULT nextval('orders_id_seq'),
-    user_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
-    my_order_id INTEGER,
-    start_date TIMESTAMP,
-    end_date TIMESTAMP,
+    user_info_id INTEGER NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id)
 
 );
@@ -158,28 +159,25 @@ ALTER TABLE IF EXISTS products
     ADD CONSTRAINT products_fk_categories
         FOREIGN KEY (category_id) REFERENCES public.categories(category_id);
 
-
-
-ALTER TABLE IF EXISTS users
-    ADD CONSTRAINT users_fk_address
-        FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
-
-ALTER TABLE IF EXISTS my_orders
-    ADD CONSTRAINT my_orders_fk_users
-        FOREIGN KEY (user_id) REFERENCES public.users(user_id);
-
-
 ALTER TABLE IF EXISTS products
-    ADD CONSTRAINT products_fk_address
+         ADD CONSTRAINT products_fk_address
+                FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
+
+
+
+ALTER TABLE IF EXISTS users_info
+    ADD CONSTRAINT users_info_fk_users
+        FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+ALTER TABLE IF EXISTS users_info
+    ADD CONSTRAINT users_info_fk_address
         FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
 
-ALTER TABLE IF EXISTS orders
-    ADD CONSTRAINT orders_fk_my_orders
-        FOREIGN KEY (my_order_id) REFERENCES public.my_orders(my_order_id);
+
 
 ALTER TABLE IF EXISTS orders
-    ADD CONSTRAINT orders_fk_users
-        FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+    ADD CONSTRAINT orders_fk_users_info
+        FOREIGN KEY (user_info_id) REFERENCES public.users_info(user_info_id);
 
 ALTER TABLE IF EXISTS orders
     ADD CONSTRAINT orders_fk_products

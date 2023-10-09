@@ -25,7 +25,7 @@
     <div class="slider-header">НОВЫЕ ПРЕДЛОЖЕНИЯ</div>
     <div class="slider" >
         <div class="slider-item"  th:each="product : ${products}">
-            <a href="#">
+            <a th:class="${product.id}" href="#">
                 <div class="card">
                     <p class="card-title" th:text="${product.title}">TITLE</p>
                     <img th:src="${product.linkToTheImage}"
@@ -63,7 +63,8 @@
         crossorigin="anonymous"
 ></script>
 <script type="text/javascript" src="./slick/slick.min.js"></script>
-<script type="text/javascript" src="/js/header.js"></script>
+
 <script src="./js/slider.js"></script>
+
 </body>
 </html>
