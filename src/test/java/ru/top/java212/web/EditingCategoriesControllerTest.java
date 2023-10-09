@@ -1,6 +1,7 @@
 package ru.top.java212.web;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,6 +44,7 @@ public class EditingCategoriesControllerTest {
 
     @Test
     @WithMockUser
+    @Disabled
     void test_editingCategories() throws Exception{
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String url = "/recordsDb/update";

@@ -25,12 +25,12 @@ public interface IncomeDbDao extends CrudRepository<Income, Integer> {
     List<TotalIncome> getIncomesUserByCategory(int userId, LocalDate startDate, LocalDate endDate);
 
       @Query("select sum(incomeAmount) from Income where incomeCategory.sourceIncomeCategory =?1")
-        int getAllAmountForTheDeletedSource(String removeIncomeSource);
+        Long getAllAmountForTheDeletedSource(String removeIncomeSource);
 
     @Query("select count(*) from Income where incomeCategory.sourceIncomeCategory !=?1")
     int getCountRecordsInDbWithoutRemoveSource(String removeIncomeSource);
 
     @Modifying
     @Query("update Income set incomeAmount = (incomeAmount + ?1) where  incomeAmount >0")
-    void transferringTheAmountOfIncomesFromTheDeletedSource(int amountToAdd);
+    void transferringTheAmountOfIncomesFromTheDeletedSource(long amountToAdd);
 }

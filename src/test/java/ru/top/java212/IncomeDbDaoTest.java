@@ -56,7 +56,7 @@ public class IncomeDbDaoTest {
     void test_getAllAmountForTheDeletedSource(){
         String removeIncomeSource = "премия";
         int thereMustBe = 150750;
-        int amountFromDb = incomeDbDao.getAllAmountForTheDeletedSource(removeIncomeSource);
+        Long amountFromDb = incomeDbDao.getAllAmountForTheDeletedSource(removeIncomeSource);
         Assertions.assertEquals(thereMustBe, amountFromDb);
     }
     @Test
@@ -71,7 +71,7 @@ public class IncomeDbDaoTest {
     @Disabled
     void test_transferringTheAmountOfIncomesFromTheDeletedSource(){
         String nameRemoveCategory = "премия";
-        int amountToAdd = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
+        Long amountToAdd = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
         incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
         incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAdd);
 

@@ -28,7 +28,7 @@ public interface ExpenseDbDao extends CrudRepository<Expense, Integer> {
     List<TotalExpense> getExpensesFamilyByCategory(LocalDate initialDate, LocalDate endData);
 
     @Query("select sum(expenseAmount) from Expense where expenseCategory.nameExpenseCategory=?1")
-    int getAllAmountForTheDeletedCategory(String removeExpenseCategory);
+    Long getAllAmountForTheDeletedCategory(String removeExpenseCategory);
 
     @Query("select count(*) from Expense where expenseCategory.nameExpenseCategory !=?1")
     int getCountRecordsInDbWithoutRemoveCategory(String removeExpenseCategory);

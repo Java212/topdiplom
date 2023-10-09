@@ -46,12 +46,12 @@ public class RedactRecordsInDb implements EditingRecordsInDb {
         int numberOfDeletedRecordsInDb = 0;
 
         if ( whatRemove.equals("расходы")){
-            int amountToAddToEachExpenseInTheDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory)/expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
+            Long amountToAddToEachExpenseInTheDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory)/expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
             numberOfDeletedRecordsInDb = expenseCategoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
             expenseDbDao.transferringTheAmountOfExpensesFromTheDeletedCategory(amountToAddToEachExpenseInTheDb);
         }
         if ( whatRemove.equals("доходы")){
-            int amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
+            Long amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
             numberOfDeletedRecordsInDb = incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
             incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAddToEachIncomeInTheDb);
         }
