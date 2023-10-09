@@ -19,12 +19,12 @@
 </section>
 <section class="center">
     <div class="userBox">
-        <table th:each="tool:${tools}">
+        <table th:each="order:${orders}">
             <td>
-                <a th:href="@{/renter/renterView/{toolId}(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
+                <label th:text="${order.getId()}"></label>
             </td>
             <td>
-                <label th:text="${tool.getPrice()}">  </label>
+                <label th:text="${order.getStartDate()}"></label>
             </td>
         </table>
         <button><a  th:href="@{/renter/toolSearchView}">Арендовать</a></button>

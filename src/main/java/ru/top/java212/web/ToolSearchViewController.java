@@ -1,15 +1,20 @@
 package ru.top.java212.web;
 
+import ch.qos.logback.core.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.model.Person;
+import ru.top.java212.model.Tool;
 import ru.top.java212.model.User;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.service.tools.ToolService;
 import ru.top.java212.utils.PriceUtils;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/renter/toolSearchView")
@@ -38,7 +43,7 @@ public class ToolSearchViewController {
     }
 
     @PostMapping
-    public ModelAndView findTool(@RequestParam(value =  "name") String name,
+    public ModelAndView findTool(ModelAndView model, @RequestParam(value =  "name") String name,
                                  @RequestParam(value = "priceMin") String priceMin,
                                  @RequestParam(value = "priceMax") String priceMax){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -48,13 +53,16 @@ public class ToolSearchViewController {
         mv.addObject("personName",personUser.getName());
         Double priceMinDouble = PriceUtils.getDoubleFromString(priceMin,0.0);
         Double priceMaxDouble = PriceUtils.getDoubleFromString(priceMax,1000000.0);
-
-//        if(!name.equals("")){
-//            mv.addObject("tools", toolService.findByName(name));
-//        }else{
-//            mv.addObject("tools", toolService.findAll());
-//        }
-        mv.addObject("tools",toolService.findByPriceBetween(priceMinDouble,priceMaxDouble));
+        List<Tool> toolList = new LinkedList<>();
+        if(!priceMax.equals("") || !priceMin.equals("")){
+            toolList = toolService.findByPriceBetween(priceMinDouble,priceMaxDouble);
+        }else{
+            toolList = toolService.findAll();
+        }
+        if(!name.equals("")){
+           toolList = toolService.findByName(toolList,name);
+        }
+        mv.addObject("tools",toolList);
         return mv;
     }
 }

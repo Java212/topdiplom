@@ -13,7 +13,7 @@ public interface ToolService {
     void deleteById(int toolId);
     List<Tool> findAll();
     List<Tool> findByName(String name);
-    public List<Tool> finByName(List<Tool> tools,String name);
+    public List<Tool> findByName(List<Tool> tools,String name);
     List<Tool> findByPriceBetween(Double priceMin, Double priceMax);
 
 }

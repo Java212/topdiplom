@@ -16,8 +16,23 @@
 <section class="center">
     <div class="registration">
 
-
-
+        <form th:action="@{/renter/toolCard}" method="post"  th:object="${order}">
+            <div>
+                <label>Наименование: </label>
+                <label th:text="${tool.getName()}"></label>
+            </div>
+            <div>
+                <label>Цена в сутки: </label>
+                <label th:text="${tool.getPrice()}"></label>
+                <label> рублей</label>
+            </div>
+            <div>
+                <input type="hidden" th:value="${tool.getId()}" name="toolId"/>
+                <input type="date"   th:field="*{startDate}"/>
+                <input type="date"   th:field="*{stopDate}"/>
+            </div>
+            <input id="submitButton" type="submit"  value="Снять"/>
+        </form>
     </div>
 </section>
 </body>

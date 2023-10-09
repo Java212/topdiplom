@@ -39,12 +39,16 @@
         </form>
         <table th:each="tool:${tools}">
             <td>
-                <a th:href="@{/renter/renterView/{toolId}(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
+                <a th:href="@{/renter/toolCard(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
             </td>
             <td>
                 <label th:text="${tool.getPrice()}">  </label>
             </td>
         </table>
+        <div>
+            <a th:href="@{/renter/toolCard}">Перейти</a>
+        </div>
+
     </div>
 </section>
 </body>

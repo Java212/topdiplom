@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.model.Person;
 import ru.top.java212.model.User;
+import ru.top.java212.repository.OrderRepository;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 
@@ -24,12 +25,12 @@ import java.util.UUID;
 public class RenterViewController {
 
     private final PersonRepository personRepository;
-    private final ToolRepository toolRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    RenterViewController(PersonRepository personRepository,ToolRepository toolRepository){
+    RenterViewController(PersonRepository personRepository,OrderRepository orderRepository){
         this.personRepository = personRepository;
-        this.toolRepository = toolRepository;
+        this.orderRepository = orderRepository;
     }
 
     @GetMapping
@@ -39,14 +40,7 @@ public class RenterViewController {
         Person personUser = personRepository.findByUser(user);
         ModelAndView mv = new ModelAndView("renter/renterView");
         mv.addObject("personName",personUser.getName());
-        mv.addObject("tools", toolRepository.findAll());
+        mv.addObject("orders", orderRepository.findByPerson(personUser));
         return  mv;
-    }
-
-    @GetMapping("{toolId}")
-    public ModelAndView tool(@PathVariable int toolId){
-          ModelAndView mv = new ModelAndView("renter/toolCard");
-          mv.addObject("tool",toolRepository.getReferenceById(toolId));
-        return mv;
     }
 }

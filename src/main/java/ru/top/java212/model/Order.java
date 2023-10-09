@@ -28,7 +28,7 @@ public class Order {
     @Column(name = "stop_date")
     private LocalDate stopDate;
 
-    Order(Person person, Tool tool, LocalDate startDate, LocalDate stopDate ){
+    public Order(Person person, Tool tool, LocalDate startDate, LocalDate stopDate){
         this.person = person;
         this.tool = tool;
         this.startDate = startDate;
