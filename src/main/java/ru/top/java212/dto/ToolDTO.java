@@ -2,6 +2,7 @@ package ru.top.java212.dto;
 
 public class ToolDTO {
     private String name;
+    private String specifications;
     private String district;
     private String street;
     private String price;
@@ -13,6 +14,14 @@ public class ToolDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(String specifications) {
+        this.specifications = specifications;
     }
 
     public String getDistrict() {

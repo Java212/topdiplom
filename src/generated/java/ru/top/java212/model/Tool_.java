@@ -15,7 +15,7 @@ public abstract class Tool_ {
 	public static volatile SingularAttribute<Tool, String> name;
 	public static volatile ListAttribute<Tool, Order> orders;
 	public static volatile SingularAttribute<Tool, Integer> id;
-	public static volatile SingularAttribute<Tool, Boolean> inRent;
+	public static volatile SingularAttribute<Tool, String> specifications;
 
 	public static final String ADDRESS = "address";
 	public static final String PERSON = "person";
@@ -23,7 +23,7 @@ public abstract class Tool_ {
 	public static final String NAME = "name";
 	public static final String ORDERS = "orders";
 	public static final String ID = "id";
-	public static final String IN_RENT = "inRent";
+	public static final String SPECIFICATIONS = "specifications";
 
 }
 

@@ -13,6 +13,7 @@ import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.service.tools.ToolService;
 import ru.top.java212.utils.PriceUtils;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,9 +44,12 @@ public class ToolSearchViewController {
     }
 
     @PostMapping
-    public ModelAndView findTool(ModelAndView model, @RequestParam(value =  "name") String name,
+    public ModelAndView findTool(ModelAndView model,
+                                 @RequestParam(value =  "name") String name,
                                  @RequestParam(value = "priceMin") String priceMin,
-                                 @RequestParam(value = "priceMax") String priceMax){
+                                 @RequestParam(value = "priceMax") String priceMax,
+                                 @RequestParam(value = "startDate")LocalDate startDate,
+                                 @RequestParam(value = "stopDate") LocalDate stopDate){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = ( principal instanceof User)? ((User) principal):new User();
         Person personUser = personRepository.findByUser(user);
@@ -62,6 +66,7 @@ public class ToolSearchViewController {
         if(!name.equals("")){
            toolList = toolService.findByName(toolList,name);
         }
+
         mv.addObject("tools",toolList);
         return mv;
     }

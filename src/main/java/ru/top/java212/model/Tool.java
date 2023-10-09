@@ -16,6 +16,7 @@ public class Tool {
     @JoinColumn(name = "person_id")
     private Person person;
     private String name;
+    private String specifications;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinColumn(name = "address_id",nullable = false)
@@ -26,17 +27,15 @@ public class Tool {
     @OneToMany(mappedBy = "tool")
     private List<Order> orders;
 
-    @Column(name = "in_rent")
-    private boolean inRent;
 
     Tool(){
     }
-    public Tool(String name, Person person, Address address,double price){
+    public Tool(String name, String specifications, Person person, Address address,double price){
         this.name = name;
+        this.specifications = specifications;
         this.person = person;
         this.address = address;
         this.price = price;
-        this.inRent = false;
     }
 
     public int getId() {
@@ -71,11 +70,4 @@ public class Tool {
         this.price = price;
     }
 
-    public boolean isInRent() {
-        return inRent;
-    }
-
-    public void setInRent(boolean inRent) {
-        this.inRent = inRent;
-    }
 }

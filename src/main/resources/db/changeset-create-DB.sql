@@ -110,10 +110,10 @@ CREATE TABLE IF NOT EXISTS public.tools
 (
     tool_id integer NOT NULL DEFAULT nextval('tools_id_seq'),
     name varchar NOT NULL,
+	specifications varchar,
 	address_id integer NOT NULL,
 	person_id integer NOT NULL,
     price real NOT NULL DEFAULT 0.0,
-	in_rent boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT tools_pkey PRIMARY KEY (tool_id),
 	 CONSTRAINT tools_address_fkey
           FOREIGN KEY(address_id)
@@ -137,6 +137,8 @@ CREATE TABLE IF NOT EXISTS public.orders
 	tool_id integer NOT NULL,
 	start_date date NOT NULL,
     stop_date date NOT NULL,
+	reversing boolean NOT NULL DEFAULT FALSE,
+	completed boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id),
 	 CONSTRAINT orders_persons_fkey
           FOREIGN KEY(person_id)

@@ -42,7 +42,7 @@ public class ToolServiceImpl implements ToolService{
         }
         Person thisPerson = personRepository.findByUser(user);
 
-        Tool newTool = new Tool(tool.getName(),thisPerson,newAddress,doublePrice);
+        Tool newTool = new Tool(tool.getName(),tool.getSpecifications(),thisPerson,newAddress,doublePrice);
         if(toolRepository.save(newTool) == null) {
             return false;
         }

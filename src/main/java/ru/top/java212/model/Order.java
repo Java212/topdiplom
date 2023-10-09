@@ -28,6 +28,9 @@ public class Order {
     @Column(name = "stop_date")
     private LocalDate stopDate;
 
+    private Boolean reversing;
+    private Boolean completed;
+
     public Order(Person person, Tool tool, LocalDate startDate, LocalDate stopDate){
         this.person = person;
         this.tool = tool;
@@ -60,5 +63,21 @@ public class Order {
 
     public void setStopDate(LocalDate stopDate) {
         this.stopDate = stopDate;
+    }
+
+    public Boolean getReversing() {
+        return reversing;
+    }
+
+    public void setReversing(Boolean reversing) {
+        this.reversing = reversing;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }
