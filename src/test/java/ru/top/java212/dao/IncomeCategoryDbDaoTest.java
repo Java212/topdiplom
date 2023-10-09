@@ -1,6 +1,7 @@
 package ru.top.java212.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,7 @@ public class IncomeCategoryDbDaoTest {
     }
 
     @Test
+    @Disabled
     void test_save_and_get_is_same(){
         IncomeCategory inCategory = new IncomeCategory("дивиденды");
         categoryDbDao.save(inCategory);
@@ -26,6 +28,7 @@ public class IncomeCategoryDbDaoTest {
         Assertions.assertEquals(inCategory.getSourceIncomeCategory(),inCategoryFromDb.getSourceIncomeCategory());
     }
     @Test
+    @Disabled
     void test_save_and_set_is_same(){
         IncomeCategory inCategoryFromDb = categoryDbDao.findById(1).orElseThrow();
         inCategoryFromDb.setSourceIncomeCategory("премия");

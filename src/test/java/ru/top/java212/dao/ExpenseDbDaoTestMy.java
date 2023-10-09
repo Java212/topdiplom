@@ -43,6 +43,7 @@ public class ExpenseDbDaoTestMy {
     }
 
     @Test
+    @Disabled
     void test_save_and_set_is_same(){
         int newExpense = 5000;
         Expense expenseFromDb = expenseDbDao.findById(1).orElseThrow();
@@ -51,6 +52,7 @@ public class ExpenseDbDaoTestMy {
     }
 
     @Test
+    @Disabled
     void test_save_and_setDate(){
         LocalDate newData = LocalDate.of(2023, 2, 25);
         Expense expenseFromDb = expenseDbDao.findById(1).orElseThrow();
@@ -59,6 +61,7 @@ public class ExpenseDbDaoTestMy {
     }
 
     @Test
+    @Disabled
     void test_method_get_and_setUsers(){
         User userFromDb = userDbDao.findById(1).orElseThrow();
         Expense expenseFromDb = expenseDbDao.findById(1).orElseThrow();

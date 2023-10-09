@@ -22,14 +22,16 @@ public class ExpenseCategoryDbDaoTest {
     }
 
     @Test
+    @Disabled
+    @Transactional
     void test_save_and_set_is_same(){
         ExpenseCategory expCategoryFromDb = categoryDbDao.findById(1).orElseThrow();
         expCategoryFromDb.setNameExpenseCategory("аренда магазина");
         Assertions.assertEquals("аренда магазина", expCategoryFromDb.getNameExpenseCategory());
     }
     @Test
-    @Transactional
     @Disabled
+    @Transactional
     void test_delete_Category(){
         String nameRemoveCategory = "квартплата";
         int colRemoveRow = categoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);

@@ -24,9 +24,8 @@
 <div class="for-user" sec:authorize="hasAuthority('USER')">
     <p> У Вас нет прав системного администратора для удаления записей в БД </p>
 </div>
-<div sec:authorize="hasAuthority('ADMIN')">
-<h2>Выберите из списка запись, которую нужно удалить</h2>
    <section class="fields" sec:authorize="hasAuthority('ADMIN')">
+       <h2>Выберите из списка запись, которую нужно удалить</h2>
        <form class="expense" th:action="@{/recordsDb/remove}" method="post">
             <div th:each="category : ${allCategoriesExpenses}">
                 <input th:name="nameRemoveCategory"  th:value="${category.nameExpenseCategory}" type="checkbox">

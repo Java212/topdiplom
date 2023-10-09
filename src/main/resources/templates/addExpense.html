@@ -34,6 +34,7 @@
   <div>
     <label class="form-label">Количество </label>
     <input name="description" th:field="*{amount}"  type="text" />
+    <span th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">error</span>
   </div>
 
   <button type="submit"> Добавить </button>

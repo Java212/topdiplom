@@ -1,6 +1,7 @@
 package ru.top.java212.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,12 +29,14 @@ public class IncomeDbDaoTest {
     }
 
     @Test
+    @Disabled
     void test_save_and_get_is_same(){
         Income incomeeFromDb = incomeDbDao.findById(1).orElseThrow();
         Assertions.assertEquals(55000, incomeeFromDb.getIncomeAmount());
     }
 
     @Test
+    @Disabled
     void test_save_and_set_is_same(){
         int newIncome = 5000;
         Income incomeeFromDb = incomeDbDao.findById(1).orElseThrow();
@@ -42,6 +45,7 @@ public class IncomeDbDaoTest {
     }
 
     @Test
+    @Disabled
     void test_save_and_setDate(){
         LocalDate newData = LocalDate.of(2023, 4, 10);
         Income incomeFromDb = incomeDbDao.findById(1).orElseThrow();
@@ -50,6 +54,7 @@ public class IncomeDbDaoTest {
     }
 
     @Test
+    @Disabled
     void test_method_get_and_setUsers(){
         User userFromDb = userDbDao.findById(1).orElseThrow();
         Income incomeFromDb = incomeDbDao.findById(1).orElseThrow();

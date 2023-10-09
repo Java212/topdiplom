@@ -17,6 +17,7 @@ import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 
 import java.math.BigDecimal;
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,17 +46,21 @@ public class AddIncomeController {
 
     @PostMapping("/incomes/add")
     @PreAuthorize("authenticated")
-    public ModelAndView addIncome(@ModelAttribute IncomeDto newIncome){
+    public ModelAndView addIncome(@ModelAttribute IncomeDto newIncome) throws BindException {
         ModelAndView mv = new ModelAndView("addIncome");
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
-        IncomeCategory defaultSource= incomeCategoryDao.findBySourceIncomeCategory(newIncome.sourceName());
+        if ( newIncome.amount() < 0 ){
+            throw new BindException();
+        } else {
+            IncomeCategory defaultSource= incomeCategoryDao.findBySourceIncomeCategory(newIncome.sourceName());
 
-        Income IncomeToBeSaved = new Income(user, defaultSource, newIncome.amount());
-        incomeDbDao.save(IncomeToBeSaved);
-        mv.addObject("newIncome", new IncomeDto("default source", 0));
-        return mv;
+            Income IncomeToBeSaved = new Income(user, defaultSource, newIncome.amount());
+            incomeDbDao.save(IncomeToBeSaved);
+            mv.addObject("newIncome", new IncomeDto("default source", 0));
+            return mv;
+        }
     }
 }

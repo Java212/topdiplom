@@ -1,6 +1,7 @@
 package ru.top.java212.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.LocalDate;
 

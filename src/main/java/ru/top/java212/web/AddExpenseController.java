@@ -1,9 +1,11 @@
 package ru.top.java212.web;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,17 +49,22 @@ public class AddExpenseController {
 
     @PostMapping("/expenses/add")
     @PreAuthorize("authenticated")
-    public ModelAndView addExpense(@ModelAttribute  ExpenseDto newExpense){
+    public ModelAndView addExpense(@Valid @ModelAttribute  ExpenseDto newExpense, BindingResult bindingResult){
         ModelAndView mv = new ModelAndView("addExpense");
 
                 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
-        ExpenseCategory defaultCategory = expenseCategoryDbDao.findByNameExpenseCategory(newExpense.categoryName());
+        if ( bindingResult.hasErrors()){
+            return  mv.addObject("newExpense", new ExpenseDto("default category",0));
+        } else {
 
-        Expense toBeSaved = new Expense(user, defaultCategory, newExpense.amount());
-        expenseDbDao.save(toBeSaved);
-        mv.addObject("newExpense", new ExpenseDto("default category",0));
-        return mv;
+            ExpenseCategory defaultCategory = expenseCategoryDbDao.findByNameExpenseCategory(newExpense.categoryName());
+
+            Expense toBeSaved = new Expense(user, defaultCategory, newExpense.amount());
+            expenseDbDao.save(toBeSaved);
+            mv.addObject("newExpense", new ExpenseDto("default category",0));
+            return mv;
+        }
     }
 }

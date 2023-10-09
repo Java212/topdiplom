@@ -29,7 +29,7 @@ public class ExpenseDbDaoTest {
 
     @Test
     void test_method_findByDateBetween(){
-        List<Integer> list = List.of(5000,3000, 23000, 300, 600, 1000,
+        List<Integer> list = List.of(  5000,3000, 23000, 300, 600, 1000,
                                                 3000, 5000, 10000, 100, 300, 600,
                                                 4000, 1000, 100, 400, 400,
                                                 6000, 8000, 36000, 4000, 400, 11000, 40000);

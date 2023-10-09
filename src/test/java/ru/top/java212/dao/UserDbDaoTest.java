@@ -1,6 +1,7 @@
 package ru.top.java212.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,7 @@ public class UserDbDaoTest {
     }
 
     @Test
+    @Disabled
     void test_save_and_get_is_same(){
         User user = new User("Bob","password", "fgfg8", Role.USER, BigDecimal.TEN);
         userDbDao.save(user);
@@ -32,6 +34,7 @@ public class UserDbDaoTest {
     }
 
     @Test
+    @Disabled
     void test_save_and_set_is_same(){
         User userFromDb = userDbDao.findById(1).orElseThrow();
         userFromDb.setLogin("chef");

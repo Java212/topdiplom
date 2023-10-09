@@ -47,6 +47,7 @@ public class RemoveCategoriesControllerTest {
     @WithMockUser
     void test_remove_records_from_Db() throws  Exception{
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
+
         String url = "/recordsDb/remove";
         String whatRemove = "расходы";
         String nameRemoveCategory = "коммунальные платежи";
