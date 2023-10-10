@@ -1,5 +1,6 @@
 body{
-background-color: aqua;
+background-image: url("../images/img-2.jpg");
+background-size: cover;
 }
 header{
 margin-top: 50px;
@@ -35,7 +36,7 @@ background-color: #3b9fd9;
 }
 .input-fields{
 margin-top: 50px;
-margin-left: 800px;
+margin-left: 500px;
 display: flex;
 flex-direction: column;
 float: left;
@@ -55,7 +56,7 @@ font-size: 16px;
 }
 .expense-output, .income-output{
 margin-top: 250px;
-margin-left: 800px;
+margin-left: 500px;
 font-size: 20px;
 font-width: 200;
 }

@@ -1,5 +1,6 @@
 body{
-    background-color: aqua;
+   background-image: url("../images/img-4.jpg");
+   background-size: cover;
 }
 header{
     margin-top: 50px;
@@ -35,7 +36,7 @@ header{
 }
 .input-data{
     margin-top: 50px;
-    margin-left: 800px;
+    margin-left: 600px;
     display: flex;
     flex-direction: column;
      float: left;
@@ -54,12 +55,13 @@ header{
     font-size: 16px;
 }
 .displaying-list-expenses, .displaying-list-incomes{
-    margin-top: 250px;
-    margin-left: 800px;
+    margin-top: 300px;
+    margin-left: 600px;
 }
 h2{
-    margin-top: 50px;
-    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-left: 0px;
     font-size: 26px;
     font-weight: 200;
 }
