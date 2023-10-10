@@ -26,17 +26,16 @@
 </div>
 <h2 sec:authorize="hasAuthority('ADMIN')">Выберите из списка запись, которую нужно удалить</h2>
    <section class="fields" sec:authorize="hasAuthority('ADMIN')">
-
        <form class="expense" th:action="@{/recordsDb/remove}" method="post">
             <div th:each="category : ${allCategoriesExpenses}">
-                <input th:name="nameRemoveCategory"  th:value="${category.nameExpenseCategory}" type="checkbox">
+                <input id="checkbox-exp"  th:name="nameRemoveCategory"  th:value="${category.nameExpenseCategory}" type="checkbox">
                 <label th:text="${category.nameExpenseCategory}"></label>
             </div>
            <button type="submit" th:name="whatRemove" th:value="расходы">Удалить</button>
        </form>
                <form class="income" th:action="@{/recordsDb/remove}" method="post">
                    <div th:each="source : ${allSourceIncomes}">
-                       <input th:name="nameRemoveCategory" th:value="${source.sourceIncomeCategory}" type="checkbox">
+                       <input id="checkbox-inc"  th:name="nameRemoveCategory" th:value="${source.sourceIncomeCategory}" type="checkbox">
                        <label th:text="${source.sourceIncomeCategory}"></label>
                    </div>
                    <button type="submit" th:name="whatRemove" th:value="доходы">Удалить</button>

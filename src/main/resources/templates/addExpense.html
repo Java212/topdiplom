@@ -31,12 +31,11 @@
               th:text="${category.nameExpenseCategory}">Имя категории</option>
     </select>
   </div>
-  <div>
+  <div class="input-amount">
     <label class="form-label">Количество </label>
-    <input name="description" th:field="*{amount}"  type="text" />
-    <span th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">error</span>
+    <input name="description" th:field="*{amount}"  type="text"/>
+    <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">error</div>
   </div>
-
   <button type="submit"> Добавить </button>
 </form>
 <script src="/js/menu.js"></script>

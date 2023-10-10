@@ -21,7 +21,7 @@ public class RegistrationController {
     @GetMapping("/registration")
     public ModelAndView viewRegistration(){
         ModelAndView mv = new ModelAndView("registration");
-        mv.addObject("newUser", new UserDto("default", "default", "default", new BigDecimal(0)));
+        mv.addObject("newUser", new UserDto("", "", "", new BigDecimal(0)));
         return mv;
     }
 

@@ -1,5 +1,6 @@
 body{
-    background-color: aqua;
+    background-image: url("../images/img-7.jpg");
+    background-size: cover;
 }
 
 header{
@@ -37,8 +38,8 @@ header{
 h2{
     margin-top: 50px;
     text-align: center;
-    font-size: 26px;
-    font-weight: 200;
+    font-size: 30px;
+    font-weight: 1000;
 }
 .input_fields{
     margin-top: 100px;
@@ -53,22 +54,35 @@ h2{
     line-height: 25px;
 }
 .form-label{
-    font-size: 20px;
+    font-size: 25px;
     float: left;
     padding-right: 10px;
     margin-bottom: 10px;
 }
 .form-select{
-    font-size: 17px;
+    font-size: 22px;
+    width: 510px;
+    height: 40px;
 }
-input{
-    margin-bottom: 20px;
-    height: 20px;
+.input-amount{
+    margin-top: 30px;
+}
+.input-amount>input{
+    width: 200px;
+    height: 30px;
+    font-size: 22px;
+}
+.input-amount>div{
+    margin-top: 20px;
+    font-size: 20px;
+    color: red;
 }
 button{
     margin: 50px;
     width: 150px;
-    height: 40px;
-    font-size: 18px;
+    height: 50px;
+    font-size: 22px;
     padding: 10px;
+    background-color: #51cce8;
+    border-color: #51cce8;;
 }
