@@ -30,9 +30,15 @@ public class ExpenseCategoryDbDaoTest {
         Assertions.assertEquals("аренда магазина", expCategoryFromDb.getNameExpenseCategory());
     }
     @Test
+    void test_method_findByNameExpenseCategory(){
+        String searchNameInTheDb = "транспортные расходы";
+        String resultFromDb = categoryDbDao.findByNameExpenseCategory(searchNameInTheDb).getNameExpenseCategory();
+        Assertions.assertEquals(searchNameInTheDb, resultFromDb);
+    }
+    @Test
     @Disabled
     @Transactional
-    void test_delete_Category(){
+    void test_method_delete_category_expense(){
         String nameRemoveCategory = "квартплата";
         int colRemoveRow = categoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
         Assertions.assertEquals(1, colRemoveRow);

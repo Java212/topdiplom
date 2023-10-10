@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.top.java212.model.Expense;
-import ru.top.java212.model.ExpenseCategory;
-import ru.top.java212.model.Role;
-import ru.top.java212.model.User;
+import ru.top.java212.dao.ExpenseDbDao;
+import ru.top.java212.dao.UserDbDao;
+import ru.top.java212.model.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+import java.util.List;
 
 @SpringBootTest
-public class ExpenseDbDaoTestMy {
+public class ExpenseDbDaoTest {
 
     @Autowired
     ExpenseDbDao expenseDbDao;
@@ -70,5 +69,43 @@ public class ExpenseDbDaoTestMy {
         User user = new User("Jek", "df34","fgfg8", Role.USER, new BigDecimal(10000.23));
         expenseFromDb.setUsers(user);
         Assertions.assertEquals(user.getName(), expenseFromDb.getUsers().getName());
+    }
+
+    @Test
+    void test_method_findByDateBetween(){
+        List<Integer> list = List.of(  5000,3000, 23000, 300, 600, 1000,
+                                                3000, 5000, 10000, 100, 300, 600,
+                                                4000, 1000, 100, 400, 400,
+                                                6000, 8000, 36000, 4000, 400, 11000, 40000);
+        LocalDate startPeriod = LocalDate.of(2023,9,1);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
+        List<Integer> result = expenseDbDao.findByDateBetween(startPeriod,endPeriod).stream()
+                .map(ExpenseAmount::getExpenseAmount).toList();
+        Assertions.assertEquals(list, result);
+    }
+    @Test
+    void test_method_findByUserIdAndDateBetween(){
+        int userId = 1;
+        List<Integer> list = List.of(5000,3000, 23000, 300, 600, 1000);
+        LocalDate startPeriod = LocalDate.of(2023,9,1);
+        LocalDate endPeriod = LocalDate.of(2023,10,31);
+        List<Integer> result = expenseDbDao.findByUserIdAndDateBetween(userId, startPeriod,endPeriod).stream()
+                .map(ExpenseAmount::getExpenseAmount).toList();
+        Assertions.assertEquals(list, result);
+    }
+
+    @Test
+    void test_getAllAmountForTheDeletedCategory(){
+        String nameRemoveCategory = "покупки непродовольственных товаров";
+        int thereMustBe = 69000;
+        Long amountFromDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory);
+        Assertions.assertEquals(thereMustBe, amountFromDb);
+    }
+    @Test
+    void test_getCountRecordsInDbWithoutRemoveCategory(){
+        String nameRemoveCategory = "покупки непродовольственных товаров";
+        int thereMustBe = 21;
+        int countRecordsWithoutRemoveCategory = expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
+        Assertions.assertEquals(thereMustBe, countRecordsWithoutRemoveCategory);
     }
 }

@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllExpensesFamily;
 import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllIncomesFamily;
-import ru.top.java212.dao.ExpenseCategoryDbDao;
-import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.model.Expense;
 import ru.top.java212.model.Income;
 
@@ -20,12 +18,6 @@ import java.util.Map;
 public class RedactRecordsInDbTest {
     @Autowired
     RedactRecordsInDb redactRecordsInDb;
-    @Autowired
-    ExpenseCategoryDbDao expenseCategoryDbDao;
-
-    @Autowired
-    IncomeCategoryDbDao incomeCategoryDbDao;
-
     @Autowired
     CalculationAllExpensesFamily calculationAllExpensesFamily;
 
@@ -39,10 +31,10 @@ public class RedactRecordsInDbTest {
         String newName = "продукты питания";
 
         redactRecordsInDb.editingCategoryNamesExpense(currentName, newName);
-        String result = expenseCategoryDbDao.findByNameExpenseCategory(newName).getNameExpenseCategory();
+        String result = redactRecordsInDb.getExpenseCategoryDbDao().findByNameExpenseCategory(newName).getNameExpenseCategory();
         Assertions.assertEquals(newName, result);
 
-        int sumAllExpenses = expenseCategoryDbDao.findByNameExpenseCategory(newName).getExpenses().stream().mapToInt(Expense::getExpenseAmount).sum();
+        int sumAllExpenses = redactRecordsInDb.getExpenseCategoryDbDao().findByNameExpenseCategory(newName).getExpenses().stream().mapToInt(Expense::getExpenseAmount).sum();
         Assertions.assertEquals(17000, sumAllExpenses);
     }
 
@@ -53,10 +45,10 @@ public class RedactRecordsInDbTest {
         String newName = "дивиденды";
 
         redactRecordsInDb.editingCategoryNamesIncome(currentName, newName);
-        String result = incomeCategoryDbDao.findBySourceIncomeCategory(newName).getSourceIncomeCategory();
+        String result = redactRecordsInDb.getIncomeCategoryDbDao().findBySourceIncomeCategory(newName).getSourceIncomeCategory();
         Assertions.assertEquals(newName, result);
 
-        int sumAllExpenses = incomeCategoryDbDao.findBySourceIncomeCategory(newName).getIncomes().stream().mapToInt(Income::getIncomeAmount).sum();
+        int sumAllExpenses = redactRecordsInDb.getIncomeCategoryDbDao().findBySourceIncomeCategory(newName).getIncomes().stream().mapToInt(Income::getIncomeAmount).sum();
         Assertions.assertEquals(10000, sumAllExpenses);
     }
     @Test
