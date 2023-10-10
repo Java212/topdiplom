@@ -28,11 +28,9 @@
                 <input name="priceMax" placeholder="макс. цена" th:value="${priceMax}"/>
             </div>
             <div>
-                <input type="date"  th:value="${startDate}"  name="startDate"/>
-                <input type="date"  th:value="${stopDate}" name="stopDate"/>
+                <input type="date"  th:value="${startDate}"  name="startDate" required/>
+                <input type="date"  th:value="${stopDate}" name="stopDate" required/>
             </div>
-
-
             <div class="input">
                 <input  type="submit"  value="Найти" />
             </div>
@@ -45,10 +43,6 @@
                 <label th:text="${tool.getPrice()}">  </label>
             </td>
         </table>
-        <div>
-            <a th:href="@{/renter/toolCard}">Перейти</a>
-        </div>
-
     </div>
 </section>
 </body>

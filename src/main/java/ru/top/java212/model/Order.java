@@ -36,6 +36,8 @@ public class Order {
         this.tool = tool;
         this.startDate = startDate;
         this.stopDate = stopDate;
+        reversing = false;
+        completed = false;
     }
     public Order(){
 

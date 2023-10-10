@@ -1,9 +1,10 @@
-package ru.top.java212.dto;
+package ru.top.java212.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.top.java212.dto.UserRegistrationDTO;
 import ru.top.java212.model.Person;
 import ru.top.java212.model.User;
 import ru.top.java212.repository.PersonRepository;

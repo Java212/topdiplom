@@ -69,12 +69,13 @@ public class ToolServiceImpl implements ToolService{
     }
 
     @Override
-    public List<Tool> findByPriceBetween(Double priceMin, Double priceMax) {
-        return toolRepository.findByPriceBetween(priceMin,priceMax);
-    }
-    @Override
     public List<Tool> findByName(List<Tool> tools,String name){
         return tools.stream().filter(t -> t.getName().equals(name)).collect(Collectors.toList());
     }
+    @Override
+    public List<Tool> findByPriceBetween(Double priceMin, Double priceMax) {
+        return toolRepository.findByPriceBetween(priceMin,priceMax);
+    }
+
 
 }

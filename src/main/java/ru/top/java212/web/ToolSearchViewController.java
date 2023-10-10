@@ -39,7 +39,6 @@ public class ToolSearchViewController {
         Person personUser = personRepository.findByUser(user);
         ModelAndView mv = new ModelAndView("renter/toolSearchView");
         mv.addObject("personName",personUser.getName());
-        mv.addObject("tools", toolService.findAll());
         return  mv;
     }
 
@@ -58,6 +57,8 @@ public class ToolSearchViewController {
         Double priceMinDouble = PriceUtils.getDoubleFromString(priceMin,0.0);
         Double priceMaxDouble = PriceUtils.getDoubleFromString(priceMax,1000000.0);
         List<Tool> toolList = new LinkedList<>();
+
+
         if(!priceMax.equals("") || !priceMin.equals("")){
             toolList = toolService.findByPriceBetween(priceMinDouble,priceMaxDouble);
         }else{
@@ -66,6 +67,7 @@ public class ToolSearchViewController {
         if(!name.equals("")){
            toolList = toolService.findByName(toolList,name);
         }
+
 
         mv.addObject("tools",toolList);
         return mv;
