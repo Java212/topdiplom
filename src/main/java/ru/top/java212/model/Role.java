@@ -8,6 +8,7 @@ import java.util.Set;
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
     public static final String ROLE_RENTER = "RENTER";
+    public static final String ROLE_LESSOR = "LESSOR";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="role_id")

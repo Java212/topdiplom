@@ -10,12 +10,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import ru.top.java212.dto.UserRegistrationDTO;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class RegistrationControllerTest {
+public class LessorViewControllerTest {
 
     @Autowired
     private WebApplicationContext context;
@@ -30,7 +31,7 @@ public class RegistrationControllerTest {
 
     @Test
     void testGet() throws Exception {
-        String url = "/registration";
+        String url = "/lessor/lessorView";
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk());
     }
