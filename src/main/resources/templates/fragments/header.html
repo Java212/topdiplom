@@ -71,11 +71,11 @@
                 <li class="nav-item">
 
                         <img src="/img/user.png" alt="">
-                   <span th:if="${userName}" th:text="${userName}">...</span>
-                    <a th:if="${userName}" th:href="@{/logout}" class="btn btn-primary">Выйти</a>
-                        <button type="button" id="authModalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal">
+                   <span th:if="${userInfo}" th:text="${userInfo.name}">...</span>
+                    <a th:if="${userInfo}" th:href="@{/logout}" class="btn btn-primary">Выйти</a>
+                        <a th:href="@{/personal-account}"  id="authModalButton" class="btn btn-primary"  >
                             Войти
-                        </button>
+                        </a>
 
 
                 </li>

@@ -20,27 +20,26 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "user_info_id")
+    private UserInfo userInfo;
+
+    @OneToMany(mappedBy = "product")
+    private List<Order> orders;
 
 
     private String title;
-
-
     private String linkToTheImage;
-
     private String specification;
-
     private BigDecimal price;
+    private boolean isBusy;
 
     public Product() {
     }
 
-    public Product(Integer id, Category category, Address address, String title, String linkToTheImage, String specification, BigDecimal price) {
-        this.id = id;
+    public Product(Category category, String title, String linkToTheImage, String specification, BigDecimal price) {
         this.category = category;
-        this.address = address;
         this.title = title;
         this.linkToTheImage = linkToTheImage;
         this.specification = specification;
@@ -63,13 +62,6 @@ public class Product {
         this.category = category;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     public String getTitle() {
         return title;
@@ -101,5 +93,29 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public boolean isBusy() {
+        return isBusy;
+    }
+
+    public void setBusy(boolean busy) {
+        isBusy = busy;
     }
 }

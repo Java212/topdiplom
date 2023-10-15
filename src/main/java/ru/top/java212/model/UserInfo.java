@@ -23,8 +23,11 @@ public class UserInfo {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "userInfo")
     private List<Order> orders;
+
+    @OneToMany(mappedBy = "userInfo")
+    private List<Product> products;
 
     public UserInfo() {}
 
@@ -91,5 +94,13 @@ public class UserInfo {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

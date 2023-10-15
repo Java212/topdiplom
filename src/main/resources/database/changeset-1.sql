@@ -130,12 +130,13 @@ CREATE SEQUENCE IF NOT EXISTS public.products_id_seq
 CREATE TABLE IF NOT EXISTS public.products
 (
     product_id INTEGER NOT NULL DEFAULT nextval('products_id_seq'),
-    address_id INTEGER NOT NULL,
     category_id INTEGER NOT NULL,
+    user_info_id INTEGER NOT NULL,
     title VARCHAR,
     link_to_the_image varchar,
     specification varchar,
     price NUMERIC(19,2),
+    is_busy BOOLEAN NOT NULL,
     CONSTRAINT products_pkey PRIMARY KEY (product_id)
 
 );
@@ -160,8 +161,8 @@ ALTER TABLE IF EXISTS products
         FOREIGN KEY (category_id) REFERENCES public.categories(category_id);
 
 ALTER TABLE IF EXISTS products
-         ADD CONSTRAINT products_fk_address
-                FOREIGN KEY (address_id) REFERENCES public.addresses(address_id);
+         ADD CONSTRAINT products_fk_users_info
+                FOREIGN KEY (user_info_id) REFERENCES public.users_info(user_info_id);
 
 
 

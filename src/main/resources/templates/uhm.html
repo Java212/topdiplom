@@ -37,7 +37,7 @@
                     <p th:text="${product.price}">
                         2345 в сутки
                     </p>
-                    <a href="#" class="btn btn-primary">Арендовать сейчас</a>
+                    <a th:href="@{'/order/' + ${product.id}}" class="btn btn-primary">Арендовать</a>
                 </div>
             </div>
         </div>

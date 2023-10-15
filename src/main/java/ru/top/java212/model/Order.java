@@ -1,7 +1,7 @@
 package ru.top.java212.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+
 
 import java.time.LocalDate;
 
@@ -23,7 +23,7 @@ public class Order {
     private Product product;
 
 
-    @CreationTimestamp
+
     private LocalDate startDate;
 
     private LocalDate endDate;
@@ -31,8 +31,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer id, UserInfo userInfo, Product product, LocalDate startDate, LocalDate endDate) {
-        this.id = id;
+    public Order(UserInfo userInfo, Product product, LocalDate startDate, LocalDate endDate) {
         this.userInfo = userInfo;
         this.product = product;
         this.startDate = startDate;

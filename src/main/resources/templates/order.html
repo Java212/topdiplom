@@ -11,12 +11,46 @@
             th:href="@{https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap}"
             rel="stylesheet"
     />
-    <link  rel="stylesheet" th:href="@{/css/footer.css}"/>
-    <link  rel="stylesheet" th:href="@{/css/gradient.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/gradient.css}"/>
+    <link rel="stylesheet" th:href="@{/css/slider.css}"/>
 </head>
 <body>
 <div th:include="fragments/header :: header"></div>
-<div class="gradient">Order</div>
+<div class="gradient">
+    <form method="post" th:action="@{/save}"  th:if="${orderDto}" th:object="${orderDto}">
+        <div class="card col-md-6">
+            <p class="card-title" th:text="${product.title}">TITLE</p>
+            <img th:src="${product.linkToTheImage}"
+                 th:alt="${product.linkToTheImage}">
+            <p class="card-specification" th:text="${product.specification}">
+                ...
+            </p>
+            <div class="card-price">
+                <div class="card-number" th:text="${product.price}">0</div>
+                <div class="card-text">
+                    <div class="card-dollar">$</div>
+                    <div class="per-day">per day</div>
+                </div>
+            </div>
+            <div class="text-center">
+                <input type="hidden"  name="productId"  th:attr="value=${product.id}"   >
+                <label for="startDate" class="form-label">Дата начала аренды</label>
+                <input type="date" name="startDate"  id="startDate" th:field="*{startDate}">
+
+                <label for="endDate" class="form-label">Дата окончания аренды</label>
+                <input type="date" name="endDate"  id="endDate" th:field="*{endDate}">
+
+                <button type="submit" class="btn btn-primary " id="rentNow">Арендовать сейчас</button>
+            </div>
+
+
+        </div>
+    </form>
+
+
+
+</div>
 <div th:include="fragments/footer :: footer"></div>
 
 <script
@@ -29,5 +63,6 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"
 ></script>
+
 </body>
 </html>

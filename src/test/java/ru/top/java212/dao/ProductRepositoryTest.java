@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import ru.top.java212.model.Address;
-import ru.top.java212.model.Category;
-import ru.top.java212.model.Product;
+import ru.top.java212.model.*;
 
 
 import java.math.BigDecimal;
@@ -29,8 +27,7 @@ public class ProductRepositoryTest {
     void test_save_find_delete_product() {
 
 
-        Product product = productRepository.save(new Product(1,new Category(1,"Пневмоинструмент"), new Address(1,"District", "street", 1, 2),
-                "productTitle","link.ru", "productSpecification", new BigDecimal(123.0)));
+        Product product = productRepository.save(new Product(new Category(), "productTitle","link.ru", "productSpecification", new BigDecimal(123.0)));
         Product actualProduct = productRepository.findByTitle("productTitle");
 
         assertThat(product).isNotNull();

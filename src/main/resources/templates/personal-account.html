@@ -11,16 +11,109 @@
             th:href="@{https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap}"
             rel="stylesheet"
     />
-    <link  rel="stylesheet" th:href="@{/css/footer.css}"/>
-    <link  rel="stylesheet" th:href="@{/css/gradient.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/gradient.css}"/>
 </head>
 <body>
 <div th:include="fragments/header :: header"></div>
 
-<div class="gradient" >личный кабинет</div>
-<div th:if="${message}">
-    <h2 th:text="${message}"> </h2>
+<div class="gradient">
+
+    <div class="row">
+        <div class="col-lg-2 left-bar">
+            <a class="btn btn-primary" data-bs-target="#infoModal" data-bs-toggle="modal">личные данные</a>
+            <a class="btn btn-primary" href="">мои инструменты</a>
+            <a class="btn btn-primary" href="">добавить инструмент</a>
+        </div>
+
+        <div class="col-lg-9 ">
+            <div class="row">
+
+                <h>Мои заказы</h>
+                <div class="col-lg-4 pb-5" th:each="order : ${orders}">
+                    <div class="card ">
+                        <img th:src="${order.product.linkToTheImage}" class="card-img-top"
+                             th:alt="${order.product.linkToTheImage}"/>
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${order.product.title}">Заголовок карточки</h5>
+                            <p>Арендовано:</p>
+                            <p th:text="${order.startDate}">
+                            </p>
+                            <p>Вернуть до:</p>
+                            <p th:text="${order.endDate}">
+                            </p>
+                            <a th:href="@{'/' + ${order.id}}" class="btn btn-primary">Вернуть</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="infoModal" aria-hidden="true" aria-labelledby="infoModalLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="infoModalLabel">Личные данные</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3 p-4">
+
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Имя</label>
+                            <input type="text" th:placeholder="${userInfo.name}" class="form-control" id="name">
+                        </div>
+                        <div>
+                            <label for="email" class="form-label">Эл. адрес</label>
+                            <input type="email" th:placeholder="${userInfo.email}" class="form-control" id="email">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phoneNumber" class="form-label">Номер телефона</label>
+                            <input type="text" th:placeholder="${userInfo.phoneNumber}" class="form-control" id="phoneNumber">
+                        </div>
+
+                        <div class="col-6">
+                            <label for="district" class="form-label">Район</label>
+                            <input type="text" th:placeholder="${userInfo.address.district}" class="form-control" id="district"
+                                   placeholder="Проспект Ленина">
+                        </div>
+
+
+                        <div class="col-6">
+                            <label for="street" class="form-label">Улица</label>
+                            <input type="text" th:placeholder="${userInfo.address.street}" class="form-control" id="street"
+                                   placeholder="Проспект Ленина">
+                        </div>
+                        <div class="col-4">
+                            <label for="numberOfHouse" class="form-label">Номер дома</label>
+                            <input type="text" th:placeholder="${userInfo.address.numberOfHouse}" class="form-control"
+                                   id="numberOfHouse" placeholder="Дом">
+                        </div>
+                        <div class="col-4">
+                            <label for="apartmentNumber" class="form-label">Номер квартиры</label>
+                            <input type="text" th:placeholder="${userInfo.address.apartmentNumber}" class="form-control"
+                                   id="apartmentNumber" placeholder="Квартира">
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" id="buttonRegistration" class="col-md-6 btn btn-primary ">
+                                Редактировать
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
 <div th:include="fragments/footer :: footer"></div>
 <script
         src="https://code.jquery.com/jquery-3.7.0.js"

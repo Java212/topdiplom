@@ -39,12 +39,9 @@ public class WebSecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/?authModal")
                         .loginProcessingUrl("/login").permitAll()
-                        .successForwardUrl("/personal-account")
-
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .permitAll()
                         .logoutSuccessUrl("/")
                 );
 

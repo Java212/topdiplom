@@ -11,11 +11,11 @@ import java.time.LocalDate;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
-public class OrdersRepositoryTest {
+public class OrderRepositoryTest {
 
 
    @Autowired
-   OrdersRepository ordersRepository;
+   OrderRepository orderRepository;
 
 
     @Test
@@ -24,11 +24,11 @@ public class OrdersRepositoryTest {
         LocalDate startLocalDate = LocalDate.now();
         LocalDate endLocalDate = LocalDate.of(2023, 9, 12);
 
-    Order order = ordersRepository.save(new Order(1, new UserInfo("user", "user@mail.com","1234-43535",new User(),new Address()),new Product(), startLocalDate, endLocalDate));
+    Order order = orderRepository.save(new Order(new UserInfo("user", "user@mail.com","1234-43535",new User(),new Address()),new Product(), startLocalDate, endLocalDate));
 
 
 
-        Order actualOrders = ordersRepository.getReferenceById(order.getId());
+        Order actualOrders = orderRepository.getReferenceById(order.getId());
 
         assertThat(order).isNotNull();
         assertThat(order.getId()).isGreaterThan(0);

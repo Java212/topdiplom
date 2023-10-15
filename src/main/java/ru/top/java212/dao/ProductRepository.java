@@ -2,11 +2,11 @@ package ru.top.java212.dao;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import ru.top.java212.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {

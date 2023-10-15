@@ -1,9 +1,14 @@
 .gradient{
-    padding: 100px;
+    padding: 50px;
     background: linear-gradient(180deg, #bde0fd 0%, #81d3f6 0%, #5b5b96 100%);
 }
 
 .card{
     box-shadow: 9px 15px 10px 1px #000;
     margin-top: 35px;
+}
+
+
+.left-bar>a{
+    margin-top: 20px;
 }
