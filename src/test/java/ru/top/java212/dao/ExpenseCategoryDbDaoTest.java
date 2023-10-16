@@ -1,12 +1,10 @@
 package ru.top.java212.dao;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-import ru.top.java212.model.ExpenseCategory;
+
 
 
 @SpringBootTest
@@ -22,25 +20,10 @@ public class ExpenseCategoryDbDaoTest {
     }
 
     @Test
-    @Disabled
-    @Transactional
-    void test_save_and_set_is_same(){
-        ExpenseCategory expCategoryFromDb = categoryDbDao.findById(1).orElseThrow();
-        expCategoryFromDb.setNameExpenseCategory("аренда магазина");
-        Assertions.assertEquals("аренда магазина", expCategoryFromDb.getNameExpenseCategory());
-    }
-    @Test
     void test_method_findByNameExpenseCategory(){
         String searchNameInTheDb = "транспортные расходы";
         String resultFromDb = categoryDbDao.findByNameExpenseCategory(searchNameInTheDb).getNameExpenseCategory();
         Assertions.assertEquals(searchNameInTheDb, resultFromDb);
     }
-    @Test
-    @Disabled
-    @Transactional
-    void test_method_delete_category_expense(){
-        String nameRemoveCategory = "квартплата";
-        int colRemoveRow = categoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
-        Assertions.assertEquals(1, colRemoveRow);
-    }
+
 }

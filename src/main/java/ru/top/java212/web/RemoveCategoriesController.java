@@ -7,13 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.dao.ExpenseCategoryDbDao;
-import ru.top.java212.dao.IncomeCategoryDbDao;
 import ru.top.java212.model.ExpenseCategory;
 import ru.top.java212.model.IncomeCategory;
 import ru.top.java212.service.RedactRecordsInDb;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -30,10 +28,8 @@ public class RemoveCategoriesController {
     @PreAuthorize("authenticated")
     public ModelAndView viewPageRemoveRecords() {
         ModelAndView mv = new ModelAndView("removeRecords");
-        List<ExpenseCategory> listExpenseCategory = new ArrayList<>();
-        redactRecordsInDb.getExpenseCategoryDbDao().findAll().iterator().forEachRemaining(listExpenseCategory::add);
-        List<IncomeCategory> listIncomesSource = new ArrayList<>();
-        redactRecordsInDb.getIncomeCategoryDbDao().findAll().iterator().forEachRemaining(listIncomesSource::add);
+        List<ExpenseCategory> listExpenseCategory = redactRecordsInDb.getExpenseCategoryList();
+        List<IncomeCategory> listIncomesSource = redactRecordsInDb.getIncomeSourceList();
         mv.addObject("allCategoriesExpenses", listExpenseCategory);
         mv.addObject("allSourceIncomes", listIncomesSource);
         return mv;
@@ -45,18 +41,16 @@ public class RemoveCategoriesController {
                                             @RequestParam("nameRemoveCategory") String nameRemoveCategory) {
 
         ModelAndView mv = new ModelAndView("removeRecords");
-
-        redactRecordsInDb.removeCategory(whatRemove, nameRemoveCategory);
-
-//        List<ExpenseCategory> listExpenseCategory = new ArrayList<>();
-//        expenseCategoryDao.findAll().iterator().forEachRemaining(listExpenseCategory::add);
-//        List<IncomeCategory> listIncomesSource = new ArrayList<>();
-//        incomeCategoryDao.findAll().iterator().forEachRemaining(listIncomesSource::add);
-
-        List<ExpenseCategory> listExpenseCategory = new ArrayList<>();
-        redactRecordsInDb.getExpenseCategoryDbDao().findAll().iterator().forEachRemaining(listExpenseCategory::add);
-        List<IncomeCategory> listIncomesSource = new ArrayList<>();
-        redactRecordsInDb.getIncomeCategoryDbDao().findAll().iterator().forEachRemaining(listIncomesSource::add);
+        List<ExpenseCategory> listExpenseCategory = Collections.EMPTY_LIST;
+        List<IncomeCategory> listIncomesSource = Collections.EMPTY_LIST;
+        if ( whatRemove.equals("расходы")){
+            listExpenseCategory =  redactRecordsInDb.removeExpenseCategory(nameRemoveCategory);
+            listIncomesSource = redactRecordsInDb.getIncomeSourceList();
+        }
+        if ( whatRemove.equals("доходы")){
+            listIncomesSource =  redactRecordsInDb.removeIncomeSource(nameRemoveCategory);
+            listExpenseCategory = redactRecordsInDb.getExpenseCategoryList();
+        }
         mv.addObject("allCategoriesExpenses", listExpenseCategory);
         mv.addObject("allSourceIncomes", listIncomesSource);
         mv.addObject("message", "Удаление прошло успешно!");

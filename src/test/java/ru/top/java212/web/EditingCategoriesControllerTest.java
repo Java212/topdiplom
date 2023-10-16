@@ -1,7 +1,6 @@
 package ru.top.java212.web;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +43,6 @@ public class EditingCategoriesControllerTest {
 
     @Test
     @WithMockUser
-    @Disabled
     void test_editingCategories() throws Exception{
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String url = "/recordsDb/update";
@@ -55,5 +53,12 @@ public class EditingCategoriesControllerTest {
                         .param("newNameCategory", "абонемент в тренажерный зал"))
                         .andExpect(model().size(3))
                         .andExpect(status().isOk());
+
+        this.mockMvc.perform(post(url).with(csrf())
+                        .param("whatToAdd", "расходы")
+                        .param("altNameCategory", "абонемент в тренажерный зал")
+                        .param("newNameCategory", "коммунальные платежи"))
+                .andExpect(model().size(3))
+                .andExpect(status().isOk());
     }
 }

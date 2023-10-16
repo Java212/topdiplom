@@ -3,7 +3,6 @@ package ru.top.java212.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.top.java212.EditingRecordsInDb;
 import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.ExpenseDbDao;
 import ru.top.java212.dao.IncomeCategoryDbDao;
@@ -11,8 +10,11 @@ import ru.top.java212.dao.IncomeDbDao;
 import ru.top.java212.model.ExpenseCategory;
 import ru.top.java212.model.IncomeCategory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-public class RedactRecordsInDb implements EditingRecordsInDb {
+public class RedactRecordsInDb {
 
     private final ExpenseDbDao expenseDbDao;
     private final IncomeDbDao incomeDbDao;
@@ -27,42 +29,46 @@ public class RedactRecordsInDb implements EditingRecordsInDb {
         this.expenseCategoryDbDao = expenseCategoryDbDao;
         this.incomeCategoryDbDao = incomeCategoryDbDao;
     }
-    @Override
-    public void editingCategoryNamesExpense(String currentName, String newName){
+
+    @Transactional
+    public void editingCategoryNamesExpense(String currentName, String newName) {
         ExpenseCategory editableCategory = expenseCategoryDbDao.findByNameExpenseCategory(currentName);
         editableCategory.setNameExpenseCategory(newName);
         expenseCategoryDbDao.save(editableCategory);
     }
-    @Override
-    public void editingCategoryNamesIncome(String currentName, String newName){
+
+    @Transactional
+    public void editingCategoryNamesIncome(String currentName, String newName) {
         IncomeCategory editableCategory = incomeCategoryDbDao.findBySourceIncomeCategory(currentName);
         editableCategory.setSourceIncomeCategory(newName);
         incomeCategoryDbDao.save(editableCategory);
     }
 
-    @Override
     @Transactional
-    public int removeCategory(String whatRemove, String nameRemoveCategory){
-        int numberOfDeletedRecordsInDb = 0;
-
-        if ( whatRemove.equals("расходы")){
-            Long amountToAddToEachExpenseInTheDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory)/expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
-            numberOfDeletedRecordsInDb = expenseCategoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
-            expenseDbDao.transferringTheAmountOfExpensesFromTheDeletedCategory(amountToAddToEachExpenseInTheDb);
-        }
-        if ( whatRemove.equals("доходы")){
-            Long amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
-            numberOfDeletedRecordsInDb = incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
-            incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAddToEachIncomeInTheDb);
-        }
-        return numberOfDeletedRecordsInDb;
+    public List<ExpenseCategory> removeExpenseCategory(String nameRemoveCategory) {
+        Long amountToAddToEachExpenseInTheDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory) / expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
+        int numberOfDeletedRecordsInDb = expenseCategoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
+        expenseDbDao.transferringTheAmountOfExpensesFromTheDeletedCategory(amountToAddToEachExpenseInTheDb);
+        return getExpenseCategoryList();
     }
 
-    public ExpenseCategoryDbDao getExpenseCategoryDbDao() {
-        return expenseCategoryDbDao;
+    @Transactional
+    public List<IncomeCategory> removeIncomeSource(String nameRemoveCategory) {
+        Long amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
+        int numberOfDeletedRecordsInDb = incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
+        incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAddToEachIncomeInTheDb);
+        return getIncomeSourceList();
     }
 
-    public IncomeCategoryDbDao getIncomeCategoryDbDao() {
-        return incomeCategoryDbDao;
+    public List<ExpenseCategory> getExpenseCategoryList() {
+        List<ExpenseCategory> expenseCategoryList = new ArrayList<>();
+        expenseCategoryDbDao.findAll().iterator().forEachRemaining(expenseCategoryList::add);
+        return expenseCategoryList;
+    }
+
+    public List<IncomeCategory> getIncomeSourceList() {
+        List<IncomeCategory> incomeCategoryList = new ArrayList<>();
+        incomeCategoryDbDao.findAll().iterator().forEachRemaining(incomeCategoryList::add);
+        return incomeCategoryList;
     }
 }

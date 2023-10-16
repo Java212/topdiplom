@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllExpensesFamily;
 import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllIncomesFamily;
 import ru.top.java212.model.Expense;
+import ru.top.java212.model.ExpenseCategory;
 import ru.top.java212.model.Income;
+import ru.top.java212.model.IncomeCategory;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -31,10 +32,11 @@ public class RedactRecordsInDbTest {
         String newName = "продукты питания";
 
         redactRecordsInDb.editingCategoryNamesExpense(currentName, newName);
-        String result = redactRecordsInDb.getExpenseCategoryDbDao().findByNameExpenseCategory(newName).getNameExpenseCategory();
-        Assertions.assertEquals(newName, result);
+        ExpenseCategory result = redactRecordsInDb.getExpenseCategoryList().stream()
+                .filter(e-> e.getNameExpenseCategory().equals(newName)).findAny().orElseThrow();
+        Assertions.assertEquals(newName, result.getNameExpenseCategory());
 
-        int sumAllExpenses = redactRecordsInDb.getExpenseCategoryDbDao().findByNameExpenseCategory(newName).getExpenses().stream().mapToInt(Expense::getExpenseAmount).sum();
+        int sumAllExpenses = result.getExpenses().stream().mapToInt(Expense::getExpenseAmount).sum();
         Assertions.assertEquals(17000, sumAllExpenses);
     }
 
@@ -45,19 +47,21 @@ public class RedactRecordsInDbTest {
         String newName = "дивиденды";
 
         redactRecordsInDb.editingCategoryNamesIncome(currentName, newName);
-        String result = redactRecordsInDb.getIncomeCategoryDbDao().findBySourceIncomeCategory(newName).getSourceIncomeCategory();
-        Assertions.assertEquals(newName, result);
+        IncomeCategory result = redactRecordsInDb.getIncomeSourceList().stream()
+                .filter(c->c.getSourceIncomeCategory().equals(newName))
+                .findAny().orElseThrow();
 
-        int sumAllExpenses = redactRecordsInDb.getIncomeCategoryDbDao().findBySourceIncomeCategory(newName).getIncomes().stream().mapToInt(Income::getIncomeAmount).sum();
+        Assertions.assertEquals(newName, result.getSourceIncomeCategory());
+
+        int sumAllExpenses = result.getIncomes().stream().mapToInt(Income::getIncomeAmount).sum();
         Assertions.assertEquals(10000, sumAllExpenses);
     }
     @Test
-    @Transactional
     @Disabled
     void test_remove_Category_from_Db_for_expense_category(){
-        String whatRemove = "расходы";
+
         String nameRemoveCategory = "покупки непродовольственных товаров";
-        redactRecordsInDb.removeCategory(whatRemove, nameRemoveCategory);
+        redactRecordsInDb.removeExpenseCategory(nameRemoveCategory);
 
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,10,31);
@@ -70,12 +74,11 @@ public class RedactRecordsInDbTest {
         Assertions.assertEquals(list,calculationAllExpensesFamily.calculationExpensesFamilyByCategory(startPeriod, endPeriod));
     }
     @Test
-    @Transactional
     @Disabled
     void test_remove_Category_from_Db_for_income_source(){
-        String whatRemove = "доходы";
+
         String nameRemoveCategory = "премия";
-        redactRecordsInDb.removeCategory(whatRemove, nameRemoveCategory);
+        redactRecordsInDb.removeIncomeSource(nameRemoveCategory);
 
         LocalDate startPeriod = LocalDate.of(2023,9,1);
         LocalDate endPeriod = LocalDate.of(2023,10,31);
