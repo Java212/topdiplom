@@ -6,17 +6,8 @@
     <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
-<section class="top">
-
-    <div class="top_center">
-        <div>
-            Кабинет арендатора:    <label  th:text="${personName}"></label>
-        </div>
-        <h1>
-            Аренда инструмента
-        </h1>
-    </div>
 </section>
+<section th:replace="fragments/header :: header" />
 <section class="center">
     <div class="userBox">
         <form th:action="@{/renter/toolSearchView}" method="post">

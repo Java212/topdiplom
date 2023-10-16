@@ -66,6 +66,12 @@ public class Order {
     public void setStopDate(LocalDate stopDate) {
         this.stopDate = stopDate;
     }
+    public String getToolName(){
+        return tool.getName();
+    }
+    public  Double getToolPrice(){
+        return tool.getPrice();
+    }
 
     public Boolean getReversing() {
         return reversing;

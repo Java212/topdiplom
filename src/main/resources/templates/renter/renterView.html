@@ -11,10 +11,10 @@
     <div class="userBox">
         <table th:each="order:${orders}">
             <td>
-                <label th:text="${order.getId()}"></label>
+                <label th:text="${order.getToolName()}"></label>
             </td>
             <td>
-                <label th:text="${order.getStartDate()}"></label>
+                <label th:text="${order.getToolPrice()}"> рублей</label>
             </td>
         </table>
         <button><a  th:href="@{/renter/toolSearchView}">Арендовать</a></button>

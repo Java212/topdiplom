@@ -25,16 +25,16 @@
                 <input type="checkbox" name="role" th:chacked="*{role}"/> Зарегистрироваться как арендодатель
             </div>
             <div class="input">
-                <input name="name" placeholder="Имя "  th:field="*{name}"/>
+                <input name="name" placeholder="Имя "  th:field="*{name}" required/>
             </div>
             <div class="input">
-                <input name="phone" placeholder="Номер телефона "  th:field="*{phone}"/>
+                <input name="phone" placeholder="Номер телефона "  th:field="*{phone}" required/>
             </div>
             <div class="input">
-                <input name="login" placeholder="Имя пользователя"  th:field="*{login}"/>
+                <input name="login" placeholder="Имя пользователя"  th:field="*{login}" required/>
             </div>
             <div class="input">
-                <input type="password" id="password" name="password" placeholder="Пароль"  th:field="*{password}"/>
+                <input type="password" id="password" name="password" placeholder="Пароль"  th:field="*{password}" required/>
             </div>
             <div class="input">
                 <input type="password" id="confirm_password" name="passwordRepeat" placeholder="Повторно пароль"/>
