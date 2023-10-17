@@ -9,6 +9,7 @@ import ru.top.java212.repository.OrderRepository;
 import ru.top.java212.repository.ToolRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -35,4 +36,14 @@ public class OrderServiceImpl implements OrderService{
         Tool tool = toolRepository.getReferenceById(orderDTO.getToolId());
        return this.save(person,tool,orderDTO.getStartDate(),orderDTO.getStopDate());
     }
+
+    @Override
+    public List<Order> findByPerson(Person person) {
+        return orderRepository.findByPerson(person);
+    }
+    @Override
+    public List<Order> findByDates(LocalDate startDate,LocalDate stopDate){
+        return orderRepository.findByDateNotBetween(startDate,stopDate);
+    }
+
 }

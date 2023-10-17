@@ -11,6 +11,9 @@
     <div class="userBox">
         <table th:each="order:${orders}">
             <td>
+                <label th:text="${order.getId()}"></label>
+            </td>
+            <td>
                 <label th:text="${order.getToolName()}"></label>
             </td>
             <td>

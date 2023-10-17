@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.dto.OrderDTO;
+import ru.top.java212.model.Order;
 import ru.top.java212.model.Person;
 import ru.top.java212.model.Tool;
 import ru.top.java212.model.User;
@@ -14,10 +15,11 @@ import ru.top.java212.repository.ToolRepository;
 import ru.top.java212.service.orders.OrderService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
-@RequestMapping("/renter/toolCard")
-public class ToolCardController {
+@RequestMapping("/renter/orderCard")
+public class OrderCardController {
 
 
 
@@ -30,11 +32,12 @@ public class ToolCardController {
 
 
     @GetMapping
-    public ModelAndView showToolCardView(@RequestParam(value = "toolId") int toolId){
-        ModelAndView mv = new ModelAndView("/renter/toolCard");
+    public ModelAndView showOrderCardView(@RequestParam(value = "toolId") int toolId){
+        ModelAndView mv = new ModelAndView("/renter/orderCard");
         Tool tool = toolRepository.getReferenceById(toolId);
         mv.addObject("order",new OrderDTO());
         mv.addObject("tool",tool);
+        List<Order> orders = orderService.findByDates(LocalDate.of(2023,10,5),LocalDate.of(2023,10,18));
         return mv;
     }
     @PostMapping
@@ -45,6 +48,8 @@ public class ToolCardController {
         Tool tool = toolRepository.getReferenceById(order.getToolId());
         orderService.save(personUser,tool,order.getStartDate(),order.getStopDate());
         ModelAndView mv = new ModelAndView("renter/renterView");
+        mv.addObject("personName",personUser.getName());
+        mv.addObject("orders", orderService.findByPerson(personUser));
         return mv;
     }
 

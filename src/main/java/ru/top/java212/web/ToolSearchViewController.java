@@ -45,6 +45,7 @@ public class ToolSearchViewController {
     @PostMapping
     public ModelAndView findTool(ModelAndView model,
                                  @RequestParam(value =  "name") String name,
+                                 @RequestParam(value = "district") String district,
                                  @RequestParam(value = "priceMin") String priceMin,
                                  @RequestParam(value = "priceMax") String priceMax,
                                  @RequestParam(value = "startDate")LocalDate startDate,
@@ -54,21 +55,19 @@ public class ToolSearchViewController {
         Person personUser = personRepository.findByUser(user);
         ModelAndView mv = new ModelAndView("renter/toolSearchView");
         mv.addObject("personName",personUser.getName());
+        Double maxPrice = toolService.findMaxPrice();
         Double priceMinDouble = PriceUtils.getDoubleFromString(priceMin,0.0);
-        Double priceMaxDouble = PriceUtils.getDoubleFromString(priceMax,1000000.0);
+        Double priceMaxDouble = PriceUtils.getDoubleFromString(priceMax,maxPrice);
         List<Tool> toolList = new LinkedList<>();
-
-
-        if(!priceMax.equals("") || !priceMin.equals("")){
-            toolList = toolService.findByPriceBetween(priceMinDouble,priceMaxDouble);
-        }else{
-            toolList = toolService.findAll();
-        }
-        if(!name.equals("")){
-           toolList = toolService.findByName(toolList,name);
-        }
-
-
+//        if(!priceMax.equals("") || !priceMin.equals("")){
+//            toolList = toolService.findByPriceBetween(priceMinDouble,priceMaxDouble);
+//        }else{
+//            toolList = toolService.findAll();
+//        }
+//        if(!name.equals("")){
+//           toolList = toolService.findByName(toolList,name);
+//        }
+        toolList = toolService.findToolsByDates(startDate,stopDate);
         mv.addObject("tools",toolList);
         return mv;
     }

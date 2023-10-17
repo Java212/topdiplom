@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private Integer id;
     private String login;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

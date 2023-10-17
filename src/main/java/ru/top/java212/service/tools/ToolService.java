@@ -5,6 +5,7 @@ import ru.top.java212.model.Person;
 import ru.top.java212.model.Tool;
 import ru.top.java212.model.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ToolService {
@@ -15,5 +16,6 @@ public interface ToolService {
     List<Tool> findByName(String name);
     public List<Tool> findByName(List<Tool> tools,String name);
     List<Tool> findByPriceBetween(Double priceMin, Double priceMax);
-
+    Double findMaxPrice();
+    List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate);
 }

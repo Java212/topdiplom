@@ -1,15 +1,21 @@
 package ru.top.java212;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.top.java212.model.Tool;
-import ru.top.java212.service.tools.ToolService;
-import ru.top.java212.service.tools.ToolServiceImpl;
 
-import java.util.List;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
+        LocalDate startDate = LocalDate.of(2023,10,10);
+        LocalDate stopDate = LocalDate.of(2023,10,16);
+        LocalDate orderStartDate = LocalDate.of(2023,10,5);
+        LocalDate orderStopDate = LocalDate.of(2023,10,10);
+        if((orderStartDate.isBefore(startDate) && orderStopDate.isBefore(startDate)) || (orderStartDate.isAfter(stopDate) && orderStopDate.isAfter(stopDate))){
+            System.out.println("true");
+        } else{
+            System.out.println("false");
+        }
+
     }
 
 }

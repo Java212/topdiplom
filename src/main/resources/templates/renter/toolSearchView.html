@@ -15,6 +15,9 @@
                 <input name="name" placeholder="название" th:value="${name}"/>
             </div>
             <div>
+                <input name="district" placeholder="район" th:value="${district}"/>
+            </div>
+            <div>
                 <input name="priceMin" placeholder="мин. цена" th:value="${priceMin}"/>
                 <input name="priceMax" placeholder="макс. цена" th:value="${priceMax}"/>
             </div>
@@ -28,10 +31,10 @@
         </form>
         <table th:each="tool:${tools}">
             <td>
-                <a th:href="@{/renter/toolCard(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
+                <a th:href="@{/renter/orderCard(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
             </td>
             <td>
-                <label th:text="${tool.getPrice()}">  </label>
+                <label th:text="${tool.getPrice()}"></label>
             </td>
         </table>
     </div>

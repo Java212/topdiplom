@@ -10,7 +10,7 @@
 <section class="center">
     <div class="registration">
 
-        <form th:action="@{/renter/toolCard}" method="post"  th:object="${order}">
+        <form th:action="@{/renter/orderCard}" method="post"  th:object="${order}">
             <div>
                 <label>Наименование: </label>
                 <label th:text="${tool.getName()}"></label>
@@ -22,8 +22,8 @@
             </div>
             <div>
                 <input type="hidden" th:value="${tool.getId()}" name="toolId"/>
-                <input type="date"   th:field="*{startDate}"/>
-                <input type="date"   th:field="*{stopDate}"/>
+                <input type="date"   th:field="*{startDate}" required/>
+                <input type="date"   th:field="*{stopDate}" required/>
             </div>
             <input id="submitButton" type="submit"  value="Арендовать"/>
         </form>

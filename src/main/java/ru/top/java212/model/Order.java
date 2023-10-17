@@ -69,6 +69,11 @@ public class Order {
     public String getToolName(){
         return tool.getName();
     }
+
+    public Tool getTool() {
+        return tool;
+    }
+
     public  Double getToolPrice(){
         return tool.getPrice();
     }

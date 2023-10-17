@@ -3,14 +3,13 @@ package ru.top.java212.service.tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.top.java212.dto.ToolDTO;
-import ru.top.java212.model.Address;
-import ru.top.java212.model.Person;
-import ru.top.java212.model.Tool;
-import ru.top.java212.model.User;
+import ru.top.java212.model.*;
 import ru.top.java212.repository.AddressRepository;
+import ru.top.java212.repository.OrderRepository;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +18,14 @@ public class ToolServiceImpl implements ToolService{
     private AddressRepository addressRepository;
     private ToolRepository toolRepository;
     private PersonRepository personRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    public ToolServiceImpl(AddressRepository addressRepository, ToolRepository toolRepository, PersonRepository personRepository){
+    public ToolServiceImpl(AddressRepository addressRepository, ToolRepository toolRepository, PersonRepository personRepository,OrderRepository orderRepository){
         this.addressRepository = addressRepository;
         this.toolRepository = toolRepository;
         this.personRepository = personRepository;
+        this.orderRepository = orderRepository;
     }
     @Override
     public Boolean save(ToolDTO tool, User user) {
@@ -75,6 +76,17 @@ public class ToolServiceImpl implements ToolService{
     @Override
     public List<Tool> findByPriceBetween(Double priceMin, Double priceMax) {
         return toolRepository.findByPriceBetween(priceMin,priceMax);
+    }
+
+    @Override
+    public Double findMaxPrice() {
+        return toolRepository.findMaxPrice();
+    }
+
+    @Override
+    public List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate) {
+        List<Order> orders = orderRepository.findByDateNotBetween(startDate,stopDate);
+        return orders.stream().map(Order::getTool).collect(Collectors.toList());
     }
 
 
