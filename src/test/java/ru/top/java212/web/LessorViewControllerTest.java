@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class LessorViewControllerTest {
 
     @Autowired
@@ -28,12 +28,14 @@ public class LessorViewControllerTest {
     public void setup() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
+                .apply(springSecurity())
                 .build();
     }
 
+
     @Test
     @Disabled
-    @WithMockUser(username = "lessor", roles = "LESSOR")
+    @WithMockUser(roles = "LESSOR")
     void testGet() throws Exception {
         String url = "/lessor/lessorView";
         this.mockMvc.perform(get(url))

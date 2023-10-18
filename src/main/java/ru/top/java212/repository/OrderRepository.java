@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByPerson(Person person);
-    @Query("SELECT o FROM Order o WHERE (o.startDate  NOT BETWEEN ?1 and ?2) AND (o.stopDate NOT BETWEEN ?1 and ?2)")
-    List<Order> findByDateNotBetween(LocalDate startDate,LocalDate stopDate);
+    @Query("SELECT o FROM Order o WHERE (o.startDate  BETWEEN ?1 and ?2) OR (o.stopDate  BETWEEN ?1 and ?2)")
+    List<Order> findOrdersByDateBetween(LocalDate startDate,LocalDate stopDate);
 
 
 }

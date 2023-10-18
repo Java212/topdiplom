@@ -10,7 +10,9 @@ import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,14 +81,47 @@ public class ToolServiceImpl implements ToolService{
     }
 
     @Override
+    public List<Tool> findByPriceBetween(List<Tool> tools, Double priceMin, Double priceMax) {
+        Double minPrice,maxPrice;
+        if(priceMin > priceMax){
+            minPrice = priceMax;
+            maxPrice = priceMin;
+        } else{
+            minPrice = priceMin;
+            maxPrice = priceMax;
+        }
+        return tools.stream().filter(t -> t.getPrice() >= minPrice && t.getPrice() <= maxPrice).collect(Collectors.toList());
+    }
+
+
+    @Override
     public Double findMaxPrice() {
         return toolRepository.findMaxPrice();
     }
 
     @Override
     public List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate) {
-        List<Order> orders = orderRepository.findByDateNotBetween(startDate,stopDate);
-        return orders.stream().map(Order::getTool).collect(Collectors.toList());
+        List<Tool> resultTools = new LinkedList<>();
+        List<Order> orders = orderRepository.findOrdersByDateBetween(startDate,stopDate);
+        List<Tool> allTools = toolRepository.findAll();
+        Set<Tool> orderTools = orders.stream().map(Order::getTool).collect(Collectors.toSet());
+        if(!orderTools.isEmpty()){
+            for(Tool toolFromAllTools:allTools){
+                for(Tool  toolFromOrderTools:orderTools){
+                    if(toolFromAllTools.getId() != toolFromOrderTools.getId()){
+                        resultTools.add(toolFromAllTools);
+                    }
+                }
+            }
+        } else{
+            resultTools = allTools;
+        }
+        return resultTools;
+    }
+
+    @Override
+    public List<Tool> findToolsByDistrict(List<Tool> tools,String district) {
+        return tools.stream().filter(t -> t.getDistrict().equals(district)).collect(Collectors.toList());
     }
 
 

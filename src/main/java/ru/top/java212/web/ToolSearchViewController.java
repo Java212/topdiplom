@@ -58,16 +58,19 @@ public class ToolSearchViewController {
         Double maxPrice = toolService.findMaxPrice();
         Double priceMinDouble = PriceUtils.getDoubleFromString(priceMin,0.0);
         Double priceMaxDouble = PriceUtils.getDoubleFromString(priceMax,maxPrice);
-        List<Tool> toolList = new LinkedList<>();
+        List<Tool> toolList = toolService.findToolsByDates(startDate,stopDate);
+
 //        if(!priceMax.equals("") || !priceMin.equals("")){
-//            toolList = toolService.findByPriceBetween(priceMinDouble,priceMaxDouble);
-//        }else{
-//            toolList = toolService.findAll();
+//            toolList = toolService.findByPriceBetween(toolList,priceMinDouble,priceMaxDouble);
 //        }
 //        if(!name.equals("")){
 //           toolList = toolService.findByName(toolList,name);
 //        }
-        toolList = toolService.findToolsByDates(startDate,stopDate);
+//        if(!district.equals("")){
+//            toolList = toolService.findToolsByDistrict(toolList,district);
+//
+//        }
+
         mv.addObject("tools",toolList);
         return mv;
     }

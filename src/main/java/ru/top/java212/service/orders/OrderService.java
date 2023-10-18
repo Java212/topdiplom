@@ -10,5 +10,5 @@ public interface OrderService {
     Boolean save(Person person, Tool tool, LocalDate startDate, LocalDate stopDate);
     public Boolean save(Person person, OrderDTO orderDTO);
     List<Order> findByPerson(Person person);
-    List<Order> findByDates(LocalDate startDate,LocalDate stopDate);
+
 }

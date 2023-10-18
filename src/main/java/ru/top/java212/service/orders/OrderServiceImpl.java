@@ -41,9 +41,6 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findByPerson(Person person) {
         return orderRepository.findByPerson(person);
     }
-    @Override
-    public List<Order> findByDates(LocalDate startDate,LocalDate stopDate){
-        return orderRepository.findByDateNotBetween(startDate,stopDate);
-    }
+
 
 }

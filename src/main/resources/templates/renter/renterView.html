@@ -9,16 +9,35 @@
 <section th:replace="fragments/header :: header" />
 <section class="center">
     <div class="userBox">
-        <table th:each="order:${orders}">
-            <td>
-                <label th:text="${order.getId()}"></label>
-            </td>
-            <td>
-                <label th:text="${order.getToolName()}"></label>
-            </td>
-            <td>
-                <label th:text="${order.getToolPrice()}"> рублей</label>
-            </td>
+        <table >
+            <thead>
+            <tr>
+                <th>ордер</th>
+                <th> инструмент</th>
+                <th> цена в сутки </th>
+                <th> Дата начала аренды </th>
+                <th> Дата окончания аренды </th>
+            </tr>
+            <thead/>
+            <tbody th:each="order:${orders}">
+               <tr>
+                   <td>
+                       <label th:text="${order.getId()}"></label>
+                   </td>
+                   <td>
+                       <label th:text="${order.getToolName()}"></label>
+                   </td>
+                   <td>
+                       <label th:text="${order.getToolPrice()}"></label>
+                   </td>
+                   <td>
+                       <label th:text="${order.getStartDate()}"></label>
+                   </td>
+                   <td>
+                       <label th:text="${order.getStopDate()}"></label>
+                   </td>
+               </tr>
+            </tbody>
         </table>
         <button><a  th:href="@{/renter/toolSearchView}">Арендовать</a></button>
     </div>

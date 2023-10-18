@@ -16,6 +16,7 @@ import ru.top.java212.service.orders.OrderService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/renter/orderCard")
@@ -37,7 +38,6 @@ public class OrderCardController {
         Tool tool = toolRepository.getReferenceById(toolId);
         mv.addObject("order",new OrderDTO());
         mv.addObject("tool",tool);
-        List<Order> orders = orderService.findByDates(LocalDate.of(2023,10,5),LocalDate.of(2023,10,18));
         return mv;
     }
     @PostMapping
@@ -46,6 +46,13 @@ public class OrderCardController {
         User user = ( principal instanceof User)? ((User) principal):new User();
         Person personUser = personRepository.findByUser(user);
         Tool tool = toolRepository.getReferenceById(order.getToolId());
+        List<Order> toolOrders = tool.getOrders();
+        List<Order> myOrders = toolOrders.stream().filter(o -> (o.getStartDate().isBefore(order.getStartDate())
+                                                                     && o.getStopDate().isBefore(order.getStartDate())
+                                                                     || (o.getStartDate().isAfter(order.getStopDate())
+                                                                     && o.getStopDate().isAfter(order.getStopDate()))))
+                                                                     .collect(Collectors.toList());
+
         orderService.save(personUser,tool,order.getStartDate(),order.getStopDate());
         ModelAndView mv = new ModelAndView("renter/renterView");
         mv.addObject("personName",personUser.getName());

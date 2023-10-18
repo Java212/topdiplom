@@ -70,4 +70,11 @@ public class Tool {
         this.price = price;
     }
 
+    public String getDistrict(){
+        return this.address.getDistrict();
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
 }

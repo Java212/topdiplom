@@ -104,5 +104,56 @@ public class ToolServiceImplTest {
         List<Tool> newTools = toolService.findByName(tools,"tool1");
         Assertions.assertEquals(2,newTools.size());
     }
+    @Test
+    public void test_that_findByPriceBetween_get_list_by_price_from_list_of_all(){
+        Person person = new Person("Person","+79865745647",new User());
+        Address address = new Address("District","Street");
+        Tool tool1 = new Tool("tool1","",person,address,100);
+        Tool tool2 = new Tool("tool2","",person,address,200);
+        Tool tool3 = new Tool("tool1","",person,address,500);
+        Tool tool4 = new Tool("tool4","",person,address,600);
+        List<Tool> tools = new LinkedList<>();
+        tools.add(tool1);
+        tools.add(tool2);
+        tools.add(tool3);
+        tools.add(tool4);
+        List<Tool> newTools = toolService.findByPriceBetween(tools,200.0,500.0);
+        Assertions.assertEquals(2,newTools.size());
+    }
+
+    @Test
+    public void test_that_findByPriceBetween_get_list_by_price_from_list_of_all_if_priceMin_greater_priceMax(){
+        Person person = new Person("Person","+79865745647",new User());
+        Address address = new Address("District","Street");
+        Tool tool1 = new Tool("tool1","",person,address,100);
+        Tool tool2 = new Tool("tool2","",person,address,200);
+        Tool tool3 = new Tool("tool1","",person,address,500);
+        Tool tool4 = new Tool("tool4","",person,address,600);
+        List<Tool> tools = new LinkedList<>();
+        tools.add(tool1);
+        tools.add(tool2);
+        tools.add(tool3);
+        tools.add(tool4);
+        List<Tool> newTools = toolService.findByPriceBetween(tools,500.0,200.0);
+        Assertions.assertEquals(2,newTools.size());
+    }
+
+    @Test
+    public void test_that_findByToolsByDistrict_get_list_by_district_from_list_of_all(){
+        Person person = new Person("Person","+79865745647",new User());
+        Address address1 = new Address("District","Street");
+        Address address2 = new Address("District2","Street2");
+        Tool tool1 = new Tool("tool1","",person,address1,100);
+        Tool tool2 = new Tool("tool2","",person,address2,200);
+        Tool tool3 = new Tool("tool1","",person,address1,500);
+        Tool tool4 = new Tool("tool4","",person,address2,600);
+        List<Tool> tools = new LinkedList<>();
+        tools.add(tool1);
+        tools.add(tool2);
+        tools.add(tool3);
+        tools.add(tool4);
+        List<Tool> newTools = toolService.findToolsByDistrict(tools,"District");
+        Assertions.assertEquals(2,newTools.size());
+    }
 
 }
