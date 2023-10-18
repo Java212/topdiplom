@@ -51,10 +51,10 @@ public class OrderController {
         return "redirect:personal-account";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/order/delete/{id}")
     public String deleteOrder(@PathVariable("id") Integer id, Model model) {
        orderService.delete(id);
-        return "redirect:personal-account";
+        return "redirect:/personal-account";
     }
 
 

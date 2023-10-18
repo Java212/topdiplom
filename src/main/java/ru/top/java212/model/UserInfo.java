@@ -23,10 +23,10 @@ public class UserInfo {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "userInfo")
+    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "userInfo")
+    @OneToMany(mappedBy = "userInfo",cascade = CascadeType.ALL)
     private List<Product> products;
 
     public UserInfo() {}

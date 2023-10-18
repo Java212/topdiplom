@@ -24,7 +24,7 @@ public class MainPageController {
     public ModelAndView getProducts() {
 
         ModelAndView mv = new ModelAndView("index");
-        mv.addObject("products", productRepository.findAll());
+        mv.addObject("products", productRepository.findByIsBusy(false));
         return mv;
     }
 

@@ -1,7 +1,9 @@
 package ru.top.java212.service;
 
-import ru.top.java212.dto.ProductDto;
+
+import ru.top.java212.model.Product;
 
 public interface ProductService {
-    void addProduct(ProductDto dto);
+    boolean saveProduct(Product product);
+    boolean delete(Integer id);
 }

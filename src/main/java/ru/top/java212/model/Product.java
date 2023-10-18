@@ -16,7 +16,7 @@ public class Product {
     @Column(name = "product_id")
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 

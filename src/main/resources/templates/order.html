@@ -17,37 +17,45 @@
 </head>
 <body>
 <div th:include="fragments/header :: header"></div>
+
 <div class="gradient">
-    <form method="post" th:action="@{/save}"  th:if="${orderDto}" th:object="${orderDto}">
-        <div class="card col-md-6">
-            <p class="card-title" th:text="${product.title}">TITLE</p>
-            <img th:src="${product.linkToTheImage}"
-                 th:alt="${product.linkToTheImage}">
-            <p class="card-specification" th:text="${product.specification}">
-                ...
-            </p>
-            <div class="card-price">
-                <div class="card-number" th:text="${product.price}">0</div>
-                <div class="card-text">
-                    <div class="card-dollar">$</div>
-                    <div class="per-day">per day</div>
-                </div>
+
+    <div class="card col-md-6">
+        <p class="card-title" th:text="${product.title}">TITLE</p>
+        <img th:src="${product.linkToTheImage}"
+             th:alt="${product.linkToTheImage}">
+        <p class="card-specification" th:text="${product.specification}">
+            ...
+        </p>
+        <div class="card-price">
+            <div class="card-number" th:text="${product.price}">0</div>
+            <div class="card-text">
+                <div class="card-dollar">$</div>
+                <div class="per-day">per day</div>
             </div>
-            <div class="text-center">
-                <input type="hidden"  name="productId"  th:attr="value=${product.id}"   >
-                <label for="startDate" class="form-label">Дата начала аренды</label>
-                <input type="date" name="startDate"  id="startDate" th:field="*{startDate}">
-
-                <label for="endDate" class="form-label">Дата окончания аренды</label>
-                <input type="date" name="endDate"  id="endDate" th:field="*{endDate}">
-
-                <button type="submit" class="btn btn-primary " id="rentNow">Арендовать сейчас</button>
-            </div>
-
-
         </div>
-    </form>
+        <form class="row g-3 p-4 needs-validation" novalidate method="post" th:action="@{/save}" th:if="${orderDto}"
+              th:object="${orderDto}">
 
+            <input type="hidden" name="productId" th:attr="value=${product.id}">
+            <div class="col-md-6">
+                <label for="startDate" class="form-label">Дата начала аренды</label>
+                <input type="date" th:field="*{startDate}" class="form-control" id="startDate" required>
+                <div class="invalid-feedback">укажите дату начала аренды</div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="endDate" class="form-label">Дата окончания аренды</label>
+                <input type="date" th:field="*{endDate}" class="form-control" id="endDate" required>
+                <div class="invalid-feedback">укажите дату окончания аренды</div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="col-md-6 btn btn-primary">Арендовать сейчас</button>
+            </div>
+
+        </form>
+    </div>
 
 
 </div>
@@ -63,6 +71,25 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"
 ></script>
+<script>
+    (function () {
+        'use strict'
 
+        var forms = document.querySelectorAll('.needs-validation')
+
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
 </body>
 </html>

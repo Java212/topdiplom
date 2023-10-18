@@ -7,4 +7,5 @@ import ru.top.java212.model.UserInfo;
 
 public interface UserInfoRepository extends JpaRepository<UserInfo,Integer> {
     UserInfo findByUser(User user);
+    void deleteById(Integer id);
 }

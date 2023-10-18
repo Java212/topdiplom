@@ -13,6 +13,7 @@ import ru.top.java212.dao.RoleRepository;
 import ru.top.java212.dao.UserInfoRepository;
 import ru.top.java212.dao.UserRepository;
 import ru.top.java212.dto.UserDto;
+import ru.top.java212.model.Address;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 import ru.top.java212.model.UserInfo;
@@ -84,5 +85,20 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("user not found");
         }
         return user;
+    }
+
+    public boolean updateUserInfo(UserInfo userInfo) {
+        UserInfo userInfoFromDb = userInfoRepository.findByUser(userInfo.getUser());
+        Address addressFromDb = userInfoFromDb.getAddress();
+        addressFromDb.setDistrict(userInfo.getAddress().getDistrict());
+        addressFromDb.setStreet(userInfo.getAddress().getStreet());
+        addressFromDb.setNumberOfHouse(userInfo.getAddress().getNumberOfHouse());
+        addressFromDb.setApartmentNumber(userInfo.getAddress().getApartmentNumber());
+        userInfoFromDb.setName(userInfo.getName());
+        userInfoFromDb.setEmail(userInfo.getEmail());
+        userInfoFromDb.setPhoneNumber(userInfo.getPhoneNumber());
+        userInfoFromDb.setAddress(addressFromDb);
+        userInfoRepository.save(userInfoFromDb);
+        return true;
     }
 }

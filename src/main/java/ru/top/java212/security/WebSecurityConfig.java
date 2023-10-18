@@ -12,7 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import ru.top.java212.service.UserService;
 
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity()
@@ -42,6 +41,7 @@ public class WebSecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
+                        .permitAll()
                         .logoutSuccessUrl("/")
                 );
 

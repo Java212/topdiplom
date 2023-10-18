@@ -5,8 +5,8 @@
 
 </head>
 <body th:fragment="header">
-<nav class="navbar navbar-expand-lg bg-info" >
-    <div class="container-fluid" >
+<nav class="navbar navbar-expand-lg bg-info">
+    <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">
             <img src="/img/logo.png" alt="" style="height: 40px">
             TOOLRENT
@@ -24,13 +24,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto mb-2 mb-lg-0">
-                <li class="nav-item" >
-                    <a class="nav-link"  th:classappend="${module == 'home' ? 'active' : ''}" aria-current="page" th:href="@{/}"
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${module == 'home' ? 'active' : ''}" aria-current="page"
+                       th:href="@{/}"
                     >Главная</a
                     >
                 </li>
-                <li class="nav-item" >
-                    <a class="nav-link " th:classappend="${module == 'sale' ? 'active' : ''}" th:href="@{/sale}">Акции</a>
+                <li class="nav-item">
+                    <a class="nav-link " th:classappend="${module == 'sale' ? 'active' : ''}"
+                       th:href="@{/sale}">Акции</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -70,13 +72,15 @@
             <ul class="navbar-nav m-auto  m-2 mb-lg-0">
                 <li class="nav-item">
 
-                        <img src="/img/user.png" alt="">
-                   <span th:if="${userInfo}" th:text="${userInfo.name}">...</span>
-                    <a th:if="${userInfo}" th:href="@{/logout}" class="btn btn-primary">Выйти</a>
-                        <a th:href="@{/personal-account}"  id="authModalButton" class="btn btn-primary"  >
-                            Войти
-                        </a>
+                    <img src="/img/user.png" alt="">
+                    <span th:if="${userInfo}" th:text="${userInfo.name}">...</span>
+                    <a th:if="${userInfo}" href="@{/logout}" th:href="@{#}" onclick="$('#form').submit();"
+                       class="btn btn-primary">Выйти</a>
 
+                    <a th:href="@{/personal-account}" id="authModalButton" class="btn btn-primary">
+                        Войти
+                    </a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
 
                 </li>
             </ul>
@@ -85,8 +89,6 @@
 </nav>
 
 
-
-<!-- Модальное окно -->
 <div class="modal fade" id="authModal" aria-hidden="true" aria-labelledby="authModalLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -98,7 +100,7 @@
                 <form th:action="@{/login}" method="post">
                     <div class="mb-3">
                         <label for="inputLogin" class="form-label">Имя пользователя</label>
-                        <input type="text" name="username" class="form-control" id="inputLogin" >
+                        <input type="text" name="username" class="form-control" id="inputLogin">
 
                     </div>
                     <div class="mb-3">
@@ -112,12 +114,14 @@
             </div>
             <div class="modal-footer">
 
-                <button class="btn btn-primary" data-bs-target="#registrationModal" data-bs-toggle="modal">Регистрация</button>
+                <button class="btn btn-primary" data-bs-target="#registrationModal" data-bs-toggle="modal">Регистрация
+                </button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="registrationModal" aria-hidden="true" aria-labelledby="registrationModalLabel" tabindex="-1">
+<div class="modal fade" id="registrationModal" aria-hidden="true" aria-labelledby="registrationModalLabel"
+     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -125,66 +129,82 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3 p-4"  method="post"  th:action="@{/registration}"  th:if="${userDto}" th:object="${userDto}" >
+                <form class="row g-3 p-4 needs-validation" novalidate method="post" th:action="@{/registration}" th:if="${userDto}"
+                      th:object="${userDto}">
+                    <div class="input-group has-validation">
+                        <div class="col-md-6">
+                            <label for="login" class="form-label">Login</label>
+                            <input type="text" th:field="*{userInfo.user.userName}" class="form-control" id="login" required>
+                            <div class="invalid-feedback">login не должен быть пустым</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="password" class="form-label">Пароль</label>
+                            <input type="password" th:field="*{userInfo.user.password}" class="form-control"
+                                   id="password" required>
+                            <div class="invalid-feedback">пароль не должен быть пустым</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPasswordRepeat" class="form-label">Повторите пароль</label>
+                            <input type="password" class="form-control" id="inputPasswordRepeat" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="userName" class="form-label">Имя</label>
+                            <input type="text" th:field="*{userInfo.name}" class="form-control" id="userName" required>
+                            <div class="invalid-feedback">имя не должно быть пустым</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Эл. адрес</label>
+                            <input type="email" th:field="*{userInfo.email}" class="form-control" id="email" required>
+                            <div class="invalid-feedback">укажите корректный электронный адрес</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phoneNumber" class="form-label">Номер телефона</label>
+                            <input type="text" th:field="*{userInfo.phoneNumber}" class="form-control" id="phoneNumber" required>
+                            <div class="invalid-feedback">номер телефона не должен быть пустым</div>
+                        </div>
+                        <div class="col-6">
+                            <label for="street" class="form-label">Улица</label>
+                            <input type="text" th:field="*{userInfo.address.street}" class="form-control" id="street"
+                                   placeholder="Проспект Ленина" required>
+                            <div class="invalid-feedback">укажите корректную улицу</div>
+                        </div>
+                        <div class="col-4">
+                            <label for="numberOfHouse" class="form-label">Номер дома</label>
+                            <input type="text" th:field="*{userInfo.address.numberOfHouse}" class="form-control"
+                                   id="numberOfHouse" placeholder="Дом" required>
+                            <div class="invalid-feedback">введите номер дома</div>
+                        </div>
+                        <div class="col-4">
+                            <label for="apartmentNumber" class="form-label">Номер квартиры</label>
+                            <input type="text" th:field="*{userInfo.address.apartmentNumber}" class="form-control"
+                                   id="apartmentNumber" placeholder="Квартира">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="role" class="form-label">Вы арендатор?</label>
+                            <select id="role" th:field="*{role.name}" class="form-select" required>
+                                <option value="" selected>Выберите роль</option>
+                                <option value="OWNER">Владелец</option>
+                                <option value="TENANT">Арендатор</option>
+                            </select>
+                            <div class="invalid-feedback">выберите одну из ролей</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="district" class="form-label">Район</label>
+                            <select id="district" th:field="*{userInfo.address.district}" class="form-select" required>
+                                <option value="" selected>Выберите район</option>
+                                <option value="САО">САО</option>
+                                <option value="ВАО">ВАО</option>
+                                <option value="ЮАО">ЮАО</option>
+                                <option value="ЗАО">ЗАО</option>
+                            </select>
+                            <div class="invalid-feedback">выберите район города</div>
+                        </div>
+                    </div>
 
-                    <div class="col-md-6">
-                        <label for="login" class="form-label">Login</label>
-                        <input type="text" th:field="*{userInfo.user.userName}" class="form-control" id="login">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="password" class="form-label">Пароль</label>
-                        <input type="password" th:field="*{userInfo.user.password}" class="form-control" id="password">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputPasswordRepeat" class="form-label">Повторите пароль</label>
-                        <input type="password"  class="form-control" id="inputPasswordRepeat">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="userName" class="form-label">Имя</label>
-                        <input type="text" th:field="*{userInfo.name}"  class="form-control" id="userName">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Эл. адрес</label>
-                        <input type="email" th:field="*{userInfo.email}" class="form-control" id="email">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="phoneNumber" class="form-label">Номер телефона</label>
-                        <input type="text" th:field="*{userInfo.phoneNumber}" class="form-control" id="phoneNumber">
-                    </div>
-
-
-                    <div class="col-6">
-                        <label for="street" class="form-label">Улица</label>
-                        <input type="text" th:field="*{userInfo.address.street}" class="form-control" id="street" placeholder="Проспект Ленина">
-                    </div>
-                    <div class="col-4">
-                        <label for="numberOfHouse" class="form-label">Номер дома</label>
-                        <input type="text" th:field="*{userInfo.address.numberOfHouse}"  class="form-control" id="numberOfHouse" placeholder="Дом">
-                    </div>
-                    <div class="col-4">
-                        <label for="apartmentNumber" class="form-label">Номер квартиры</label>
-                        <input type="text"  th:field="*{userInfo.address.apartmentNumber}" class="form-control" id="apartmentNumber" placeholder="Квартира">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="role" class="form-label">Вы арендатор?</label>
-                        <select id="role" th:field="*{role.name}"  class="form-select">
-                            <option value="" selected>Выберите роль</option>
-                            <option value="OWNER">Владелец</option>
-                            <option value="TENANT">Арендатор</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="district" class="form-label">Район</label>
-                        <select    id="district"  th:field="*{userInfo.address.district}"   class="form-select">
-                            <option value="" selected>Выберите район</option>
-                            <option value="САО">САО</option>
-                            <option value="ВАО">ВАО</option>
-                            <option value="ЮАО">ЮАО</option>
-                            <option value="ЗАО">ЗАО</option>
-                        </select>
-                    </div>
                     <div class="text-center">
-                        <button type="submit" id="buttonRegistration" class="col-md-6 btn btn-primary ">Зарегистрироваться</button>
+                        <button type="submit" id="buttonRegistration" class="col-md-6 btn btn-primary ">
+                            Зарегистрироваться
+                        </button>
                     </div>
 
 
@@ -201,5 +221,6 @@
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"
 ></script>
+
 
 </html>
