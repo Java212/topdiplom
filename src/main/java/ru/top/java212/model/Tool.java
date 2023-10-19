@@ -3,6 +3,7 @@ package ru.top.java212.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tools")
@@ -49,6 +50,9 @@ public class Tool {
     public Person getPerson() {
         return person;
     }
+    public String getPersonName(){
+        return this.person.getName();
+    }
 
     public void setPerson(Person person) {
         this.person = person;
@@ -76,5 +80,18 @@ public class Tool {
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tool tool = (Tool) o;
+        return id == tool.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

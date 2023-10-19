@@ -14,9 +14,6 @@
                 <form th:action="@{/lessor/lessorView}" method="post">
                     <table th:each="tool:${tools}">
                         <td>
-                            <input type="checkbox" th:name="deleteList" th:value="${tool.getId()}"/>
-                        </td>
-                        <td>
                             <label th:text="${tool.getName()}"></label>
                         </td>
                         <td>

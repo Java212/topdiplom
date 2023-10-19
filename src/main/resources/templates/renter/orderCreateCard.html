@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tool</title>
+    <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
+</head>
+<body>
+<section th:replace="fragments/header :: header" />
+<section class="center">
+    <div class="registration">
+        <form th:action="@{/renter/orderCard}" method="post"  th:object="${order}">
+            <h2 th:text="${tool.getName()}"></h2>
+            <div class="content">
+                <div class="input">
+                    <br>
+                    <label>Цена в сутки: </label>
+                    <label th:text="${tool.getPrice()}"></label>
+                    <label> рублей</label>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                    <label>Владелец: </label>
+                    <label th:text="${tool.getPersonName()}"></label>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                    <input type="hidden" th:value="${tool.getId()}" name="toolId"/>
+                    <input type="date"   th:field="*{startDate}" required/>
+                    <input type="date"   th:field="*{stopDate}" required/>
+                    <br>
+                </div>
+                <div class="input">
+                    <button><a  th:href="@{/renter/toolSearchView}">Вернуться к поиску</a></button>
+                    <input id="submitButton" type="submit"  value="Арендовать"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

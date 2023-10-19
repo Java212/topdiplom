@@ -82,17 +82,9 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findByPriceBetween(List<Tool> tools, Double priceMin, Double priceMax) {
-        Double minPrice,maxPrice;
-        if(priceMin > priceMax){
-            minPrice = priceMax;
-            maxPrice = priceMin;
-        } else{
-            minPrice = priceMin;
-            maxPrice = priceMax;
-        }
-        return tools.stream().filter(t -> t.getPrice() >= minPrice && t.getPrice() <= maxPrice).collect(Collectors.toList());
+        return tools.stream().filter(t -> (t.getPrice() >= priceMin
+                                        && t.getPrice() <= priceMax)).collect(Collectors.toList());
     }
-
 
     @Override
     public Double findMaxPrice() {
@@ -105,18 +97,8 @@ public class ToolServiceImpl implements ToolService{
         List<Order> orders = orderRepository.findOrdersByDateBetween(startDate,stopDate);
         List<Tool> allTools = toolRepository.findAll();
         Set<Tool> orderTools = orders.stream().map(Order::getTool).collect(Collectors.toSet());
-        if(!orderTools.isEmpty()){
-            for(Tool toolFromAllTools:allTools){
-                for(Tool  toolFromOrderTools:orderTools){
-                    if(toolFromAllTools.getId() != toolFromOrderTools.getId()){
-                        resultTools.add(toolFromAllTools);
-                    }
-                }
-            }
-        } else{
-            resultTools = allTools;
-        }
-        return resultTools;
+        allTools.removeAll(orderTools);
+        return allTools ;
     }
 
     @Override

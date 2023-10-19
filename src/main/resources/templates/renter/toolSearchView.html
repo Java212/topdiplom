@@ -10,33 +10,65 @@
 <section th:replace="fragments/header :: header" />
 <section class="center">
     <div class="userBox">
-        <form th:action="@{/renter/toolSearchView}" method="post">
-            <div class="input">
-                <input name="name" placeholder="название" th:value="${name}"/>
-            </div>
+        <div class="table">
             <div>
-                <input name="district" placeholder="район" th:value="${district}"/>
+                <form th:action="@{/renter/toolSearchView}" method="post">
+                    <h3>Поиск</h3>
+                    <div class="field">
+                        <label>Начало аренды:</label>
+                        <input type="date"  th:value="${startDate}"  name="startDate" required/>
+                    </div>
+                    <div class="field">
+                        <label>Окончание аренды:</label>
+                        <input type="date"  th:value="${stopDate}" name="stopDate" required/>
+                    </div>
+                    <div class="field">
+                        <label>Инструмент:</label>
+                        <input name="name" placeholder="название" th:value="${name}"/>
+                    </div>
+                    <div class="field">
+                        <label>Район:</label>
+                        <input name="district" placeholder="район" th:value="${district}"/>
+                    </div>
+                    <div class="field">
+                        <label>Минимальная цена:</label>
+                        <input name="priceMin" placeholder="мин. цена" th:value="${priceMin}"/>
+                    </div>
+                    <div class="field">
+                        <label>Максимальная цена:</label>
+                        <input name="priceMax" placeholder="макс. цена" th:value="${priceMax}"/>
+                    </div>
+                    <div class="input">
+                        <button><a  th:href="@{/renter/renterView}">Вернуться</a></button>
+                        <input  type="submit"  value="Найти" />
+                    </div>
+                </form>
             </div>
-            <div>
-                <input name="priceMin" placeholder="мин. цена" th:value="${priceMin}"/>
-                <input name="priceMax" placeholder="макс. цена" th:value="${priceMax}"/>
+            <div class="content">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>
+                            Инструмент
+                        </th>
+                        <th>
+                            Цена за сутки
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="tool:${tools}">
+                    <tr>
+                        <td>
+                            <a class="change-text" th:href="@{/renter/orderCreateCard(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
+                        </td>
+                        <td>
+                            <label th:text="${tool.getPrice()}"></label>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <input type="date"  th:value="${startDate}"  name="startDate" required/>
-                <input type="date"  th:value="${stopDate}" name="stopDate" required/>
-            </div>
-            <div class="input">
-                <input  type="submit"  value="Найти" />
-            </div>
-        </form>
-        <table th:each="tool:${tools}">
-            <td>
-                <a th:href="@{/renter/orderCard(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
-            </td>
-            <td>
-                <label th:text="${tool.getPrice()}"></label>
-            </td>
-        </table>
+        </div>
     </div>
 </section>
 </body>

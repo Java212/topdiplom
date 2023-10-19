@@ -52,6 +52,9 @@ h1{
 h2{
   color:#af2121;
 }
+h3{
+text-align:center;
+}
 .bottom{
    margin-top:10px;
 }
@@ -114,3 +117,26 @@ th {
  td {
    border: 1px solid grey;
 }
+
+.field{
+   text-align:right;
+   padding-bottom:5px;
+}
+label{
+  float:left;
+}
+.content{
+margin-left:50px;
+}
+
+ .change-text{
+    color:black;
+ }
+
+ .change-text:hover {
+   color:#7d7f7d;
+ }
+
+ label{
+   margin-right:10px;
+ }

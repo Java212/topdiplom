@@ -14,13 +14,12 @@ import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 import ru.top.java212.service.orders.OrderService;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/renter/orderCard")
-public class OrderCardController {
+@RequestMapping("/renter/orderCreateCard")
+public class OrderCreateCardController {
 
 
 
@@ -34,7 +33,7 @@ public class OrderCardController {
 
     @GetMapping
     public ModelAndView showOrderCardView(@RequestParam(value = "toolId") int toolId){
-        ModelAndView mv = new ModelAndView("/renter/orderCard");
+        ModelAndView mv = new ModelAndView("/renter/orderCreateCard");
         Tool tool = toolRepository.getReferenceById(toolId);
         mv.addObject("order",new OrderDTO());
         mv.addObject("tool",tool);

@@ -1,4 +1,4 @@
-package ru.top.java212.web;
+package ru.top.java212.web.renter;
 
 import ch.qos.logback.core.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,16 +60,16 @@ public class ToolSearchViewController {
         Double priceMaxDouble = PriceUtils.getDoubleFromString(priceMax,maxPrice);
         List<Tool> toolList = toolService.findToolsByDates(startDate,stopDate);
 
-//        if(!priceMax.equals("") || !priceMin.equals("")){
-//            toolList = toolService.findByPriceBetween(toolList,priceMinDouble,priceMaxDouble);
-//        }
-//        if(!name.equals("")){
-//           toolList = toolService.findByName(toolList,name);
-//        }
-//        if(!district.equals("")){
-//            toolList = toolService.findToolsByDistrict(toolList,district);
-//
-//        }
+        if(!priceMax.equals("") || !priceMin.equals("")){
+            toolList = toolService.findByPriceBetween(toolList,priceMinDouble,priceMaxDouble);
+        }
+        if(!name.equals("")){
+           toolList = toolService.findByName(toolList,name);
+        }
+        if(!district.equals("")){
+            toolList = toolService.findToolsByDistrict(toolList,district);
+
+        }
 
         mv.addObject("tools",toolList);
         return mv;

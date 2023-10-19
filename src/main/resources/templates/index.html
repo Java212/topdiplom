@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>Аренда инструмента</title>
+    <title>Ордер</title>
     <link rel="stylesheet" th:href="@{css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
@@ -10,9 +10,8 @@
 <section class="center">
     <div class="registration">
         <h2>
-            Рады приветствовать Вас,  <label  th:text="${personName}"></label>
+            Рады приветствовать Вас,  <p  th:text="${personName}"></p>
         </h2>
-
         <p sec:authorize="hasRole('LESSOR')">
             <a th:href="@{/lessor/lessorView}"> Сдать инструмент </a>
         </p>
