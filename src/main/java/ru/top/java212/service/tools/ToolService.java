@@ -20,4 +20,5 @@ public interface ToolService {
     Double findMaxPrice();
     List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate);
     List<Tool> findToolsByDistrict(List<Tool> tools,String district);
+    Tool getToolById(int id);
 }

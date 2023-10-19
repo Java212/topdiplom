@@ -106,5 +106,10 @@ public class ToolServiceImpl implements ToolService{
         return tools.stream().filter(t -> t.getDistrict().equals(district)).collect(Collectors.toList());
     }
 
+    @Override
+    public Tool getToolById(int id) {
+        return toolRepository.getReferenceById(id);
+    }
+
 
 }

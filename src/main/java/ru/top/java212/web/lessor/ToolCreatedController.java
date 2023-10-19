@@ -16,7 +16,7 @@ import ru.top.java212.service.tools.ToolService;
 
 @Controller
 @RequestMapping("/lessor/toolCreatedView")
-public class ToolCreatedView {
+public class ToolCreatedController {
 
     @Autowired
     ToolService toolService;

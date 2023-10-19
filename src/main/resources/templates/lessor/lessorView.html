@@ -14,7 +14,7 @@
                 <form th:action="@{/lessor/lessorView}" method="post">
                     <table th:each="tool:${tools}">
                         <td>
-                            <label th:text="${tool.getName()}"></label>
+                            <a class="change-text" th:href="@{/lessor/toolModifyCardView(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
                         </td>
                         <td>
                             <label th:text="${tool.getPrice()}">  </label>
