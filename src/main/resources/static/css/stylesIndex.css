@@ -50,6 +50,7 @@ h1{
    color:#af2121;
 }
 h2{
+  text-align:center;
   color:#af2121;
 }
 h3{
@@ -122,8 +123,8 @@ th {
    text-align:right;
    padding-bottom:5px;
 }
-label{
-  float:left;
+.label-field{
+   float:left;
 }
 .content{
 margin-left:50px;

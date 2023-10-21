@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ru.top.java212.model.Order;
 import ru.top.java212.model.Person;
+import ru.top.java212.model.Tool;
 import ru.top.java212.model.User;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 import ru.top.java212.service.tools.ToolService;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -35,21 +39,13 @@ public class LessorViewController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (principal instanceof User) ? ((User) principal) : new User();
         Person personUser = personRepository.findByUser(user);
+        List<Tool> userTools = toolService.findAllByUser(user);
+        List<Order> userOrders = toolService.getOrdersByTools(userTools);
         ModelAndView mv = new ModelAndView("lessor/lessorView");
         mv.addObject("personName", personUser.getName());
-        mv.addObject("tools", toolService.findAllByUser(user));
+        mv.addObject("tools", userTools);
+        mv.addObject("orders",userOrders);
         return mv;
     }
 
-    @PostMapping
-    public ModelAndView deleteTool(@RequestParam(required = false) List<String> deleteList){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (principal instanceof User) ? ((User) principal) : new User();
-        ModelAndView mv = new ModelAndView("lessor/lessorView");
-        for(String element:deleteList){
-            toolService.deleteById( Integer.parseInt(element));
-            mv.addObject("tools", toolService.findAllByUser(user));
-        }
-        return mv;
-    }
 }

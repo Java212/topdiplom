@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.model.Tool;
 import ru.top.java212.model.User;
-import ru.top.java212.repository.ToolRepository;
 import ru.top.java212.service.tools.ToolService;
 
 @Controller
-
 @RequestMapping("/lessor/toolModifyCardView")
 public class ToolModifyController {
     ToolService toolService;
@@ -31,11 +29,8 @@ public class ToolModifyController {
 
     @PostMapping
     public ModelAndView removeTool(@RequestParam(value = "toolId") int toolId){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = ( principal instanceof User)? ((User) principal):new User();
         toolService.deleteById(toolId);
-        ModelAndView mv = new ModelAndView("lessor/lessorView");
-        mv.addObject("tools", toolService.findAllByUser(user));
+        ModelAndView mv = new ModelAndView("redirect:/lessor/lessorView");
         return  mv;
     }
 }

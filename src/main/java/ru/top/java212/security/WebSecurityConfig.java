@@ -23,7 +23,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                         .requestMatchers("/registration","/login").permitAll()
-                        .requestMatchers("/").hasAnyRole(Role.ROLE_RENTER,Role.ROLE_LESSOR)
+                        .requestMatchers("/","/orderModifyCardView").hasAnyRole(Role.ROLE_RENTER,Role.ROLE_LESSOR)
                         .requestMatchers("/lessor/**").hasRole(Role.ROLE_LESSOR)
                         .requestMatchers("/renter/**").hasRole(Role.ROLE_RENTER)
                         .anyRequest().authenticated()

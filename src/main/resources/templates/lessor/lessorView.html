@@ -11,17 +11,62 @@
     <div class="userBox">
         <div class="table">
             <div class="tools">
+                <h2>Инструмент</h2>
                 <form th:action="@{/lessor/lessorView}" method="post">
-                    <table th:each="tool:${tools}">
-                        <td>
-                            <a class="change-text" th:href="@{/lessor/toolModifyCardView(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
-                        </td>
-                        <td>
-                            <label th:text="${tool.getPrice()}">  </label>
-                        </td>
+                    <table >
+                        <thead>
+                        <tr>
+                            <th>
+                                Инструмент
+                            </th>
+                            <th>
+                                Цена за сутки
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="tool:${tools}">
+                        <tr>
+                            <td>
+                                <a class="change-text" th:href="@{/lessor/toolModifyCardView(toolId=${tool.getId()})}"><label th:text="${tool.getName()}"></label> </a>
+                            </td>
+                            <td>
+                                <label th:text="${tool.getPrice()}">  </label>
+                            </td>
+                        </tr>
+                        </tbody>
                     </table>
-                    <input id="submitButton" type="submit"  value="Удалить" />
-                    <button><a th:href="toolCreatedView">Добавить</a></button>
+                    <div class="input">
+                        <button><a th:href="toolCreatedView">Добавить</a></button>
+                    </div>
+                </form >
+            </div>
+            <div class="content">
+                <h2>Ордера</h2>
+                <form th:action="@{/lessor/lessorView}" method="post">
+                    <table >
+                        <thead>
+                        <tr>
+                            <th>
+                                Ордер
+                            </th>
+                            <th>
+                                Инструмент
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="order:${orders}">
+                        <tr>
+                            <td>
+                                <a class="change-text" th:href="@{/orderModifyCardView(orderId=${order.getId()})}"><label th:text="${order.getId()}"></label> </a>
+                            </td>
+                            <td>
+                                <a class="change-text" th:href="@{/orderModifyCardView(orderId=${order.getId()})}"> <label th:text="${order.getToolName()}"></label> </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="input">
+                    </div>
                 </form >
             </div>
         </div>

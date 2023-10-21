@@ -1,4 +1,4 @@
-package ru.top.java212.web;
+package ru.top.java212.web.renter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

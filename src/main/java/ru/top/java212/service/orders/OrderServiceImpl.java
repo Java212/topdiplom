@@ -38,6 +38,11 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Order findOrderById(int id){
+        return orderRepository.getReferenceById(id);
+    }
+
+    @Override
     public List<Order> findByPerson(Person person) {
         return orderRepository.findByPerson(person);
     }

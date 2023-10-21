@@ -15,27 +15,27 @@
                 <form th:action="@{/renter/toolSearchView}" method="post">
                     <h3>Поиск</h3>
                     <div class="field">
-                        <label>Начало аренды:</label>
+                        <label class="label-field">Начало аренды:</label>
                         <input type="date"  th:value="${startDate}"  name="startDate" required/>
                     </div>
                     <div class="field">
-                        <label>Окончание аренды:</label>
+                        <label class="label-field">Окончание аренды:</label>
                         <input type="date"  th:value="${stopDate}" name="stopDate" required/>
                     </div>
                     <div class="field">
-                        <label>Инструмент:</label>
+                        <label class="label-field">Инструмент:</label>
                         <input name="name" placeholder="название" th:value="${name}"/>
                     </div>
                     <div class="field">
-                        <label>Район:</label>
+                        <label class="label-field">Район:</label>
                         <input name="district" placeholder="район" th:value="${district}"/>
                     </div>
                     <div class="field">
-                        <label>Минимальная цена:</label>
+                        <label class="label-field">Минимальная цена:</label>
                         <input name="priceMin" placeholder="мин. цена" th:value="${priceMin}"/>
                     </div>
                     <div class="field">
-                        <label>Максимальная цена:</label>
+                        <label class="label-field">Максимальная цена:</label>
                         <input name="priceMax" placeholder="макс. цена" th:value="${priceMax}"/>
                     </div>
                     <div class="input">

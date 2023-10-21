@@ -10,6 +10,7 @@ import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -109,6 +110,11 @@ public class ToolServiceImpl implements ToolService{
     @Override
     public Tool getToolById(int id) {
         return toolRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<Order> getOrdersByTools(List<Tool> tools) {
+        return tools.stream().map(Tool::getOrders).flatMap(Collection::stream).collect(Collectors.toList());
     }
 
 

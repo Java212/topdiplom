@@ -38,10 +38,7 @@ public class ToolCreatedController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = ( principal instanceof User)? ((User) principal):new User();
         toolService.save(toolDTO,user);
-        Person personUser = personRepository.findByUser(user);
-        ModelAndView mv = new ModelAndView("lessor/lessorView");
-        mv.addObject("personName",personUser.getName());
-        mv.addObject("tools",toolService.findAllByUser(user));
+        ModelAndView mv = new ModelAndView("redirect:/lessor/lessorView");
        return  mv;
     }
 

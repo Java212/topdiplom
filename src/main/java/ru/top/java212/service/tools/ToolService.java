@@ -1,12 +1,15 @@
 package ru.top.java212.service.tools;
 
 import ru.top.java212.dto.ToolDTO;
+import ru.top.java212.model.Order;
 import ru.top.java212.model.Person;
 import ru.top.java212.model.Tool;
 import ru.top.java212.model.User;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface ToolService {
     Boolean save(ToolDTO tool, User user);
@@ -21,4 +24,5 @@ public interface ToolService {
     List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate);
     List<Tool> findToolsByDistrict(List<Tool> tools,String district);
     Tool getToolById(int id);
+    List<Order> getOrdersByTools(List<Tool> tools);
 }
