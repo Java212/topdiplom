@@ -6,6 +6,11 @@ import ru.top.java212.dao.ProductRepository;
 import ru.top.java212.model.Category;
 import ru.top.java212.model.Product;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -26,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
         if (categoryFromDb != null) {
             category = categoryFromDb;
         }
+        categoryRepository.save(category);
         product.setCategories(category);
         product.setBusy(false);
         productRepository.save(product);
@@ -40,5 +46,35 @@ public class ProductServiceImpl implements ProductService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Product> getProductsByCategory(String title) {
+
+        List<Product> result = new ArrayList<>();
+        productRepository.findByIsBusy(false).iterator().forEachRemaining(result::add);
+        return result.stream().filter(product -> product.getCategories().getTitle().equals(title)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getLastProductsByIsBusy(boolean isBusy) {
+
+        List<Product> result = new ArrayList<>();
+        productRepository.findFirst10ByOrderByIdDesc().iterator().forEachRemaining(result::add);
+        return result.stream().filter(product -> product.isBusy() == isBusy).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getProductsByTitleNotBusy(boolean isBusy, String title) {
+
+        List<Product> result = new ArrayList<>();
+        List<Product> productsFromDb = new ArrayList<>();
+         productsFromDb = productRepository.findAllByTitle(title);
+        if (!productsFromDb.isEmpty()) {
+            productsFromDb.iterator().forEachRemaining(result::add);
+            return result.stream().filter(product -> product.isBusy() == isBusy).collect(Collectors.toList());
+        }
+        productsFromDb.add(new Product(new Category(),"Nothing found","/img/not found.jpg","Nothing was found for your query",new BigDecimal(0)));
+        return productsFromDb;
     }
 }

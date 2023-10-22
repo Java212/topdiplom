@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Battery Tool</title>
+    <title>tools</title>
 
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -25,24 +25,26 @@
 
 
 
-            <div class="row">
-                <div class="col-lg-4 col-md-6" th:each="product : ${products}">
-                    <div class="card">
-                        <img th:src="${product.linkToTheImage}" class="card-img-top"  th:alt="${product.linkToTheImage}" />
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${product.title}">Заголовок карточки</h5>
-                            <p class="card-text" th:text="${product.specification}">
-                               ...
-                            </p>
-                            <p th:text="${product.price}">
-                                2345 в сутки
-                            </p>
-                            <a th:href="@{'/order/' + ${product.id}}" class="btn btn-primary">Арендовать</a>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6" th:each="product : ${products}">
+            <div class="card">
+                <img th:src="${product.linkToTheImage}" class="card-img-top"  th:alt="${product.linkToTheImage}" />
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.title}">Заголовок карточки</h5>
+                    <p class="card-text" th:text="${product.specification}">
+                        ...
+                    </p>
+                    <p th:text="${product.price}">
+                        2345 в сутки
+                    </p>
+                    <a th:if="${product.category.title}" th:href="@{'/order/' + ${product.id}}" class="btn btn-primary">Арендовать</a>
                 </div>
-
             </div>
+        </div>
+
+    </div>
+
+
         </div>
 
 

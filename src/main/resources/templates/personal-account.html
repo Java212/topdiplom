@@ -53,126 +53,132 @@
 
 
     </div>
-    <div class="modal fade" id="infoModal" aria-hidden="true" aria-labelledby="infoModalLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="infoModalLabel">Личные данные</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3 p-4" th:action="@{/update-user}" method="post"  th:if="${userInfo}" th:object="${userInfo}">
+    <div th:fragment="infoModal">
+        <div class="modal fade" id="infoModal" aria-hidden="true" aria-labelledby="infoModalLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="infoModalLabel">Личные данные</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 p-4" th:action="@{/update-user}" method="post"  th:if="${userInfo}" th:object="${userInfo}">
 
-                        <div class="col-md-6">
-                            <label for="name" class="form-label">Имя</label>
-                            <input type="text" th:placeholder="${userInfo.name}" th:field="*{name}" class="form-control" id="name">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email" class="form-label">Эл. адрес</label>
-                            <input type="email" th:placeholder="${userInfo.email}" th:field="*{email}" class="form-control" id="email">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="phoneNumber" class="form-label">Номер телефона</label>
-                            <input type="text" th:placeholder="${userInfo.phoneNumber}" th:field="*{phoneNumber}" class="form-control" id="phoneNumber">
-                        </div>
-
-
-                        <div class="col-md-6">
-                            <label for="district" class="form-label">Район</label>
-                            <select    id="district"  th:field="*{address.district}"   class="form-select">
-                                <option th:value="${userInfo.address.district}" selected></option>
-                                <option value="САО">САО</option>
-                                <option value="ВАО">ВАО</option>
-                                <option value="ЮАО">ЮАО</option>
-                                <option value="ЗАО">ЗАО</option>
-                            </select>
-                        </div>
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Имя</label>
+                                <input type="text" th:placeholder="${userInfo.name}" th:field="*{name}" class="form-control" id="name">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Эл. адрес</label>
+                                <input type="email" th:placeholder="${userInfo.email}" th:field="*{email}" class="form-control" id="email">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phoneNumber" class="form-label">Номер телефона</label>
+                                <input type="text" th:placeholder="${userInfo.phoneNumber}" th:field="*{phoneNumber}" class="form-control" id="phoneNumber">
+                            </div>
 
 
-                        <div class="col-6">
-                            <label for="street" class="form-label">Улица</label>
-                            <input type="text" th:placeholder="${userInfo.address.street}" th:field="*{address.street}" class="form-control" id="street"
-                                   >
-                        </div>
-                        <div class="col-4">
-                            <label for="numberOfHouse" class="form-label">Номер дома</label>
-                            <input type="text" th:placeholder="${userInfo.address.numberOfHouse}" th:field="*{address.numberOfHouse}" class="form-control"
-                                   id="numberOfHouse" >
-                        </div>
-                        <div class="col-4">
-                            <label for="apartmentNumber" class="form-label">Номер квартиры</label>
-                            <input type="text" th:placeholder="${userInfo.address.apartmentNumber}" th:field="*{address.apartmentNumber}" class="form-control"
-                                   id="apartmentNumber" >
-                        </div>
+                            <div class="col-md-6">
+                                <label for="district" class="form-label">Район</label>
+                                <select    id="district"  th:field="*{address.district}"   class="form-select">
+                                    <option th:value="${userInfo.address.district}" selected></option>
+                                    <option value="САО">САО</option>
+                                    <option value="ВАО">ВАО</option>
+                                    <option value="ЮАО">ЮАО</option>
+                                    <option value="ЗАО">ЗАО</option>
+                                </select>
+                            </div>
 
 
-                        <div>
-                            <button type="submit" id="buttonRegistration" class="col-md-4 btn btn-primary ">
-                                Редактировать
-                            </button>
-
-                            <a th:href="@{'/delete-user/' + ${userInfo.id}}" class="col-md-4 btn btn-primary">Удалить</a>
-                        </div>
-
-
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="createProductModal" aria-hidden="true" aria-labelledby="createProductModalLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createProductModalLabel">Добавить инструмент</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3 p-4 needs-validation" novalidate  method="post"  th:action="@{/create-product}"  th:if="${product}" th:object="${product}" >
-
-                        <div class="col-md-6">
-                            <label for="category" class="form-label">Категория</label>
-                            <select id="category" th:field="*{category.title}"  class="form-select" required>
-                                <option value="" selected>Выберите категорию</option>
-                                <option value="УШМ">УШМ</option>
-                                <option value="Аккумуляторный инструмент">Аккумуляторный инструмент</option>
-                                <option value="Перфораторы">Перфораторы</option>
-                            </select>
-                            <div class="invalid-feedback">пожалуйста, выберите категорию</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="title" class="form-label">Название</label>
-                            <input type="text" th:field="*{title}" class="form-control" id="title" required>
-                            <div class="invalid-feedback">укажите название</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="linkToTheImage" class="form-label">Ссылка на фото</label>
-                            <textarea  th:field="*{linkToTheImage}" class="form-control" id="linkToTheImage" required></textarea>
-                            <div class="invalid-feedback">Ссылка не должна быть пустой</div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="specification" class="form-label">Описание</label>
-                            <textarea  th:field="*{specification}" class="form-control" id="specification" required></textarea>
-                            <div class="invalid-feedback">поле не должно быть пустым</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="price" class="form-label">Цена</label>
-                            <input type="text" th:field="*{price}"  class="form-control" id="price" required>
-                            <div class="invalid-feedback">укажите цену</div>
-                        </div>
-
-                        <div class="text-center">
-                            <button type="submit" id="createProductButton" class="col-md-6 btn btn-primary ">Добавить</button>
-                        </div>
+                            <div class="col-6">
+                                <label for="street" class="form-label">Улица</label>
+                                <input type="text" th:placeholder="${userInfo.address.street}" th:field="*{address.street}" class="form-control" id="street"
+                                >
+                            </div>
+                            <div class="col-4">
+                                <label for="numberOfHouse" class="form-label">Номер дома</label>
+                                <input type="text" th:placeholder="${userInfo.address.numberOfHouse}" th:field="*{address.numberOfHouse}" class="form-control"
+                                       id="numberOfHouse" >
+                            </div>
+                            <div class="col-4">
+                                <label for="apartmentNumber" class="form-label">Номер квартиры</label>
+                                <input type="text" th:placeholder="${userInfo.address.apartmentNumber}" th:field="*{address.apartmentNumber}" class="form-control"
+                                       id="apartmentNumber" >
+                            </div>
 
 
-                    </form>
+                            <div>
+                                <button type="submit" id="buttonRegistration" class="col-md-4 btn btn-primary ">
+                                    Редактировать
+                                </button>
+
+                                <a th:href="@{'/delete-user/' + ${userInfo.id}}" class="col-md-4 btn btn-primary">Удалить</a>
+                            </div>
+
+
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div th:fragment="createProductModal">
+        <div class="modal fade" id="createProductModal" aria-hidden="true" aria-labelledby="createProductModalLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="createProductModalLabel">Добавить инструмент</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 p-4 needs-validation" novalidate  method="post"  th:action="@{/create-product}"  th:if="${product}" th:object="${product}" >
+
+                            <div class="col-md-6">
+                                <label for="category" class="form-label">Категория</label>
+                                <select id="category" th:field="*{category.title}"  class="form-select" required>
+                                    <option value="" selected>Выберите категорию</option>
+                                    <option value="УШМ">УШМ</option>
+                                    <option value="Аккумуляторный инструмент">Аккумуляторный инструмент</option>
+                                    <option value="Перфораторы">Перфораторы</option>
+                                </select>
+                                <div class="invalid-feedback">пожалуйста, выберите категорию</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="title" class="form-label">Название</label>
+                                <input type="text" th:field="*{title}" class="form-control" id="title" required>
+                                <div class="invalid-feedback">укажите название</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="linkToTheImage" class="form-label">Ссылка на фото</label>
+                                <textarea  th:field="*{linkToTheImage}" class="form-control" id="linkToTheImage" required></textarea>
+                                <div class="invalid-feedback">Ссылка не должна быть пустой</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="specification" class="form-label">Описание</label>
+                                <textarea  th:field="*{specification}" class="form-control" id="specification" required></textarea>
+                                <div class="invalid-feedback">поле не должно быть пустым</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="price" class="form-label">Цена</label>
+                                <input type="text" th:field="*{price}"  class="form-control" id="price" required>
+                                <div class="invalid-feedback">укажите цену</div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" id="createProductButton" class="col-md-6 btn btn-primary ">Добавить</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

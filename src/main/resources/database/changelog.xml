@@ -5,9 +5,5 @@
         <sqlFile path="database/changeset-1.sql"/>
     </changeSet>
 
-    <changeSet id="2" author="mehaniqs">
-        <sqlFile path="database/changeset-2.sql"/>
-    </changeSet>
-
 
 </databaseChangeLog>

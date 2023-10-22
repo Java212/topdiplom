@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
         if (roleFromDb != null) {
             role = roleFromDb;
         }
-
+        roleRepository.save(role);
         userFromDb.setRoles(Collections.singleton(role));
         User newUser = userRepository.save(userFromDb);
         userInfoRepository.save(new UserInfo(userDto.getUserInfo().getName(), userDto.getUserInfo().getEmail(),

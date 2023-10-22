@@ -8,6 +8,10 @@ import ru.top.java212.dto.OrderDto;
 import ru.top.java212.model.Order;
 import ru.top.java212.model.Product;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class OrderServiceImpl implements OrderService {
     private final ProductRepository productRepository;
@@ -21,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public boolean save(OrderDto orderDto) {
-        Product product =  productRepository.findById(orderDto.getProductId()).orElseThrow();
+        Product product = productRepository.findById(orderDto.getProductId()).orElseThrow();
         product.setBusy(true);
         orderRepository.save(new Order(orderDto.getUserInfo(), product, orderDto.getStartDate(), orderDto.getEndDate()));
         return true;
@@ -30,14 +34,28 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean delete(Integer id) {
 
-            if (orderRepository.findById(id).isPresent()) {
-                Order order = orderRepository.findById(id).orElseThrow();
-                Product product = order.getProduct();
-                product.setBusy(false);
-                orderRepository.deleteById(id);
-                return true;
-            }
-            return false;
+        if (orderRepository.findById(id).isPresent()) {
+            Order order = orderRepository.findById(id).orElseThrow();
+            Product product = order.getProduct();
+            product.setBusy(false);
+            orderRepository.deleteById(id);
+            return true;
         }
+        return false;
     }
+
+    @Override
+    public Map<Product, Order> findByListProduct(List<Product> products) {
+        Map<Product, Order> mapOrders = new HashMap<>();
+        for (Product product : products) {
+            Order order = orderRepository.findByProduct(product);
+            if (order != null) {
+                 mapOrders.put(product, order);
+            }
+        }
+        return mapOrders;
+    }
+
+
+}
 

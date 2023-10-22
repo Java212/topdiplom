@@ -29,9 +29,7 @@ public class WebSecurityConfig {
         http.userDetailsService(userDetailsService)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/slick/**").permitAll()
-                        .requestMatchers("/").permitAll()
-                        .requestMatchers("/categories/**").permitAll()
-                        .requestMatchers("/registration").permitAll()
+                        .requestMatchers("/", "/find-product/**", "/categories/**", "/registration").permitAll()
                         .anyRequest().authenticated()
                 )
 

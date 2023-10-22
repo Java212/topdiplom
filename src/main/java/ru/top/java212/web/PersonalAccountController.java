@@ -14,6 +14,7 @@ import ru.top.java212.dao.UserInfoRepository;
 import ru.top.java212.model.Product;
 import ru.top.java212.model.User;
 import ru.top.java212.model.UserInfo;
+import ru.top.java212.service.OrderService;
 
 
 @Controller
@@ -25,7 +26,8 @@ public class PersonalAccountController {
     private ProductRepository productRepository;
     @Autowired
     OrderRepository orderRepository;
-
+    @Autowired
+    OrderService orderService;
 
 
     @ModelAttribute("product")
@@ -53,7 +55,7 @@ public class PersonalAccountController {
         ModelAndView mv = new ModelAndView("myTools");
         mv.addObject("userInfo", userInfo);
         mv.addObject("products", productRepository.findAllByUserInfo(userInfo));
-
+        mv.addObject("mapOrders", orderService.findByListProduct(productRepository.findAllByUserInfo(userInfo)));
         return mv;
     }
 
@@ -61,8 +63,6 @@ public class PersonalAccountController {
     public String personPost() {
         return "personal-account";
     }
-
-
 
 
 }

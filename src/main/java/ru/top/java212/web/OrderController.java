@@ -37,7 +37,7 @@ public class OrderController {
     @GetMapping("/order/{id}")
     public ModelAndView orderView(@PathVariable("id") Integer id, Model model) {
         ModelAndView mv = new ModelAndView("order");
-        mv.addObject("product", productRepository.findById(id).orElse(null));
+        mv.addObject("product", productRepository.findById(id).orElseThrow());
         return mv;
     }
 
