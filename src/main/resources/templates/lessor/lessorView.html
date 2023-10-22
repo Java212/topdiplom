@@ -52,6 +52,9 @@
                             <th>
                                 Инструмент
                             </th>
+                            <th>
+                                Арендатор
+                            </th>
                         </tr>
                         </thead>
                         <tbody th:each="order:${orders}">
@@ -61,6 +64,9 @@
                             </td>
                             <td>
                                 <a class="change-text" th:href="@{/orderModifyCardView(orderId=${order.getId()})}"> <label th:text="${order.getToolName()}"></label> </a>
+                            </td>
+                            <td>
+                                <a class="change-text" th:href="@{/orderModifyCardView(orderId=${order.getId()})}"> <label th:text="${order.getPersonName()}"></label> </a>
                             </td>
                         </tr>
                         </tbody>

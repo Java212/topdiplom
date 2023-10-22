@@ -10,13 +10,29 @@ import ru.top.java212.repository.ToolRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService{
+
+    private final OrderRepository orderRepository;
+
+    private final ToolRepository toolRepository;
+
     @Autowired
-    OrderRepository orderRepository;
-    @Autowired
-    ToolRepository toolRepository;
+    OrderServiceImpl(OrderRepository orderRepository, ToolRepository toolRepository){
+        this.orderRepository = orderRepository;
+        this.toolRepository = toolRepository;
+    }
+    @Override
+    public Boolean save(Order order) {
+        try{
+            orderRepository.save(order);
+            return true;
+        }catch (NumberFormatException | NullPointerException e){
+            return false;
+        }
+    }
 
     @Override
     public Boolean save(Person person, Tool tool, LocalDate startDate, LocalDate stopDate) {
@@ -46,6 +62,13 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findByPerson(Person person) {
         return orderRepository.findByPerson(person);
     }
+    @Override
+    public List<Order> findStoppedByPerson(Person person){
+        return findByPerson(person).stream().filter(o -> o.getStopped() == true).collect(Collectors.toList());
+    }
 
-
+    @Override
+    public List<Order> findCurrentByPerson(Person person){
+        return findByPerson(person).stream().filter(o -> (o.getStopped() == false) && (o.getCompleted() == false)).collect(Collectors.toList());
+    }
 }

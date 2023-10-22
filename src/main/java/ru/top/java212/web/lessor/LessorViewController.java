@@ -40,7 +40,7 @@ public class LessorViewController {
         User user = (principal instanceof User) ? ((User) principal) : new User();
         Person personUser = personRepository.findByUser(user);
         List<Tool> userTools = toolService.findAllByUser(user);
-        List<Order> userOrders = toolService.getOrdersByTools(userTools);
+        List<Order> userOrders = toolService.getCurrentOrdersByTools(userTools);
         ModelAndView mv = new ModelAndView("lessor/lessorView");
         mv.addObject("personName", personUser.getName());
         mv.addObject("tools", userTools);

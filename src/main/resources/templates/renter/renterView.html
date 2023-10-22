@@ -22,11 +22,10 @@
             <tbody th:each="order:${orders}">
                <tr>
                    <td>
-
-                       <label th:text="${order.getId()}"></label>
+                       <a class="change-text" th:href="@{/orderModifyCardView(orderId=${order.getId()})}"><label th:text="${order.getId()}"></label> </a>
                    </td>
                    <td>
-                       <label th:text="${order.getToolName()}"></label>
+                       <a class="change-text" th:href="@{/orderModifyCardView(orderId=${order.getId()})}"> <label th:text="${order.getToolName()}"></label> </a>
                    </td>
                    <td>
                        <label th:text="${order.getToolPrice()}"></label>

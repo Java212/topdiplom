@@ -16,12 +16,12 @@
             </h2>
             <div class="content">
                 <div class="input">
-                    <label class="label-field" th:text="${tool.getName()}"></label>
+                    <label class="label-field" th:text="${order.getToolName()}"></label>
                 </div>
                 <div class="input">
                     <br>
                     <label class="label-field">Цена в сутки: </label>
-                    <label th:text="${tool.getPrice()}"></label>
+                    <label th:text="${order.getToolPrice()}"></label>
                     <label> рублей</label>
                     <br>
                 </div>

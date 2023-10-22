@@ -9,6 +9,9 @@
 <section th:replace="fragments/header :: header" />
 <section class="center">
     <div class="registration">
+        <div th:if="${message}">
+            Инструмент занят в эти даты. Измените даты аренды!
+        </div>
         <form th:action="@{/renter/orderCreateCard}" method="post"  th:object="${order}">
             <h2 th:text="${tool.getName()}"></h2>
             <div class="content">
@@ -28,8 +31,8 @@
                 <div>
                     <br>
                     <input type="hidden" th:value="${tool.getId()}" name="toolId"/>
-                    <input type="date"   th:field="*{startDate}" required/>
-                    <input type="date"   th:field="*{stopDate}" required/>
+                    <input type="date"    th:field="*{startDate}" required/>
+                    <input type="date"    th:field="*{stopDate}" required/>
                     <br>
                 </div>
                 <div class="input">

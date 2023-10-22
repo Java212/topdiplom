@@ -14,6 +14,7 @@ import ru.top.java212.model.User;
 import ru.top.java212.repository.OrderRepository;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
+import ru.top.java212.service.orders.OrderService;
 
 import java.util.Map;
 import java.util.Optional;
@@ -25,12 +26,12 @@ import java.util.UUID;
 public class RenterViewController {
 
     private final PersonRepository personRepository;
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
     @Autowired
-    RenterViewController(PersonRepository personRepository,OrderRepository orderRepository){
+    RenterViewController(PersonRepository personRepository,OrderService orderService){
         this.personRepository = personRepository;
-        this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
 
     @GetMapping
@@ -40,7 +41,7 @@ public class RenterViewController {
         Person personUser = personRepository.findByUser(user);
         ModelAndView mv = new ModelAndView("renter/renterView");
         mv.addObject("personName",personUser.getName());
-        mv.addObject("orders", orderRepository.findByPerson(personUser));
+        mv.addObject("orders", orderService.findCurrentByPerson(personUser));
         return  mv;
     }
 }

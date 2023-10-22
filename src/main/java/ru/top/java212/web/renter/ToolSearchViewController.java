@@ -43,8 +43,7 @@ public class ToolSearchViewController {
     }
 
     @PostMapping
-    public ModelAndView findTool(ModelAndView model,
-                                 @RequestParam(value =  "name") String name,
+    public ModelAndView findTool(@RequestParam(value =  "name") String name,
                                  @RequestParam(value = "district") String district,
                                  @RequestParam(value = "priceMin") String priceMin,
                                  @RequestParam(value = "priceMax") String priceMax,

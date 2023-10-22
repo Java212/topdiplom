@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS public.orders
 	tool_id integer NOT NULL,
 	start_date date NOT NULL,
     stop_date date NOT NULL,
-	reversing boolean NOT NULL DEFAULT FALSE,
+	stopped boolean NOT NULL DEFAULT FALSE,
 	completed boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id),
 	 CONSTRAINT orders_persons_fkey

@@ -25,4 +25,8 @@ public interface ToolService {
     List<Tool> findToolsByDistrict(List<Tool> tools,String district);
     Tool getToolById(int id);
     List<Order> getOrdersByTools(List<Tool> tools);
+    List<Order> getStoppedOrdersByTools(List<Tool> tools);
+    List<Order> getCurrentOrdersByTools(List<Tool> tools);
+    Boolean toolIsFree(Tool tool,LocalDate startDate, LocalDate stopDate);
+
 }

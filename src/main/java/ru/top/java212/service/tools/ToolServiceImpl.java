@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class ToolServiceImpl implements ToolService{
-    private AddressRepository addressRepository;
-    private ToolRepository toolRepository;
-    private PersonRepository personRepository;
-    private OrderRepository orderRepository;
+    private final AddressRepository addressRepository;
+    private final ToolRepository toolRepository;
+    private final PersonRepository personRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
     public ToolServiceImpl(AddressRepository addressRepository, ToolRepository toolRepository, PersonRepository personRepository,OrderRepository orderRepository){
@@ -59,7 +59,18 @@ public class ToolServiceImpl implements ToolService{
     }
     @Override
     public void deleteById(int toolId) {
-        toolRepository.deleteById(toolId);
+        if(getCurrentOrdersByToolId(toolId).isEmpty()){
+            toolRepository.deleteById(toolId);
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    private List<Order> getCurrentOrdersByToolId(int toolId){
+        Tool tool = toolRepository.getReferenceById(toolId);
+        return tool.getOrders().stream()
+                               .filter(o -> (o.getStopped() == false) && (o.getCompleted() == false))
+                               .collect(Collectors.toList());
     }
 
     @Override
@@ -74,7 +85,8 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findByName(List<Tool> tools,String name){
-        return tools.stream().filter(t -> t.getName().equals(name)).collect(Collectors.toList());
+        return tools.stream().filter(t -> t.getName().equals(name))
+                             .collect(Collectors.toList());
     }
     @Override
     public List<Tool> findByPriceBetween(Double priceMin, Double priceMax) {
@@ -94,7 +106,6 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate) {
-        List<Tool> resultTools = new LinkedList<>();
         List<Order> orders = orderRepository.findOrdersByDateBetween(startDate,stopDate);
         List<Tool> allTools = toolRepository.findAll();
         Set<Tool> orderTools = orders.stream().map(Order::getTool).collect(Collectors.toSet());
@@ -104,7 +115,8 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findToolsByDistrict(List<Tool> tools,String district) {
-        return tools.stream().filter(t -> t.getDistrict().equals(district)).collect(Collectors.toList());
+        return tools.stream().filter(t -> t.getDistrict().equals(district))
+                             .collect(Collectors.toList());
     }
 
     @Override
@@ -114,8 +126,38 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Order> getOrdersByTools(List<Tool> tools) {
-        return tools.stream().map(Tool::getOrders).flatMap(Collection::stream).collect(Collectors.toList());
+        return tools.stream().map(Tool::getOrders)
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toList());
     }
 
+    @Override
+    public  List<Order> getStoppedOrdersByTools(List<Tool> tool){
+        return getOrdersByTools(tool).stream().filter(o -> o.getStopped() == true)
+                                              .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Order> getCurrentOrdersByTools(List<Tool> tools) {
+        return getOrdersByTools(tools).stream()
+                                      .filter(o -> (o.getStopped() == false) && (o.getCompleted() == false))
+                                      .collect(Collectors.toList());
+    }
+
+    public Boolean toolIsFree(Tool tool,LocalDate startDate, LocalDate stopDate){
+//        List<Order> toolOrders = tool.getOrders();
+//        List<Order> myOrders = toolOrders.stream().filter(o -> (startDate.isBefore(o.getStartDate())
+//                        && stopDate.isBefore(o.getStartDate()))
+//                        || (startDate.isAfter(o.getStopDate())
+//                        && stopDate.isAfter(o.getStopDate())))
+//                .collect(Collectors.toList());
+        List<Order> orders = orderRepository.findOrdersByDateBetween(startDate,stopDate);
+        Set<Tool> orderTools = orders.stream().map(Order::getTool).collect(Collectors.toSet());
+        if(orderTools.contains(tool)){
+            return  false;
+        }
+
+        return true;
+    }
 
 }

@@ -21,9 +21,9 @@
         <div th:if="${param.error}">
             Неверное имя пользователя и(или) пароль.
         </div>
-<!--        <div th:if="${param.logout}">-->
-<!--            <div class="alert alert-info">Вход выполнен успешно</div>-->
-<!--        </div>-->
+        <div th:if="${param.logout}">
+            <div class="alert alert-info">Вход выполнен успешно</div>
+        </div>
 
         <form th:action="@{/login}" method="post">
             <div class="input">
@@ -40,6 +40,5 @@
             <a th:href="@{/registration}"> Зарегистрироваться </a>
         </div>
     </div>
-
 </section>
 </body>

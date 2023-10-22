@@ -13,6 +13,7 @@ import ru.top.java212.model.User;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 import ru.top.java212.service.orders.OrderService;
+import ru.top.java212.service.tools.ToolService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,10 +22,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/renter/orderCreateCard")
 public class OrderCreateCardController {
 
-
-
     @Autowired
-    private  ToolRepository toolRepository;
+    private ToolService toolService;
     @Autowired
     private PersonRepository personRepository;
     @Autowired
@@ -34,28 +33,29 @@ public class OrderCreateCardController {
     @GetMapping
     public ModelAndView showOrderCardView(@RequestParam(value = "toolId") int toolId){
         ModelAndView mv = new ModelAndView("/renter/orderCreateCard");
-        Tool tool = toolRepository.getReferenceById(toolId);
+        Tool tool = toolService.getToolById(toolId);
         mv.addObject("order",new OrderDTO());
         mv.addObject("tool",tool);
         return mv;
     }
     @PostMapping
     public ModelAndView createdOrder(@ModelAttribute("order") OrderDTO order){
+        ModelAndView mv;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = ( principal instanceof User)? ((User) principal):new User();
         Person personUser = personRepository.findByUser(user);
-        Tool tool = toolRepository.getReferenceById(order.getToolId());
-        List<Order> toolOrders = tool.getOrders();
-        List<Order> myOrders = toolOrders.stream().filter(o -> (o.getStartDate().isBefore(order.getStartDate())
-                                                                     && o.getStopDate().isBefore(order.getStartDate())
-                                                                     || (o.getStartDate().isAfter(order.getStopDate())
-                                                                     && o.getStopDate().isAfter(order.getStopDate()))))
-                                                                     .collect(Collectors.toList());
-
-        orderService.save(personUser,tool,order.getStartDate(),order.getStopDate());
-        ModelAndView mv = new ModelAndView("renter/renterView");
-        mv.addObject("personName",personUser.getName());
-        mv.addObject("orders", orderService.findByPerson(personUser));
+        Tool tool = toolService.getToolById(order.getToolId());
+        if(toolService.toolIsFree(tool,order.getStartDate(),order.getStopDate())){
+            orderService.save(personUser,tool,order.getStartDate(),order.getStopDate());
+            mv = new ModelAndView("redirect:/renter/renterView");
+//            mv.addObject("personName",personUser.getName());
+//            mv.addObject("orders", orderService.findByPerson(personUser));
+        } else {
+            mv = new ModelAndView("/renter/orderCreateCard");
+            mv.addObject("message",true);
+            mv.addObject("order",new OrderDTO());
+            mv.addObject("tool",tool);
+        }
         return mv;
     }
 
