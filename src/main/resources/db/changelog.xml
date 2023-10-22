@@ -5,10 +5,10 @@
     <changeSet id="1" author="Bazhanov">
         <sqlFile path="db/changeset-create-DB.sql"/>
     </changeSet>
-<!--    <changeSet id="2" author="Bazhanov">-->
-<!--        <sqlFile path="db/changeset-created-user.sql"/>-->
-<!--    </changeSet>-->
-<!--    <changeSet id="3" author="Bazhanov">-->
-<!--        <sqlFile path="db/changeset-created-persons.sql"/>-->
-<!--    </changeSet>-->
+    <changeSet id="2" author="Bazhanov">
+        <sqlFile path="db/changeset-created-user.sql"/>
+    </changeSet>
+    <changeSet id="3" author="Bazhanov">
+        <sqlFile path="db/changeset-created-persons.sql"/>
+    </changeSet>
    </databaseChangeLog>

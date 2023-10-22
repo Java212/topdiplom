@@ -23,7 +23,7 @@ public class Tool {
     @JoinColumn(name = "address_id",nullable = false)
     private Address address;
 
-    private double price;
+    private Double price;
 
     @OneToMany(mappedBy = "tool")
     private List<Order> orders;
