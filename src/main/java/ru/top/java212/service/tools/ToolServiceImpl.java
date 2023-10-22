@@ -95,8 +95,17 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findByPriceBetween(List<Tool> tools, Double priceMin, Double priceMax) {
-        return tools.stream().filter(t -> (t.getPrice() >= priceMin
-                                        && t.getPrice() <= priceMax)).collect(Collectors.toList());
+        Double minPrice;
+        Double maxPrice;
+        if(priceMin>priceMax){
+            maxPrice = priceMin;
+            minPrice = priceMax;
+        }else{
+            minPrice = priceMin;
+            maxPrice = priceMax;
+        }
+        return tools.stream().filter(t -> (t.getPrice() >= minPrice
+                                        && t.getPrice() <= maxPrice)).collect(Collectors.toList());
     }
 
     @Override

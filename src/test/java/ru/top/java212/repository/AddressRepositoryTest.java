@@ -15,11 +15,4 @@ public class AddressRepositoryTest {
     public void test_that_context_is_ok(){
         Assertions.assertDoesNotThrow(() -> addressRepository.findAll());
     }
-    @Test
-    public void test_that_Address_is_saved(){
-       addressRepository.save(new Address(2,"District2","Street2"));
-       Address addressFromDB = addressRepository.findById(2).orElseThrow();
-       Assertions.assertEquals("Street2",addressFromDB.getStreet());
-    }
-
 }

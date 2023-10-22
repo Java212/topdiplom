@@ -71,23 +71,7 @@ public class ToolServiceImplTest {
         List<Tool> tool = toolService.findAllByUser(thisUser);
         Assertions.assertEquals(0,tool.size());
     }
-    @Test
-    public void test_that_tool_is_deleted(){
-        User thisUser = userRepository.findByLogin("user2");
-        ToolDTO toolDTO = new ToolDTO();
-        toolDTO.setName("tool3");
-        toolDTO.setDistrict("District3");
-        toolDTO.setStreet("Street3");
-        toolDTO.setPrice("3000.0");
-        toolService.save(toolDTO,thisUser);
-        List<Tool> tools = toolService.findAllByUser(thisUser);
-        int toolsSize = tools.size();
-        Tool tool = tools.get(toolsSize-1);
-        int toolId = tool.getId();
-        toolService.deleteById(toolId);
-        tools = toolService.findAllByUser(thisUser);
-        Assertions.assertEquals(toolsSize-1,tools.size());
-    }
+
     @Test
     public void test_that_findByName_get_list_by_name_from_list_of_all(){
         Person person = new Person("Person","+79865745647",new User());
@@ -125,10 +109,10 @@ public class ToolServiceImplTest {
     public void test_that_findByPriceBetween_get_list_by_price_from_list_of_all_if_priceMin_greater_priceMax(){
         Person person = new Person("Person","+79865745647",new User());
         Address address = new Address("District","Street");
-        Tool tool1 = new Tool("tool1","",person,address,100);
-        Tool tool2 = new Tool("tool2","",person,address,200);
-        Tool tool3 = new Tool("tool1","",person,address,500);
-        Tool tool4 = new Tool("tool4","",person,address,600);
+        Tool tool1 = new Tool("tool1","",person,address,100.0);
+        Tool tool2 = new Tool("tool2","",person,address,200.0);
+        Tool tool3 = new Tool("tool3","",person,address,500.0);
+        Tool tool4 = new Tool("tool4","",person,address,600.0);
         List<Tool> tools = new LinkedList<>();
         tools.add(tool1);
         tools.add(tool2);

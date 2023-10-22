@@ -14,12 +14,12 @@ import ru.top.java212.service.user.UserService;
 public class UserRegistrationDTOTest {
 
     @Autowired
-    private UserService userService;
+    private  UserService userService;
     @Autowired
     private PersonRepository personRepository;
 
     @Test
-    public void test_that_user_and_person_saved_are_ok() {
+    public void test_that_user_and_person_saved_ok() {
         int usersSize = userService.allUsers().size();
         UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO();
         userRegistrationDTO.setName("Andrey");

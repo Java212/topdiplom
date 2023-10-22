@@ -9,10 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class OrderRepositoryTest {
     @Autowired
     OrderRepository orderRepository;
-    @Autowired
-    RoleRepository roleRepository;
-    @Autowired
-    UserRepository userRepository;
 
     @Test
     public void test_that_context_is_ok(){
