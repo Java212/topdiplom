@@ -15,6 +15,7 @@ import ru.top.java212.repository.ToolRepository;
 import ru.top.java212.service.orders.OrderService;
 import ru.top.java212.service.tools.ToolService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,7 @@ public class OrderCreateCardController {
         Tool tool = toolService.getToolById(toolId);
         mv.addObject("order",new OrderDTO());
         mv.addObject("tool",tool);
+        mv.addObject("nowDate", LocalDate.now());
         return mv;
     }
     @PostMapping

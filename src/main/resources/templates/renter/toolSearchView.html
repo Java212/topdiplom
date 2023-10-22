@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Renter</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
@@ -12,15 +13,16 @@
     <div class="userBox">
         <div class="table">
             <div>
-                <form th:action="@{/renter/toolSearchView}" method="post">
+                <form id="formToolSearch" onsubmit="return submitFunction(event)" th:action="@{/renter/toolSearchView}" method="post">
                     <h3>Поиск</h3>
+                    <div class="divError" id="error"> </div>
                     <div class="field">
                         <label class="label-field">Начало аренды:</label>
-                        <input type="date"  th:value="${startDate}"  name="startDate" required/>
+                        <input id="startDate" type="date"  th:value="${startDate}"  name="startDate" required/>
                     </div>
                     <div class="field">
                         <label class="label-field">Окончание аренды:</label>
-                        <input type="date"  th:value="${stopDate}" name="stopDate" required/>
+                        <input id="stopDate" type="date"  th:value="${stopDate}" name="stopDate" required/>
                     </div>
                     <div class="field">
                         <label class="label-field">Инструмент:</label>
@@ -71,5 +73,22 @@
         </div>
     </div>
 </section>
+<script th:inline="javascript" type="text/javascript">
+     function submitFunction(e){
+              var startDate =new Date($("#startDate").val());
+              var stopDate = new Date($("#stopDate").val());
+              var nowDate = new Date().setHours(0,0,0,0);
+              if(startDate<nowDate){
+                $("#error").text("Дата начала не может быть раньше текущей даты!");
+              } else{
+                   if(startDate<=stopDate){
+                      return;
+                   } else {
+                        $("#error").text("выбраны ошибочные даты!");
+                     }
+                }
+             e.preventDefault();
+           }
+</script>
 </body>
 </html>

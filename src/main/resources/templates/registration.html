@@ -19,7 +19,7 @@
         <h2>
             Зарегистрируйтесь
         </h2>
-        <div th:if="${error}"> <h3 style="color:red" th:text="${error}">  </h3></div>
+        <div class="divError" th:if="${error}"> </div>
         <form  th:action="@{/registration}" method="post" th:object="${userForm}">
             <div class="input">
                 <input type="checkbox" name="role" th:chacked="*{role}"/> Зарегистрироваться как арендодатель
@@ -43,7 +43,7 @@
                 <input id="submitButton" type="submit" disabled value="Зарегистрироваться" />
             </div>
            </form>
-        <div class="come_in">
+        <div class="input">
             <a th:href="@{/login}"> Войти </a>
         </div>
     </div>
@@ -51,16 +51,11 @@
             $("#confirm_password").on("keyup", function() {
               var value_input1 = $("#password").val();
               var value_input2 = $("#confirm_password").val();
-              console.log ("function");
               if(value_input1 != value_input2) {
-                  console.log("password incorrect");
                   $("#submitButton").attr("disabled",true);
                   $(".error").html("Пароли не совпадают!");
                   $("#submit").attr("disabled", "disabled");
-
                 } else {
-
-                      console.log("password correct");
                       $("#submitButton").attr("disabled",false);
                       $("#submit").removeAttr("disabled");
                       $(".error").html("");

@@ -141,3 +141,7 @@ margin-left:50px;
  label{
    margin-right:10px;
  }
+
+ .divError{
+     color:red;
+ }
