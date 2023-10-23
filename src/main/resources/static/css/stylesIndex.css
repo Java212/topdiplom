@@ -67,7 +67,7 @@ text-align:center;
 }
 .registration{
    width:400px;
-   height:300px;
+   height:auto;
    background:rgb(0,191,255,0.8);
    text-align: center;
 }

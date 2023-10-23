@@ -20,7 +20,7 @@
             <div class="input">
                 <input name="name" placeholder="Название"  th:field="*{name}"/>
             </div>
-            <div>
+            <div class="input">
                 <textarea name="specifications"  rows="6" th:field="*{specifications}"></textarea>
             </div>
             <div class="input">
@@ -35,6 +35,9 @@
             <div class="input">
                 <input id="submitButton" type="submit"  value="Сохранить" />
                 <button><a  th:href="@{/lessor/lessorView}">Выйти</a></button>
+            </div>
+            <div class="input">
+
             </div>
         </form>
     </div>

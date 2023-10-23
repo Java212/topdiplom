@@ -20,15 +20,18 @@
             Зарегистрируйтесь
         </h2>
         <div class="divError" th:if="${error}"> </div>
-        <form  th:action="@{/registration}" method="post" th:object="${userForm}">
+        <form onsubmit="return submitFunction(event)" th:action="@{/registration}" method="post" th:object="${userForm}" >
             <div class="input">
                 <input type="checkbox" name="role" th:chacked="*{role}"/> Зарегистрироваться как арендодатель
             </div>
             <div class="input">
-                <input name="name" placeholder="Имя "  th:field="*{name}" required/>
+                <div class="divError" id="nameError"> </div>
+                <input id="name_input" name="name" placeholder="Имя "  th:field="*{name}" required/>
             </div>
+
             <div class="input">
-                <input name="phone" placeholder="Номер телефона "  th:field="*{phone}" required/>
+                <div class="divError" id="phoneError"> </div>
+                <input id="phone_input" name="phone" placeholder="Номер телефона"  th:field="*{phone}" required/>
             </div>
             <div class="input">
                 <input name="login" placeholder="Имя пользователя"  th:field="*{login}" required/>
@@ -61,6 +64,36 @@
                       $(".error").html("");
                     }
             });
+            function ValidPhone(){
+              var  phonePattern = /^[\d\+][\d\(\)\ -]{4,10}\d$/;
+              var  phone = $("#phone_input").val();
+              var valid = phonePattern.test(phone);
+              if(valid){
+               $("#phoneError").text("");
+              }else{
+                $("#phoneError").text(" Не корректный телефон");
+              }
+              return valid;
+            }
+
+            function ValidPersonName(){
+              var namePattern = /^[а-яА-ЯёЁa-zA-Z ]+$/;
+              var name = $("#name_input").val();
+              var valid = namePattern.test(name);
+              if(valid){
+                $("#nameError").text("");
+              } else {
+                    $("#nameError").text("Не корректное имя");
+                }
+              return valid;
+            }
+
+            function submitFunction(e){
+               if(ValidPhone() &&  ValidPersonName()){
+               return;
+               }
+               e.preventDefault();
+            }
         </script>
 </section>
 </body>

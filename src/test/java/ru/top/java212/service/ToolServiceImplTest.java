@@ -61,9 +61,10 @@ public class ToolServiceImplTest {
         toolDTO.setDistrict("District2");
         toolDTO.setStreet("Street2");
         toolDTO.setPrice("2000.0");
+        int size =  toolService.findAllByUser(thisUser).size();
         toolService.save(toolDTO,thisUser);
         List<Tool> tool = toolService.findAllByUser(thisUser);
-        Assertions.assertEquals(1,tool.size());
+        Assertions.assertEquals(size+1,tool.size());
     }
     @Test
     public void test_that_findAllByUser_get_list_of_dimension_0_when_user_does_not_exists(){
