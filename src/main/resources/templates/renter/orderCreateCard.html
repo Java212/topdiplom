@@ -15,7 +15,7 @@
         </div>
         <form  id="formOrderCreate" onsubmit="return submitFunction(event)" th:action="@{/renter/orderCreateCard}" method="post"  th:object="${order}">
             <h2 th:text="${tool.getName()}"></h2>
-            <div class="content">
+            <div class="box">
                 <div class="input">
                     <br>
                     <label>Цена в сутки: </label>
@@ -31,7 +31,7 @@
                 </div>
                 <div>
                     <br>
-                    <div class="divError" id="error"> </div>
+                    <div class="div_error" id="error"> </div>
                     <input  type="hidden" th:value="${tool.getId()}" name="toolId"/>
                     <input  id="startDate" type="date"    th:field="*{startDate}" required/>
                     <input id="stopDate" type="date"    th:field="*{stopDate}" required/>
@@ -42,14 +42,11 @@
                     <input id="submitButton" type="submit" value="Арендовать" />
                 </div>
                 <div class="input">
-
                 </div>
             </div>
         </form>
-
     </div>
 </section>
-
 <script th:inline="javascript" type="text/javascript">
            function submitFunction(e){
               var startDate =new Date($("#startDate").val());
@@ -67,7 +64,5 @@
              e.preventDefault();
            }
 </script>
-
-
 </body>
 </html>

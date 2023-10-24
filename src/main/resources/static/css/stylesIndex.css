@@ -1,8 +1,15 @@
+:root{
+   --h_color:#af2121;
+   --error_color:red;
+   --table_line_color:grey;
+   --background_color:rgb(0,191,255,0.8);
+}
+
 body{
    background-image:url(../img/tools_rent.jpg);
 }
 .top{
-   background:rgb(0,191,255,0.8);
+   background:var(--background_color)
 }
 .top_box{
    display: flex;
@@ -47,17 +54,20 @@ body{
 .menu_box:hover .menu_box{background-color: #af2121;}
 h1{
    font-size: 42px;
-   color:#af2121;
+   color:var(--h_color);
 }
 h2{
   text-align:center;
-  color:#af2121;
+  color:var(--h_color);
 }
 h3{
 text-align:center;
 }
 .bottom{
    margin-top:10px;
+}
+h4{
+   color:var(--h_color);
 }
 .center{
    margin-top:20px;
@@ -68,13 +78,23 @@ text-align:center;
 .registration{
    width:400px;
    height:auto;
-   background:rgb(0,191,255,0.8);
+   background:var(--background_color);
    text-align: center;
+   justify-content: center;
+   padding:20px;
 }
-.userBox{
-    width:100%;
-    height:400px;
-    background:rgb(0,191,255,0.8);
+.user_box{
+    margin-top:20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    height:auto;
+    background:var(--background_color);
+    padding:50px;
+}
+.box{
+    justify-content: center;
+    padding:10px;
 }
 .bottom{
    display: flex;
@@ -87,10 +107,7 @@ text-align:center;
 .input{
    margin-top:10px;
 }
-.table{
-   display:flex;
-   flex-direction:row;
-}
+
 .panel{
     width:30%;
     height:100%
@@ -103,32 +120,30 @@ a {
    margin-top:5px;
 }
 button_box {
-margin-top:20px;
+   margin-top:20px;
    display: flex;
    flex-direction: row;
    justify-content: center;
 }
 table{
    border-collapse: collapse;
-   border: 2px solid grey;
+   border: 2px solid var(--table_line_color);
 }
 th {
-   border: 2px solid grey;
+   border: 2px solid var(--table_line_color);
 }
  td {
-   border: 1px solid grey;
+   border: 1px solid var(--table_line_color);
 }
 
 .field{
    text-align:right;
    padding-bottom:5px;
 }
-.label-field{
+.label_field{
    float:left;
 }
-.content{
-margin-left:50px;
-}
+
 
  .change-text{
     color:black;
@@ -142,6 +157,14 @@ margin-left:50px;
    margin-right:10px;
  }
 
- .divError{
-     color:red;
+ .div_error{
+     color:var(--error_color);
+ }
+
+ @media (max-width:660px){
+    .user_box{
+          float: none;
+          margin: 0 auto 15px;
+          display: table;
+    }
  }

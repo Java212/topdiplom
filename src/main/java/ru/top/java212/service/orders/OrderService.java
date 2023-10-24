@@ -10,10 +10,9 @@ public interface OrderService {
 
     Boolean save(Order order);
     Boolean save(Person person, Tool tool, LocalDate startDate, LocalDate stopDate);
-    public Boolean save(Person person, OrderDTO orderDTO);
+    Boolean save(Person person, OrderDTO orderDTO);
     List<Order> findByPerson(Person person);
     Order findOrderById(int id);
     List<Order> findStoppedByPerson(Person person);
     List<Order> findCurrentByPerson(Person person);
-
 }

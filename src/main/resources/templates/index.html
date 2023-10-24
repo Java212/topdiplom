@@ -10,7 +10,7 @@
 <section class="center">
     <div class="registration">
         <h2>
-            Рады приветствовать Вас,  <p  th:text="${personName}"></p>
+            Рады приветствовать Вас,  <p th:text="${personName}"></p>
         </h2>
         <p sec:authorize="hasRole('LESSOR')">
             <a th:href="@{/lessor/lessorView}"> Сдать инструмент </a>

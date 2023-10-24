@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ru.top.java212.model.Order;
 import ru.top.java212.model.Person;
 import ru.top.java212.model.User;
 import ru.top.java212.repository.OrderRepository;
@@ -42,6 +43,7 @@ public class RenterViewController {
         ModelAndView mv = new ModelAndView("renter/renterView");
         mv.addObject("personName",personUser.getName());
         mv.addObject("orders", orderService.findCurrentByPerson(personUser));
+        mv.addObject("stoppedOrders",orderService.findStoppedByPerson(personUser));
         return  mv;
     }
 }
