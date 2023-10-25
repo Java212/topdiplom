@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.net.BindException;
 
 @ControllerAdvice
-public class ExeptionHandler {
+public class CustomExceptionHandler {
 
     @ExceptionHandler(BindException.class)
     public ModelAndView badRequest(BindException exception){

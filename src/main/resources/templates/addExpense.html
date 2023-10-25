@@ -22,7 +22,7 @@
   </div>
 </header>
 <h2>Выберите категорию расхода и введите в поле ввода сумму в рублях</h2>
-<form class="input_fields" th:object="${newExpense}" th:action="@{/expenses/add}" method="post">
+<form class="input_fields" th:object="${expenseDto}" th:action="@{/expenses/add}" method="post">
   <div class="fields">
     <label class="form-label">Категория </label>
     <select class="form-select"  th:field="*{categoryName}">

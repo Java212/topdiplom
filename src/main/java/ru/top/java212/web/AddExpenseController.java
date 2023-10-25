@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 import ru.top.java212.dao.ExpenseCategoryDbDao;
 import ru.top.java212.dao.ExpenseDbDao;
 import ru.top.java212.dto.ExpenseDto;
@@ -32,7 +32,7 @@ public class AddExpenseController {
     ExpenseDbDao expenseDbDao;
 
     @ModelAttribute("allCategories")
-    List<ExpenseCategory> getCategories(){
+    List<ExpenseCategory> getCategories() {
         List<ExpenseCategory> list = new ArrayList<>();
         expenseCategoryDbDao.findAll().iterator().forEachRemaining(list::add);
         return list;
@@ -40,31 +40,28 @@ public class AddExpenseController {
 
     @GetMapping("/expenses/add")
     @PreAuthorize("authenticated")
-    public ModelAndView getNewExpenseView(){
-        ModelAndView mv = new ModelAndView("addExpense");
-
-        mv.addObject("newExpense", new ExpenseDto("default category",0));
-        return mv;
+    public String getNewExpenseView(Model model) {
+        model.addAttribute("expenseDto", new ExpenseDto("default category",0));
+        return "addExpense";
     }
 
     @PostMapping("/expenses/add")
     @PreAuthorize("authenticated")
-    public ModelAndView addExpense(@Valid @ModelAttribute  ExpenseDto newExpense, BindingResult bindingResult){
-        ModelAndView mv = new ModelAndView("addExpense");
+    public String addExpense(@Valid @ModelAttribute ExpenseDto expenseDto, BindingResult bindingResult, Model model) {
 
-                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
-
-        if ( bindingResult.hasErrors()){
-            return  mv.addObject("newExpense", new ExpenseDto("default category",0));
-        } else {
-
-            ExpenseCategory defaultCategory = expenseCategoryDbDao.findByNameExpenseCategory(newExpense.categoryName());
-
-            Expense toBeSaved = new Expense(user, defaultCategory, newExpense.amount());
-            expenseDbDao.save(toBeSaved);
-            mv.addObject("newExpense", new ExpenseDto("default category",0));
-            return mv;
+        if (bindingResult.hasErrors()) {
+            return "addExpense";
         }
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (principal instanceof User) ? ((User) principal) : new User("sisadmin", "admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
+
+        ExpenseCategory expenseCategory = expenseCategoryDbDao.findByNameExpenseCategory(expenseDto.categoryName());
+
+        Expense toBeSaved = new Expense(user, expenseCategory, expenseDto.amount());
+        expenseDbDao.save(toBeSaved);
+
+        return "addExpense";
+
     }
 }
