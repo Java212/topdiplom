@@ -31,7 +31,7 @@ public class EditingCategoriesController {
     @GetMapping("/recordsDb/update")
     @PreAuthorize("authenticated")
     public ModelAndView viewPageUpdateRecordsDb() {
-       return  getModelAndView();
+        return getModelAndView();
     }
 
     @PostMapping("/recordsDb/update")

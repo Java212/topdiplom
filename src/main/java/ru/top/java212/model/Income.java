@@ -29,13 +29,14 @@ public class Income {
     @JoinColumn(name = "income_category_id")
     private IncomeCategory incomeCategory;
 
-    public Income(){}
+    public Income() {
+    }
 
-    public Income(User user, IncomeCategory incomeCategory, int incomeAmount){
-        this.user=user;
-        this.incomeCategory=incomeCategory;
-        this.incomeAmount=incomeAmount;
-        this.date=LocalDate.now();
+    public Income(User user, IncomeCategory incomeCategory, int incomeAmount) {
+        this.user = user;
+        this.incomeCategory = incomeCategory;
+        this.incomeAmount = incomeAmount;
+        this.date = LocalDate.now();
     }
 
 

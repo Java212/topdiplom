@@ -26,7 +26,7 @@ public class ViewDetailsExpensesController {
 
     @GetMapping("/details/expenses")
     @PreAuthorize("authenticated")
-    public String viewDetailsExpenses(){
+    public String viewDetailsExpenses() {
         return "details-expense";
     }
 
@@ -34,22 +34,22 @@ public class ViewDetailsExpensesController {
     @PreAuthorize("authenticated")
     public ModelAndView viewDetailsExpenses(@RequestParam("checkbox") String checkbox,
                                             @RequestParam("startDate") LocalDate startDate,
-                                            @RequestParam("endDate") LocalDate endDate){
+                                            @RequestParam("endDate") LocalDate endDate) {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
+        User user = (principal instanceof User) ? ((User) principal) : new User("sisadmin", "admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
         ModelAndView mv = new ModelAndView("details-expense");
 
-        if ( checkbox.equals("family") ){
-           mv.addObject("detailsListExpensesFamily", calculationExpensesFamily.calculationExpensesFamilyByCategory(startDate, endDate));
-           mv.addObject("forWhomCalculation", checkbox);
+        if (checkbox.equals("family")) {
+            mv.addObject("detailsListExpensesFamily", calculationExpensesFamily.calculationExpensesFamilyByCategory(startDate, endDate));
+            mv.addObject("forWhomCalculation", checkbox);
         } else {
-            if ( checkbox.equals("user") ){
+            if (checkbox.equals("user")) {
                 mv.addObject("detailsListExpensesUser", calculationExpensesUser.calculationExpensesUserByCategory(user.getId(), startDate, endDate));
                 mv.addObject("forWhomCalculation", checkbox);
             }
         }
-       return mv;
+        return mv;
     }
 }

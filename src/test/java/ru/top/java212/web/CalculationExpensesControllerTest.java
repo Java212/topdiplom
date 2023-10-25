@@ -3,10 +3,8 @@ package ru.top.java212.web;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,8 +17,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class CalculationExpensesControllerTest {
@@ -40,10 +38,10 @@ public class CalculationExpensesControllerTest {
 
     @Test
     @WithMockUser
-    void test_viewPageExpense() throws Exception{
-      String url = "/expense/calculation";
-      this.mockMvc.perform(get(url))
-              .andExpect(status().isOk());
+    void test_viewPageExpense() throws Exception {
+        String url = "/expense/calculation";
+        this.mockMvc.perform(get(url))
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -63,6 +61,7 @@ public class CalculationExpensesControllerTest {
                 .andExpect(model().attribute("totalExpenseFamily", 163200))
                 .andExpect(status().isOk());
     }
+
     @Test
     void test_controller_calculation_Expenses_for_user() throws Exception {
         String url = "/expense/calculation";

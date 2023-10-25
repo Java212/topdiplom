@@ -1,27 +1,26 @@
 package ru.top.java212.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 @Entity
 @Table(name = "users")
 
-public class User implements UserDetails{
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private  Integer id;
+    private Integer id;
 
     @Column(name = "user_name")
-     private String name;
+    private String name;
 
     @Column(name = "user_login")
     private String login;
@@ -34,7 +33,7 @@ public class User implements UserDetails{
     private Role role;
 
     @Column(name = "user_starting_capital")
-    private  BigDecimal startingCapital;
+    private BigDecimal startingCapital;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Expense> expenses;
@@ -42,7 +41,8 @@ public class User implements UserDetails{
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Income> incomes;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String name, String login, String password, BigDecimal startingCapital) {
         this.name = name;
@@ -50,9 +50,10 @@ public class User implements UserDetails{
         this.password = password;
         this.startingCapital = startingCapital;
     }
+
     public User(String name, String login, String password, Role role, BigDecimal startingCapital) {
         this.name = name;
-        this.login= login;
+        this.login = login;
         this.password = password;
         this.role = role;
         this.startingCapital = startingCapital;

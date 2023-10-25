@@ -14,10 +14,10 @@ public class CalculationFamilyBalanceTest {
     CalculationFamilyBalance balanceFamily;
 
     @Test
-    void test_method_getBalance(){
+    void test_method_getBalance() {
         int result = 813551;
-        LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,10,31);
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
         Assertions.assertEquals(result, balanceFamily.getBalance(startPeriod, endPeriod));
     }
 }

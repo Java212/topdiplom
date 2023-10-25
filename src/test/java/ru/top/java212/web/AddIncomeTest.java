@@ -12,12 +12,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class AddIncomeTest {
@@ -36,7 +36,7 @@ public class AddIncomeTest {
 
     @Test
     @WithMockUser
-    void test_view() throws Exception{
+    void test_view() throws Exception {
         String url = "/incomes/add";
 
         this.mockMvc.perform(get(url))
@@ -46,13 +46,13 @@ public class AddIncomeTest {
 
     @Test
     @Disabled
-    void test_add_Income() throws Exception{
+    void test_add_Income() throws Exception {
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
 
         String url = "/incomes/add";
         this.mockMvc.perform(post(url).with(csrf())
-                .param("sourceName", "премия")
-                .param("amount", "6000"))
+                        .param("sourceName", "премия")
+                        .param("amount", "6000"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("form")));
     }

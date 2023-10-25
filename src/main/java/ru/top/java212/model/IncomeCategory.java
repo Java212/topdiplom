@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="incomes_category")
+@Table(name = "incomes_category")
 
 public class IncomeCategory {
 

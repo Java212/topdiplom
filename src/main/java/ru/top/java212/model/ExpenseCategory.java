@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="expenses_category")
+@Table(name = "expenses_category")
 
 public class ExpenseCategory {
     @Id
@@ -26,7 +26,7 @@ public class ExpenseCategory {
         this.nameExpenseCategory = nameExpenseCategory;
     }
 
-     public Integer getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -9,12 +9,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,7 +24,7 @@ public class RegistrationControllerTest {
     MockMvc mockMvc;
 
     @Test
-    void test_GetMapping() throws Exception{
+    void test_GetMapping() throws Exception {
         String url = "/registration";
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk())
@@ -33,7 +33,7 @@ public class RegistrationControllerTest {
 
 
     @Test
-    void test_PostMapping() throws Exception{
+    void test_PostMapping() throws Exception {
         String url = "/registration";
         String userName = "John";
         String userLogin = "j-88";

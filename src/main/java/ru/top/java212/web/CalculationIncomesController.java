@@ -28,22 +28,22 @@ public class CalculationIncomesController {
 
     @GetMapping("/income/calculation")
     @PreAuthorize("authenticated")
-    public String viewPageIncomes(){
+    public String viewPageIncomes() {
         return "income";
     }
 
     @PostMapping("/income/calculation")
     public ModelAndView calculationIncomes(@RequestParam("checkbox") String checkbox,
                                            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                           @RequestParam("endDate") @DateTimeFormat (iso = DateTimeFormat.ISO.DATE)  LocalDate endDate){
+                                           @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
+        User user = (principal instanceof User) ? ((User) principal) : new User("sisadmin", "admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
         ModelAndView mv = new ModelAndView("income");
-        if (checkbox.equals("family")){
+        if (checkbox.equals("family")) {
             mv.addObject("totalIncomeFamily", calculationIncomesFamily.calculationIncomesFamily(startDate, endDate));
         } else {
-            if (checkbox.equals("user")){
+            if (checkbox.equals("user")) {
                 mv.addObject("totalIncomeUser", calculationIncomesUser.calculationIncomesUser(user.getId(), startDate, endDate));
             }
         }

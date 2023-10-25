@@ -12,17 +12,18 @@ import java.time.LocalDate;
 public class StartController {
     @Autowired
     FamilyBalance balance;
+
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 
     @GetMapping("/menu")
-    public ModelAndView menuDisplay(){
+    public ModelAndView menuDisplay() {
         ModelAndView mv = new ModelAndView("menu");
 
-        LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,9,30);
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 9, 30);
         int balanceFamily = balance.getBalance(startPeriod, endPeriod);
 
         mv.addObject("balanceFamily", balanceFamily);
@@ -30,7 +31,7 @@ public class StartController {
     }
 
     @GetMapping("/comeIn")
-    public String comeIn(){
+    public String comeIn() {
         return "comeIn";
     }
 }

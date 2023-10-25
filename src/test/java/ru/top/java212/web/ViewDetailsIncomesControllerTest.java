@@ -18,7 +18,6 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class ViewDetailsIncomesControllerTest {
@@ -37,16 +36,16 @@ public class ViewDetailsIncomesControllerTest {
     }
 
     @Test
-
-    void test_view_page_details_income() throws Exception{
+    void test_view_page_details_income() throws Exception {
         String url = "/details/incomes";
 
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("form")));
     }
+
     @Test
-    void test_controller_view_details_incomes_for_family() throws Exception{
+    void test_controller_view_details_incomes_for_family() throws Exception {
         String url = "/details/incomes";
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
@@ -62,7 +61,7 @@ public class ViewDetailsIncomesControllerTest {
 
     @Test
     @WithMockUser
-    void test_controller_view_details_incomes_for_user() throws Exception{
+    void test_controller_view_details_incomes_for_user() throws Exception {
         String url = "/details/incomes";
         String checkbox = "user";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));

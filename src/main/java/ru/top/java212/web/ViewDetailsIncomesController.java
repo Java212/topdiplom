@@ -26,29 +26,29 @@ public class ViewDetailsIncomesController {
 
     @GetMapping("/details/incomes")
     @PreAuthorize("authenticated")
-    public String viewDetailsExpenses(){
+    public String viewDetailsExpenses() {
         return "details-income";
     }
 
     @PostMapping("/details/incomes")
     @PreAuthorize("authenticated")
     public ModelAndView viewDetailsIncomes(@RequestParam("checkbox") String checkbox,
-                                            @RequestParam("startDate") LocalDate startDate,
-                                            @RequestParam("endDate") LocalDate endDate){
+                                           @RequestParam("startDate") LocalDate startDate,
+                                           @RequestParam("endDate") LocalDate endDate) {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
+        User user = (principal instanceof User) ? ((User) principal) : new User("sisadmin", "admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
         ModelAndView mv = new ModelAndView("details-income");
 
-        if ( checkbox.equals("family") ){
-           mv.addObject("detailsListIncomesFamily", calculationIncomesFamily.calculationSourceIncomeByCategory(startDate, endDate));
+        if (checkbox.equals("family")) {
+            mv.addObject("detailsListIncomesFamily", calculationIncomesFamily.calculationSourceIncomeByCategory(startDate, endDate));
         } else {
-            if ( checkbox.equals("user") ){
+            if (checkbox.equals("user")) {
                 mv.addObject("detailsListIncomesUser", calculationIncomesUser.calculationIncomesUserBySource(user.getId(), startDate, endDate));
             }
         }
         mv.addObject("forWhomCalculation", checkbox);
-       return mv;
+        return mv;
     }
 }

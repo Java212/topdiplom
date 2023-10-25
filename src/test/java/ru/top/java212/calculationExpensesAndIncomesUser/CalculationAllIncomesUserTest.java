@@ -14,21 +14,21 @@ public class CalculationAllIncomesUserTest {
     CalculationAllIncomesUser calculationIncomesUser;
 
     @Test
-    void test_calculationIncomesUser(){
+    void test_calculationIncomesUser() {
         int userId = 3;
-        LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,10,31);
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
         int result = 27000;
-        Assertions.assertEquals(result, calculationIncomesUser.calculationIncomesUser(userId,startPeriod,endPeriod));
+        Assertions.assertEquals(result, calculationIncomesUser.calculationIncomesUser(userId, startPeriod, endPeriod));
     }
 
     @Test
-    void test_method_calculationIncomesUserBySource(){
+    void test_method_calculationIncomesUserBySource() {
         int userId = 3;
-        LocalDate startPeriod = LocalDate.of(2023,9,1);
-        LocalDate endPeriod = LocalDate.of(2023,10,31);
+        LocalDate startPeriod = LocalDate.of(2023, 9, 1);
+        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
         Map<String, Long> list = Map.of("стипендия", 10000L,
-                                        "доходы от других источников", 17000L);
+                "доходы от других источников", 17000L);
         Assertions.assertEquals(list, calculationIncomesUser.calculationIncomesUserBySource(userId, startPeriod, endPeriod));
     }
 }

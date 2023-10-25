@@ -43,12 +43,12 @@ public class RemoveCategoriesController {
         ModelAndView mv = new ModelAndView("removeRecords");
         List<ExpenseCategory> listExpenseCategory = Collections.EMPTY_LIST;
         List<IncomeCategory> listIncomesSource = Collections.EMPTY_LIST;
-        if ( whatRemove.equals("расходы")){
-            listExpenseCategory =  redactRecordsInDb.removeExpenseCategory(nameRemoveCategory);
+        if (whatRemove.equals("расходы")) {
+            listExpenseCategory = redactRecordsInDb.removeExpenseCategory(nameRemoveCategory);
             listIncomesSource = redactRecordsInDb.getIncomeSourceList();
         }
-        if ( whatRemove.equals("доходы")){
-            listIncomesSource =  redactRecordsInDb.removeIncomeSource(nameRemoveCategory);
+        if (whatRemove.equals("доходы")) {
+            listIncomesSource = redactRecordsInDb.removeIncomeSource(nameRemoveCategory);
             listExpenseCategory = redactRecordsInDb.getExpenseCategoryList();
         }
         mv.addObject("allCategoriesExpenses", listExpenseCategory);

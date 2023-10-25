@@ -15,26 +15,26 @@ import java.util.Map;
 @Component
 public class CalculationAllExpensesFamily implements AllExpensesFamily {
 
-     private final ExpenseDbDao expenseDbDao;
+    private final ExpenseDbDao expenseDbDao;
 
-        @Autowired
-        public CalculationAllExpensesFamily(ExpenseDbDao expenseDbDao) {
-                this.expenseDbDao = expenseDbDao;
-        }
+    @Autowired
+    public CalculationAllExpensesFamily(ExpenseDbDao expenseDbDao) {
+        this.expenseDbDao = expenseDbDao;
+    }
 
-        @Override
-        public int calculationExpensesFamily(LocalDate initialDate, LocalDate endData){
-             List<ExpenseAmount> list = expenseDbDao.findByDateBetween(initialDate, endData);
-             return list.stream().mapToInt(ExpenseAmount::getExpenseAmount).reduce(0, Integer::sum);
-        }
+    @Override
+    public int calculationExpensesFamily(LocalDate initialDate, LocalDate endData) {
+        List<ExpenseAmount> list = expenseDbDao.findByDateBetween(initialDate, endData);
+        return list.stream().mapToInt(ExpenseAmount::getExpenseAmount).reduce(0, Integer::sum);
+    }
 
-        @Override
-        public Map<String, Long> calculationExpensesFamilyByCategory(LocalDate initialDate, LocalDate endData){
-                List<TotalExpense> list = expenseDbDao.getExpensesFamilyByCategory(initialDate, endData);
-                Map<String, Long> map = new HashMap<>();
-                for (TotalExpense e : list) {
-                        map.put(e.getCategoryName(), e.getTotal());
-                }
-                return map;
+    @Override
+    public Map<String, Long> calculationExpensesFamilyByCategory(LocalDate initialDate, LocalDate endData) {
+        List<TotalExpense> list = expenseDbDao.getExpensesFamilyByCategory(initialDate, endData);
+        Map<String, Long> map = new HashMap<>();
+        for (TotalExpense e : list) {
+            map.put(e.getCategoryName(), e.getTotal());
         }
+        return map;
+    }
 }

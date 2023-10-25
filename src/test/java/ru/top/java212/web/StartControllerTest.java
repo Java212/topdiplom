@@ -9,13 +9,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -35,15 +33,15 @@ public class StartControllerTest {
     }
 
     @Test
-    void testing_the_initial_request() throws Exception{
-    String url = "/";
+    void testing_the_initial_request() throws Exception {
+        String url = "/";
 
-    this.mockMvc.perform(get(url))
+        this.mockMvc.perform(get(url))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void test_go_to_home_page_index() throws Exception{
+    void test_go_to_home_page_index() throws Exception {
         String url = "/";
 
         this.mockMvc.perform(get(url))
@@ -54,7 +52,7 @@ public class StartControllerTest {
 
 
     @Test
-    void test_go_to_page_menu() throws Exception{
+    void test_go_to_page_menu() throws Exception {
         String url = "/menu";
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
 
@@ -65,7 +63,7 @@ public class StartControllerTest {
     }
 
     @Test
-    void test_go_to_page_comeIn() throws Exception{
+    void test_go_to_page_comeIn() throws Exception {
         String url = "/comeIn";
 
         this.mockMvc.perform(get(url))

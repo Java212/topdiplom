@@ -37,11 +37,12 @@ public class CalculationIncomesControllerTest {
 
     @Test
     @WithMockUser
-    void test_viewPageIncome() throws Exception{
+    void test_viewPageIncome() throws Exception {
         String url = "/income/calculation";
         this.mockMvc.perform(get(url))
                 .andExpect(status().isOk());
     }
+
     @Test
     void test_controller_calculation_Incomes_for_family() throws Exception {
         String url = "/income/calculation";
@@ -58,6 +59,7 @@ public class CalculationIncomesControllerTest {
                 .andExpect(model().attribute("totalIncomeFamily", 466750))
                 .andExpect(status().isOk());
     }
+
     @Test
     void test_controller_calculation_Incomes_for_user() throws Exception {
         String url = "/income/calculation";

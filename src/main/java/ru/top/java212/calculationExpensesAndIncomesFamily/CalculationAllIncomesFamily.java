@@ -14,26 +14,26 @@ import java.util.Map;
 
 @Component
 public class CalculationAllIncomesFamily implements AllIncomesFamily {
-        private final IncomeDbDao incomeDao;
+    private final IncomeDbDao incomeDao;
 
-        @Autowired
-        public CalculationAllIncomesFamily(IncomeDbDao incomeDao) {
-                this.incomeDao = incomeDao;
-        }
+    @Autowired
+    public CalculationAllIncomesFamily(IncomeDbDao incomeDao) {
+        this.incomeDao = incomeDao;
+    }
 
-        @Override
-        public int calculationIncomesFamily(LocalDate startDate, LocalDate endData){
-                List<IncomeAmount> list = incomeDao.findByDateBetween(startDate, endData);
-                return list.stream().mapToInt(IncomeAmount::getIncomeAmount).reduce(0, Integer :: sum);
-        }
+    @Override
+    public int calculationIncomesFamily(LocalDate startDate, LocalDate endData) {
+        List<IncomeAmount> list = incomeDao.findByDateBetween(startDate, endData);
+        return list.stream().mapToInt(IncomeAmount::getIncomeAmount).reduce(0, Integer::sum);
+    }
 
-        @Override
-        public Map<String, Long> calculationSourceIncomeByCategory(LocalDate startDate, LocalDate endData){
-                List<TotalIncome> list = incomeDao.getIncomesFamilyByCategory(startDate, endData);
-                Map<String, Long> map = new HashMap<>();
-                for(TotalIncome i : list){
-                    map.put(i.getCategoryName(), i.getTotal());
-                }
-                return map;
+    @Override
+    public Map<String, Long> calculationSourceIncomeByCategory(LocalDate startDate, LocalDate endData) {
+        List<TotalIncome> list = incomeDao.getIncomesFamilyByCategory(startDate, endData);
+        Map<String, Long> map = new HashMap<>();
+        for (TotalIncome i : list) {
+            map.put(i.getCategoryName(), i.getTotal());
         }
+        return map;
+    }
 }

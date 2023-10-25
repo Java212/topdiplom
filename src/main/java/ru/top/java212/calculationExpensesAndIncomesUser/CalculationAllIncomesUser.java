@@ -23,16 +23,17 @@ public class CalculationAllIncomesUser implements AllIncomesUser {
     }
 
     @Override
-    public int calculationIncomesUser(int userId, LocalDate startDate, LocalDate endDate){
+    public int calculationIncomesUser(int userId, LocalDate startDate, LocalDate endDate) {
 
         List<IncomeAmount> list = incomeDao.findByUserIdAndDateBetween(userId, startDate, endDate);
-        return list.stream().mapToInt(IncomeAmount::getIncomeAmount).reduce(0, Integer :: sum);
+        return list.stream().mapToInt(IncomeAmount::getIncomeAmount).reduce(0, Integer::sum);
     }
+
     @Override
-    public Map<String, Long> calculationIncomesUserBySource(int userId, LocalDate startDate, LocalDate endDate){
+    public Map<String, Long> calculationIncomesUserBySource(int userId, LocalDate startDate, LocalDate endDate) {
         List<TotalIncome> list = incomeDao.getIncomesUserByCategory(userId, startDate, endDate);
         Map<String, Long> map = new HashMap<>();
-        for (TotalIncome i : list){
+        for (TotalIncome i : list) {
             map.put(i.getCategoryName(), i.getTotal());
         }
         return map;

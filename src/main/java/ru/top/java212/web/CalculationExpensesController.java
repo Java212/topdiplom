@@ -28,29 +28,29 @@ public class CalculationExpensesController {
 
     @GetMapping("/expense/calculation")
     @PreAuthorize("authenticated")
-    public String viewPageExpense(){
+    public String viewPageExpense() {
         return "expense";
     }
 
     @PostMapping("/expense/calculation")
     @PreAuthorize("authenticated")
     public ModelAndView calculationExpenses(@RequestParam("checkbox") String checkbox,
-                                            @RequestParam("startDate") @DateTimeFormat (iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                            @RequestParam("endDate") @DateTimeFormat (iso = DateTimeFormat.ISO.DATE)  LocalDate endDate){
+                                            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = ( principal instanceof User)? ((User) principal) : new User("sisadmin","admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
+        User user = (principal instanceof User) ? ((User) principal) : new User("sisadmin", "admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
         ModelAndView mv = new ModelAndView("expense");
 
-            if(checkbox.equals("family")){
-             mv.addObject("totalExpenseFamily", calculationExpensesFamily.calculationExpensesFamily(startDate, endDate));
-            } else {
-                if (checkbox.equals("user")){
-                    mv.addObject("totalExpenseUser", calculationExpensesUser.calculationExpensesUser(user.getId(), startDate, endDate));
-                }
+        if (checkbox.equals("family")) {
+            mv.addObject("totalExpenseFamily", calculationExpensesFamily.calculationExpensesFamily(startDate, endDate));
+        } else {
+            if (checkbox.equals("user")) {
+                mv.addObject("totalExpenseUser", calculationExpensesUser.calculationExpensesUser(user.getId(), startDate, endDate));
             }
-            mv.addObject("checkbox", checkbox);
+        }
+        mv.addObject("checkbox", checkbox);
         return mv;
     }
 }

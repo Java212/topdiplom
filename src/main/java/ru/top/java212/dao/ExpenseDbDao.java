@@ -11,10 +11,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-
 public interface ExpenseDbDao extends CrudRepository<Expense, Integer> {
 
     List<ExpenseAmount> findByDateBetween(LocalDate initialDate, LocalDate endDate);
+
     List<ExpenseAmount> findByUserIdAndDateBetween(int userId, LocalDate initialDate, LocalDate endDate);
 
     @Query("select expenseCategory.nameExpenseCategory as categoryName, sum(expenseAmount) as total \n" +

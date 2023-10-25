@@ -41,7 +41,7 @@ public class AddExpenseController {
     @GetMapping("/expenses/add")
     @PreAuthorize("authenticated")
     public String getNewExpenseView(Model model) {
-        model.addAttribute("expenseDto", new ExpenseDto("default category",0));
+        model.addAttribute("expenseDto", new ExpenseDto("default category", 0));
         return "addExpense";
     }
 

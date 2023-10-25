@@ -7,5 +7,5 @@ import ru.top.java212.model.ExpenseCategory;
 public interface ExpenseCategoryDbDao extends CrudRepository<ExpenseCategory, Integer> {
     ExpenseCategory findByNameExpenseCategory(String nameExpenseCategory);
 
-    int deleteByNameExpenseCategory (String nameExpenseCategory);
+    int deleteByNameExpenseCategory(String nameExpenseCategory);
 }

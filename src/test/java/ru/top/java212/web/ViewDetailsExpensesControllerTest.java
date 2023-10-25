@@ -12,14 +12,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class ViewDetailsExpensesControllerTest {
@@ -38,17 +36,17 @@ public class ViewDetailsExpensesControllerTest {
 
     @Test
     @WithMockUser
-    void test_view_page_details_expense() throws Exception{
-      String url = "/details/expenses";
+    void test_view_page_details_expense() throws Exception {
+        String url = "/details/expenses";
 
-      this.mockMvc.perform(get(url))
-              .andExpect(status().isOk())
-              .andExpect(content().string(containsString("form")));
+        this.mockMvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("form")));
     }
 
     @Test
     @WithMockUser
-    void test_controller_view_details_expense_for_family() throws Exception{
+    void test_controller_view_details_expense_for_family() throws Exception {
         String url = "/details/expenses";
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
@@ -63,7 +61,7 @@ public class ViewDetailsExpensesControllerTest {
     }
 
     @Test
-    void test_controller_view_details_expense_for_user() throws Exception{
+    void test_controller_view_details_expense_for_user() throws Exception {
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String url = "/details/expenses";
         String checkbox = "user";

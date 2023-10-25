@@ -10,7 +10,7 @@ import java.net.BindException;
 public class CustomExceptionHandler {
 
     @ExceptionHandler(BindException.class)
-    public ModelAndView badRequest(BindException exception){
+    public ModelAndView badRequest(BindException exception) {
         ModelAndView mv = new ModelAndView("error-page");
         mv.addObject("message", "Некорректный ввод в поля формы!");
         return mv;

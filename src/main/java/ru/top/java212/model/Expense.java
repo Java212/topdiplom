@@ -1,12 +1,11 @@
 package ru.top.java212.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.LocalDate;
 
 @Entity
-@Table( name = "expenses")
+@Table(name = "expenses")
 
 public class Expense {
 
@@ -29,14 +28,15 @@ public class Expense {
     @JoinColumn(name = "expense_category_id")
     private ExpenseCategory expenseCategory;
 
-    private Expense(){}
+    private Expense() {
+    }
 
 
-    public Expense(User user, ExpenseCategory expenseCategory, int expenseAmount){
-        this.expenseAmount=expenseAmount;
-        this.date=LocalDate.now();
-        this.user=user;
-        this.expenseCategory=expenseCategory;
+    public Expense(User user, ExpenseCategory expenseCategory, int expenseAmount) {
+        this.expenseAmount = expenseAmount;
+        this.date = LocalDate.now();
+        this.user = user;
+        this.expenseCategory = expenseCategory;
     }
 
     public Integer getId() {

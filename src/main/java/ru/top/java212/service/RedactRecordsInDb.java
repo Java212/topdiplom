@@ -54,7 +54,7 @@ public class RedactRecordsInDb {
 
     @Transactional
     public List<IncomeCategory> removeIncomeSource(String nameRemoveCategory) {
-        Long amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory)/incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
+        Long amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory) / incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
         int numberOfDeletedRecordsInDb = incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
         incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAddToEachIncomeInTheDb);
         return getIncomeSourceList();

@@ -12,13 +12,13 @@ public class IncomeCategoryDbDaoTest {
     IncomeCategoryDbDao categoryDbDao;
 
     @Test
-    void test_categories_are_mapped(){
+    void test_categories_are_mapped() {
 
         Assertions.assertDoesNotThrow(() -> categoryDbDao.findAll());
     }
 
     @Test
-    void test_method_findBySourceIncomeCategory(){
+    void test_method_findBySourceIncomeCategory() {
         String searchNameInTheDb = "доходы от ценных бумаг";
         String resultFromDb = categoryDbDao.findBySourceIncomeCategory(searchNameInTheDb).getSourceIncomeCategory();
         Assertions.assertEquals(searchNameInTheDb, resultFromDb);
