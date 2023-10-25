@@ -115,9 +115,11 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate) {
-        List<Order> orders = orderRepository.findOrdersByDateBetween(startDate,stopDate);
+        List<Order> ordersByDateBetween = orderRepository.findOrdersByDateBetween(startDate,stopDate);
+        List<Order> stoppedOrders = orderRepository.findByStopped(true);
+        ordersByDateBetween.removeAll(stoppedOrders);
         List<Tool> allTools = toolRepository.findAll();
-        Set<Tool> orderTools = orders.stream().map(Order::getTool).collect(Collectors.toSet());
+        Set<Tool> orderTools = ordersByDateBetween.stream().map(Order::getTool).collect(Collectors.toSet());
         allTools.removeAll(orderTools);
         return allTools ;
     }

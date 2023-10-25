@@ -19,18 +19,18 @@
         <h2>
             Зарегистрируйтесь
         </h2>
-        <div class="divError" th:if="${error}"> </div>
+        <div class="div_error" th:if="${error}"> </div>
         <form onsubmit="return submitFunction(event)" th:action="@{/registration}" method="post" th:object="${userForm}" >
             <div class="input">
                 <input type="checkbox" name="role" th:chacked="*{role}"/> Зарегистрироваться как арендодатель
             </div>
             <div class="input">
-                <div class="divError" id="nameError"> </div>
+                <div class="div_error" id="nameError"> </div>
                 <input id="name_input" name="name" placeholder="Имя "  th:field="*{name}" required/>
             </div>
 
             <div class="input">
-                <div class="divError" id="phoneError"> </div>
+                <div class="div_error" id="phoneError"> </div>
                 <input id="phone_input" name="phone" placeholder="Номер телефона"  th:field="*{phone}" required/>
             </div>
             <div class="input">
