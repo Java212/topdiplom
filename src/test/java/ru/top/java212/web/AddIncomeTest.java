@@ -48,7 +48,6 @@ public class AddIncomeTest {
     @Disabled
     void test_add_Income() throws Exception {
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
-
         String url = "/incomes/add";
         this.mockMvc.perform(post(url).with(csrf())
                         .param("sourceName", "премия")

@@ -1,4 +1,7 @@
 package ru.top.java212.dto;
 
-public record IncomeDto(String sourceName, int amount) {
+import jakarta.validation.constraints.PositiveOrZero;
+
+public record IncomeDto(String sourceName,
+                        @PositiveOrZero(message = "введите значение больше или равно 0") Integer amount) {
 }
