@@ -1,4 +1,4 @@
-package ru.top.java212.calculationExpensesAndIncomesFamily;
+package ru.top.java212.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

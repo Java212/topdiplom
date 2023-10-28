@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllIncomesFamily;
-import ru.top.java212.calculationExpensesAndIncomesUser.CalculationAllIncomesUser;
+import ru.top.java212.service.CalculationAllIncomesFamily;
+import ru.top.java212.service.CalculationAllIncomesUser;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 

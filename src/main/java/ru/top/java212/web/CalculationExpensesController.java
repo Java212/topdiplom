@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.calculationExpensesAndIncomesFamily.CalculationAllExpensesFamily;
-import ru.top.java212.calculationExpensesAndIncomesUser.CalculationAllExpensesUser;
+import ru.top.java212.service.CalculationAllExpensesFamily;
+import ru.top.java212.service.CalculationAllExpensesUser;
 import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 
