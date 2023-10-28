@@ -40,13 +40,13 @@ public class AddIncomeController {
     @GetMapping("/incomes/add")
     @PreAuthorize("authenticated")
     public String getNewIncomeView(Model model) {
-        model.addAttribute("newIncome", new IncomeDto("default source", 0));
+        model.addAttribute("incomeDto", new IncomeDto("default source", 0));
         return "addIncome";
     }
 
     @PostMapping("/incomes/add")
     @PreAuthorize("authenticated")
-    public String addIncome(@Valid @ModelAttribute IncomeDto newIncome, BindingResult bindingResult, Model model) {
+    public String addIncome(@Valid @ModelAttribute IncomeDto incomeDto, BindingResult bindingResult, Model model) {
 
         if ( bindingResult.hasErrors() ) {
             return "addIncome";
@@ -55,9 +55,9 @@ public class AddIncomeController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (principal instanceof User) ? ((User) principal) : new User("sisadmin", "admin", "ldfgjdff89", Role.ADMIN, new BigDecimal(0));
 
-            IncomeCategory defaultSource = incomeCategoryDao.findBySourceIncomeCategory(newIncome.sourceName());
+            IncomeCategory defaultSource = incomeCategoryDao.findBySourceIncomeCategory(incomeDto.sourceName());
 
-            Income IncomeToBeSaved = new Income(user, defaultSource, newIncome.amount());
+            Income IncomeToBeSaved = new Income(user, defaultSource, incomeDto.amount());
             incomeDbDao.save(IncomeToBeSaved);
             return "addIncome";
         }

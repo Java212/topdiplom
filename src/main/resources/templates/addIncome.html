@@ -22,7 +22,7 @@
     </div>
 </header>
 <h2>Выберите источник дохода и введите в поле ввода сумму в рублях</h2>
-<form class="input_fields" th:object="${newIncome}" th:action="@{/incomes/add}" method="post">
+<form class="input_fields" th:object="${incomeDto}" th:action="@{/incomes/add}" method="post">
     <div class="fields">
         <label class="form-label">Источник </label>
         <select class="form-select"  th:field="*{sourceName}">
