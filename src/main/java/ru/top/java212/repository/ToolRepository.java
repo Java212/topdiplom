@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public interface ToolRepository extends JpaRepository<Tool,Integer> {
       List<Tool> findByPerson(Person person);
-      List<Tool> findByName(String name);
+      List<Tool> findByNameContainingIgnoreCase(String name);
       List<Tool> findByPriceBetween(Double priceMin,Double PriceMax);
       @Query("SELECT MAX(t.price) FROM Tool t")
       Double findMaxPrice();

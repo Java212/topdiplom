@@ -137,7 +137,7 @@ public class ToolServiceImplTest {
         tools.add(tool2);
         tools.add(tool3);
         tools.add(tool4);
-        List<Tool> newTools = toolService.findToolsByDistrict(tools,"District");
+        List<Tool> newTools = toolService.findToolsByDistrict(tools,"District2");
         Assertions.assertEquals(2,newTools.size());
     }
 

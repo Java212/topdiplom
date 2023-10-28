@@ -1,5 +1,6 @@
 package ru.top.java212.service.tools;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.top.java212.dto.ToolDTO;
@@ -10,10 +11,7 @@ import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,12 +78,12 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findByName(String name){
-        return toolRepository.findByName(name);
+        return toolRepository.findByNameContainingIgnoreCase(name);
     }
 
     @Override
     public List<Tool> findByName(List<Tool> tools,String name){
-        return tools.stream().filter(t -> t.getName().equals(name))
+        return tools.stream().filter(t -> StringUtils.containsIgnoreCase(t.getName(), name))
                              .collect(Collectors.toList());
     }
     @Override
@@ -104,8 +102,8 @@ public class ToolServiceImpl implements ToolService{
             minPrice = priceMin;
             maxPrice = priceMax;
         }
-        return tools.stream().filter(t -> (t.getPrice() >= minPrice
-                                        && t.getPrice() <= maxPrice)).collect(Collectors.toList());
+        return  tools.stream().filter(t -> (t.getPrice() >= minPrice
+                && t.getPrice() <= maxPrice)).sorted(Comparator.comparing(Tool::getPrice)).toList();
     }
 
     @Override
@@ -121,12 +119,12 @@ public class ToolServiceImpl implements ToolService{
         List<Tool> allTools = toolRepository.findAll();
         Set<Tool> orderTools = ordersByDateBetween.stream().map(Order::getTool).collect(Collectors.toSet());
         allTools.removeAll(orderTools);
-        return allTools ;
+        return allTools.stream().sorted(Comparator.comparing(Tool::getName)).toList() ;
     }
 
     @Override
     public List<Tool> findToolsByDistrict(List<Tool> tools,String district) {
-        return tools.stream().filter(t -> t.getDistrict().equals(district))
+        return tools.stream().filter(t -> StringUtils.containsIgnoreCase(t.getDistrict(), district)).sorted(Comparator.comparing(Tool::getName))
                              .collect(Collectors.toList());
     }
 
@@ -156,12 +154,6 @@ public class ToolServiceImpl implements ToolService{
     }
 
     public Boolean toolIsFree(Tool tool,LocalDate startDate, LocalDate stopDate){
-//        List<Order> toolOrders = tool.getOrders();
-//        List<Order> myOrders = toolOrders.stream().filter(o -> (startDate.isBefore(o.getStartDate())
-//                        && stopDate.isBefore(o.getStartDate()))
-//                        || (startDate.isAfter(o.getStopDate())
-//                        && stopDate.isAfter(o.getStopDate())))
-//                .collect(Collectors.toList());
         List<Order> orders = orderRepository.findOrdersByDateBetween(startDate,stopDate);
         Set<Tool> orderTools = orders.stream().map(Order::getTool).collect(Collectors.toSet());
         if(orderTools.contains(tool)){
