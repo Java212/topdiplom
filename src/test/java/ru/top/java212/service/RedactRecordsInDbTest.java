@@ -60,16 +60,17 @@ public class RedactRecordsInDbTest {
     void test_remove_Category_from_Db_for_expense_category() {
 
         String nameRemoveCategory = "покупки непродовольственных товаров";
-        redactRecordsInDb.removeExpenseCategory(nameRemoveCategory);
+        int idAnotherCategory = 7;
+        redactRecordsInDb.removeExpenseCategory(nameRemoveCategory, idAnotherCategory);
 
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
         LocalDate endPeriod = LocalDate.of(2023, 10, 31);
-        Map<String, Long> list = Map.of("коммунальные платежи", 31140L,
-                "расходы на питание", 30140L,
-                "транспортные расходы", 17640L,
-                "расходы на мобильную связь и интернет", 14840L,
-                "покупка лекарственных средств", 26140L,
-                "непредвиденные расходы", 43285L);
+        Map<String, Long> list = Map.of("коммунальные платежи", 18000L,
+                "расходы на питание", 17000L,
+                "транспортные расходы", 4500L,
+                "расходы на мобильную связь и интернет", 1700L,
+                "покупка лекарственных средств", 13000L,
+                "непредвиденные расходы", 109000L);
         Assertions.assertEquals(list, calculationAllExpensesFamily.calculationExpensesFamilyByCategory(startPeriod, endPeriod));
     }
 
@@ -78,15 +79,16 @@ public class RedactRecordsInDbTest {
     void test_remove_Category_from_Db_for_income_source() {
 
         String nameRemoveCategory = "премия";
-        redactRecordsInDb.removeIncomeSource(nameRemoveCategory);
+        int idAnotherCategory = 6;
+        redactRecordsInDb.removeIncomeSource(nameRemoveCategory, idAnotherCategory);
 
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
         LocalDate endPeriod = LocalDate.of(2023, 10, 31);
-        Map<String, Long> list = Map.of("заработная плата", 251250L,
-                "доходы от ценных бумаг", 43500L,
-                "стипендия", 26750L,
-                "доходы от предпренимательской деятельности", 111500L,
-                "доходы от других источников", 33750L);
+        Map<String, Long> list = Map.of("заработная плата", 201000L,
+                "доходы от ценных бумаг", 10000L,
+                "стипендия", 10000L,
+                "доходы от предпринимательской  деятельности", 78000L,
+                "доходы от других источников", 167750L);
         Assertions.assertEquals(list, calculationAllIncomesFamily.calculationSourceIncomeByCategory(startPeriod, endPeriod));
     }
 }

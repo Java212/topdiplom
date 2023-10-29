@@ -45,20 +45,4 @@ public class ExpenseDbDaoTest {
                 .map(ExpenseAmount::getExpenseAmount).toList();
         Assertions.assertEquals(list, result);
     }
-
-    @Test
-    void test_getAllAmountForTheDeletedCategory() {
-        String nameRemoveCategory = "покупки непродовольственных товаров";
-        int thereMustBe = 69000;
-        Long amountFromDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory);
-        Assertions.assertEquals(thereMustBe, amountFromDb);
-    }
-
-    @Test
-    void test_getCountRecordsInDbWithoutRemoveCategory() {
-        String nameRemoveCategory = "покупки непродовольственных товаров";
-        int thereMustBe = 21;
-        int countRecordsWithoutRemoveCategory = expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
-        Assertions.assertEquals(thereMustBe, countRecordsWithoutRemoveCategory);
-    }
 }

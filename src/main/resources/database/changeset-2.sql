@@ -17,7 +17,7 @@ insert into incomes_category (source_income_category) values ('заработн�
 insert into incomes_category (source_income_category) values ('премия');
 insert into incomes_category (source_income_category) values ('доходы от ценных бумаг');
 insert into incomes_category (source_income_category) values ('стипендия');
-insert into incomes_category (source_income_category) values ('доходы от предпренимательской деятельности');
+insert into incomes_category (source_income_category) values ('доходы от предпринимательской  деятельности');
 insert into incomes_category (source_income_category) values ('доходы от других источников');
 
 insert into expenses (expense_amount, user_id, expense_category_id) values (5000,  1, 1);

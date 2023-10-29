@@ -45,18 +45,18 @@ public class RedactRecordsInDb {
     }
 
     @Transactional
-    public List<ExpenseCategory> removeExpenseCategory(String nameRemoveCategory) {
-        Long amountToAddToEachExpenseInTheDb = expenseDbDao.getAllAmountForTheDeletedCategory(nameRemoveCategory) / expenseDbDao.getCountRecordsInDbWithoutRemoveCategory(nameRemoveCategory);
-        int numberOfDeletedRecordsInDb = expenseCategoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
-        expenseDbDao.transferringTheAmountOfExpensesFromTheDeletedCategory(amountToAddToEachExpenseInTheDb);
+    public List<ExpenseCategory> removeExpenseCategory(String nameRemoveCategory, int idAnotherCategory) {
+        int idRemoveCategory = expenseCategoryDbDao.findByNameExpenseCategory(nameRemoveCategory).getId();
+        expenseDbDao.rewritingExpenseId(idRemoveCategory, idAnotherCategory);
+        expenseCategoryDbDao.deleteByNameExpenseCategory(nameRemoveCategory);
         return getExpenseCategoryList();
     }
 
     @Transactional
-    public List<IncomeCategory> removeIncomeSource(String nameRemoveCategory) {
-        Long amountToAddToEachIncomeInTheDb = incomeDbDao.getAllAmountForTheDeletedSource(nameRemoveCategory) / incomeDbDao.getCountRecordsInDbWithoutRemoveSource(nameRemoveCategory);
-        int numberOfDeletedRecordsInDb = incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
-        incomeDbDao.transferringTheAmountOfIncomesFromTheDeletedSource(amountToAddToEachIncomeInTheDb);
+    public List<IncomeCategory> removeIncomeSource(String nameRemoveCategory, int idAnotherCategory) {
+        int idRemoveCategory = incomeCategoryDbDao.findBySourceIncomeCategory(nameRemoveCategory).getId();
+        incomeDbDao.rewritingIncomeId(idRemoveCategory, idAnotherCategory);
+        incomeCategoryDbDao.deleteBySourceIncomeCategory(nameRemoveCategory);
         return getIncomeSourceList();
     }
 

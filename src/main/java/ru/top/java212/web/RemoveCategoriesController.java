@@ -44,11 +44,13 @@ public class RemoveCategoriesController {
         List<ExpenseCategory> listExpenseCategory = Collections.EMPTY_LIST;
         List<IncomeCategory> listIncomesSource = Collections.EMPTY_LIST;
         if (whatRemove.equals("расходы")) {
-            listExpenseCategory = redactRecordsInDb.removeExpenseCategory(nameRemoveCategory);
+            int idAnotherCategory = 7;
+            listExpenseCategory = redactRecordsInDb.removeExpenseCategory(nameRemoveCategory, idAnotherCategory);
             listIncomesSource = redactRecordsInDb.getIncomeSourceList();
         }
         if (whatRemove.equals("доходы")) {
-            listIncomesSource = redactRecordsInDb.removeIncomeSource(nameRemoveCategory);
+            int idAnotherCategory = 6;
+            listIncomesSource = redactRecordsInDb.removeIncomeSource(nameRemoveCategory, idAnotherCategory);
             listExpenseCategory = redactRecordsInDb.getExpenseCategoryList();
         }
         mv.addObject("allCategoriesExpenses", listExpenseCategory);

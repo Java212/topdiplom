@@ -31,7 +31,7 @@ public class CalculationAllIncomesFamilyTest {
                 "премия", 150750L,
                 "доходы от ценных бумаг", 10000L,
                 "стипендия", 10000L,
-                "доходы от предпренимательской деятельности", 78000L,
+                "доходы от предпринимательской  деятельности", 78000L,
                 "доходы от других источников", 17000L);
         Assertions.assertEquals(list, calculationIncomes.calculationSourceIncomeByCategory(startPeriod, endPeriod));
     }

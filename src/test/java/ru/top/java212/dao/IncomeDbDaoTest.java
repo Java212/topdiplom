@@ -46,20 +46,4 @@ public class IncomeDbDaoTest {
                 .map(IncomeAmount::getIncomeAmount).toList();
         Assertions.assertEquals(list, result);
     }
-
-    @Test
-    void test_getAllAmountForTheDeletedSource() {
-        String removeIncomeSource = "премия";
-        int thereMustBe = 150750;
-        Long amountFromDb = incomeDbDao.getAllAmountForTheDeletedSource(removeIncomeSource);
-        Assertions.assertEquals(thereMustBe, amountFromDb);
-    }
-
-    @Test
-    void test_getCountRecordsInDbWithoutRemoveSource() {
-        String removeIncomeSource = "премия";
-        int thereMustBe = 9;
-        int countRecordsWithoutRemoveSource = incomeDbDao.getCountRecordsInDbWithoutRemoveSource(removeIncomeSource);
-        Assertions.assertEquals(thereMustBe, countRecordsWithoutRemoveSource);
-    }
 }
