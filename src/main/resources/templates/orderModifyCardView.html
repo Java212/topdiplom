@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>Tool</title>
+    <title>Аренда инструмента</title>
     <link rel="stylesheet" th:href="@{../css/stylesIndex.css}" type="text/css"/>
 </head>
 <body>
@@ -13,6 +13,9 @@
             <h2>
                 <label class="h-label"> Ордер №</label>
                 <label class="h-label" th:text="${order.getId()}"></label>
+            </h2>
+            <h2>
+                <label th:if="${order.getStopped()}" class="h-lable">Отменен!</label>
             </h2>
             <div class="box">
                 <div class="input">
