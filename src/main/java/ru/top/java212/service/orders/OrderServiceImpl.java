@@ -71,4 +71,11 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findCurrentByPerson(Person person){
         return findByPerson(person).stream().filter(o -> (o.getStopped() == false) && (o.getCompleted() == false)).collect(Collectors.toList());
     }
+    @Override
+    public List<Order> getCurrentOrdersByDates(LocalDate startDate, LocalDate stopDate){
+            List<Order> ordersByDateBetween = orderRepository.findOrdersByDateBetween(startDate,stopDate);
+            List<Order> stoppedOrders = orderRepository.findByStopped(true);
+            ordersByDateBetween.removeAll(stoppedOrders);
+            return  ordersByDateBetween;
+    }
 }

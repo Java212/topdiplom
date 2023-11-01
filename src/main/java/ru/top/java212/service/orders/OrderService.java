@@ -15,4 +15,5 @@ public interface OrderService {
     Order findOrderById(int id);
     List<Order> findStoppedByPerson(Person person);
     List<Order> findCurrentByPerson(Person person);
+    List<Order> getCurrentOrdersByDates(LocalDate startDate, LocalDate stopDate);
 }

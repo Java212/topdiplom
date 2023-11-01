@@ -50,8 +50,6 @@ public class OrderCreateCardController {
         if(toolService.toolIsFree(tool,order.getStartDate(),order.getStopDate())){
             orderService.save(personUser,tool,order.getStartDate(),order.getStopDate());
             mv = new ModelAndView("redirect:/renter/renterView");
-//            mv.addObject("personName",personUser.getName());
-//            mv.addObject("orders", orderService.findByPerson(personUser));
         } else {
             mv = new ModelAndView("/renter/orderCreateCard");
             mv.addObject("message",true);

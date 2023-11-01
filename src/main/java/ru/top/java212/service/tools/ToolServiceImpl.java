@@ -9,6 +9,7 @@ import ru.top.java212.repository.AddressRepository;
 import ru.top.java212.repository.OrderRepository;
 import ru.top.java212.repository.PersonRepository;
 import ru.top.java212.repository.ToolRepository;
+import ru.top.java212.service.orders.OrderService;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -19,14 +20,14 @@ public class ToolServiceImpl implements ToolService{
     private final AddressRepository addressRepository;
     private final ToolRepository toolRepository;
     private final PersonRepository personRepository;
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
     @Autowired
-    public ToolServiceImpl(AddressRepository addressRepository, ToolRepository toolRepository, PersonRepository personRepository,OrderRepository orderRepository){
+    public ToolServiceImpl(AddressRepository addressRepository, ToolRepository toolRepository, PersonRepository personRepository,OrderService orderService){
         this.addressRepository = addressRepository;
         this.toolRepository = toolRepository;
         this.personRepository = personRepository;
-        this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
     @Override
     public Boolean save(ToolDTO tool, User user) {
@@ -113,14 +114,13 @@ public class ToolServiceImpl implements ToolService{
 
     @Override
     public List<Tool> findToolsByDates(LocalDate startDate, LocalDate stopDate) {
-        List<Order> ordersByDateBetween = orderRepository.findOrdersByDateBetween(startDate,stopDate);
-        List<Order> stoppedOrders = orderRepository.findByStopped(true);
-        ordersByDateBetween.removeAll(stoppedOrders);
+        List<Order> ordersByDateBetween = orderService.getCurrentOrdersByDates(startDate,stopDate);
         List<Tool> allTools = toolRepository.findAll();
         Set<Tool> orderTools = ordersByDateBetween.stream().map(Order::getTool).collect(Collectors.toSet());
         allTools.removeAll(orderTools);
         return allTools.stream().sorted(Comparator.comparing(Tool::getName)).toList() ;
     }
+
 
     @Override
     public List<Tool> findToolsByDistrict(List<Tool> tools,String district) {
@@ -154,7 +154,7 @@ public class ToolServiceImpl implements ToolService{
     }
 
     public Boolean toolIsFree(Tool tool,LocalDate startDate, LocalDate stopDate){
-        List<Order> orders = orderRepository.findOrdersByDateBetween(startDate,stopDate);
+        List<Order> orders = orderService.getCurrentOrdersByDates(startDate,stopDate);
         Set<Tool> orderTools = orders.stream().map(Order::getTool).collect(Collectors.toSet());
         if(orderTools.contains(tool)){
             return  false;
