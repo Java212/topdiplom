@@ -24,7 +24,7 @@
             <a th:href="@{/comeIn}">Выйти</a>
         </div>
 </header>
-<section class="view-income-and-expenses">
+<section class="view-income-and-expenses" sec:authorize="hasAuthority('USER')">
     <div class="all_exp_and_inc_family">
         <form  th:action="@{/expense/calculation}" method="get">
             <button class="button_family">Рассчитать расходы</button>
@@ -43,7 +43,7 @@
         </form>
     </div>
 </section>
-<section class="add-expenses-and-income">
+<section class="add-expenses-and-income" sec:authorize="hasAuthority('USER')">
     <div class="buttons-add">
         <form  th:action="@{/expenses/add}" method="get">
             <button class="button_family">Внести расходы</button>
