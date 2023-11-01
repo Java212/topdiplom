@@ -13,6 +13,8 @@ import ru.top.java212.model.Role;
 import ru.top.java212.model.User;
 import ru.top.java212.service.orders.OrderService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/orderModifyCardView")
 public class OrderModifyCardViewController {
@@ -38,12 +40,15 @@ public class OrderModifyCardViewController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (principal instanceof User) ? ((User) principal) : new User();
         String redirect = "redirect:/renter/renterView";
+        List<Role>  roles = (List<Role>) user.getRoles();
+        String role = roles.get(0).getName();
+        if(role.contains(Role.ROLE_LESSOR)){
+            redirect = "redirect:/lessor/lessorView";
+        }
         Order order = orderService.findOrderById(orderId);
         order.setStopped(true);
         orderService.save(order);
-        if(user.getRoles().contains(Role.ROLE_LESSOR)){
-            redirect = "redirect:/lessor/lessorView";
-        }
+
         ModelAndView mv = new ModelAndView(redirect);
         return mv;
     }
