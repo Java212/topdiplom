@@ -64,7 +64,7 @@ public class RedactRecordsInDbTest {
         redactRecordsInDb.removeExpenseCategory(nameRemoveCategory, idAnotherCategory);
 
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
-        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
+        LocalDate endPeriod = LocalDate.of(2023, 12, 31);
         Map<String, Long> list = Map.of("коммунальные платежи", 18000L,
                 "расходы на питание", 17000L,
                 "транспортные расходы", 4500L,
@@ -83,7 +83,7 @@ public class RedactRecordsInDbTest {
         redactRecordsInDb.removeIncomeSource(nameRemoveCategory, idAnotherCategory);
 
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
-        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
+        LocalDate endPeriod = LocalDate.of(2023, 12, 31);
         Map<String, Long> list = Map.of("заработная плата", 201000L,
                 "доходы от ценных бумаг", 10000L,
                 "стипендия", 10000L,

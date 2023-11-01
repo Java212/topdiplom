@@ -49,7 +49,7 @@ public class CalculationIncomesControllerTest {
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
-        String endPeriod = String.valueOf(LocalDate.of(2023, 10, 31));
+        String endPeriod = String.valueOf(LocalDate.of(2023, 12, 31));
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("checkbox", checkbox)
@@ -67,7 +67,7 @@ public class CalculationIncomesControllerTest {
         SecurityContextHolder.getContext().setAuthentication(new TestAuth());
         String checkbox = "user";
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
-        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
+        LocalDate endPeriod = LocalDate.of(2023, 12, 31);
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("checkbox", checkbox)

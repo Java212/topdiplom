@@ -29,7 +29,7 @@ public class ExpenseDbDaoTest {
                 4000, 1000, 100, 400, 400,
                 6000, 8000, 36000, 4000, 400, 11000, 40000);
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
-        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
+        LocalDate endPeriod = LocalDate.of(2023, 12, 31);
         List<Integer> result = expenseDbDao.findByDateBetween(startPeriod, endPeriod).stream()
                 .map(ExpenseAmount::getExpenseAmount).toList();
         Assertions.assertEquals(list, result);
@@ -40,7 +40,7 @@ public class ExpenseDbDaoTest {
         int userId = 1;
         List<Integer> list = List.of(5000, 3000, 23000, 300, 600, 1000);
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
-        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
+        LocalDate endPeriod = LocalDate.of(2023, 12, 31);
         List<Integer> result = expenseDbDao.findByUserIdAndDateBetween(userId, startPeriod, endPeriod).stream()
                 .map(ExpenseAmount::getExpenseAmount).toList();
         Assertions.assertEquals(list, result);

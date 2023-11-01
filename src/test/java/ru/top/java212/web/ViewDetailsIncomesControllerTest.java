@@ -49,7 +49,7 @@ public class ViewDetailsIncomesControllerTest {
         String url = "/details/incomes";
         String checkbox = "family";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
-        String endPeriod = String.valueOf(LocalDate.of(2023, 10, 31));
+        String endPeriod = String.valueOf(LocalDate.of(2023, 12, 31));
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("checkbox", checkbox)
@@ -65,7 +65,7 @@ public class ViewDetailsIncomesControllerTest {
         String url = "/details/incomes";
         String checkbox = "user";
         String startPeriod = String.valueOf(LocalDate.of(2023, 9, 1));
-        String endPeriod = String.valueOf(LocalDate.of(2023, 10, 31));
+        String endPeriod = String.valueOf(LocalDate.of(2023, 12, 31));
 
         this.mockMvc.perform(post(url).with(csrf())
                         .param("checkbox", checkbox)

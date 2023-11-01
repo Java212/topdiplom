@@ -1,10 +1,9 @@
-package ru.top.java212.calculationExpensesAndIncomesFamily;
+package ru.top.java212.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.top.java212.service.CalculationAllExpensesFamily;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -20,15 +19,14 @@ public class CalculationAllExpensesFamilyTest {
     void test_method_calculationExpensesFamily() {
         int result = 163200;
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
-        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
+        LocalDate endPeriod = LocalDate.of(2023, 12, 31);
         Assertions.assertEquals(result, calculationAllExpensesFamily.calculationExpensesFamily(startPeriod, endPeriod));
     }
 
     @Test
     void test_method_calculationExpensesFamilyByCategory() {
-
         LocalDate startPeriod = LocalDate.of(2023, 9, 1);
-        LocalDate endPeriod = LocalDate.of(2023, 10, 31);
+        LocalDate endPeriod = LocalDate.of(2023, 12, 31);
         Map<String, Long> list = Map.of("коммунальные платежи", 18000L,
                 "расходы на питание", 17000L,
                 "покупки непродовольственных товаров", 69000L,
