@@ -16,18 +16,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class ProductRepositoryTest {
 
 
-
     @Autowired
     ProductRepository productRepository;
-
-
-
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @Test
     void test_save_find_delete_product() {
-
-
-        Product product = productRepository.save(new Product(new Category(), "productTitle","link.ru", "productSpecification", new BigDecimal(123.0)));
+        Category category = categoryRepository.save(new  Category(1, "categoryTitle"));
+        Product product = productRepository.save(new Product(category, "productTitle", "link.ru", "productSpecification", new BigDecimal(123.0)));
         Product actualProduct = productRepository.findByTitle("productTitle");
 
         assertThat(product).isNotNull();
@@ -37,7 +34,7 @@ public class ProductRepositoryTest {
         productRepository.deleteById(product.getId());
         assertThat(productRepository.findByTitle("productTitle")).isNull();
 
-   }
+    }
 
 
 }

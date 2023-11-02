@@ -17,7 +17,7 @@ public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable = false)
     private Integer id;
 
     private String userName;

@@ -29,7 +29,9 @@ public class UserController {
 
     @PostMapping("/registration")
     public String createUser(Model model, @ModelAttribute UserDto userDto) {
-        userService.save(userDto);
+       if(!userService.save(userDto)){
+           return "redirect:?registrationModal";
+       }
         return "redirect:?authModal";
     }
 

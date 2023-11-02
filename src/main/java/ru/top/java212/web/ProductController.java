@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.top.java212.dao.ProductRepository;
 import ru.top.java212.dao.UserInfoRepository;
 import ru.top.java212.model.Product;
 import ru.top.java212.model.User;
@@ -22,8 +21,6 @@ public class ProductController {
 
     @Autowired
     private UserInfoRepository userInfoRepository;
-    @Autowired
-    ProductRepository productRepository;
     @Autowired
     ProductService productService;
 
@@ -49,6 +46,17 @@ public class ProductController {
     public ModelAndView findProductByTitle(Model model, @Param("title") String title ) {
         ModelAndView mv = new ModelAndView("categories");
         mv.addObject("products", productService.getProductsByTitleNotBusy(false, title));
+        return mv;
+    }
+
+    @GetMapping("/tools-nearby")
+    public ModelAndView showToolsNearby() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (principal instanceof User) ? ((User) principal) : new User();
+        UserInfo userInfo = userInfoRepository.findByUser(user);
+        ModelAndView mv = new ModelAndView("categories");
+        mv.addObject("district", userInfo.getAddress().getDistrict());
+        mv.addObject("products", productService.getProductsByAddress(userInfo.getAddress().getDistrict()));
         return mv;
     }
 }

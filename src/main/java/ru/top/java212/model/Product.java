@@ -13,7 +13,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
+    @Column(name = "product_id", insertable = false)
     private Integer id;
 
     @ManyToOne()
@@ -25,7 +25,7 @@ public class Product {
     @JoinColumn(name = "user_info_id")
     private UserInfo userInfo;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Order> orders;
 
 

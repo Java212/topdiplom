@@ -9,7 +9,7 @@ import java.util.List;
 public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_info_id")
+    @Column(name = "user_info_id", insertable = false)
     private Integer id;
     private String name;
     private String email;

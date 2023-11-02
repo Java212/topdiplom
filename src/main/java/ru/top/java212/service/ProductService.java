@@ -15,4 +15,7 @@ public interface ProductService {
     List<Product> getLastProductsByIsBusy(boolean isBusy);
 
     List<Product> getProductsByTitleNotBusy(boolean isBusy, String title);
+
+    List<Product> getProductsByAddress(String district);
+
 }

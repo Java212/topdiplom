@@ -25,6 +25,7 @@
             <a class="btn btn-primary" data-bs-target="#infoModal" data-bs-toggle="modal">личные данные</a>
             <a class="btn btn-primary" sec:authorize="hasAuthority('OWNER')" data-bs-target="#createProductModal"
                data-bs-toggle="modal">добавить инструмент</a>
+            <a class="btn btn-primary" th:href="@{/tools-nearby}" >инструменты рядом</a>
         </div>
 
         <div class="col-lg-9 ">

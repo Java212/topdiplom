@@ -19,3 +19,15 @@ if(get[1]=='authModal'){
         $("#authModal").modal('show');
     });
 }
+if(get[1]=='registrationModal'){
+    $(document).ready(function(){
+        $("#registrationModal").modal('show');
+        $("#registrationError").text('пользователь с таким именем уже существует');
+    });
+}
+if(get[2]=='error'){
+    $(document).ready(function(){
+        $("#errorMessage").text('неверное имя пользователя или пароль');
+    });
+
+}

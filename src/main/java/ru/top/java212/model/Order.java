@@ -11,14 +11,14 @@ import java.time.LocalDate;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "order_id", insertable = false)
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_info_id")
     private UserInfo userInfo;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "product_id")
     private Product product;
 

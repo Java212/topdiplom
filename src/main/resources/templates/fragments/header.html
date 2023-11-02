@@ -103,7 +103,8 @@
                         <label for="authInputPassword" class="form-label">Пароль</label>
                         <input type="password" name="password" class="form-control" id="authInputPassword">
                     </div>
-
+                    <div id="errorMessage" style="color:red" typeof="hidden">
+                    </div>
                     <input class="btn btn-primary" type="submit" value="Войти"/>
 
                 </form>
@@ -132,6 +133,7 @@
                             <label for="login" class="form-label">Login</label>
                             <input type="text" th:field="*{userInfo.user.userName}" class="form-control" id="login" required>
                             <div class="invalid-feedback">login не должен быть пустым</div>
+                            <div id="registrationError" style="color:red"></div>
                         </div>
                         <div class="col-md-6">
                             <label for="password" class="form-label">Пароль</label>
@@ -140,13 +142,15 @@
                             <div class="invalid-feedback">пароль не должен быть пустым</div>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPasswordRepeat" class="form-label">Повторите пароль</label>
-                            <input type="password" class="form-control" id="inputPasswordRepeat" required>
+                            <label for="passwordRepeat" class="form-label">Повторите пароль</label>
+                            <input type="password" class="form-control" id="passwordRepeat" required>
+                            <div class="invalid-feedback">пароли не совпадают</div>
                         </div>
                         <div class="col-md-6">
                             <label for="userName" class="form-label">Имя</label>
                             <input type="text" th:field="*{userInfo.name}" class="form-control" id="userName" required>
                             <div class="invalid-feedback">имя не должно быть пустым</div>
+
                         </div>
                         <div class="col-md-6">
                             <label for="email" class="form-label">Эл. адрес</label>

@@ -22,8 +22,9 @@
     <div class="row">
         <div class="col-lg-2 left-bar">
             <a class="btn btn-primary" data-bs-target="#infoModal" data-bs-toggle="modal">личные данные</a>
-            <a class="btn btn-primary" sec:authorize="hasAuthority('OWNER')" href="/personal-account/tools">мои инструменты</a>
+            <a class="btn btn-primary" sec:authorize="hasAuthority('OWNER')" th:href="@{/personal-account/tools}">мои инструменты</a>
             <a class="btn btn-primary" sec:authorize="hasAuthority('OWNER')" data-bs-target="#createProductModal" data-bs-toggle="modal">добавить инструмент</a>
+            <a class="btn btn-primary" th:href="@{/tools-nearby}" >инструменты рядом</a>
         </div>
 
         <div class="col-lg-9 ">
@@ -146,8 +147,8 @@
                                 <div class="invalid-feedback">пожалуйста, выберите категорию</div>
                             </div>
                             <div class="col-md-6">
-                                <label for="title" class="form-label">Название</label>
-                                <input type="text" th:field="*{title}" class="form-control" id="title" required>
+                                <label for="titleTool" class="form-label">Название</label>
+                                <input type="text" th:field="*{title}" class="form-control" id="titleTool" required>
                                 <div class="invalid-feedback">укажите название</div>
                             </div>
                             <div class="col-md-6">

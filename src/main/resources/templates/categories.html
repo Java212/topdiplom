@@ -23,7 +23,9 @@
 
 <div class="container-fluid gradient">
 
-
+<div th:if="${district}">
+    <h1> Инструмент рядом со мной район: <span th:text="${district}"></span></h1>
+</div>
 
     <div class="row">
         <div class="col-lg-4 col-md-6" th:each="product : ${products}">
