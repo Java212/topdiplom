@@ -1,4 +1,4 @@
-package ru.top.java212.model;
+package ru.top.java212.dao;
 
 public interface TotalExpense {
     Long getTotal();

@@ -75,14 +75,6 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -97,14 +89,6 @@ public class User implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public BigDecimal getstartingCapital() {
-        return startingCapital;
-    }
-
-    public void setstartingCapital(BigDecimal startingCapital) {
-        this.startingCapital = startingCapital;
     }
 
     public Set<Expense> getExpenses() {

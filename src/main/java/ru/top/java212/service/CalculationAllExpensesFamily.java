@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.top.java212.dao.AllExpensesFamily;
 import ru.top.java212.dao.ExpenseDbDao;
-import ru.top.java212.model.ExpenseAmount;
-import ru.top.java212.model.TotalExpense;
+import ru.top.java212.dao.ExpenseAmount;
+import ru.top.java212.dao.TotalExpense;
 
 import java.time.LocalDate;
 import java.util.HashMap;

@@ -4,8 +4,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.top.java212.model.Expense;
-import ru.top.java212.model.ExpenseAmount;
-import ru.top.java212.model.TotalExpense;
 
 import java.time.LocalDate;
 import java.util.List;

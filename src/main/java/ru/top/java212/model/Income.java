@@ -52,10 +52,6 @@ public class Income {
         return incomeAmount;
     }
 
-    public void setIncomeAmount(int incomeAmount) {
-        this.incomeAmount = incomeAmount;
-    }
-
     public LocalDate getDate() {
         return date;
     }
@@ -70,13 +66,5 @@ public class Income {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public IncomeCategory getIncomeCategory() {
-        return incomeCategory;
-    }
-
-    public void setIncomeCategory(IncomeCategory incomeCategory) {
-        this.incomeCategory = incomeCategory;
     }
 }

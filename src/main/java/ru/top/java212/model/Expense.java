@@ -51,10 +51,6 @@ public class Expense {
         return expenseAmount;
     }
 
-    public void setExpenseAmount(int expenseAmount) {
-        this.expenseAmount = expenseAmount;
-    }
-
     public LocalDate getDate() {
         return date;
     }
@@ -63,27 +59,11 @@ public class Expense {
         this.date = date;
     }
 
-    public User getUsers() {
-        return user;
-    }
-
-    public void setUsers(User user) {
-        this.user = user;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public ExpenseCategory getExpenseCategory() {
-        return expenseCategory;
-    }
-
-    public void setExpenseCategory(ExpenseCategory expenseCategory) {
-        this.expenseCategory = expenseCategory;
     }
 }
