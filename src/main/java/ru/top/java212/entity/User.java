@@ -1,48 +1,70 @@
-package ru.top.java212.model;
+package ru.top.java212.entity;
 
 import jakarta.persistence.*;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
 
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private Integer id;
-    private String login;
+    private String userName;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name="role_id", nullable = false)
+            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false)
     )
-    private Collection<Role> roles;
-
+    private Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoles();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getUserName();
+    }
+
+    public User() {
+    }
+
+    public User(String userName, String password) {
+
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
     public String getPassword() {
         return this.password;
-    }
-
-    public  void setPassword(String password){
-        this.password = password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getLogin();
     }
 
     @Override
@@ -65,22 +87,7 @@ public class User implements UserDetails {
         return true;
     }
 
-    public User(){
-    }
-    public User(String login, String password){
-        this.login = login;
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
@@ -88,11 +95,8 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public int getId(){
-        return this.id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
