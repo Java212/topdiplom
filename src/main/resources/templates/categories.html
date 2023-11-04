@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/categories.css}" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="nav-link disabled fw-semibold me-5" href="/">Семейный бюджет</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item me-1">
+                    <a class="nav-link" aria-current="page" href="/">Главная</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/user">Моя страница</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link disabled" href="/family">Семья</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/expences">Расходы</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/incomes">Доходы</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link active" href="/categories">Категории</a>
+                </li>
+            </ul>
+            <div sec:authorize="isAnonymous()">
+                <a href="/login" class="btn btn-primary btn-block me-2">Войти</a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a href="/register" class="btn btn-secondary btn-block me-2">Зарегистрироваться</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a href="/logout" class="btn btn-danger btn-block me-2">Выйти</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="m-3">
+    <h5 class="mb-3">Управление категориями</h5>
+    <div class="btn-group mb-1" role="group" aria-label="Базовая группа переключателей радио">
+        <input type="radio" class="btn-check" name="btnradio" id="incomesButton" autocomplete="off" checked>
+        <label class="btn btn-outline-secondary choose-button" for="incomesButton">Доходы</label>
+        <input type="radio" class="btn-check" name="btnradio" id="expenceButton" autocomplete="off">
+        <label class="btn btn-outline-secondary choose-button" for="expenceButton">Расходы</label>
+    </div>
+</div>
+<div class="alert alert-light m-3">
+
+    <div id="incomesCategories" class="flex-wrap">
+
+        <button id="addIncomeCategoryButton" class="d-flex align-items-center btn btn-outline-secondary">
+            <img th:src="@{/img/plus-icon.svg}" alt="" class="plus-icon me-2">
+            <span>Добавить</span>
+        </button>
+
+        <div th:id="incomeCategory-+${category.id}" th:category_id="${category.id}" th:category_name="${category.name}" th:each = "category: ${incomeCategories}" class="d-flex alert alert-secondary w-fit-content category align-items-center mb-0 income-category">
+
+            <h6 class="me-2 mt-0 mb-0"><th:span th:text="${category.name}"/></h6>
+
+            <button th:id="deleteIncomeCategoryButton-+${category.id}" class="btn btn-outline-danger btn-sm deleteCategoryButton">X</button>
+
+            <div th:id="deleteIncomeModalBackground-+${category.id}" class="modal-background">
+                <div class="modal-window">
+                    <div class="modal-content">
+                        <button th:id="deleteIncomeModalClose-+${category.id}" class="btn btn-outline-danger btn-sm modal-close">X</button>
+                        <h1>Удалить категорию доходов</h1><br>
+                        <div th:id="incomeCategoryDeleteModal-+${category.id}" class="alert alert-secondary pt-2 pb-2" th:text="${category.name}"></div>
+                        <div th:id="incomeCategoryDeleteSucessModal-+${category.id}" class="alert alert-success pt-2 pb-2 info">
+                            <span>Категория "</span><span th:text="${category.name}"></span><span>" удалена</span>
+                        </div>
+                        <button th:id="deleteIncomeCategoryModalButton-+${category.id}" class="btn btn-danger">Удалить</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="addIncomeModalBackground" class="modal-background">
+            <div class="modal-window">
+                <div class="modal-content">
+                    <button id="addIncomeModalClose" class="btn btn-outline-danger btn-sm modal-close">X</button>
+
+                    <h1 class="mb-3">Добавить категорию доходов</h1><br>
+
+                    <form id="addIncomeCategoryForm">
+                        <div class="mb-3">
+                            <input type="text" id="incomeCategoryNameInput" class="pt-2 pb-2 form-control" placeholder="Наименование категории"/>
+                        </div>
+                        <div id="errorIncomeCategoryNameInput" class="pt-2 pb-2 info alert alert-danger">Введите наименование!</div>
+                        <button id="addIncomeCategoryModalButton" class="btn btn-success w-100" type="button">Добавить</button>
+                    </form>
+
+                    <div id="successAddIncomeCategoryForm">
+                        <div id="successAddIncomeCategoryAlert" class="pt-2 pb-2 alert alert-success">Катогория добавлена</div>
+                        <button id="addMoreIncomeCategory" class="btn btn-success w-100">Добавить еще</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="expencesCategories" class="flex-wrap">
+
+        <button id="addExpenceCategoryButton" class="d-flex align-items-center btn btn-outline-secondary">
+            <img th:src="@{/img/plus-icon.svg}" alt="" class="plus-icon me-2">
+            <span>Добавить</span>
+        </button>
+
+        <div th:id="expenceCategory-+${category.id}" th:category_id="${category.id}" th:category_name="${category.name}" th:each = "category: ${expenceCategories}" class="d-flex alert alert-secondary w-fit-content category align-items-center mb-0 expence-category">
+
+            <h6 class="me-2 mt-0 mb-0"><th:span th:text="${category.name}"/></h6>
+
+            <button th:id="deleteExpenceCategoryButton-+${category.id}" class="btn btn-outline-danger btn-sm deleteCategoryButton">X</button>
+
+            <div th:id="deleteExpenceModalBackground-+${category.id}" class="modal-background">
+                <div class="modal-window">
+                    <div class="modal-content">
+                        <button th:id="deleteExpenceModalClose-+${category.id}" class="btn btn-outline-danger btn-sm modal-close">X</button>
+                        <h1>Удалить категорию расходов</h1><br>
+                        <div th:id="expenceCategoryDeleteModal-+${category.id}" class="alert alert-secondary pt-2 pb-2" th:text="${category.name}"></div>
+                        <div th:id="expenceCategoryDeleteSucessModal-+${category.id}" class="alert alert-success pt-2 pb-2 info">
+                            <span>Категория "</span><span th:text="${category.name}"></span><span>" удалена</span>
+                        </div>
+                        <button th:id="deleteExpenceCategoryModalButton-+${category.id}" class="btn btn-danger">Удалить</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="addExpenceModalBackground" class="modal-background">
+            <div class="modal-window">
+                <div class="modal-content">
+                    <button id="addExpenceModalClose" class="btn btn-outline-danger btn-sm modal-close">X</button>
+
+                    <h1 class="mb-3">Добавить категорию расходов</h1><br>
+
+                    <form id="addExpenceCategoryForm">
+                        <div class="mb-3">
+                            <input type="text" id="expenceCategoryNameInput" class="pt-2 pb-2 form-control" placeholder="Наименование категории"/>
+                        </div>
+                        <div id="errorExpenceCategoryNameInput" class="pt-2 pb-2 info alert alert-danger">Введите наименование!</div>
+                        <button id="addExpenceCategoryModalButton" class="btn btn-success w-100" type="button">Добавить</button>
+                    </form>
+
+                    <div id="successAddExpenceCategoryForm">
+                        <div id="successAddExpenceCategoryAlert" class="pt-2 pb-2 alert alert-success">Катогория добавлена</div>
+                        <button id="addMoreExpenceCategory" class="btn btn-success w-100">Добавить еще</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/categories.js}"></script>
+</body>
+</html>

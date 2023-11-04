@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Расходы</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/expences.css}" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+</head>
+<body>
+
+<div id="current-user" sec:authorize="isAuthenticated()" hidden>
+    <div id="currentUserId" th:text="${currentUser.getId()}"></div>
+    <div id="currentUserName" th:text="${currentUser.getName()}"></div>
+    <div id="currentUserFamily-id" th:text="${currentUser.getFamilyId()}"></div>
+</div>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="nav-link disabled fw-semibold me-5" href="/">Семейный бюджет</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item me-1">
+                    <a class="nav-link" aria-current="page" href="/">Главная</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/user">Моя страница</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link disabled" href="/family">Семья</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link active" href="/expences">Расходы</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/incomes">Доходы</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/categories">Категории</a>
+                </li>
+            </ul>
+            <div sec:authorize="isAnonymous()">
+                <a href="/login" class="btn btn-primary btn-block me-2">Войти</a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a href="/register" class="btn btn-secondary btn-block me-2">Зарегистрироваться</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a href="/logout" class="btn btn-danger btn-block me-2">Выйти</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<h5 class="m-3">Управление расходами</h5>
+<div id="expenceHeader" class="d-flex alert alert-light m-3">
+    <button id="addExpenceButton" class="d-flex align-items-center btn btn-outline-secondary me-3">
+        <img th:src="@{/img/plus-icon.svg}" alt="" class="plus-icon me-2">
+        <span>Добавить</span>
+    </button>
+</div>
+
+<div id="addExpenceModalBackground" class="modal-background">
+    <div class="modal-window">
+        <div class="modal-content">
+            <button id="addExpenceModalClose" class="btn btn-outline-danger btn-sm modal-close">X</button>
+
+            <h1 class="mb-3">Добавить позицию</h1><br>
+
+            <form id="addExpenceForm">
+                <div class="mb-3">
+                    <input type="text" id="expenceNameInput" class="pt-2 pb-2 form-control" placeholder="Наименование платежа"/>
+                </div>
+                <div id="errorExpenceNameInput" class="pt-2 pb-2 info alert alert-danger">Введите наименование!</div>
+
+                <div class="mb-3">
+                    <input type="number" min="0" id="expenceSummInput" class="pt-2 pb-2 form-control" placeholder="Сумма платежа"/>
+                </div>
+                <div id="errorExpenceSummInput" class="pt-2 pb-2 info alert alert-danger">Введите сумму!</div>
+                <div id="errorExpenceSummZero" class="pt-2 pb-2 info alert alert-danger">Сумма должна быть больше или равна 0!</div>
+
+                <div class="mb-3">
+                    <select id="expenceCategoryInput" class="pt-2 pb-2 form-control" place>
+                        <option value="">-- Выберите категорию --</option>
+                        <option th:value="${category.getId()}" th:text="${category.getName()}" th:each = "category: ${categories}"></option>
+                    </select>
+                </div>
+                <div id="errorExpenceCategoryInput" class="pt-2 pb-2 info alert alert-danger">Введите категорию!</div>
+                <div id="errorExpenceCategoryZero" class="pt-2 pb-2 info alert alert-danger">Сумма должна быть больше или равна 0!</div>
+
+                <div class="mb-3">
+                    <input type="date" id="expenceDateInput" class="pt-2 pb-2 form-control" placeholder="Дата платежа (ГГГГ-ММ-ДД)"/>
+                </div>
+                <div id="errorExpenceDateInput" class="pt-2 pb-2 info alert alert-danger">Введите дату!</div>
+
+                <button id="addExpenceModalButton" class="btn btn-success w-100" type="button">Добавить</button>
+            </form>
+
+            <div id="successAddExpence">
+                <div class="pt-2 pb-2 alert alert-success">Платеж добавлен</div>
+                <button id="addMoreExpenceButton" class="btn btn-success w-100">Добавить еще</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/expences.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя страница</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/user.css}" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="nav-link disabled fw-semibold me-5" href="/">Семейный бюджет</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item me-1">
+                    <a class="nav-link" aria-current="page" href="/">Главная</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link active" href="/user">Моя страница</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link disabled" href="/family">Семья</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/expences">Расходы</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/incomes">Доходы</a>
+                </li>
+                <li class="nav-item me-1">
+                    <a class="nav-link" href="/categories">Категории</a>
+                </li>
+            </ul>
+            <div sec:authorize="isAnonymous()">
+                <a href="/login" class="btn btn-primary btn-block me-2">Войти</a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a href="/register" class="btn btn-secondary btn-block me-2">Зарегистрироваться</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a href="/logout" class="btn btn-danger btn-block me-2">Выйти</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="user " sec:authorize="isAuthenticated()">
+    <div id="userInfo" class="d-flex flex-column w-fit-content ms-3">
+        <img th:src="@{/img/avatar-default.svg}" alt="" class="avatarIcon align-self-center">
+        <p id="username" class="fw-semibold fs-2 text-center" th:text="${currentUser.getName()}"></p>
+        <div class="value">
+            <span class="fw-semibold me-1">Идентификатор пользователя:</span>
+            <span id="userId" th:text="${currentUser.getId()}"></span>
+        </div>
+        <div class="value">
+            <span class="fw-semibold me-1">Идентификатор семьи:</span>
+            <span id="familyId" th:text="${currentUser.getFamilyId()}"></span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

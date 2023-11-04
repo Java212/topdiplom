@@ -1,0 +1,49 @@
+body{
+   padding-top: 40px;
+   padding-bottom: 40px;
+   background-color: #eee;
+}
+
+
+h2{
+   text-align: center;
+   margin-bottom: 16px;
+   background-color: #eee;
+}
+
+.info{
+   display: none;
+   margin: 0px;
+}
+
+#registration{
+   display: grid;
+   gap: 16px;
+   width: fit-content;
+   height: fit-content;
+   margin: auto;
+}
+
+#successRegistration{
+   display: none;
+   width: 300px;
+   height: fit-content;
+   margin: auto;
+}
+
+#successRegistration>div{
+   margin-bottom: 16px;
+}
+
+#successRegistration>p{
+   margin-bottom: 8px;
+}
+
+#userNameInput, #passwordInput, #passwordRepeatInput {
+   height: 43px;
+}
+
+#button_reg{
+   font-size: 16px;
+   width: 300px;
+}
