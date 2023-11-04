@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link href="../../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/register.css}" type="text/css"/>
+</head>
+<body>
+<div>
+    <div th:fragment="register_fragment">
+        <h2>Зарегистрируйтесь в системе как новый пользователь</h2>
+        <form id="registration">
+            <div id="errors" hidden="true"></div>
+            <div>
+                <input type="text" id="userNameInput" class="form-control" placeholder="Имя пользователя"/>
+            </div>
+            <div id="errorInputName" class="info alert alert-danger">
+                <p>Введите имя пользователя</p>
+            </div>
+            <div id="errorUserExist" class="info alert alert-danger">
+                <p>Такой пользователь уже существует!</p>
+            </div>
+            <div>
+                <input type="password" id="passwordInput" class="form-control" placeholder="Пароль"/>
+            </div>
+            <div id="errorInputPassword" class="info alert alert-danger">
+                <p>Введите пароль</p>
+            </div>
+            <div>
+                <input type="password" id="passwordRepeatInput" class="form-control" placeholder="Повторите пароль"/>
+            </div>
+            <div id="errorPasswordRepeatIncorrect" class="info alert alert-danger">
+                <p>Введите пароль еще раз</p>
+            </div>
+            <div id="errorPasswordsMismatch" class="info alert alert-danger">
+                <p>Пароли не совпадают</p>
+            </div>
+            <input id="button_reg" type="submit" class="btn btn-lg btn-primary btn-block" value="Регистрация" />
+        </form>
+        <div id="successRegistration">
+            <div class="alert alert-success">
+                <p>Регистрация прошла успешно!</p>
+            </div>
+            <a href="/login" class="btn btn-success btn-block">Войти</a>
+        </div>
+        <script type="text/javascript" th:src="@{/js/register.js}"></script>
+    </div>
+</div>
+</body>
+</html>
