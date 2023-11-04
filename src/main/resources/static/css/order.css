@@ -1,0 +1,61 @@
+.title-products{
+	margin-left: 500px;
+	margin-right: 500px;
+	margin-top: 80px;
+}
+
+.renterDate{
+	margin-left: 300px
+}
+
+.renterDate-block {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.renterDate-block-title {
+	margin-top: 10px;
+ 	margin-left: 20px;
+}
+
+
+.renterDate-block-specification {
+      margin-left: 20px;
+	  margin-right: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      border: 2px solid #000;
+      border-radius: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+}
+
+.renterDate-block-price {
+    display: flex;
+}
+
+.renterDate-block-number {
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.renterDate-ruble {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.renterDate-day {
+    margin-left: 20px;
+    font-size: 16px;
+}
+.renterDate-block-begin{
+	margin-left: 20px;
+}
+.renterDate-block-end{
+ 	margin-left: 20px;
+}
+.renterDate-block-btn{
+	margin-left: 20px;
+	margin-bottom: 10px;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>аренда мастер</title>
+    <link
+            th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap}"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+<div class="profile">
+    <div class="container rounded">
+        <a class="btn btn-dark btn-md" sec:authorize="hasAuthority('OWNER')"
+           href="/personal-account/tools">Мои инструменты</a>
+    </div>
+    <div class="add-prod">
+        <a class="btn btn-dark btn-md" sec:authorize="hasAuthority('OWNER')" data-bs-target="#createProductModal"
+           data-bs-toggle="modal">Добавить инструмент</a>
+    </div>
+</div>
+</div>
+<div class="my-orders text-center">
+    <div class="mt-4"><h4>Мои заказы</h4></div>
+    <div class="container rounded mx-auto d-flex border" style="height: 290px; overflow-y: auto;">
+        <div class="pb-5 ms-2" th:each="order : ${orders}">
+            <div class="block container rounded">
+                <div class="block-have d-flex flex-column">
+                    <h5 class="block-title text-center mt-3" th:text="${order.product.title}">Заголовок</h5>
+                    <p class="mb-0 mt-3">Арендовано: <span th:text="${order.startDate}"></span></p>
+                    <p class="mb-0 mt-3">Вернуть до: <span th:text="${order.endDate}"></span></p>
+                    <a th:href="@{'/order/delete/' + ${order.id}}" method="post" class="btn btn-dark mt-3 ps-3 pe-3">Вернуть</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:fragment="createProductModal">
+        <div class="modal fade" id="createProductModal" aria-hidden="true" aria-labelledby="createProductModalLabel"
+             tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="createProductModalLabel">Добавить инструмент</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="module-have">
+                        <form class="p-4 needs-validation" novalidate method="post" th:action="@{/create-product}"
+                              th:if="${product}" th:object="${product}">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Название</label>
+                                <input type="text" th:field="*{title}" class="form-control" id="title" required>
+                                <div class="invalid-feedback">Укажите название</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="specification" class="form-label">Описание</label>
+                                <textarea th:field="*{specification}" class="form-control" id="specification" required></textarea>
+                                <div class="invalid-feedback">Напишите описание</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Категория</label>
+                                <select id="category" th:field="*{category.title}" class="form-select" required>
+                                    <option value="" selected>Выберите категорию</option>
+                                    <option value="Шуруповерты">Шуруповерты</option>
+                                    <option value="Станки">Станки</option>
+                                    <option value="Пилы">Пилы</option>
+                                    <option value="Дозаторы">Дозаторы</option>
+                                    <option value="Реноваторы">Реноваторы</option>
+                                    <option value="Краскопульты">Краскопульты</option>
+                                </select>
+                                <div class="invalid-feedback">Пожалуйста, выберите категорию</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Цена</label>
+                                <input type="text" th:field="*{price}" class="form-control" id="price" required>
+                                <div class="invalid-feedback">Укажите цену</div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" id="createProductButton" class="btn btn-dark">
+                                    Добавить
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"
+></script>
+<script>
+    $('#authModalButton').hide();
+</script>
+<script src="./js/validation.js"></script>
+</body>
+</html>
