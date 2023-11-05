@@ -29,7 +29,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
-    // Создаем заглушки (mock) для репозиториев и кодировщика паролей.
     @Mock
     private ProfileRepository profileRepository;
 
@@ -42,41 +41,24 @@ public class UserServiceImplTest {
     @Mock
     private PasswordEncoder bCryptPasswordEncoder;
 
-
     @InjectMocks
     private UserServiceImpl userService;
 
     @Test
     void testLoadUserByUsername_UserNotFound() {
-        // настройте моки при необходимости
         when(userRepository.findByUserName("nonexistentUsername")).thenReturn(null);
-
-        // выполните ваш тест
         assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername("nonexistentUsername"));
     }
 
     @Test
     public void testSaveNewUser() {
-        // Создаем объекты DTO и роли для теста.
         UserDto userDto = createMockUserDto();
         Role role = createMockRole();
-
-        // Создаем заглушку для пользователя из базы данных (пользователь с таким именем не существует).
         when(userRepository.findByUserName(any())).thenReturn(null);
-
-        // Создаем заглушку для роли из базы данных (роль существует).
         when(roleRepository.findByName(any())).thenReturn(role);
-
-        // Создаем заглушку для сохранения роли.
         when(roleRepository.save(any())).thenReturn(role);
-
-        // Создаем заглушку для сохранения пользователя.
         when(userRepository.save(any())).thenReturn(createMockUser());
-
-        // Вызываем метод save и проверяем, что возвращается true (успешное завершение операции).
         assertTrue(userService.save(userDto));
-
-        // Проверяем, что методы были вызваны корректное количество раз.
         verify(userRepository, times(1)).findByUserName(any());
         verify(roleRepository, times(1)).findByName(any());
         verify(roleRepository, times(1)).save(any());
@@ -86,44 +68,25 @@ public class UserServiceImplTest {
 
     @Test
     public void testSaveExistingUser() {
-        // Создаем объекты DTO и роли для теста.
         UserDto userDto = createMockUserDto();
         Role role = createMockRole();
-
-        // Создаем заглушку для пользователя из базы данных (пользователь с таким именем уже существует).
         when(userRepository.findByUserName(any())).thenReturn(createMockUser());
-
-        // Вызываем метод save и проверяем, что возвращается false (пользователь существует).
         assertFalse(userService.save(userDto));
-
-        // Проверяем, что метод findByUserName был вызван один раз.
         verify(userRepository, times(1)).findByUserName(any());
-
-        // Проверяем, что остальные методы не были вызваны.
         verifyNoMoreInteractions(roleRepository, userRepository, profileRepository);
     }
 
     @Test
     public void testLoadUserByUsername() {
-        // Создаем заглушку для пользователя из базы данных.
         User user = createMockUser();
         when(userRepository.findByUserName(any())).thenReturn(user);
-
-        // Вызываем метод loadUserByUsername.
         UserDetails userDetails = userService.loadUserByUsername("testUser");
-
-        // Проверяем, что полученный UserDetails соответствует ожидаемому пользователю.
         assertEquals(user, userDetails);
-
-        // Проверяем, что метод findByUserName был вызван один раз.
         verify(userRepository, times(1)).findByUserName(any());
-
-        // Проверяем, что остальные методы не были вызваны.
         verifyNoMoreInteractions(roleRepository, userRepository, profileRepository);
     }
 
     private UserDto createMockUserDto() {
-        // Создаем объект DTO для теста.
         UserDto userDto = new UserDto();
         userDto.setProfile(createMockProfile());
         userDto.setRole(createMockRole());
@@ -131,9 +94,8 @@ public class UserServiceImplTest {
     }
 
     private Profile createMockProfile() {
-        // Создаем объект профиля для теста.
         User owner = createMockUser();
-        Address address = createMockAddress(); // Создаем объект Address
+        Address address = createMockAddress();
         return new Profile("Test User", "test@example.com", "123456789", owner, address);
     }
 
@@ -142,7 +104,6 @@ public class UserServiceImplTest {
     }
 
     private Role createMockRole() {
-        // Создаем объект роли для теста.
         Role role = new Role();
         role.setId(1);
         role.setName("ROLE_USER");
@@ -150,7 +111,6 @@ public class UserServiceImplTest {
     }
 
     private User createMockUser() {
-        // Создаем объект пользователя для теста.
         User user = new User("testUser", "encodedPassword");
         user.setId(1);
         user.setRoles(Collections.singleton(createMockRole()));
