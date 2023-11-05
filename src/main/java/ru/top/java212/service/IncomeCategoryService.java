@@ -19,6 +19,10 @@ public class IncomeCategoryService {
         return StreamSupport.stream(incomeCategoryRepository.findAll().spliterator(), false).map(this::incomeCategoryToDto).collect(Collectors.toList());
     }
 
+    public List<IncomeCategoryDTO> getUsedCategoryDtoList(){
+        return incomeCategoryRepository.getUsedCategories().stream().map(this::incomeCategoryToDto).collect(Collectors.toList());
+    }
+
     public IncomeCategoryDTO getDtoById(Integer id) {
         return incomeCategoryToDto(getById(id));
     }

@@ -133,6 +133,7 @@ document.querySelectorAll('.income-category').forEach((category) => {
     const deleteIncomeCategoryModalButton = document.getElementById("deleteIncomeCategoryModalButton-" + id);
     const incomeCategoryDeleteModal = document.getElementById("incomeCategoryDeleteModal-" + id);
     const incomeCategoryDeleteSucessModal = document.getElementById("incomeCategoryDeleteSucessModal-" + id);
+    const incomeCategoryDeleteErrorUsed = document.getElementById("incomeCategoryDeleteErrorUsed-" + id);
 
     deleteIncomeCategoryButton.addEventListener('click', function () {
         deleteIncomeModalBackground.style.display = "block";
@@ -148,20 +149,44 @@ document.querySelectorAll('.income-category').forEach((category) => {
         deleteIncomeModalBackground.style.display = "none";
     });
 
-    deleteIncomeCategoryModalButton.addEventListener("click", function () {
-        $.ajax({
-            type: 'delete',
-            url: '/categories/income/'+id,
-            complete: function () {
-                resetIncomeForm();
-                deleteIncomeCategoryModalButton.style.display = "none";
-                incomeCategoryDeleteModal.style.display = "none";
-                incomeCategoryDeleteSucessModal.style.display = "block";
-                console.log('income category "' + category_name + '" delete successful');
+    deleteIncomeCategoryModalButton.addEventListener("click", async function () {
+
+        let usedCategories = await getUsedIncomeCategories();
+
+        function isUsed(id) {
+            for (let i = 0; i < usedCategories.length; i++) {
+                if (usedCategories[i].id == id) {
+                    return true;
+                }
             }
-        })
+            return false;
+        }
+
+        if (isUsed(id)) {
+            resetExpenceForm();
+            deleteIncomeCategoryModalButton.style.display = "none";
+            incomeCategoryDeleteModal.style.display = "none";
+            incomeCategoryDeleteErrorUsed.style.display = "block";
+        } else {
+            $.ajax({
+                type: 'delete',
+                url: '/categories/income/' + id,
+                complete: function () {
+                    resetIncomeForm();
+                    deleteIncomeCategoryModalButton.style.display = "none";
+                    incomeCategoryDeleteModal.style.display = "none";
+                    incomeCategoryDeleteSucessModal.style.display = "block";
+                    console.log('income category "' + category_name + '" delete successful');
+                }
+            })
+        }
     })
 })
+
+async function getUsedIncomeCategories() {
+    const response = await fetch('/categories/income/used');
+    return await response.json();
+}
 
 // Add expence category
 
@@ -250,6 +275,7 @@ document.querySelectorAll('.expence-category').forEach((category) => {
     const deleteExpenceCategoryModalButton = document.getElementById("deleteExpenceCategoryModalButton-" + id);
     const expenceCategoryDeleteModal = document.getElementById("expenceCategoryDeleteModal-" + id);
     const expenceCategoryDeleteSucessModal = document.getElementById("expenceCategoryDeleteSucessModal-" + id);
+    const expenceCategoryDeleteErrorUsed = document.getElementById("expenceCategoryDeleteErrorUsed-" + id);
 
     deleteExpenceCategoryButton.addEventListener('click', function () {
         deleteExpenceModalBackground.style.display = "block";
@@ -265,18 +291,42 @@ document.querySelectorAll('.expence-category').forEach((category) => {
         deleteExpenceModalBackground.style.display = "none";
     });
 
-    deleteExpenceCategoryModalButton.addEventListener("click", function () {
-        $.ajax({
-            type: 'delete',
-            url: '/categories/expence/'+id,
-            complete: function () {
-                resetExpenceForm();
-                deleteExpenceCategoryModalButton.style.display = "none";
-                expenceCategoryDeleteModal.style.display = "none";
-                expenceCategoryDeleteSucessModal.style.display = "block";
-                console.log('expence category "' + category_name + '" delete successful');
+    deleteExpenceCategoryModalButton.addEventListener("click", async function () {
+
+        let usedCategories = await getUsedExpenceCategories();
+
+        function isUsed(id) {
+            for (let i = 0; i < usedCategories.length; i++) {
+                if (usedCategories[i].id == id) {
+                    return true;
+                }
             }
-        })
+            return false;
+        }
+
+        if (isUsed(id)) {
+            resetExpenceForm();
+            deleteExpenceCategoryModalButton.style.display = "none";
+            expenceCategoryDeleteModal.style.display = "none";
+            expenceCategoryDeleteErrorUsed.style.display = "block";
+        } else {
+            $.ajax({
+                type: 'delete',
+                url: '/categories/expence/' + id,
+                complete: function () {
+                    resetExpenceForm();
+                    deleteExpenceCategoryModalButton.style.display = "none";
+                    expenceCategoryDeleteModal.style.display = "none";
+                    expenceCategoryDeleteSucessModal.style.display = "block";
+                    console.log('expence category "' + category_name + '" delete successful');
+                }
+            })
+        }
+
     })
 })
 
+async function getUsedExpenceCategories() {
+    const response = await fetch('/categories/expence/used');
+    return await response.json();
+}

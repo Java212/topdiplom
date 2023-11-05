@@ -18,6 +18,10 @@ const errorIncomeCategoryZero = document.getElementById("errorIncomeCategoryZero
 const errorIncomeDateInput = document.getElementById("errorIncomeDateInput");
 
 const currentUserId = document.getElementById("currentUserId");
+const currentUserName = document.getElementById("currentUserName");
+
+const allIncomesSumm = document.getElementById("allIncomesSumm");
+const userIncomesSumm = document.getElementById("userIncomesSumm");
 
 // Get incomes list
 
@@ -29,9 +33,9 @@ function getIncomes(){
         type: 'get',
         url: '/incomes/list',
         dataType: 'json',
-    }).done(function(data){
+    }).done(async function (data) {
 
-        if (document.body.contains(document.getElementById("incomesList"))){
+        if (document.body.contains(document.getElementById("incomesList"))) {
             const incomesList = document.getElementById("incomesList");
             incomesList.parentNode.removeChild(incomesList);
         }
@@ -41,13 +45,23 @@ function getIncomes(){
             const body = document.getElementsByTagName('Body')[0];
             const incomesList = document.createElement('div');
             incomesList.classList.add('alert', 'alert-light', 'm-3');
-            incomesList.setAttribute('id','incomesList');
+            incomesList.setAttribute('id', 'incomesList');
+
+            let categories = await getAllCategories();
+
+            function searchCategory(id) {
+                for (let i = 0; i < categories.length; i++) {
+                    if (categories[i].id === id) {
+                        return categories[i];
+                    }
+                }
+            }
 
             for (let i = 0; i < data.length; i++) {
 
                 const income = document.createElement('div');
                 income.classList.add('d-flex', 'alert', 'alert-secondary', 'w-100', 'category', 'align-items-center', 'mb-0')
-                income.setAttribute('id','income-'+i);
+                income.setAttribute('id', 'income-' + i);
 
                 const name = document.createElement('h6');
                 name.classList.add('me-3', 'mt-0', 'mb-0');
@@ -61,7 +75,7 @@ function getIncomes(){
 
                 const category = document.createElement('h6');
                 category.classList.add('me-3', 'mt-0', 'mb-0');
-                category.innerText = "Категория: " + data[i].categoryId + ",";
+                category.innerText = "Категория: " + searchCategory(data[i].categoryId).name + ",";
                 income.append(category);
 
                 const date = document.createElement('h6');
@@ -72,13 +86,14 @@ function getIncomes(){
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('btn', 'btn-outline-danger', 'btn-sm', 'deleteIncomeButton');
                 deleteButton.innerText = "X";
-                deleteButton.addEventListener('click',function (){
+                deleteButton.addEventListener('click', function () {
                     $.ajax({
                         type: 'delete',
-                        url: '/incomes/'+(data[i].id),
+                        url: '/incomes/' + (data[i].id),
                         complete: function () {
                             getIncomes();
-                            getIncomesSumm();
+                            getAllIncomesSumm();
+                            getUserIncomesSumm();
                             console.log('income "' + data[i].name + '" delete successful');
                         }
                     })
@@ -95,27 +110,24 @@ function getIncomes(){
     });
 }
 
-// Get incomes summ
+async function getAllCategories() {
+    const response = await fetch('/categories/income');
+    return await response.json();
+}
 
-getIncomesSumm();
+// Get all incomes summ
 
-function getIncomesSumm() {
+getAllIncomesSumm();
+
+function getAllIncomesSumm() {
+    removeAllIncomesSumm();
     $.ajax({
         type: 'get',
         url: '/incomes/summ_all',
         dataType: 'json',
     }).done(function(data){
-
-        if (document.body.contains(document.getElementById("allIncomesSumm"))){
-            removeIncomesSumm();
-        }
-
         if (data>0) {
-            const header = document.getElementById("incomeHeader");
-            const allIncomesSumm = document.createElement('div');
-            allIncomesSumm.classList.add('alert', 'alert-light', 'mt-0', 'mb-0');
-            allIncomesSumm.setAttribute('id','allIncomesSumm');
-
+            allIncomesSumm.style.display = 'block';
             const allIncomesSummName = document.createElement('span');
             allIncomesSummName.classList.add('fw-semibold', 'me-1');
             allIncomesSummName.innerText = "Общий доход: ";
@@ -124,17 +136,55 @@ function getIncomesSumm() {
             const allIncomesSummValue = document.createElement('span');
             allIncomesSummValue.innerText = data + " р.";
             allIncomesSumm.append(allIncomesSummValue);
-
-            header.append(allIncomesSumm);
         } else {
-            removeIncomesSumm();
+            removeAllIncomesSumm();
         }
+    }).fail(function(){
+        removeAllIncomesSumm();
     });
 }
 
-function removeIncomesSumm() {
-    const allIncomesSumm = document.getElementById("allIncomesSumm");
-    allIncomesSumm.parentNode.removeChild(allIncomesSumm);
+function removeAllIncomesSumm() {
+    while (allIncomesSumm.firstChild) {
+        allIncomesSumm.removeChild(allIncomesSumm.lastChild);
+    }
+    allIncomesSumm.style.display = 'none';
+}
+
+// Get user incomes summ
+
+getUserIncomesSumm();
+
+function getUserIncomesSumm(){
+    const userId = currentUserId.innerText;
+    removeUserIncomesSumm();
+    fetch('/incomes/summ/'+userId)
+        .then((responce) => responce.json())
+        .then((data) => {
+            if (data>0) {
+                userIncomesSumm.style.display = 'block';
+                const userIncomesSummName = document.createElement('span');
+                userIncomesSummName.classList.add('fw-semibold', 'me-1');
+                userIncomesSummName.innerText = "Доход " + currentUserName.innerText + ": ";
+                userIncomesSumm.append(userIncomesSummName);
+
+                const userIncomesSummValue = document.createElement('span');
+                userIncomesSummValue.innerText = data + " р.";
+                userIncomesSumm.append(userIncomesSummValue);
+            } else {
+                removeUserIncomesSumm();
+            }
+        })
+        .catch(() => {
+            removeUserIncomesSumm();
+        });
+}
+
+function removeUserIncomesSumm() {
+    while (userIncomesSumm.firstChild) {
+        userIncomesSumm.removeChild(userIncomesSumm.lastChild);
+    }
+    userIncomesSumm.style.display = 'none';
 }
 
 // Add income
@@ -178,7 +228,8 @@ addIncomeModalButton.addEventListener('click', function (){
             data: JSON.stringify(income),
             complete: function () {
                 getIncomes();
-                getIncomesSumm();
+                getAllIncomesSumm();
+                getUserIncomesSumm();
                 resetIncomeForm();
                 addIncomeForm.style.display='none';
                 successAddIncome.style.display = 'block';

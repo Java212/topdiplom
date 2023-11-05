@@ -19,6 +19,10 @@ public class ExpenceCategoryService {
         return StreamSupport.stream(expenceCategoryRepository.findAll().spliterator(), false).map(this::expenceCategoryToDto).collect(Collectors.toList());
     }
 
+    public List<ExpenceCategoryDTO> getUsedCategoryDtoList(){
+        return expenceCategoryRepository.getUsedCategories().stream().map(this::expenceCategoryToDto).collect(Collectors.toList());
+    }
+
     public ExpenceCategoryDTO getDtoById(Integer id) {
         return expenceCategoryToDto(getById(id));
     }

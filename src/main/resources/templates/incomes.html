@@ -57,11 +57,14 @@
 </nav>
 
 <h5 class="m-3">Управление доходами</h5>
+
 <div id="incomeHeader" class="d-flex alert alert-light m-3">
     <button id="addIncomeButton" class="d-flex align-items-center btn btn-outline-secondary me-3">
         <img th:src="@{/img/plus-icon.svg}" alt="" class="plus-icon me-2">
         <span>Добавить</span>
     </button>
+    <div id="allIncomesSumm" class="alert alert-light mt-0 mb-0 me-3"></div>
+    <div id="userIncomesSumm" class="alert alert-light mt-0 mb-0 me-3"></div>
 </div>
 
 <div id="addIncomeModalBackground" class="modal-background">

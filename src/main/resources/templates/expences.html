@@ -57,11 +57,14 @@
 </nav>
 
 <h5 class="m-3">Управление расходами</h5>
+
 <div id="expenceHeader" class="d-flex alert alert-light m-3">
     <button id="addExpenceButton" class="d-flex align-items-center btn btn-outline-secondary me-3">
         <img th:src="@{/img/plus-icon.svg}" alt="" class="plus-icon me-2">
         <span>Добавить</span>
     </button>
+    <div id="allExpencesSumm" class="alert alert-light mt-0 mb-0 me-3"></div>
+    <div id="userExpencesSumm" class="alert alert-light mt-0 mb-0 me-3"></div>
 </div>
 
 <div id="addExpenceModalBackground" class="modal-background">

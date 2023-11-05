@@ -8,11 +8,12 @@ import ru.top.java212.dto.ExpenceCategoryDTO;
 import ru.top.java212.dto.IncomeCategoryDTO;
 import ru.top.java212.service.ExpenceCategoryService;
 import ru.top.java212.service.IncomeCategoryService;
+import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
 @RequiredArgsConstructor
-@Tag(name = "wd")
+@Tag(name = "API для взаимодействия с категориями")
 public class CategoriesController {
 
     private final IncomeCategoryService incomeCategoryService;
@@ -30,37 +31,43 @@ public class CategoriesController {
     }
 
     @GetMapping("/income")
-    public void getIncomeCategories() {
-        incomeCategoryService.getIncomeCategoryDtoList();
+    public List<IncomeCategoryDTO> getIncomeCategories() {
+        return incomeCategoryService.getIncomeCategoryDtoList();
     }
 
     @GetMapping("/expence")
-    public void getExpenceCategories() {
-        expenceCategoryService.getExpenceCategoryDtoList();
+    public List<ExpenceCategoryDTO> getExpenceCategories() {
+        return expenceCategoryService.getExpenceCategoryDtoList();
+    }
+
+    @GetMapping("/income/used")
+    public List<IncomeCategoryDTO> getUsedIncomeCategoryDtoList() {
+        return incomeCategoryService.getUsedCategoryDtoList();
+    }
+
+    @GetMapping("/expence/used")
+    public List<ExpenceCategoryDTO> getUsedExpenceCategoryDtoList() {
+        return expenceCategoryService.getUsedCategoryDtoList();
     }
 
     @PostMapping("/income")
-    public ModelAndView addIncomeCategory(@RequestBody IncomeCategoryDTO dto) {
+    public void addIncomeCategory(@RequestBody IncomeCategoryDTO dto) {
         incomeCategoryService.convertAndSave(dto);
-        return viewCategories();
     }
 
     @PostMapping("/expence")
-    public ModelAndView addExpenceCategory(@RequestBody ExpenceCategoryDTO dto) {
+    public void addExpenceCategory(@RequestBody ExpenceCategoryDTO dto) {
         expenceCategoryService.convertAndSave(dto);
-        return viewCategories();
     }
 
     @DeleteMapping("/income/{id}")
-    public ModelAndView deleteIncomeCategory(@PathVariable Integer id) {
+    public void deleteIncomeCategory(@PathVariable Integer id) {
         incomeCategoryService.deleteById(id);
-        return viewCategories();
     }
 
     @DeleteMapping("/expence/{id}")
-    public ModelAndView deleteExpenceCategory(@PathVariable Integer id) {
+    public void deleteExpenceCategory(@PathVariable Integer id) {
         expenceCategoryService.deleteById(id);
-        return viewCategories();
     }
 
 }

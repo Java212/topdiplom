@@ -38,8 +38,13 @@ public class IncomesController {
     }
 
     @GetMapping("/summ_all")
-    public Integer getAllIncomesSumm(){
+    public Double getAllIncomesSumm(){
         return incomeService.getAllIncomesSumm();
+    }
+
+    @GetMapping("/summ/{id}")
+    public Double getAllIncomesSummByUserId(@PathVariable Integer id){
+        return incomeService.getAllIncomesSummByUserId(id);
     }
 
     @PostMapping

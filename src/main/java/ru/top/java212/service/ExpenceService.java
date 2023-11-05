@@ -19,8 +19,12 @@ public class ExpenceService {
         return StreamSupport.stream(expenceRepository.findAll().spliterator(), false).map(this::expenceToDto).collect(Collectors.toList());
     }
 
-    public Integer getAllExpencesSumm(){
+    public Double getAllExpencesSumm(){
         return expenceRepository.getAllExpencesSumm();
+    }
+
+    public Double getAllExpencesSummByUserId(Integer id){
+        return expenceRepository.getAllExpencesSummByUserId(id);
     }
 
     public void convertAndSave(ExpenceDTO dto) {

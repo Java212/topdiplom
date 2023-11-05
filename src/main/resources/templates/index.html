@@ -35,6 +35,9 @@
                 <li class="nav-item me-1">
                     <a class="nav-link" href="/categories">Категории</a>
                 </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item me-1">
+                    <a class="nav-link" href="/swagger-ui/index.html">API Menu</a>
+                </li>
             </ul>
             <div sec:authorize="isAnonymous()">
                 <a href="/login" class="btn btn-primary btn-block me-2">Войти</a>

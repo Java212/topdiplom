@@ -38,8 +38,13 @@ public class ExpencesController {
     }
 
     @GetMapping("/summ_all")
-    public Integer getAllExpencesSumm(){
+    public Double getAllExpencesSumm(){
         return expenceService.getAllExpencesSumm();
+    }
+
+    @GetMapping("/summ/{id}")
+    public Double getAllExpencesSummByUserId(@PathVariable Integer id){
+        return expenceService.getAllExpencesSummByUserId(id);
     }
 
     @PostMapping

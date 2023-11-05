@@ -19,8 +19,12 @@ public class IncomeService {
         return StreamSupport.stream(incomeRepository.findAll().spliterator(), false).map(this::incomeToDto).collect(Collectors.toList());
     }
 
-    public Integer getAllIncomesSumm(){
+    public Double getAllIncomesSumm(){
         return incomeRepository.getAllIncomesSumm();
+    }
+
+    public Double getAllIncomesSummByUserId(Integer id){
+        return incomeRepository.getAllIncomesSummByUserId(id);
     }
 
     public void convertAndSave(IncomeDTO dto) {
