@@ -1,15 +1,10 @@
 package ru.top.java212.service;
-
-
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.top.java212.entity.Address;
 import ru.top.java212.repository.RoleRepository;
 import ru.top.java212.repository.ProfileRepository;
 import ru.top.java212.repository.UserRepository;
@@ -73,6 +68,5 @@ public class UserServiceImpl implements UserDetailsService {
         }
         return user;
     }
-
 
 }
