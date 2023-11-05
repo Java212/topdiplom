@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>school</title>
+    <style>
+        .list-item label {
+            font-size: 36px;
+            list-style-type: none;
+        }
+
+        .list-item label span {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Учителя школы</h1>
+    <ul class="list">
+        <li th:each="subject : ${subjects}" class="list-item">
+            <label>
+                <span th:text="${subject.teacher.surname}"></span>
+                <span th:text="${subject.teacher.name}"></span>
+                <span th:text="${subject.teacher.patronymic}"></span>
+                <span th:text="' (' + ${subject.title} + ')'"></span>
+            </label>
+            <br>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
