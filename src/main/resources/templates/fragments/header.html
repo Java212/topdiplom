@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<body th:fragment="header">
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container bg-secondary mt-5 rounded mx-auto py-2">
+        <a class="navbar-brand ms-4" th:href="@{/}">
+            Аренда Мастер
+        </a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex mx-5 col-md-5" th:action="@{/search-product}">
+                <input id="title" type="search" name="title" th:value="${title}" required
+                       class="form-control search-input" placeholder="Поиск среди товаров в аренду"
+                       style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                />
+                <button type="submit" class="btn btn-dark ms-1">Найти</button>
+            </form>
+            <ul class="navbar-nav mx-2 mb-3 mb-lg-0 fs-6">
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${module == 'home' ? 'active' : ''}" aria-current="page" th:href="@{/}">Главная</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/categories/Шуруповерты}">Шуруповерты</a></li>
+                        <li><a class="dropdown-item" th:href="@{/categories/Станки}">Станки</a></li>
+                        <li><a class="dropdown-item" th:href="@{/categories/Пилы}">Пилы</a></li>
+                        <li><a class="dropdown-item" th:href="@{/categories/Дозаторы}">Дозаторы</a></li>
+                        <li><a class="dropdown-item" th:href="@{/categories/Реноваторы}">Реноваторы</a></li>
+                        <li><a class="dropdown-item" th:href="@{/categories/Краскопульты}">Краскопульты</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto m-0 mb-lg-0">
+                <li class="nav-item">
+                    <span th:if="${profile}" th:text="${profile.name} ">...</span></a>
+                    <a th:if="${profile}" href="@{/logout}" th:href="@{#}" onclick="$('#form').submit();"
+                       class="btn btn-dark">Выйти</a>
+                    <a th:href="@{/personal-account}" id="authModalButton" class="btn btn-dark">Личный кабинет</a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="authModal" aria-hidden="true" aria-labelledby="authModalLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h1 class="modal-title mx-3 fs-4 " id="authModalLabel">Авторизация</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/login}" method="post">
+                    <div class="mx-3 mb-2">
+                        <label for="inputLogin" class="form-label">Имя пользователя</label>
+                        <input type="text" name="username" class="form-control" id="inputLogin"
+                               style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);">
+                    </div>
+                    <div class="mx-3 mb-2">
+                        <label for="authInputPassword" class="form-label">Пароль</label>
+                        <input type="password" name="password" class="form-control"
+                               id="authInputPassword"  style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);">
+                    </div>
+                    <input class="btn btn-dark mx-3 mt-2" type="submit" value="Войти"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-dark me-3" data-bs-target="#registrationModal" data-bs-toggle="modal">Регистрация
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registrationModal" aria-hidden="true" aria-labelledby="registrationModalLabel"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4 mx-3" id="registrationModalLabel">Регистрация</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate method="post" th:action="@{/registration}"
+                      th:if="${userDto}"
+                      th:object="${userDto}">
+                    <div class="input-group has-validation d-flex justify-content-between">
+                        <div class="col-md-5 mx-3">
+                            <label for="login" class="form-label">Логин</label>
+                            <input type="text" th:field="*{profile.user.userName}" class="form-control" id="login"
+                                   required  style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);">
+                            <div class="invalid-feedback">Введите логин</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="userName" class="form-label">Имя</label>
+                            <input type="text" th:field="*{profile.name}" class="form-control" id="userName" required
+                                   style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                            <div class="invalid-feedback">Укажите имя</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="password" class="form-label">Пароль</label>
+                            <input type="password" th:field="*{profile.user.password}" class="form-control"
+                                   id="password" required
+                                   style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                            <div class="invalid-feedback">Введите пароль</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="inputPasswordRepeat" class="form-label">Повторите пароль</label>
+                            <input type="password" class="form-control" id="inputPasswordRepeat" required
+                                   style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                            <div class="invalid-feedback">Введите повторный пароль</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="email" class="form-label">Эл. адрес</label>
+                            <input type="email" th:field="*{profile.email}" class="form-control" id="email" required
+                                   style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                            <div class="invalid-feedback">Укажите электронный адрес</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="phoneNumber" class="form-label">Номер телефона</label>
+                            <input type="text" th:field="*{profile.phoneNumber}" class="form-control" id="phoneNumber"
+                                   required
+                                   style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                            <div class="invalid-feedback">Укажите номер телефона</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="street" class="form-label">Улица</label>
+                            <input type="text" th:field="*{profile.address.street}" class="form-control" id="street"
+                                   required
+                                   style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                            <div class="invalid-feedback">Укажите название улицы</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="numberOfHouse" class="form-label">Номер дома</label>
+                            <input type="text" th:field="*{profile.address.numberOfHouse}" class="form-control"
+                                   id="numberOfHouse" required
+                                   style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                            <div class="invalid-feedback">Укажите номер дома</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="apartmentNumber" class="form-label">Номер квартиры</label>
+                            <input type="text" th:field="*{profile.address.apartmentNumber}" class="form-control"
+                                   id="apartmentNumber"  style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);">
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="role" class="form-label">Выберите кто вы</label>
+                            <select id="role" th:field="*{role.name}" class="form-select" required
+                                    style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);">
+                                <option value="" selected>Выбрать роль</option>
+                                <option value="OWNER">Арендодатель</option>
+                                <option value="TENANT">Пользователь</option>
+                            </select>
+                            <div class="invalid-feedback">Выберете роль</div>
+                        </div>
+                        <div class="col-md-5 mx-3">
+                            <label for="district" class="form-label">Район</label>
+                            <select id="district" th:field="*{profile.address.district}" class="form-select" required
+                                    style="border-color: #d6d8db; box-shadow: 0 0 0 0.2rem rgba(214, 216, 219, 0.15);"
+                            >
+                                <option value="" selected>Укажите район</option>
+                                <option value="ЦМР">ЦМР</option>
+                                <option value="СМР">СМР</option>
+                                <option value="ПМР">ПМР</option>
+                                <option value="ГМР">ГМР</option>
+                                <option value="ЧМР">ЧМР</option>
+                                <option value="МХГ">МХГ</option>
+                            </select>
+                            <div class="invalid-feedback">Укажите район города</div>
+                        </div>
+                        <div class="col-md-5 mx-3 mt-5">
+                            <button type="submit" id="buttonRegistration" class="btn btn-dark">
+                                Зарегистрироваться
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</html>

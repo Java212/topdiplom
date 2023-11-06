@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>аренда мастер</title>
+    <link
+            th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap}"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/order.css}"/>
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+
+<div class="renterDate">
+    <div class="renterDate-block col-md-3">
+        <p class="renterDate-block-title fs-5" th:text="${product.title}">Название</p>
+        <img th:src="${product.linkToTheImage}"
+             th:alt="${product.linkToTheImage}">
+        <p class="renterDate-block-specification " th:text="${product.specification}">Описание</p>
+        <div class="renterDate-block-price">
+            <div class="renterDate-block-number" th:text="${product.price}">1</div>
+            <span class="renterDate-block-ruble">руб</span>
+            <span class="renterDate-block-day">(cутки)</span>
+        </div>
+        <form class="needs-validation" novalidate method="post" th:action="@{/save}"
+              th:if="${orderDto}"
+              th:object="${orderDto}">
+            <input type="hidden" name="productId" th:attr="value=${product.id}">
+            <div class="renterDate-block-begin col-md-5 fs-6">
+                    <label for="startDate" class="form-label">Дата начала аренды</label>
+                    <input type="date" th:field="*{startDate}" class="form-control" id="startDate" required>
+                    <div class="invalid-feedback">Введите дату начала аренды</div>
+            </div>
+            <div class="renterDate-block-end col-md-5 fs-6">
+                    <label for="endDate" class="form-label">Дата окончания аренды</label>
+                    <input type="date" th:field="*{endDate}" class="form-control" id="endDate" required>
+                    <div class="invalid-feedback">Введите дату окончания аренды</div>
+            </div>
+                <button type="submit" class="renterDate-block-btn col-md-5 fs-6 btn btn-dark mt-2">Арендовать</button>
+        </form>
+    </div>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"
+></script>
+<script src="./js/validation.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>аренда мастер</title>
+    <link
+            th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap}"
+            rel="stylesheet"
+    />
+    <link  rel="stylesheet" th:href="@{/css/index.css}"/>
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+<div class="stand">
+    <div class="title-header">Список товаров</div>
+    <div class="board" >
+        <div class="board-item"  th:each="product : ${products}">
+            <a th:class="${product.id}" th:href="@{'/order/' + ${product.id}}">
+                <div class="box ">
+                    <div class="box-title fs-5 mt-2" th:text="${product.title}">Название</div>
+                    <div class="box-specification mt-4" th:text="${product.specification}">Описание</div>
+                    <div class="box-price mt-4">
+                        <div class="box-number mt-4 fs-4" th:text="${product.price}">0</div>
+                        <div class="box-text">
+                            <span class="box-ruble">руб</span>
+                            <span class="box-day">(cутки)</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark mt-4">Арендовать</button>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"
+></script>
+<script type="text/javascript" src="./js/git.code.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/validation.js"></script>
+</body>
+</html>
