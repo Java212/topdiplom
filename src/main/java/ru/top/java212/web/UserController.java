@@ -1,5 +1,7 @@
 package ru.top.java212.web;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +16,7 @@ import ru.top.java212.service.UserService;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Tag(name = "API для взаимодействия с пользователем")
 public class UserController {
 
     private final UserService userService;
@@ -27,6 +30,7 @@ public class UserController {
         return mv;
     }
 
+    @Operation(summary = "Получить данные текущего пользователя")
     @GetMapping("/current")
     public UserDTO getCurrentUser(Authentication authentication) {
         return userService.getUserDtoByName(authentication.getName());
