@@ -15,7 +15,7 @@ $(document).ready(function () {
     passwordInput.addEventListener('input', inputPassword);
     passwordRepeatInput.addEventListener('input', inputPasswordRepeat);
 
-    $('#button_reg').on('click', function (event) {
+    $('#button_reg').on('click', async function (event) {
         event.preventDefault();
         inputName();
         inputPassword();
@@ -23,6 +23,7 @@ $(document).ready(function () {
 
         if (
             checkName(userNameInput.value) &&
+            !(await doesUserExist(name)) &&
             checkPassword(passwordInput.value) &&
             passwordInput.value === passwordRepeatInput.value
         ) {
@@ -51,66 +52,26 @@ $(document).ready(function () {
         }
     })
 
-    function inputName(){
+    async function inputName() {
         let name = userNameInput.value;
-        console.log(name);
-        console.log(doesUserExist(name));
-        if(checkName(name) && !doesUserExist(name)){
+        if (checkName(name) && !(await doesUserExist(name))) {
             userNameInput.style.borderColor = 'green';
-            errorInputName.style.display='none';
-            errorUserExist.style.display='none';
+            errorInputName.style.display = 'none';
+            errorUserExist.style.display = 'none';
         } else if (!checkName(name)) {
             userNameInput.style.borderColor = 'red';
-            errorInputName.style.display='block';
-        } else if (doesUserExist(name)){
+            errorInputName.style.display = 'block';
+            errorUserExist.style.display = 'none';
+        } else if (await doesUserExist(name)) {
             userNameInput.style.borderColor = 'red';
-            errorUserExist.style.display='block';
+            errorInputName.style.display = 'none';
+            errorUserExist.style.display = 'block';
         }
     }
 
-    // function doesUserExist(name){
-    //     let isExist = false;
-    //     if (checkName(name)) {
-    //         $.ajax({
-    //             type: 'post',
-    //             url: '/register/exist',
-    //             data: name,
-    //             dataType: 'json',
-    //             contentType: 'application/json',
-    //             processData: false,
-    //         }).done(function (data){
-    //             isExist = data;
-    //         })
-    //     } else {
-    //         return false;
-    //     }
-    //     return isExist;
-    // }
-
-    // function doesUserExist(name, callback){
-    //     let request = new XMLHttpRequest();
-    //     request.open('GET', url, true);
-    //     request.send(name);
-    //     request.responseType = 'text';
-    //     request.onload = function() {
-    //         let status = request.status;
-    //         if (status === 200) {
-    //             callback(name, request.response);
-    //         } else {
-    //             callback(name, false);
-    //         }
-    //     };
-    //     request.send();
-    // }
-
-    function doesUserExist(name){
-        let isExist = false;
-        fetch('/register/exist/' + name)
-            .then((data) => {
-                console.log(data.body.getReader().read())
-            isExist = data.body.getReader().read();
-        })
-        return isExist;
+    async function doesUserExist(name) {
+        const response = await fetch('/register/exist/' + name);
+        return await response.json();
     }
 
     function inputPassword() {
